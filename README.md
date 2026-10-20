@@ -4,196 +4,137 @@
 
 ### Before you buy the parts, know whether the whole thing works.
 
-Evidence-aware planning · Inspectable decisions · Explicit approval
+Evidence-aware planning · Interactive 3D · Explicit approval
 
-[Start locally](#start-locally) · [How it works](#how-a-request-becomes-a-plan) · [Engineering evidence](#what-the-evidence-says) · [Explore the code](#inside-the-repository)
+[Run locally](#run-locally) · [Explore](#explore-the-workspaces) · [How it works](#from-a-request-to-a-reviewed-decision)
 
 </div>
 
-![IntentCart Outcome studio: a complete workstation, its evidence and its exact quote](submission/cinematic-setup.png)
-
-## It starts with a simple request
+## A cart holds products. A plan makes them work together.
 
 > “I have a laptop. I want two monitors, enough charging power and a setup within my budget. What do I actually need?”
 
-A shopping cart can hold a dock, two displays and a pair of cables. It cannot tell you whether the laptop supports that arrangement, whether a driver is required, or whether one missing specification changes the answer.
+The dock looks right. The monitors fit the budget. The cables are in the cart. But can the laptop drive both displays? Is a driver required? Does the power supply deliver enough charging power?
 
-IntentCart starts with the outcome. It turns reviewed requirements into a complete workstation plan, investigates the facts that matter, and explains what remains uncertain. When the request cannot be satisfied, it shows the conflict. When something changes, it looks for a repair that changes the fewest component slots.
+IntentCart starts with the outcome. Review your requirements, explore a complete workstation in a cinematic 3D studio, and inspect the evidence behind each decision. Missing information stays visible. An impossible request gets an explanation. When availability changes, the planner looks for a repair that changes the fewest component slots.
 
-Then comes a separate decision: whether to buy. A supported plan does not authorize a payment. You review an exact basket and total before PayPal sandbox checkout can proceed.
+Payment is a separate decision. A supported plan never grants permission to spend: an exact basket, current quote and explicit approval precede PayPal **sandbox** checkout.
 
-**The idea is simple: understand the system before committing to its parts.**
+## From a request to a reviewed decision
 
-## How a request becomes a plan
+```mermaid
+flowchart LR
+    A[Describe your outcome] --> B[Review requirements]
+    B --> C[Plan a complete setup]
+    C --> D{Enough supporting evidence?}
+    D -->|Missing facts| E[Inspect or clarify]
+    E --> C
+    D -->|Unsupported| F[Explain, revise or defer]
+    F --> B
+    D -->|Supported| G[Explore and review]
+    G --> H[Exact basket and quote]
+    H --> I[Explicit approval]
+    I --> J[PayPal sandbox]
+    J --> K[Verify, reconcile or refund]
+```
 
-![IntentCart architecture: reviewed requirements, finite planning, decision evidence, exact approval and PayPal sandbox reconciliation](docs/assets/intentcart-decision-path.svg)
+The application keeps these boundaries explicit:
 
-1. **Describe the outcome.** Review the budget, displays, power and other supported requirements. The reviewed typed goal is authoritative.
-2. **Investigate what matters.** Inspect missing specifications and distinguish known, unknown and conflicting facts.
-3. **Explore a complete setup.** Compare compatible baskets in a 3D workspace. Inspect support, conflicts and possible repairs.
-4. **Review the exact decision.** The quote binds the selected basket, prices and current state. Changes invalidate earlier approval.
-5. **Approve sandbox checkout.** The payment path checks capture evidence and preserves retry identities when a response is uncertain.
+- **Requirements before recommendations.** A bounded text interpreter proposes settings for review; typed requirements remain authoritative.
+- **Evidence before support.** Known, unknown and conflicting facts are distinct. Source dates, exact variants, prices and permissions matter.
+- **Preferences within constraints.** Pairwise choices update a Bayesian estimate without weakening hard requirements.
+- **Approval for one exact decision.** Changed plans invalidate old quotes. Payment retries preserve operation identities, and uncertain results require reconciliation.
 
-The planner handles a declared finite catalog and constraint set. “Compatible” means supported under those represented rules and available evidence.
+## Run locally
 
-## A second workspace asks a different question
-
-**What should an agent learn before it recommends anything?**
-
-At `/agent`, a bounded evidence controller can **search, inspect, clarify, recommend or defer**. Every action passes the same validator. Unsupported basket IDs, stale revisions, mismatched product variants and repeated inspections are rejected.
-
-The curated example connects an Apple MacBook Air M1, a specific Plugable dock revision and Dell monitor specifications. Each inspected field carries its value, unit, exact variant, source URL and review date. Cable capabilities and price allowances remain explicitly declared scenario assumptions. Manufacturer review is evidence to inspect; it is not a physical hardware test or a live merchant offer.
-
-![The evidence workspace: reviewed source fields and a bounded action history](submission/agent-workspace.png)
-
-This workspace is separate from the fictional merchant catalog and **cannot create checkout**. Its default controller is a deterministic local policy. An optional language-model proposal path is gated and now has a small actual Haiku 4.5 validation through Astropods: seventeen requests, USD 0.026906 free-credit usage. Four native fixture trials completed; the harder driver task retained one supported, one rejected and two unattempted trials. Initial failures stay in the total. See [live evidence](submission/live-validation.json); these diagnostics do not establish model superiority. Permanent calls remain disabled.
-
-In the main Missions planner, explicit pairwise choices can also update a four-attribute Bayesian preference estimate. Hard constraints still apply, and a changed selection needs a fresh quote. Estimated preference does not establish true user utility or optimality.
-
-## Refine the decision without losing its history
-
-The **Planning workbench** adds explicit source expiry and replacement review, owned monitor specifications, exact variant selection, driver-permission withdrawal and availability restoration. Compare supported baskets, inspect changed component slots, edit or undo preference answers, and export a parts CSV or readable decision report. Unknown tax or shipping blocks a supported all-in price. Requested HDCP, gaming, numeric OS version, charging and connector capabilities need supporting observations. Three/four-display and USB-C paths are bounded prototypes with synthetic positive tests; the reviewed real-product scenario remains narrower.
-
-![Planning workbench: source review, constraints and supported configurations](submission/workbench-overview.png)
-
-Try a counterfactual without changing the active task. Review an exact source replacement in two steps. Structural changes clear old preference evidence and acceptance. The model action schema cannot perform these human review operations.
-
-The **Offline research** view compares an exact finite-budget reference with CPU students and ablations. The full learned student does not beat the references, and removing a budget feature improves the pooled diagnostic average. These negative results remain visible. [Release scope and remaining external gates](docs/RELEASE_STATUS.md).
-
-## One project, several ways to inspect it
-
-| Workspace | What you can do |
-|---|---|
-| `/missions` | Describe → Explore → Review; build a complete fixture setup in the cinematic 3D studio. |
-| `/agent` | Inspect curated manufacturer evidence and step through bounded agent actions. |
-| `/workbench` | Review sources, owned inventory, exact variants, all-in costs, preference history and decision exports. |
-| `/research` | Inspect finite-budget learning curves, ablations, prior/cost shifts and preference diagnostics. |
-| `/reliability` | Inspect decision claims, evidence-budget comparisons and saved failure traces. |
-| `/learn` | Explore the original Bayesian pairwise preference-learning lab. |
-| `/lab` | Rehearse fictional changes and inspect decision exports. |
-
-The interface uses locally served Three.js and procedural hardware. Orbit, zoom, inspect parts and take a guided tour. Reduced-motion behavior and an illustrated fallback support the experience. Browser WebGL renders the scene; the planning and research core runs on CPU.
-
-## Start locally
-
-**Requirements:** Python 3.12 and a complete source checkout. Node.js is needed for JavaScript verification.
+**Requires Python 3.12.** No Node.js build, API key, paid service or rented GPU is needed for the local application.
 
 ```sh
+git clone https://github.com/usmanmohammed2306/IntentCart.git
+cd IntentCart
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.lock.txt
-# Create the private local configuration only if it does not exist.
-test -f .env || cp .env.example .env
-chmod 600 .env
+python -m pip install -r requirements.txt
 python -m intentcart
 ```
 
-Open **http://127.0.0.1:4000**. Start with an example in Missions, review its settings, build the setup and inspect any missing evidence.
+Open **http://127.0.0.1:4000**. Choose an example, review its settings and build a setup. Local SQLite storage is created automatically in `var/`.
 
-**The local planning core needs no API key, rented GPU, card or paid service.** Keep `EXTERNAL_CALL_LIMIT=0` and optional model budgets at zero for local exploration. Use the exact configured origin; if you change ports, update `PUBLIC_URL` to match.
+On Windows, create the environment with `py -3.12 -m venv .venv`, activate it with `.venv\Scripts\Activate.ps1`, then run the same install and start commands.
 
-<details>
-<summary>Windows setup</summary>
-
-```powershell
-py -3.12 -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.lock.txt
-if (!(Test-Path .env)) { Copy-Item .env.example .env }
-python -m intentcart
-```
-
-Protect `.env` using local file permissions. No credentials are required for the local planning experience.
-
-</details>
-
-## What the evidence says
-
-These results are **dated local checks**, not live CI badges or claims about real customers.
-
-| Question | Observed result | Scope |
-|---|---|---|
-| Does fixture planning match an independent oracle? | **73/73** solvable minimum-cost plans; **311/311** infeasible goals deferred. | 384 authored synthetic goals, three controllers, 1,152 runs. |
-| Can targeted inspection avoid irrelevant lookups? | **143** inspections versus **1,920** for a full census. | The same finite fixture catalog; not measured model cost savings. |
-| Does repair preserve the declared objective? | **272/272** repair outcomes match the independent oracle. | 241 feasible repairs and 31 infeasible outcomes. |
-| Can payment failures be reproduced and reduced? | **11** scenarios, **three** deliberately introduced defects, **28** reduction candidates. | Local API replays, an independent fake-provider ledger and simulated interruption boundaries. |
-| Does a targeted agent policy use fewer inspections locally? | **121** inspections versus **280**; 19 versus 17 supported recommendations; zero invalid recommendations for either policy. | 12 authored structures × five budgets × two local policies = 120 correlated runs; not an LLM comparison. |
-| Does the local verification suite pass? | **Public export, October 20: 300 Python tests, 24 JavaScript behavior tests, 11 syntax checks pass.** | Disposable storage, blank provider credentials and a zero external-call ceiling. The original October 19 local/Linux snapshot passed 305 Python tests, including five private publication-guide checks omitted from this export. See docs/RELEASE_STATUS.md; remote CI and outside reproduction remain pending. |
-
-**The negative findings matter too.** A CPU ridge-imitation policy lost to the practical decision-splitting baseline on the structural-shift experiment and remains research-only. The earlier preference controller also did not improve pooled held-out quality. Those outcomes are retained instead of presented as wins.
-
-The application source and sanitized technical evidence are included in this checkout. The consented human pilot remains unperformed; public video upload, remote CI and final entry remain pending. See [release status](docs/RELEASE_STATUS.md). No model GPU deployment or training was used.
-
-See [evaluation methods and limitations](docs/EVALUATION.md), [Missions and the independent oracle](docs/MISSIONS.md), [adaptive acquisition](docs/ACQUISITION.md) and [failure replay](docs/REPLAY.md). The fixture planner contains 17 fictional components and three fictional laptop profiles. No real-world compatibility or purchase-success rate follows from these tests.
-
-The [combinatorial validation report](submission/COMBINATORIAL_VALIDATION.md) records a separate exhaustive 196,608-case synthetic capability/requirement matrix, ordered recovery and source-review tests, 960 fictional-persona disruption chains and actual local API guard combinations. Complete compressed traces, source identities and coverage counts are audited. These are finite software checks; no human study or model-quality result follows from that matrix.
-
-## Reproduce the checks
-
-With the Python environment active and Node.js installed:
+To check a running server:
 
 ```sh
-python scripts/verify.py
-python scripts/audit_external_validation.py
-python scripts/evaluate_missions.py --output /tmp/intentcart-missions.json
-python scripts/evaluate_acquisition.py --check
-python scripts/evaluate_agent.py --output /tmp/intentcart-agent.json
-python scripts/evaluate_learned_acquisition.py --output /tmp/intentcart-learning.json
-python scripts/evaluate_budget_roadmap.py --output /tmp/intentcart-budget.json
-python scripts/evaluate_preference_workbench.py --output /tmp/intentcart-preferences.json
+curl http://127.0.0.1:4000/healthz
 ```
 
-The canonical verifier uses disposable storage, blank provider credentials and a zero external-call ceiling. Read the experiment documentation before interpreting results; budgets, repeated task variants and shared catalogs affect the denominators.
+Expected response: `{"status":"ok","environment":"sandbox"}`.
 
-## PayPal sandbox, when you are ready
+## Explore the workspaces
 
-Planning and quote review work without payment credentials. To exercise actual sandbox transactions:
+| Address | Experience |
+|---|---|
+| `/` or `/missions` | Describe → Explore → Review. Inspect parts, orbit the 3D setup and repair fictional-catalog plans. |
+| `/agent` | Step through a bounded evidence controller: search, inspect, clarify, recommend or defer. |
+| `/workbench` | Review manufacturer records, exact variants, owned inventory, source expiry, all-in costs and preference history; export the decision. |
+| `/research` | Explore saved finite-budget comparisons, CPU learning curves, ablations and preference diagnostics. |
+| `/reliability` | Inspect separate decision claims, evidence-budget comparisons and recorded fake-provider failure traces. |
+| `/learn` and `/lab` | Explore Bayesian pairwise learning and rehearse fictional budget, shipping or stock changes. |
+| `/study` | Open the optional consent-based local pilot instrument. No conducted human study is claimed. |
 
-1. Create or select a **sandbox** REST app in the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/applications/sandbox).
-2. Store its client ID and secret in your private `.env`; run `python scripts/check_setup.py` and restart the server.
-3. Use a separate Personal sandbox buyer account with test funds.
-4. Review a plan, generate its exact quote and explicitly approve the USD total before checkout.
-5. Inspect the saved receipt. After an uncertain capture, reconcile the saved order before retrying. Refund only a verified sandbox capture.
+The evidence workspace uses curated manufacturer records and declared scenario assumptions. It cannot create checkout. Missions uses a separate fictional merchant catalog. Browser WebGL renders the locally served Three.js scene, with an illustrated fallback; the planning core runs on CPU.
 
-The exact **USD 279 complete-workstation sandbox basket was captured and fully refunded on October 19, 2026**. Separate final provider reads verified the matching order, capture and full refund; ten server API calls stayed within the authorized twelve-call ceiling. [Sanitized verification](submission/workstation-sandbox-verification.json). The historical USD 62 backpack transaction is separate. No real money or goods are involved.
+## Optional configuration
 
-## Inside the repository
+The application reads a private `.env` from the repository root. It is ignored by Git. The defaults run locally with external inference and discovery disabled:
+
+```dotenv
+PUBLIC_URL=http://127.0.0.1:4000
+DATABASE_PATH=var/intentcart.sqlite3
+EXTERNAL_CALL_LIMIT=0
+ASTRO_BUDGET_MICROUSD=0
+```
+
+If you change the port, set `PORT` in the shell before starting and make `PUBLIC_URL` match the exact browser origin. Keep the server bound to localhost for local use.
+
+**PayPal sandbox:** create a sandbox REST application in the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/applications/sandbox), set `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` privately, restart the server and use a separate Personal sandbox buyer. Review and approve the exact quote before opening checkout. No real funds or goods are involved. After an uncertain capture, reconcile the existing order before retrying.
+
+**Optional hosted inference:** the Astropods adapter requires `ASTRO_GATEWAY_URL`, `ASTRO_GATEWAY_API_KEY`, `MODEL_DEFAULT`, explicitly reviewed input/output rates, `ASTRO_CREDIT_ONLY_CONFIRMED=true`, and positive call and cost ceilings. Costs are configured in micro-USD; the rate variables are `ASTRO_INPUT_MICROUSD_PER_MILLION` and `ASTRO_OUTPUT_MICROUSD_PER_MILLION`. Keep ceilings at zero unless you deliberately authorize usage. Hosted inference is separate from the default deterministic controller.
+
+**Optional discovery:** `CHANNEL3_API_KEY` and an explicitly positive `EXTERNAL_CALL_LIMIT` enable separate product discovery. Discovery listings do not authorize checkout or establish compatibility.
+
+## Inside the runnable source
 
 ```text
 intentcart/
-  app.py                     FastAPI application and owned API routes
-  missions.py                Finite planning, evidence and minimal-change repair
-  agent.py                   Bounded evidence tools and action validation
-  evidence_catalog.py        Curated fields, sources and exact product variants
-  workspace_preferences.py   Bayesian estimates over valid configurations
-  workbench.py               Human review, inventory, constraints and exports
-  finite_budget.py            Exact finite-horizon reference and CPU diagnostics
-  transcripts.py              Strict offline imported-evidence analysis
-  validity.py                Separate feasibility, optimality and consent claims
-  acquisition.py             Finite adaptive evidence-acquisition research
-  replay.py                  Reproducible fault traces and failure reduction
-  web/                       Local interface, state guards and 3D rendering
-scripts/                     Verification, evaluation and bounded import tools
-tests/                       Python and JavaScript regression coverage
-docs/                        Methods, architecture, evidence and limitations
-submission/                  Sanitized evidence, walkthroughs and selected UI images
+  app.py, *_routes.py         HTTP routes, session ownership and persisted state
+  missions.py                Finite planning, investigation and minimal-change repair
+  agent.py, workbench.py      Bounded actions and human evidence review
+  evidence_catalog.py        Curated sources and exact product variants
+  learning.py                Bayesian preference learning
+  workspace_preferences.py   Preferences over supported configurations
+  acquisition.py             Finite evidence-acquisition reference
+  finite_budget.py            CPU budget and learning diagnostics
+  validity.py, research.py    Decision claims and source-checked saved results
+  replay.py                  Local failure reproduction with a fake provider
+  paypal.py, gateway.py      Optional bounded external transports
+  data/                      Catalogs, settings and results used by the interface
+  web/                       HTML, CSS, JavaScript, illustrations and Three.js
+scripts/                     Sources required to validate the saved research views
+docs/protocols/              Two machine-readable inputs for those views
+requirements.txt             Pinned runtime dependencies
 ```
 
-| Read next | What it explains |
-|---|---|
-| [Architecture](docs/ARCHITECTURE.md) | How the planner, evidence, storage and interface fit together. |
-| [Evidence agent](docs/AGENT.md) | Tool boundaries, source bindings, local comparisons and the learning experiment. |
-| [Decision validity](docs/VALIDITY.md) | What each decision claim establishes and what invalidates it. |
-| [Security and operations](docs/SECURITY.md) | Session ownership, exact approval, retry behavior and operational limits. |
-| [Interface design](docs/DESIGN.md) | The spatial studio, interaction model and accessibility behavior. |
-| [Demo walkthrough](submission/DEMO_SCRIPT.md) | A guided path through the project. |
+The research views check saved results against their source hashes. Their supporting scripts and JSON protocols are retained so those checks remain usable. To regenerate a report locally, for example:
 
-`demandweave/` preserves an earlier experiment and is distinct from IntentCart.
+```sh
+python scripts/evaluate_missions.py --output /tmp/intentcart-missions.json
+```
 
-## Boundaries worth understanding
+## Scope and limits
 
-This is a **single-instance sandbox application**. It does not include account authentication, distributed coordination, webhook settlement, live inventory or fulfillment. Source fingerprints identify content and detect changes; they are not authenticity signatures. Local tests do not establish a production security certification.
+IntentCart is a **single-instance sandbox application** built for the 2026 PayPal AI Hackathon. Compatibility means support under the represented finite rules and available evidence; it is not physical hardware certification or a live retailer guarantee. Saved synthetic experiments, CPU learning diagnostics and fake-provider replays are distinct from human studies and live transactions. Negative learning results remain visible in the application.
 
-Optional Channel3 discovery is separate from fixture checkout. Optional inference requires explicit configuration and reviewed budgets. The recorded live-model integration uses tiny authored fixtures; no human-study outcome, comparative model-quality advantage or public benchmark leadership is claimed. Keep credentials, raw feedback, private exports and runtime databases out of Git.
+The local planning experience works without external services. Actual inference, discovery and sandbox payments require your own deliberate configuration. The project does not include account authentication, distributed settlement, live inventory, fulfillment or production security certification. Source fingerprints detect content changes; they are not authenticity signatures.
 
-Built for the **2026 PayPal AI Hackathon**. Released under the [MIT License](LICENSE); bundled third-party notices remain with their components.
+Released under the [MIT License](LICENSE). Bundled Three.js retains its [upstream notice](intentcart/web/vendor/THREE_LICENSE.md).

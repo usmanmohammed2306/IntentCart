@@ -1,33 +1,29 @@
-__pycache__/
-*.pyc
-.venv/
+# Local configuration, data and secrets
 .env
-artifacts/
 .env.*
-!.env.example
+.venv/
 var/
-.pytest_cache/
-*.egg-info/
-.DS_Store
-node_modules/
-output/browser-tests/
-submission/*.webm
-submission/*.mp4
-
-# Browser account screens and private local exports
 output/
-
-# Private operator, career and runtime records
-AGENTS.md
-docs/CAREER_EVIDENCE.md
-docs/HIRING_EVIDENCE.md
-docs/RESUME_METRICS.md
-docs/GITHUB_90_DAY_PLAN.md
-docs/commit-plan.json
 *.sqlite3
 *.sqlite3-*
 *.db
 *.db-*
 *.pem
 *.key
+
+# Generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.DS_Store
+node_modules/
+
+# Private operator records and archives
+AGENTS.md
+docs/CAREER_EVIDENCE.md
+docs/HIRING_EVIDENCE.md
+docs/RESUME_METRICS.md
+docs/GITHUB_90_DAY_PLAN.md
+docs/commit-plan.json
 *.zip
