@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Conceptual precision dock</title><desc id="desc">Unbranded conceptual hardware illustration. Appearance does not establish product specifications or compatibility.</desc>
+<defs>
+ <linearGradient id="titanium" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#d5e0e8"/><stop offset=".28" stop-color="#8c9daa"/><stop offset=".54" stop-color="#617582"/><stop offset="1" stop-color="#263b49"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eff9fd"/><stop offset=".38" stop-color="#738c9b"/><stop offset="1" stop-color="#243744"/></linearGradient>
+ <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07141c"/><stop offset=".65" stop-color="#123443"/><stop offset="1" stop-color="#20596a"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9fbff" stop-opacity=".12"/><stop offset=".5" stop-color="#d9fbff" stop-opacity="0"/><stop offset="1" stop-color="#d9fbff" stop-opacity=".035"/></linearGradient>
+ <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#334956"/><stop offset="1" stop-color="#101e29"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-100%" width="180%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+
+<ellipse cx="81" cy="96" rx="59" ry="7" fill="#02090e" opacity=".7" filter="url(#shadow)"/>
+<path d="M14 47 92 29 146 51v27L69 97 14 72Z" fill="url(#side)"/>
+<path d="M14 46 92 28 146 50 69 70Z" fill="url(#titanium)" stroke="#c7dde6" stroke-width=".7"/>
+<path d="M69 70 146 50v27L69 97Z" fill="url(#side)"/>
+<path d="m19 46 73-16 48 20-70 18Z" stroke="#d4e9ef" stroke-opacity=".25" stroke-width=".45"/>
+<path d="m22 55 38 18" stroke="#bfd7e0" stroke-opacity=".45" stroke-width=".5"/>
+<path d="m25 63 12 5v5l-12-5Z" fill="#050e15" stroke="#819ba8" stroke-width=".6"/><path d="m27 66 8 4" stroke="#b1cbd6" stroke-width=".6"/>
+<path d="m46 72 15 7v7l-15-7Z" fill="#050e15" stroke="#819ba8" stroke-width=".6"/><path d="m49 76 9 4" stroke="#7abacb" stroke-width=".7"/>
+<path d="m77 78 19-5v8l-19 5Z" fill="#050e15" stroke="#8097a6" stroke-width=".6"/><path d="m79 79 14-3v3l-14 3Z" fill="#2c404d"/>
+<path d="m103 71 18-5v8l-18 5Z" fill="#050e15" stroke="#819ba8" stroke-width=".6"/><path d="m106 71 12-3v3l-12 3Z" fill="#2c404d"/>
+<path d="m128 65 8-2v4l-8 2Z" fill="#050e15" stroke="#8cbdcb" stroke-width=".7"/><path d="m130 66 4-1" stroke="#73c7d9" stroke-width=".7"/>
+<path d="m35 44 34-8m-31 11 34-8m-31 11 34-8m-31 11 34-8" stroke="#4a6372" stroke-opacity=".5" stroke-width=".7"/>
+<circle cx="139" cy="59" r="1" fill="#c8edf3"/><path d="m75 91 63-15" stroke="#7596a5" stroke-opacity=".3" stroke-width=".5"/>
+
+</svg>

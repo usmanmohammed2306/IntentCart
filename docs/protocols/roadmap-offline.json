@@ -1,0 +1,13 @@
+{
+  "schema": "intentcart-roadmap-protocol/1",
+  "declared_on": "2026-10-19",
+  "training_seeds": [100,101,102,103,104,105,106,107,108,109,110,111],
+  "test_seeds": [300,301,302,303,304,305,306,307,308,309,310,311],
+  "training_sizes": [2,4,8,12],
+  "test_shifts": ["original","prior","cost"],
+  "budget_fractions": [0.25,0.5,0.75,1.0],
+  "policies": ["finite_exact","unrestricted_exact","finite_student_2","finite_student_4","finite_student_8","finite_student_12","unrestricted_student","no_budget_feature","no_information_features"],
+  "primary_measure": "prior-weighted supported decision completion within budget",
+  "secondary_measure": "prior-weighted inspection cost",
+  "limits": "Authored finite tasks, shared symbolic support rules, correlated worlds and budget cuts; no live LLMs, people, production throughput or broad superiority claim. Learning curves, teacher and feature ablations are diagnostic CPU experiments."
+}

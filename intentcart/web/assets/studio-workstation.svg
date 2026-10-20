@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Concept workstation — connected by intent</title><desc id="desc">Unbranded conceptual laptop, dual displays, dock and power supply on a dark precision work surface. Display graphics are illustrative; they do not represent measured product specifications or verified compatibility.</desc>
+<defs>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b6c5ce"/><stop offset=".38" stop-color="#607986"/><stop offset="1" stop-color="#1a303c"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a0b0ba"/><stop offset=".55" stop-color="#506673"/><stop offset="1" stop-color="#233d4b"/></linearGradient>
+ <linearGradient id="stand" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#283f4b"/><stop offset=".52" stop-color="#bbcbd2"/><stop offset=".62" stop-color="#6b8490"/><stop offset="1" stop-color="#243e4b"/></linearGradient>
+ <linearGradient id="screen1" x1="180" y1="100" x2="500" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#081922"/><stop offset=".38" stop-color="#123d4b"/><stop offset="1" stop-color="#367185"/></linearGradient>
+ <linearGradient id="screen2" x1="610" y1="70" x2="1010" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#081b24"/><stop offset=".4" stop-color="#1c4d5d"/><stop offset="1" stop-color="#336c7e"/></linearGradient>
+ <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#98d9e1"/><stop offset=".38" stop-color="#347a8c"/><stop offset="1" stop-color="#173e4e"/></linearGradient>
+ <linearGradient id="laptopScreen" x1="320" y1="310" x2="640" y2="430" gradientUnits="userSpaceOnUse"><stop stop-color="#071820"/><stop offset=".5" stop-color="#19434f"/><stop offset="1" stop-color="#316376"/></linearGradient>
+ <linearGradient id="desk" x1="600" y1="300" x2="600" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#284957" stop-opacity=".05"/><stop offset=".62" stop-color="#244a59" stop-opacity=".48"/><stop offset="1" stop-color="#244a59" stop-opacity="0"/></linearGradient>
+ <linearGradient id="base" x1="300" y1="425" x2="650" y2="530" gradientUnits="userSpaceOnUse"><stop stop-color="#b6c5ce"/><stop offset=".36" stop-color="#718a97"/><stop offset="1" stop-color="#3d5a6a"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-50%" width="180%" height="220%"><feGaussianBlur stdDeviation="15"/></filter>
+ <filter id="softShadow" x="-50%" y="-100%" width="200%" height="300%"><feGaussianBlur stdDeviation="5"/></filter>
+ <clipPath id="leftScreen"><path d="M177 128 526 84 531 287 186 330Z"/></clipPath>
+ <clipPath id="rightScreen"><path d="M620 84 973 137 963 330 617 279Z"/></clipPath>
+ <clipPath id="lapScreen"><path d="M329 296 590 328 606 430 347 395Z"/></clipPath>
+</defs>
+<g stroke="#79aebb" stroke-opacity=".085" stroke-width=".8"><path d="M105 530 574 423 1085 530M164 554l417-105 444 105M278 577l307-84 325 84M223 469l367 117M970 469 590 586M590 414v172"/></g>
+<ellipse cx="606" cy="471" rx="506" ry="126" fill="url(#desk)"/>
+<ellipse cx="589" cy="475" rx="397" ry="46" fill="#00090e" opacity=".14" filter="url(#shadow)"/>
+<!-- Cable paths stay separate and visible behind the hardware. -->
+<g stroke-linecap="round">
+ <path d="M348 329C345 374 365 390 443 386L733 418Q764 422 783 442" stroke="#07161f" stroke-width="8"/>
+ <path d="M348 328C345 373 365 389 443 385L733 417Q764 421 783 441" stroke="#647f8e" stroke-width="4"/>
+ <path d="M793 328C792 370 944 369 946 414S900 460 863 448" stroke="#07161f" stroke-width="8"/>
+ <path d="M793 327C792 369 944 368 946 413S900 459 863 447" stroke="#647f8e" stroke-width="4"/>
+ <path d="M689 499C723 511 746 480 780 451" stroke="#06141e" stroke-width="7"/>
+ <path d="M689 497C723 509 746 478 780 449" stroke="#7697a6" stroke-width="3"/>
+ <path d="M945 486C982 507 1030 505 1034 465S1008 418 1023 390" stroke="#3c5969" stroke-width="5"/>
+ <path d="M852 459C861 488 879 498 913 480" stroke="#203d4d" stroke-width="6"/>
+</g>
+<g id="display-left"><!-- Left display stand. -->
+<path d="M340 291 365 289 368 381 341 386Z" fill="url(#stand)"/>
+<path d="M297 385 365 372 422 389 353 405Z" fill="#172e3c"/>
+<path d="M297 381 366 368 422 385 353 401Z" fill="url(#metal)" stroke="#bad2dd" stroke-opacity=".45"/>
+<!-- Left display, with a machined rim and a recessed screen. -->
+<path d="M163 117 535 69Q541 68 542 74L548 306Q548 312 542 313L173 360Q167 361 166 355L157 125Q157 119 163 117Z" fill="url(#edge)"/>
+<path d="M168 118 535 72 541 308 176 353Z" fill="#08151e"/>
+<path d="M177 128 526 84 531 287 186 330Z" fill="url(#screen1)"/>
+<g clip-path="url(#leftScreen)">
+<path d="M175 172 531 127M178 217l354-45M180 262l353-45M184 307l350-45M231 121l8 202M301 111l7 203M371 101l6 204M441 93l5 203" stroke="#a1dfe7" stroke-opacity=".07"/>
+<path d="m211 254 66-66 86 51 98-105" stroke="#8eddeb" stroke-opacity=".12" stroke-width="14"/>
+<path d="m211 254 66-66 86 51 98-105" stroke="#9ee7ef" stroke-width="1.5"/>
+<path d="m211 254 68 27 84-42 100 23" stroke="#8fcedc" stroke-opacity=".28" stroke-width="1.2"/>
+<g fill="#153a47" stroke="#b4ecf3" stroke-width="1.3"><circle cx="211" cy="254" r="6"/><circle cx="277" cy="188" r="6"/><circle cx="363" cy="239" r="6"/><circle cx="461" cy="134" r="6"/></g>
+<path d="m203 151 48-6m-47 15 30-4" stroke="#b5d7df" stroke-opacity=".55" stroke-width="2"/>
+<path d="m177 128 122-16-67 212-46 6Z" fill="#d5faff" fill-opacity=".045"/>
+<path d="m202 297 92-12m-91 18 43-5" stroke="#b5d7df" stroke-opacity=".35" stroke-width="1.2"/>
+</g>
+<path d="M177 128 526 84 531 287 186 330Z" stroke="#a3dce7" stroke-opacity=".24"/>
+<path d="M171 120 532 75" stroke="#d8edf5" stroke-opacity=".62"/>
+<circle cx="358" cy="324" r="1.5" fill="#bad7df"/>
+</g><g id="display-right"><!-- Right display stand and foot. -->
+<path d="M781 290 804 294 800 389 775 385Z" fill="url(#stand)"/>
+<path d="M730 385 794 374 855 397 790 411Z" fill="#142a36"/>
+<path d="M730 381 794 370 855 393 790 407Z" fill="url(#metal)" stroke="#bad2dd" stroke-opacity=".5"/>
+<!-- Right display. -->
+<path d="M610 68 984 123Q990 124 990 130L980 354Q980 360 974 359L608 306Q602 305 602 299L604 75Q604 67 610 68Z" fill="url(#edge)"/>
+<path d="M608 73 984 128 974 354 607 301Z" fill="#08151e"/>
+<path d="M620 84 973 137 963 330 617 279Z" fill="url(#screen2)"/>
+<g clip-path="url(#rightScreen)">
+<path d="m620 130 352 52m-353-7 351 52m-351-7 349 52m-348-7 346 52M678 93l-2 194M748 103l-3 195M818 114l-5 195M888 124l-6 194" stroke="#a1dfe7" stroke-opacity=".07"/>
+<path d="m677 184 91 13 0 62-91-13Z" fill="#123b48" stroke="#7dd2df" stroke-width="1.2"/>
+<path d="m676 184 32-21 92 13-32 21m0 62 31-21 1-62" stroke="#a3e0ea" stroke-width="1.2"/>
+<path d="m708 163-1 61-30 22m30-22 92 14" stroke="#8cbeca" stroke-opacity=".25"/>
+<path d="m800 209 45 7 20-30 53 8m-118 35 62 10 28 42 27 4" stroke="#9ee7ef" stroke-opacity=".65" stroke-width="1.1"/>
+<circle cx="919" cy="194" r="4" fill="#123b48" stroke="#b1e9f0"/><circle cx="917" cy="286" r="4" fill="#123b48" stroke="#b1e9f0"/>
+<path d="m642 115 49 7m-49 2 30 4m-31 134 68 10m-68-2 36 5" stroke="#b5d7df" stroke-opacity=".5" stroke-width="1.5"/>
+<path d="m620 84 114 17-79 183-38-5Z" fill="#d5faff" fill-opacity=".04"/>
+</g>
+<path d="M620 84 973 137 963 330 617 279Z" stroke="#bbe4ec" stroke-opacity=".24"/>
+<path d="M610 71 983 126" stroke="#d8edf5" stroke-opacity=".65"/>
+<circle cx="793" cy="326" r="1.5" fill="#bad7df"/>
+</g><g id="laptop"><!-- Laptop: lifted screen, fully drawn keyboard and inset trackpad. -->
+<ellipse cx="474" cy="491" rx="187" ry="20" fill="#00121b" opacity=".22" filter="url(#softShadow)"/>
+<path d="M316 280 597 315Q603 316 604 322L623 448 336 410 310 287Q309 279 316 280Z" fill="url(#edge)"/>
+<path d="M318 284 596 318 615 441 339 404Z" fill="#0b202d"/>
+<path d="M329 296 590 328 606 430 347 395Z" fill="url(#laptopScreen)"/>
+<g clip-path="url(#lapScreen)">
+<path d="m329 328 267 35m-262-4 266 35M393 304l16 99M459 312l16 100M525 320l16 99" stroke="#a1dfe7" stroke-opacity=".08"/>
+<path d="m365 368 53-24 43 44 56-26 62 34" stroke="#92e1eb" stroke-opacity=".14" stroke-width="10"/>
+<path d="m365 368 53-24 43 44 56-26 62 34" stroke="#a5e7ef" stroke-width="1.1"/>
+<g fill="#d0f3f6"><circle cx="365" cy="368" r="2.7"/><circle cx="418" cy="344" r="2.7"/><circle cx="461" cy="388" r="2.7"/><circle cx="517" cy="362" r="2.7"/><circle cx="579" cy="396" r="2.7"/></g>
+<path d="m344 315 39 5m-38 2 23 3" stroke="#b5d7df" stroke-opacity=".45" stroke-width="1"/>
+<path d="m329 296 96 12-52 92-26-5Z" fill="#d5faff" fill-opacity=".055"/>
+</g>
+<path d="M329 296 590 328 606 430 347 395Z" stroke="#a3dce7" stroke-opacity=".25"/>
+<circle cx="455" cy="307" r="1.5" fill="#71919f"/>
+<path d="M337 408 621 446 698 498Q700 502 693 505L414 529Q407 530 401 526L281 474Q276 471 282 467Z" fill="#142b39"/>
+<path d="M337 405 621 443 696 494Q700 499 693 500L414 524Q407 525 401 521L280 470Z" fill="url(#base)"/>
+<path d="M339 411 610 447 655 478 385 479 315 459Z" fill="#405866" stroke="#b5cdd8" stroke-opacity=".4"/>
+<path d="M345.0 417.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M363.0 419.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M381.0 421.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M399.0 424.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M417.0 426.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M435.0 429.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M453.0 431.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M471.0 433.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M489.0 436.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M507.0 438.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M525.0 441.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M543.0 443.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M561.0 445.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M579.0 448.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M345.5 423.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M363.5 425.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M381.5 428.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M399.5 430.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M417.5 432.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M435.5 435.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M453.5 437.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M471.5 440.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M489.5 442.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M507.5 444.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M525.5 447.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M543.5 449.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M561.5 452.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M579.5 454.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M346.0 429.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M364.0 431.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M382.0 434.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M400.0 436.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M418.0 439.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M436.0 441.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M454.0 443.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M472.0 446.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M490.0 448.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M508.0 451.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M526.0 453.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M544.0 455.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M562.0 458.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M580.0 460.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M346.5 435.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M364.5 438.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M382.5 440.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M400.5 442.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M418.5 445.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M436.5 447.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M454.5 450.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M472.5 452.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M490.5 454.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M508.5 457.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M526.5 459.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M544.5 462.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M562.5 464.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M580.5 466.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M347.0 441.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M365.0 444.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M383.0 446.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M401.0 449.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M419.0 451.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M437.0 453.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M455.0 456.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M473.0 458.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M491.0 461.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M509.0 463.4l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M527.0 465.8l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M545.0 468.2l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M563.0 470.6l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M581.0 473.0l14 1.8 7 4.8-14-1.8Z" fill="#091a25" stroke="#a0bdca" stroke-opacity=".32" stroke-width=".5"/>
+<path d="M403 481 498 486 531 504 435 511 389 492Z" fill="#8ea4af" stroke="#c9dfe8" stroke-opacity=".55" stroke-width=".7"/>
+<path d="M418 519 686 497" stroke="#d7edf3" stroke-opacity=".45" stroke-width="1"/>
+<path d="M302 481 323 490 323 493 302 484Z" fill="#07151d"/>
+<path d="M329 493 348 501 348 504 329 496Z" fill="#07151d"/>
+<path d="M535 515 565 512" stroke="#304d5d" stroke-width="2" stroke-linecap="round"/>
+</g><g id="dock"><!-- Compact dock, with front-facing and side ports. -->
+<ellipse cx="814" cy="466" rx="93" ry="13" fill="#00121b" opacity=".18" filter="url(#softShadow)"/>
+<path d="M742 418 838 406 901 434 901 457 805 471 742 442Z" fill="#102936"/>
+<path d="M742 418 838 406 901 434 805 448Z" fill="url(#metal)" stroke="#c0d6df" stroke-width="1"/>
+<path d="M805 448 901 434 901 457 805 471Z" fill="#345360"/>
+<path d="M742 418 805 448 805 471 742 442Z" fill="#1a3442"/>
+<path d="M750 429 764 436 764 441 750 434Z" fill="#05111a" stroke="#83a2b1" stroke-width=".7"/>
+<path d="M773 440 793 449 793 455 773 446Z" fill="#05111a" stroke="#83a2b1" stroke-width=".7"/>
+<path d="M815 453 830 451 830 458 815 460Z" fill="#05111a" stroke="#83a2b1" stroke-width=".7"/>
+<path d="M837 450 852 448 852 455 837 457Z" fill="#05111a" stroke="#83a2b1" stroke-width=".7"/>
+<path d="M861 449 873 447 873 452 861 454Z" fill="#05111a" stroke="#9bbdce" stroke-width=".7"/>
+<ellipse cx="888" cy="447" rx="2" ry="2.4" fill="#b3eaf3"/>
+<path d="M770 419 836 411" stroke="#dcebf1" stroke-opacity=".35" stroke-width=".8"/>
+</g><g id="power"><!-- Power brick. -->
+<ellipse cx="947" cy="489" rx="45" ry="12" fill="#00121b" opacity=".16" filter="url(#softShadow)"/>
+<path d="M902 462 940 453 975 470 975 491 937 500 902 482Z" fill="#254452"/>
+<path d="M902 462 940 453 975 470 937 480Z" fill="#829eac" stroke="#bad6e1" stroke-opacity=".55"/>
+<path d="M937 480 975 470 975 491 937 500Z" fill="#142b39"/>
+<path d="M910 468 930 477" stroke="#aac7d5" stroke-opacity=".5"/>
+</g></svg>

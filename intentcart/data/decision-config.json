@@ -1,0 +1,6 @@
+{
+  "schema": "intentcart-decision-config/1",
+  "decay": 0.5,
+  "development_sha256": "c1d8175d9df07fe3364700dc44c19e2400f6fcbb0ff1b2839fb18b7c5e1cedd2",
+  "note": "Development-selected heuristic; not calibrated human confidence. Selected before heldout."
+}

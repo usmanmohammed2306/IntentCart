@@ -1,0 +1,701 @@
+{
+  "schema": "intentcart-agent-protocol/1",
+  "frozen_on": "2026-10-14",
+  "policies": [
+    "targeted",
+    "census"
+  ],
+  "tasks": [
+    {
+      "id": "dual-source-b0",
+      "family": "dual-source",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / dual-source",
+      "goal": {},
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "dual-source-b2",
+      "family": "dual-source",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / dual-source",
+      "goal": {},
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "dual-source-b8",
+      "family": "dual-source",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / dual-source",
+      "goal": {},
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "dual-source-b16",
+      "family": "dual-source",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / dual-source",
+      "goal": {},
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "dual-source-b32",
+      "family": "dual-source",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / dual-source",
+      "goal": {},
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "declined-driver-b0",
+      "family": "declined-driver",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / declined-driver",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 0
+    },
+    {
+      "id": "declined-driver-b2",
+      "family": "declined-driver",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / declined-driver",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 2
+    },
+    {
+      "id": "declined-driver-b8",
+      "family": "declined-driver",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / declined-driver",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 8
+    },
+    {
+      "id": "declined-driver-b16",
+      "family": "declined-driver",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / declined-driver",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 16
+    },
+    {
+      "id": "declined-driver-b32",
+      "family": "declined-driver",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / declined-driver",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 32
+    },
+    {
+      "id": "tight-budget-b0",
+      "family": "tight-budget",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / tight-budget",
+      "goal": {
+        "budget_cents": 15000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "tight-budget-b2",
+      "family": "tight-budget",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / tight-budget",
+      "goal": {
+        "budget_cents": 15000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "tight-budget-b8",
+      "family": "tight-budget",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / tight-budget",
+      "goal": {
+        "budget_cents": 15000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "tight-budget-b16",
+      "family": "tight-budget",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / tight-budget",
+      "goal": {
+        "budget_cents": 15000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "tight-budget-b32",
+      "family": "tight-budget",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / tight-budget",
+      "goal": {
+        "budget_cents": 15000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "unsupported-4k-b0",
+      "family": "unsupported-4k",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / unsupported-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "unsupported-4k-b2",
+      "family": "unsupported-4k",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / unsupported-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "unsupported-4k-b8",
+      "family": "unsupported-4k",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / unsupported-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "unsupported-4k-b16",
+      "family": "unsupported-4k",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / unsupported-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "unsupported-4k-b32",
+      "family": "unsupported-4k",
+      "catalog_kind": "curated",
+      "query": "Fixed authored workstation task / unsupported-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "native-default-b0",
+      "family": "native-default",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / native-default",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 0
+    },
+    {
+      "id": "native-default-b2",
+      "family": "native-default",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / native-default",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 2
+    },
+    {
+      "id": "native-default-b8",
+      "family": "native-default",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / native-default",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 8
+    },
+    {
+      "id": "native-default-b16",
+      "family": "native-default",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / native-default",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 16
+    },
+    {
+      "id": "native-default-b32",
+      "family": "native-default",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / native-default",
+      "goal": {},
+      "driver_answer": false,
+      "inspection_budget": 32
+    },
+    {
+      "id": "air-driver-b0",
+      "family": "air-driver",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / air-driver",
+      "goal": {
+        "laptop_id": "studio-air",
+        "allow_driver": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "air-driver-b2",
+      "family": "air-driver",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / air-driver",
+      "goal": {
+        "laptop_id": "studio-air",
+        "allow_driver": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "air-driver-b8",
+      "family": "air-driver",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / air-driver",
+      "goal": {
+        "laptop_id": "studio-air",
+        "allow_driver": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "air-driver-b16",
+      "family": "air-driver",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / air-driver",
+      "goal": {
+        "laptop_id": "studio-air",
+        "allow_driver": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "air-driver-b32",
+      "family": "air-driver",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / air-driver",
+      "goal": {
+        "laptop_id": "studio-air",
+        "allow_driver": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "new-single-b0",
+      "family": "new-single",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / new-single",
+      "goal": {
+        "displays": 1,
+        "reuse_monitor": false,
+        "budget_cents": 22000
+      },
+      "driver_answer": false,
+      "inspection_budget": 0
+    },
+    {
+      "id": "new-single-b2",
+      "family": "new-single",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / new-single",
+      "goal": {
+        "displays": 1,
+        "reuse_monitor": false,
+        "budget_cents": 22000
+      },
+      "driver_answer": false,
+      "inspection_budget": 2
+    },
+    {
+      "id": "new-single-b8",
+      "family": "new-single",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / new-single",
+      "goal": {
+        "displays": 1,
+        "reuse_monitor": false,
+        "budget_cents": 22000
+      },
+      "driver_answer": false,
+      "inspection_budget": 8
+    },
+    {
+      "id": "new-single-b16",
+      "family": "new-single",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / new-single",
+      "goal": {
+        "displays": 1,
+        "reuse_monitor": false,
+        "budget_cents": 22000
+      },
+      "driver_answer": false,
+      "inspection_budget": 16
+    },
+    {
+      "id": "new-single-b32",
+      "family": "new-single",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / new-single",
+      "goal": {
+        "displays": 1,
+        "reuse_monitor": false,
+        "budget_cents": 22000
+      },
+      "driver_answer": false,
+      "inspection_budget": 32
+    },
+    {
+      "id": "high-refresh-b0",
+      "family": "high-refresh",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / high-refresh",
+      "goal": {
+        "hz": 120,
+        "reuse_monitor": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "high-refresh-b2",
+      "family": "high-refresh",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / high-refresh",
+      "goal": {
+        "hz": 120,
+        "reuse_monitor": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "high-refresh-b8",
+      "family": "high-refresh",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / high-refresh",
+      "goal": {
+        "hz": 120,
+        "reuse_monitor": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "high-refresh-b16",
+      "family": "high-refresh",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / high-refresh",
+      "goal": {
+        "hz": 120,
+        "reuse_monitor": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "high-refresh-b32",
+      "family": "high-refresh",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / high-refresh",
+      "goal": {
+        "hz": 120,
+        "reuse_monitor": false,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "budget-conflict-b0",
+      "family": "budget-conflict",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / budget-conflict",
+      "goal": {
+        "budget_cents": 1000
+      },
+      "driver_answer": false,
+      "inspection_budget": 0
+    },
+    {
+      "id": "budget-conflict-b2",
+      "family": "budget-conflict",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / budget-conflict",
+      "goal": {
+        "budget_cents": 1000
+      },
+      "driver_answer": false,
+      "inspection_budget": 2
+    },
+    {
+      "id": "budget-conflict-b8",
+      "family": "budget-conflict",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / budget-conflict",
+      "goal": {
+        "budget_cents": 1000
+      },
+      "driver_answer": false,
+      "inspection_budget": 8
+    },
+    {
+      "id": "budget-conflict-b16",
+      "family": "budget-conflict",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / budget-conflict",
+      "goal": {
+        "budget_cents": 1000
+      },
+      "driver_answer": false,
+      "inspection_budget": 16
+    },
+    {
+      "id": "budget-conflict-b32",
+      "family": "budget-conflict",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / budget-conflict",
+      "goal": {
+        "budget_cents": 1000
+      },
+      "driver_answer": false,
+      "inspection_budget": 32
+    },
+    {
+      "id": "dual-4k-b0",
+      "family": "dual-4k",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / dual-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "dual-4k-b2",
+      "family": "dual-4k",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / dual-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "dual-4k-b8",
+      "family": "dual-4k",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / dual-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "dual-4k-b16",
+      "family": "dual-4k",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / dual-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "dual-4k-b32",
+      "family": "dual-4k",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / dual-4k",
+      "goal": {
+        "height": 2160,
+        "reuse_monitor": false,
+        "budget_cents": 100000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "permission-on-b0",
+      "family": "permission-on",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / permission-on",
+      "goal": {
+        "allow_driver": true,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 0
+    },
+    {
+      "id": "permission-on-b2",
+      "family": "permission-on",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / permission-on",
+      "goal": {
+        "allow_driver": true,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 2
+    },
+    {
+      "id": "permission-on-b8",
+      "family": "permission-on",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / permission-on",
+      "goal": {
+        "allow_driver": true,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 8
+    },
+    {
+      "id": "permission-on-b16",
+      "family": "permission-on",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / permission-on",
+      "goal": {
+        "allow_driver": true,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 16
+    },
+    {
+      "id": "permission-on-b32",
+      "family": "permission-on",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / permission-on",
+      "goal": {
+        "allow_driver": true,
+        "budget_cents": 80000
+      },
+      "driver_answer": true,
+      "inspection_budget": 32
+    },
+    {
+      "id": "work-laptop-b0",
+      "family": "work-laptop",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / work-laptop",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 80000
+      },
+      "driver_answer": false,
+      "inspection_budget": 0
+    },
+    {
+      "id": "work-laptop-b2",
+      "family": "work-laptop",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / work-laptop",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 80000
+      },
+      "driver_answer": false,
+      "inspection_budget": 2
+    },
+    {
+      "id": "work-laptop-b8",
+      "family": "work-laptop",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / work-laptop",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 80000
+      },
+      "driver_answer": false,
+      "inspection_budget": 8
+    },
+    {
+      "id": "work-laptop-b16",
+      "family": "work-laptop",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / work-laptop",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 80000
+      },
+      "driver_answer": false,
+      "inspection_budget": 16
+    },
+    {
+      "id": "work-laptop-b32",
+      "family": "work-laptop",
+      "catalog_kind": "fixture",
+      "query": "Fixed authored workstation task / work-laptop",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 80000
+      },
+      "driver_answer": false,
+      "inspection_budget": 32
+    }
+  ],
+  "split_notice": "Authored diagnostic tasks, not blind independent people. Budgets repeat each structure. Both controllers share tools, catalog, goals, answers, validator and limits. No live model."
+}

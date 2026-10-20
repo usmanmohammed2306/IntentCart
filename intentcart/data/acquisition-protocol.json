@@ -1,0 +1,115 @@
+{
+  "schema": "intentcart-acquisition-protocol/1",
+  "frozen_date": "2026-10-12",
+  "hypothesis": "Selective investigation and source-version reuse may reduce acquisition cost while retaining supported completion in an explicitly bounded fictional workstation system.",
+  "primary_comparison": "decision_split versus information, both retaining identical current-version observations",
+  "reference": "Exact minimum unrestricted expected-cost adaptive tree under the declared positive integer-weight prior. This is not a clairvoyant or budget-optimal oracle.",
+  "policies": ["exact", "decision_split", "information", "restart_decision_split", "full_census"],
+  "budgets": [0, 2, 4, 8, "unlimited"],
+  "statistical_unit": "Declared scenario structure; all worlds are an exhaustive finite enumeration, not independent people or tasks sampled from a population.",
+  "split_notice": "Development and structural-check scenarios use different dependency structures. Policy definitions were written before this first frozen run. Authors inspect these results; this set is subsequently diagnostic, not a permanently untouched test set. No tuning or statistical superiority claim is supported by these few hand-authored structures.",
+  "decision_scope": "Consensus on exact cheapest basket and its total, or infeasibility, within all declared worlds consistent with the observations. Other plausible real worlds are not covered. A budget stop is not a proven-infeasible decision.",
+  "cost_scope": "Integer fictional acquisition-work units, not seconds, tokens, dollars, API calls or human effort. Prior observations are separately recorded sunk work shared by all policies; the restart ablation intentionally ignores their values.",
+  "scenario_specs": [
+    {
+      "id": "dev-single-charging", "split": "development", "family": "one-component-threshold",
+      "goal": {"displays": 1, "reuse_monitor": true, "budget_cents": 20000},
+      "queries": [
+        {"product": "dock-limited", "field": "pd_watts", "values": [45, 65], "weights": [1, 2], "cost": 2},
+        {"product": "dock-solo", "field": "price_cents", "values": [5900, 6500], "weights": [1, 1], "cost": 1},
+        {"product": "dock-pro", "field": "max_hz", "values": [60, 120], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "dev-joint-dock", "split": "development", "family": "joint-capability-conjunction",
+      "goal": {"height": 2160, "reuse_monitor": false, "budget_cents": 80000},
+      "queries": [
+        {"product": "dock-archive", "field": "protocol", "values": ["altmode", "displaylink"], "weights": [2, 1], "cost": 1},
+        {"product": "dock-archive", "field": "max_height", "values": [1080, 2160], "weights": [1, 2], "cost": 3},
+        {"product": "dock-archive", "field": "pd_watts", "values": [45, 100], "weights": [1, 2], "cost": 2},
+        {"product": "dock-limited", "field": "max_hz", "values": [60, 120], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "dev-alternative-prices", "split": "development", "family": "competing-path-prices",
+      "goal": {"budget_cents": 60000, "allow_driver": true},
+      "queries": [
+        {"product": "dock-archive", "field": "price_cents", "values": [8900, 13900], "weights": [1, 1], "cost": 4},
+        {"product": "dock-mystery", "field": "protocol", "values": ["altmode", "displaylink"], "weights": [1, 1], "cost": 1},
+        {"product": "dock-mystery", "field": "price_cents", "values": [7900, 15900], "weights": [1, 2], "cost": 2},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [2, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "dev-conflict-source", "split": "development", "family": "conflict-with-fallback",
+      "goal": {"budget_cents": 60000},
+      "queries": [
+        {"product": "dock-conflict", "field": "displays", "values": ["CONFLICT", 1, 2], "weights": [1, 1, 1], "cost": 2},
+        {"product": "dock-archive", "field": "price_cents", "values": [8900, 13900], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "test-cross-component", "split": "structural_check", "family": "cross-component-substitution-and-stock",
+      "goal": {"height": 2160, "reuse_monitor": false, "budget_cents": 90000},
+      "queries": [
+        {"product": "dock-archive", "field": "max_height", "values": [1080, 2160], "weights": [1, 1], "cost": 3},
+        {"product": "dock-twin", "field": "available", "values": [false, true], "weights": [1, 2], "cost": 1},
+        {"product": "cable-mystery", "field": "connector", "values": ["hdmi", "displayport"], "weights": [2, 1], "cost": 2},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "test-budget-threshold", "split": "structural_check", "family": "budget-and-power-fallback",
+      "goal": {"budget_cents": 24000},
+      "queries": [
+        {"product": "dock-archive", "field": "price_cents", "values": [8900, 12900], "weights": [1, 1], "cost": 3},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 1], "cost": 1},
+        {"product": "power-65", "field": "available", "values": [false, true], "weights": [1, 2], "cost": 2}
+      ]
+    },
+    {
+      "id": "test-conflict-no-fallback", "split": "structural_check", "family": "three-way-source-with-no-compatible-fallback",
+      "goal": {"budget_cents": 25000},
+      "excluded": ["dock-twin", "dock-link", "dock-pro", "dock-mystery", "dock-archive"],
+      "queries": [
+        {"product": "dock-conflict", "field": "displays", "values": ["CONFLICT", 1, 2], "weights": [1, 1, 2], "cost": 4},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 1], "cost": 1},
+        {"product": "dock-solo", "field": "max_hz", "values": [60, 120], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "test-goal-revision", "split": "structural_check", "family": "changed-display-goal-with-reusable-observations",
+      "previous_goal": {"displays": 1, "height": 1080, "reuse_monitor": true},
+      "goal": {"displays": 2, "height": 2160, "reuse_monitor": false, "budget_cents": 80000},
+      "cached_queries": ["dock-archive.max_height", "monitor-paper.connector"],
+      "queries": [
+        {"product": "dock-archive", "field": "max_height", "values": [1080, 2160], "weights": [1, 1], "cost": 3},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 1], "cost": 1},
+        {"product": "cable-mystery", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 2], "cost": 2},
+        {"product": "dock-limited", "field": "pd_watts", "values": [45, 65], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "test-source-revision", "split": "structural_check", "family": "source-replacement-invalidates-one-cached-fact",
+      "previous_goal": {"displays": 1, "height": 1080, "reuse_monitor": true},
+      "goal": {"height": 2160, "reuse_monitor": false, "budget_cents": 80000},
+      "cached_queries": ["dock-archive.max_height", "cable-mystery.connector"],
+      "stale_queries": ["dock-archive.max_height"],
+      "queries": [
+        {"product": "dock-archive", "field": "max_height", "values": [1080, 2160], "weights": [1, 1], "cost": 3},
+        {"product": "cable-mystery", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 2], "cost": 2},
+        {"product": "dock-pro", "field": "pd_watts", "values": [45, 100], "weights": [1, 1], "cost": 1}
+      ]
+    },
+    {
+      "id": "test-data-only-transport", "split": "structural_check", "family": "transport-permission-charging-interaction",
+      "goal": {"laptop_id": "studio-work", "allow_driver": true, "budget_cents": 28000},
+      "queries": [
+        {"product": "dock-mystery", "field": "protocol", "values": ["altmode", "displaylink"], "weights": [1, 2], "cost": 2},
+        {"product": "dock-mystery", "field": "pd_watts", "values": [45, 100], "weights": [1, 2], "cost": 2},
+        {"product": "monitor-paper", "field": "connector", "values": ["hdmi", "displayport"], "weights": [2, 1], "cost": 1},
+        {"product": "cable-mystery", "field": "connector", "values": ["hdmi", "displayport"], "weights": [1, 1], "cost": 1}
+      ]
+    }
+  ]
+}

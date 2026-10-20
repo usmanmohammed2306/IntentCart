@@ -1,0 +1,54 @@
+{
+  "schema": "intentcart-workstation-pilot-report/1",
+  "evidence_kind": "fictional",
+  "study_status": "not_conducted",
+  "recorded_active_human_participants": 0,
+  "independently_verified_participants": 0,
+  "fictional_records": 0,
+  "entered_records": 0,
+  "completed_records": 0,
+  "incomplete_records": 0,
+  "withdrawn_records_excluded": 0,
+  "declined_records_excluded": 0,
+  "tasks": {
+    "evidence": {},
+    "repair": {},
+    "source-change": {}
+  },
+  "comprehension": {
+    "approval": {
+      "answered": 0,
+      "correct_no": 0,
+      "incorrect_yes": 0,
+      "unsure": 0,
+      "unanswered": 0
+    },
+    "evidence": {
+      "answered": 0,
+      "correct_no": 0,
+      "incorrect_yes": 0,
+      "unsure": 0,
+      "unanswered": 0
+    },
+    "price": {
+      "answered": 0,
+      "correct_no": 0,
+      "incorrect_yes": 0,
+      "unsure": 0,
+      "unanswered": 0
+    }
+  },
+  "elapsed_seconds": {
+    "reported_records": 0,
+    "values": []
+  },
+  "voluntary_rating": {
+    "scale": "1..7, optional, observer-entered",
+    "reported_records": 0,
+    "values": []
+  },
+  "provider_requests": 0,
+  "payment_operations": 0,
+  "notice": "Fictional records never count as humans. Local IDs/consent entries do not prove unique people. Withdrawn/declined records contribute no task/comprehension/rating results. Descriptive only; no causal benefit or usability superiority is inferred.",
+  "protocol_sha256": "f910b5f503af7b4b8be4088e287ed6d9d3dbf16a3ad77f01d7248fb159215259"
+}

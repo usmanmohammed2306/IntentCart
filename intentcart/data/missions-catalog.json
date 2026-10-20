@@ -1,0 +1,1399 @@
+{
+  "schema": "intentcart-missions-catalog/1",
+  "notice": "All products, prices, laptop profiles and specifications are fictional controlled fixtures. No retailer inventory, shipping promise or real compatibility certification. Source URLs deliberately use .invalid.",
+  "products": [
+    {
+      "id": "dock-solo",
+      "kind": "dock",
+      "name": "Solo USB-C dock",
+      "price_cents": 5900,
+      "variant": "dock-solo",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "altmode",
+          "source_id": "dock-solo-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 1,
+          "source_id": "dock-solo-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-solo-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-solo-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 65,
+          "source_id": "dock-solo-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-twin",
+      "kind": "dock",
+      "name": "Twin HDMI dock",
+      "price_cents": 12900,
+      "variant": "dock-twin",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "altmode",
+          "source_id": "dock-twin-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-twin-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-twin-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-twin-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-twin-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-link",
+      "kind": "dock",
+      "name": "Link dual-display dock",
+      "price_cents": 14900,
+      "variant": "dock-link",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "displaylink",
+          "source_id": "dock-link-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-link-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-link-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-link-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-link-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-pro",
+      "kind": "dock",
+      "name": "Pro Thunderbolt dock",
+      "price_cents": 17900,
+      "variant": "dock-pro",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "thunderbolt",
+          "source_id": "dock-pro-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-pro-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-pro-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 120,
+          "source_id": "dock-pro-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-pro-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-mystery",
+      "kind": "dock",
+      "name": "Unverified compact dock",
+      "price_cents": 9900,
+      "variant": "dock-mystery",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "displaylink",
+          "source_id": "dock-mystery-protocol",
+          "visible": false
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-mystery-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-mystery-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-mystery-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-mystery-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-conflict",
+      "kind": "dock",
+      "name": "Conflicting revision dock",
+      "price_cents": 6900,
+      "variant": "dock-conflict",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "altmode",
+          "source_id": "dock-conflict-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-conflict-displays",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 1,
+          "source_id": "dock-conflict-displays-revision",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "dock-conflict-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-conflict-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-conflict-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-archive",
+      "kind": "dock",
+      "name": "Archive dual HDMI dock",
+      "price_cents": 8900,
+      "variant": "dock-archive",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "altmode",
+          "source_id": "dock-archive-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "dock-archive-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 1080,
+          "source_id": "dock-archive-max_height",
+          "visible": false
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-archive-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "dock-archive-pd_watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "dock-limited",
+      "kind": "dock",
+      "name": "Pocket single-display dock",
+      "price_cents": 4900,
+      "variant": "dock-limited",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "altmode",
+          "source_id": "dock-limited-protocol",
+          "visible": true
+        },
+        {
+          "field": "displays",
+          "value": 1,
+          "source_id": "dock-limited-displays",
+          "visible": true
+        },
+        {
+          "field": "max_height",
+          "value": 1080,
+          "source_id": "dock-limited-max_height",
+          "visible": true
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "dock-limited-max_hz",
+          "visible": true
+        },
+        {
+          "field": "pd_watts",
+          "value": 45,
+          "source_id": "dock-limited-pd_watts",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "monitor-paper",
+      "kind": "monitor",
+      "name": "Unverified Full HD display",
+      "price_cents": 9900,
+      "variant": "monitor-paper",
+      "observations": [
+        {
+          "field": "height",
+          "value": 1080,
+          "source_id": "monitor-paper-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "monitor-paper-hz",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "monitor-paper-connector",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "cable-mystery",
+      "kind": "cable",
+      "name": "Unverified 4K cable pair",
+      "price_cents": 1800,
+      "variant": "cable-mystery",
+      "observations": [
+        {
+          "field": "height",
+          "value": 2160,
+          "source_id": "cable-mystery-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "cable-mystery-hz",
+          "visible": true
+        },
+        {
+          "field": "count",
+          "value": 2,
+          "source_id": "cable-mystery-count",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "cable-mystery-connector",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "monitor-hd",
+      "kind": "monitor",
+      "name": "24 inch Full HD display",
+      "price_cents": 10900,
+      "variant": "monitor-hd",
+      "observations": [
+        {
+          "field": "height",
+          "value": 1080,
+          "source_id": "monitor-hd-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "monitor-hd-hz",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "monitor-hd-connector",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "monitor-4k",
+      "kind": "monitor",
+      "name": "27 inch 4K display",
+      "price_cents": 21900,
+      "variant": "monitor-4k",
+      "observations": [
+        {
+          "field": "height",
+          "value": 2160,
+          "source_id": "monitor-4k-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "monitor-4k-hz",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "monitor-4k-connector",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "monitor-fast",
+      "kind": "monitor",
+      "name": "27 inch 4K high-refresh display",
+      "price_cents": 31900,
+      "variant": "monitor-fast",
+      "observations": [
+        {
+          "field": "height",
+          "value": 2160,
+          "source_id": "monitor-fast-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 120,
+          "source_id": "monitor-fast-hz",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "monitor-fast-connector",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "cable-basic",
+      "kind": "cable",
+      "name": "Two HDMI basic cables",
+      "price_cents": 1200,
+      "variant": "cable-basic",
+      "observations": [
+        {
+          "field": "height",
+          "value": 1080,
+          "source_id": "cable-basic-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "cable-basic-hz",
+          "visible": true
+        },
+        {
+          "field": "count",
+          "value": 2,
+          "source_id": "cable-basic-count",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "cable-basic-connector",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "cable-4k",
+      "kind": "cable",
+      "name": "Two HDMI 4K cables",
+      "price_cents": 2400,
+      "variant": "cable-4k",
+      "observations": [
+        {
+          "field": "height",
+          "value": 2160,
+          "source_id": "cable-4k-height",
+          "visible": true
+        },
+        {
+          "field": "hz",
+          "value": 120,
+          "source_id": "cable-4k-hz",
+          "visible": true
+        },
+        {
+          "field": "count",
+          "value": 2,
+          "source_id": "cable-4k-count",
+          "visible": true
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "cable-4k-connector",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "power-65",
+      "kind": "power",
+      "name": "65 W USB-C supply",
+      "price_cents": 2900,
+      "variant": "power-65",
+      "observations": [
+        {
+          "field": "watts",
+          "value": 65,
+          "source_id": "power-65-watts",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "power-100",
+      "kind": "power",
+      "name": "100 W USB-C supply",
+      "price_cents": 4900,
+      "variant": "power-100",
+      "observations": [
+        {
+          "field": "watts",
+          "value": 100,
+          "source_id": "power-100-watts",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "dock-solo-protocol": {
+      "id": "dock-solo-protocol",
+      "product_id": "dock-solo",
+      "variant": "dock-solo",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-solo-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Solo USB-C dock / protocol: \"altmode\".",
+      "field": "protocol",
+      "value": "altmode",
+      "unit": "transport enum"
+    },
+    "dock-solo-displays": {
+      "id": "dock-solo-displays",
+      "product_id": "dock-solo",
+      "variant": "dock-solo",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-solo-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Solo USB-C dock / displays: 1.",
+      "field": "displays",
+      "value": 1,
+      "unit": "independent displays"
+    },
+    "dock-solo-max_height": {
+      "id": "dock-solo-max_height",
+      "product_id": "dock-solo",
+      "variant": "dock-solo",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-solo-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Solo USB-C dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-solo-max_hz": {
+      "id": "dock-solo-max_hz",
+      "product_id": "dock-solo",
+      "variant": "dock-solo",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-solo-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Solo USB-C dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-solo-pd_watts": {
+      "id": "dock-solo-pd_watts",
+      "product_id": "dock-solo",
+      "variant": "dock-solo",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-solo-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Solo USB-C dock / pd_watts: 65.",
+      "field": "pd_watts",
+      "value": 65,
+      "unit": "W"
+    },
+    "dock-twin-protocol": {
+      "id": "dock-twin-protocol",
+      "product_id": "dock-twin",
+      "variant": "dock-twin",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-twin-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Twin HDMI dock / protocol: \"altmode\".",
+      "field": "protocol",
+      "value": "altmode",
+      "unit": "transport enum"
+    },
+    "dock-twin-displays": {
+      "id": "dock-twin-displays",
+      "product_id": "dock-twin",
+      "variant": "dock-twin",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-twin-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Twin HDMI dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-twin-max_height": {
+      "id": "dock-twin-max_height",
+      "product_id": "dock-twin",
+      "variant": "dock-twin",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-twin-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Twin HDMI dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-twin-max_hz": {
+      "id": "dock-twin-max_hz",
+      "product_id": "dock-twin",
+      "variant": "dock-twin",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-twin-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Twin HDMI dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-twin-pd_watts": {
+      "id": "dock-twin-pd_watts",
+      "product_id": "dock-twin",
+      "variant": "dock-twin",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-twin-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Twin HDMI dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-link-protocol": {
+      "id": "dock-link-protocol",
+      "product_id": "dock-link",
+      "variant": "dock-link",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-link-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Link dual-display dock / protocol: \"displaylink\".",
+      "field": "protocol",
+      "value": "displaylink",
+      "unit": "transport enum"
+    },
+    "dock-link-displays": {
+      "id": "dock-link-displays",
+      "product_id": "dock-link",
+      "variant": "dock-link",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-link-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Link dual-display dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-link-max_height": {
+      "id": "dock-link-max_height",
+      "product_id": "dock-link",
+      "variant": "dock-link",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-link-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Link dual-display dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-link-max_hz": {
+      "id": "dock-link-max_hz",
+      "product_id": "dock-link",
+      "variant": "dock-link",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-link-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Link dual-display dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-link-pd_watts": {
+      "id": "dock-link-pd_watts",
+      "product_id": "dock-link",
+      "variant": "dock-link",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-link-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Link dual-display dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-pro-protocol": {
+      "id": "dock-pro-protocol",
+      "product_id": "dock-pro",
+      "variant": "dock-pro",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-pro-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pro Thunderbolt dock / protocol: \"thunderbolt\".",
+      "field": "protocol",
+      "value": "thunderbolt",
+      "unit": "transport enum"
+    },
+    "dock-pro-displays": {
+      "id": "dock-pro-displays",
+      "product_id": "dock-pro",
+      "variant": "dock-pro",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-pro-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pro Thunderbolt dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-pro-max_height": {
+      "id": "dock-pro-max_height",
+      "product_id": "dock-pro",
+      "variant": "dock-pro",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-pro-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pro Thunderbolt dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-pro-max_hz": {
+      "id": "dock-pro-max_hz",
+      "product_id": "dock-pro",
+      "variant": "dock-pro",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-pro-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pro Thunderbolt dock / max_hz: 120.",
+      "field": "max_hz",
+      "value": 120,
+      "unit": "Hz"
+    },
+    "dock-pro-pd_watts": {
+      "id": "dock-pro-pd_watts",
+      "product_id": "dock-pro",
+      "variant": "dock-pro",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-pro-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pro Thunderbolt dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-mystery-protocol": {
+      "id": "dock-mystery-protocol",
+      "product_id": "dock-mystery",
+      "variant": "dock-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-mystery-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified compact dock / protocol: \"displaylink\".",
+      "field": "protocol",
+      "value": "displaylink",
+      "unit": "transport enum"
+    },
+    "dock-mystery-displays": {
+      "id": "dock-mystery-displays",
+      "product_id": "dock-mystery",
+      "variant": "dock-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-mystery-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified compact dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-mystery-max_height": {
+      "id": "dock-mystery-max_height",
+      "product_id": "dock-mystery",
+      "variant": "dock-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-mystery-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified compact dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-mystery-max_hz": {
+      "id": "dock-mystery-max_hz",
+      "product_id": "dock-mystery",
+      "variant": "dock-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-mystery-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified compact dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-mystery-pd_watts": {
+      "id": "dock-mystery-pd_watts",
+      "product_id": "dock-mystery",
+      "variant": "dock-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-mystery-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified compact dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-conflict-protocol": {
+      "id": "dock-conflict-protocol",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting revision dock / protocol: \"altmode\".",
+      "field": "protocol",
+      "value": "altmode",
+      "unit": "transport enum"
+    },
+    "dock-conflict-displays": {
+      "id": "dock-conflict-displays",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting revision dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-conflict-displays-revision": {
+      "id": "dock-conflict-displays-revision",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-displays-revision",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting fixture revision / displays: 1.",
+      "field": "displays",
+      "value": 1,
+      "unit": "independent displays"
+    },
+    "dock-conflict-max_height": {
+      "id": "dock-conflict-max_height",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting revision dock / max_height: 2160.",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "dock-conflict-max_hz": {
+      "id": "dock-conflict-max_hz",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting revision dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-conflict-pd_watts": {
+      "id": "dock-conflict-pd_watts",
+      "product_id": "dock-conflict",
+      "variant": "dock-conflict",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-conflict-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Conflicting revision dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-archive-protocol": {
+      "id": "dock-archive-protocol",
+      "product_id": "dock-archive",
+      "variant": "dock-archive",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-archive-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Archive dual HDMI dock / protocol: \"altmode\".",
+      "field": "protocol",
+      "value": "altmode",
+      "unit": "transport enum"
+    },
+    "dock-archive-displays": {
+      "id": "dock-archive-displays",
+      "product_id": "dock-archive",
+      "variant": "dock-archive",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-archive-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Archive dual HDMI dock / displays: 2.",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays"
+    },
+    "dock-archive-max_height": {
+      "id": "dock-archive-max_height",
+      "product_id": "dock-archive",
+      "variant": "dock-archive",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-archive-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Archive dual HDMI dock / max_height: 1080.",
+      "field": "max_height",
+      "value": 1080,
+      "unit": "vertical pixels"
+    },
+    "dock-archive-max_hz": {
+      "id": "dock-archive-max_hz",
+      "product_id": "dock-archive",
+      "variant": "dock-archive",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-archive-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Archive dual HDMI dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-archive-pd_watts": {
+      "id": "dock-archive-pd_watts",
+      "product_id": "dock-archive",
+      "variant": "dock-archive",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-archive-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Archive dual HDMI dock / pd_watts: 100.",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W"
+    },
+    "dock-limited-protocol": {
+      "id": "dock-limited-protocol",
+      "product_id": "dock-limited",
+      "variant": "dock-limited",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-limited-protocol",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pocket single-display dock / protocol: \"altmode\".",
+      "field": "protocol",
+      "value": "altmode",
+      "unit": "transport enum"
+    },
+    "dock-limited-displays": {
+      "id": "dock-limited-displays",
+      "product_id": "dock-limited",
+      "variant": "dock-limited",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-limited-displays",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pocket single-display dock / displays: 1.",
+      "field": "displays",
+      "value": 1,
+      "unit": "independent displays"
+    },
+    "dock-limited-max_height": {
+      "id": "dock-limited-max_height",
+      "product_id": "dock-limited",
+      "variant": "dock-limited",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-limited-max_height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pocket single-display dock / max_height: 1080.",
+      "field": "max_height",
+      "value": 1080,
+      "unit": "vertical pixels"
+    },
+    "dock-limited-max_hz": {
+      "id": "dock-limited-max_hz",
+      "product_id": "dock-limited",
+      "variant": "dock-limited",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-limited-max_hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pocket single-display dock / max_hz: 60.",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "dock-limited-pd_watts": {
+      "id": "dock-limited-pd_watts",
+      "product_id": "dock-limited",
+      "variant": "dock-limited",
+      "url": "https://fixtures.intentcart.invalid/specs/dock-limited-pd_watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Pocket single-display dock / pd_watts: 45.",
+      "field": "pd_watts",
+      "value": 45,
+      "unit": "W"
+    },
+    "monitor-paper-height": {
+      "id": "monitor-paper-height",
+      "product_id": "monitor-paper",
+      "variant": "monitor-paper",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-paper-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified Full HD display / height: 1080.",
+      "field": "height",
+      "value": 1080,
+      "unit": "vertical pixels"
+    },
+    "monitor-paper-hz": {
+      "id": "monitor-paper-hz",
+      "product_id": "monitor-paper",
+      "variant": "monitor-paper",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-paper-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified Full HD display / hz: 60.",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "monitor-paper-connector": {
+      "id": "monitor-paper-connector",
+      "product_id": "monitor-paper",
+      "variant": "monitor-paper",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-paper-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified Full HD display / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "cable-mystery-height": {
+      "id": "cable-mystery-height",
+      "product_id": "cable-mystery",
+      "variant": "cable-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-mystery-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified 4K cable pair / height: 2160.",
+      "field": "height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "cable-mystery-hz": {
+      "id": "cable-mystery-hz",
+      "product_id": "cable-mystery",
+      "variant": "cable-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-mystery-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified 4K cable pair / hz: 60.",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "cable-mystery-count": {
+      "id": "cable-mystery-count",
+      "product_id": "cable-mystery",
+      "variant": "cable-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-mystery-count",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified 4K cable pair / count: 2.",
+      "field": "count",
+      "value": 2,
+      "unit": "cables"
+    },
+    "cable-mystery-connector": {
+      "id": "cable-mystery-connector",
+      "product_id": "cable-mystery",
+      "variant": "cable-mystery",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-mystery-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Unverified 4K cable pair / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "monitor-hd-height": {
+      "id": "monitor-hd-height",
+      "product_id": "monitor-hd",
+      "variant": "monitor-hd",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-hd-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "24 inch Full HD display / height: 1080.",
+      "field": "height",
+      "value": 1080,
+      "unit": "vertical pixels"
+    },
+    "monitor-hd-hz": {
+      "id": "monitor-hd-hz",
+      "product_id": "monitor-hd",
+      "variant": "monitor-hd",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-hd-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "24 inch Full HD display / hz: 60.",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "monitor-hd-connector": {
+      "id": "monitor-hd-connector",
+      "product_id": "monitor-hd",
+      "variant": "monitor-hd",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-hd-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "24 inch Full HD display / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "monitor-4k-height": {
+      "id": "monitor-4k-height",
+      "product_id": "monitor-4k",
+      "variant": "monitor-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-4k-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K display / height: 2160.",
+      "field": "height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "monitor-4k-hz": {
+      "id": "monitor-4k-hz",
+      "product_id": "monitor-4k",
+      "variant": "monitor-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-4k-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K display / hz: 60.",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "monitor-4k-connector": {
+      "id": "monitor-4k-connector",
+      "product_id": "monitor-4k",
+      "variant": "monitor-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-4k-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K display / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "monitor-fast-height": {
+      "id": "monitor-fast-height",
+      "product_id": "monitor-fast",
+      "variant": "monitor-fast",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-fast-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K high-refresh display / height: 2160.",
+      "field": "height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "monitor-fast-hz": {
+      "id": "monitor-fast-hz",
+      "product_id": "monitor-fast",
+      "variant": "monitor-fast",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-fast-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K high-refresh display / hz: 120.",
+      "field": "hz",
+      "value": 120,
+      "unit": "Hz"
+    },
+    "monitor-fast-connector": {
+      "id": "monitor-fast-connector",
+      "product_id": "monitor-fast",
+      "variant": "monitor-fast",
+      "url": "https://fixtures.intentcart.invalid/specs/monitor-fast-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "27 inch 4K high-refresh display / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "cable-basic-height": {
+      "id": "cable-basic-height",
+      "product_id": "cable-basic",
+      "variant": "cable-basic",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-basic-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI basic cables / height: 1080.",
+      "field": "height",
+      "value": 1080,
+      "unit": "vertical pixels"
+    },
+    "cable-basic-hz": {
+      "id": "cable-basic-hz",
+      "product_id": "cable-basic",
+      "variant": "cable-basic",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-basic-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI basic cables / hz: 60.",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz"
+    },
+    "cable-basic-count": {
+      "id": "cable-basic-count",
+      "product_id": "cable-basic",
+      "variant": "cable-basic",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-basic-count",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI basic cables / count: 2.",
+      "field": "count",
+      "value": 2,
+      "unit": "cables"
+    },
+    "cable-basic-connector": {
+      "id": "cable-basic-connector",
+      "product_id": "cable-basic",
+      "variant": "cable-basic",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-basic-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI basic cables / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "cable-4k-height": {
+      "id": "cable-4k-height",
+      "product_id": "cable-4k",
+      "variant": "cable-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-4k-height",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI 4K cables / height: 2160.",
+      "field": "height",
+      "value": 2160,
+      "unit": "vertical pixels"
+    },
+    "cable-4k-hz": {
+      "id": "cable-4k-hz",
+      "product_id": "cable-4k",
+      "variant": "cable-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-4k-hz",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI 4K cables / hz: 120.",
+      "field": "hz",
+      "value": 120,
+      "unit": "Hz"
+    },
+    "cable-4k-count": {
+      "id": "cable-4k-count",
+      "product_id": "cable-4k",
+      "variant": "cable-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-4k-count",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI 4K cables / count: 2.",
+      "field": "count",
+      "value": 2,
+      "unit": "cables"
+    },
+    "cable-4k-connector": {
+      "id": "cable-4k-connector",
+      "product_id": "cable-4k",
+      "variant": "cable-4k",
+      "url": "https://fixtures.intentcart.invalid/specs/cable-4k-connector",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "Two HDMI 4K cables / connector: \"hdmi\".",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum"
+    },
+    "power-65-watts": {
+      "id": "power-65-watts",
+      "product_id": "power-65",
+      "variant": "power-65",
+      "url": "https://fixtures.intentcart.invalid/specs/power-65-watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "65 W USB-C supply / watts: 65.",
+      "field": "watts",
+      "value": 65,
+      "unit": "W"
+    },
+    "power-100-watts": {
+      "id": "power-100-watts",
+      "product_id": "power-100",
+      "variant": "power-100",
+      "url": "https://fixtures.intentcart.invalid/specs/power-100-watts",
+      "observed_at": "2026-10-11",
+      "kind": "fictional specification fixture",
+      "excerpt": "100 W USB-C supply / watts: 100.",
+      "field": "watts",
+      "value": 100,
+      "unit": "W"
+    }
+  },
+  "laptops": [
+    {
+      "id": "studio-pro",
+      "name": "Studio Pro (fictional Thunderbolt laptop)",
+      "protocols": [
+        "altmode",
+        "thunderbolt",
+        "displaylink"
+      ],
+      "native_displays": 2,
+      "charge_watts": 65
+    },
+    {
+      "id": "studio-air",
+      "name": "Studio Air (fictional single-native-display laptop)",
+      "protocols": [
+        "altmode",
+        "displaylink"
+      ],
+      "native_displays": 1,
+      "charge_watts": 65
+    },
+    {
+      "id": "studio-work",
+      "name": "Studio Work (fictional USB data-only laptop)",
+      "protocols": [
+        "displaylink"
+      ],
+      "native_displays": 0,
+      "charge_watts": 65
+    }
+  ]
+}

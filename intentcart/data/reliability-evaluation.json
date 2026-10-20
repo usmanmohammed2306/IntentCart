@@ -1,0 +1,5008 @@
+{
+  "schema": "intentcart-reliability-v1",
+  "created_utc": "2026-10-20T04:44:41.353261+00:00",
+  "kind": "Declared local fault injection and mutation testing through real API endpoints; independent fake SQLite provider",
+  "source_sha256": {
+    "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+    "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+    "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+    "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+    "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+    "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+    "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+    "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+    "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+    "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+    "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+    "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+    "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+    "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+    "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+    "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+    "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+    "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+    "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+    "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+    "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Darwin",
+    "packages": {
+      "fastapi": "0.142.2",
+      "starlette": "1.7.0",
+      "pydantic": "2.13.5",
+      "httpx": "0.28.1"
+    }
+  },
+  "denominators": {
+    "fault_cases": 9,
+    "controls": 2,
+    "baseline_replays": 22,
+    "mutants": 3,
+    "mutant_cases": 3,
+    "interruption_points": 6,
+    "shrink_candidate_replays": 28
+  },
+  "checks": {
+    "baseline_expected_outcomes": true,
+    "baseline_no_invariant_violations": true,
+    "normalized_replay_matches": true,
+    "valid_controls_complete": true,
+    "declared_mutants_detected": true,
+    "shrunk_failures_removal_minimal": true
+  },
+  "cases": [
+    {
+      "id": "valid-refund",
+      "kind": "control",
+      "expected_status": "REFUNDED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "valid-refund",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          },
+          {
+            "op": "refund"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "cb2ed739f97a5e10b613df490f1d82eb16b722bd369e90efea1c12730947a00f"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "refund",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "REFUNDED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          }
+        },
+        "completed": true,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "cb2ed739f97a5e10b613df490f1d82eb16b722bd369e90efea1c12730947a00f"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "valid-restart",
+      "kind": "control",
+      "expected_status": "COMPLETED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "valid-restart",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "409e1e40526f33d4c20247e3c21e0c87b43f528be3e54e924f167ca32dece872"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "409e1e40526f33d4c20247e3c21e0c87b43f528be3e54e924f167ca32dece872"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "stale-approval",
+      "kind": "fault",
+      "expected_status": null,
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "stale-approval",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "revise"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "read"
+          }
+        ],
+        "expected_digest": "30da0436bbc9ace43eaeba8836a53632ba580dc76513dd0285352391daf9b28f"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "revise",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 409,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": null,
+        "ledger_counts": {
+          "commits": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "30da0436bbc9ace43eaeba8836a53632ba580dc76513dd0285352391daf9b28f"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "invalid_request_rejected": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "missing-approval",
+      "kind": "fault",
+      "expected_status": null,
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "missing-approval",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": false
+          },
+          {
+            "op": "read"
+          }
+        ],
+        "expected_digest": "a5ce9907057c30e14546cfcdca924d62d34b1d4d38ffc074c62c65755661543a"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 422,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": null,
+        "ledger_counts": {
+          "commits": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 0,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "a5ce9907057c30e14546cfcdca924d62d34b1d4d38ffc074c62c65755661543a"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "invalid_request_rejected": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "order-completed",
+      "kind": "fault",
+      "expected_status": "CREATED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "order-completed",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "completed-without-capture"
+          },
+          {
+            "op": "status"
+          },
+          {
+            "op": "read"
+          }
+        ],
+        "expected_digest": "447702c68d781614c7a98c00f40d23a8785302c5e66c6065837d4043c85d9668"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "completed-without-capture",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "CREATED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "447702c68d781614c7a98c00f40d23a8785302c5e66c6065837d4043c85d9668"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "invalid_request_rejected": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "create-before",
+      "kind": "fault",
+      "expected_status": "COMPLETED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "create-before",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "fault",
+            "at": "create-before"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "12057e1d018056df7ee3a5d0dae25e662e411c1aa2146245b0314d730dbd5551"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "create-before"
+          },
+          {
+            "op": "create",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 2,
+            "capture": 1,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "12057e1d018056df7ee3a5d0dae25e662e411c1aa2146245b0314d730dbd5551"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "create-after",
+      "kind": "fault",
+      "expected_status": "COMPLETED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "create-after",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "fault",
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "68756a2a5e26d8ce2706e701c07af447d6456eaf1cb28d54c8165879d083b519"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 2,
+            "capture": 1,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "68756a2a5e26d8ce2706e701c07af447d6456eaf1cb28d54c8165879d083b519"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "capture-before",
+      "kind": "fault",
+      "expected_status": "COMPLETED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "capture-before",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "fault",
+            "at": "capture-before"
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "636a32978a4ee54d1717949050ca898adca854f23ac1890e5cffabd7208e03ed"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "capture-before"
+          },
+          {
+            "op": "capture",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 2,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 2,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 2,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "636a32978a4ee54d1717949050ca898adca854f23ac1890e5cffabd7208e03ed"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "capture-after",
+      "kind": "fault",
+      "expected_status": "COMPLETED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "capture-after",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "fault",
+            "at": "capture-after"
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "62493b449a5b6bb9fc42a18d0cf9fe5d4ced40dcc7a1fd8f2deb21972088bf3d"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "capture-after"
+          },
+          {
+            "op": "capture",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "62493b449a5b6bb9fc42a18d0cf9fe5d4ced40dcc7a1fd8f2deb21972088bf3d"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "refund-before",
+      "kind": "fault",
+      "expected_status": "REFUNDED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "refund-before",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "fault",
+            "at": "refund-before"
+          },
+          {
+            "op": "refund"
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "refund"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "22f364196e8e1e02271199419cb82622f0740a3d4291a0cc6a289b56f53ad10c"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "refund-before"
+          },
+          {
+            "op": "refund",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "REFUND_PENDING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "REFUND_PENDING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "refund",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 2
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 2
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "REFUNDED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 1,
+            "refund": 2
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "22f364196e8e1e02271199419cb82622f0740a3d4291a0cc6a289b56f53ad10c"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    },
+    {
+      "id": "refund-after",
+      "kind": "fault",
+      "expected_status": "REFUNDED",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "refund-after",
+        "mutant": "none",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "fault",
+            "at": "refund-after"
+          },
+          {
+            "op": "refund"
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "refund"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "389bac150baaa58ea068ae0d12e41b9de95558e75241642bfb62ae0ca58e06ca"
+      },
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "refund-after"
+          },
+          {
+            "op": "refund",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "REFUND_PENDING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "REFUND_PENDING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "refund",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 2
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "REFUNDED",
+            "uncertain": false,
+            "local_status": "REFUNDED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 1,
+                "refund": 2
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 1,
+                "refund": 1
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [],
+        "local_status": "REFUNDED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 1,
+            "refund": 2
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 1,
+            "refund": 1
+          }
+        },
+        "completed": true,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "389bac150baaa58ea068ae0d12e41b9de95558e75241642bfb62ae0ca58e06ca"
+      },
+      "expected_outcome_matches": true,
+      "checks": {
+        "expected_status": true,
+        "expected_commit_counts": true,
+        "no_invariant_violations": true,
+        "interruption_point_observed": true,
+        "retry_identity_preserved": true
+      },
+      "repeat_digest_matches": true
+    }
+  ],
+  "mutations": [
+    {
+      "id": "stale-approval",
+      "scenario_id": "stale-approval",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-stale-approval",
+        "mutant": "stale-approval",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "revise"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "read"
+          }
+        ],
+        "expected_digest": "63b2abd19410044ccf860245d73e360241152b620de222c81af197abe4d37958"
+      },
+      "detected": true,
+      "expected_violation": "stale-approval-dispatched",
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "revise",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "stale-approval-dispatched"
+            ]
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          }
+        ],
+        "violations": [
+          "stale-approval-dispatched"
+        ],
+        "local_status": "CREATED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "63b2abd19410044ccf860245d73e360241152b620de222c81af197abe4d37958"
+      },
+      "shrunk_trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-stale-approval",
+        "mutant": "stale-approval",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "revise"
+          },
+          {
+            "op": "create",
+            "approved": true
+          }
+        ],
+        "expected_digest": "d2b1a3090fafeaeb1cf63ba753cd77ed82dd00e167d9a071136e1804477b0dcf"
+      },
+      "shrunk_outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "revise",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "stale-approval-dispatched"
+            ]
+          }
+        ],
+        "violations": [
+          "stale-approval-dispatched"
+        ],
+        "local_status": "CREATED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "d2b1a3090fafeaeb1cf63ba753cd77ed82dd00e167d9a071136e1804477b0dcf"
+      },
+      "shrink": {
+        "attempts": 9,
+        "invalid_candidates": 4,
+        "original_events": 8,
+        "reduced_events": 4,
+        "removal_minimal": true,
+        "limit": 80,
+        "operator": "single-event deletion with valid prerequisites and identical violation set"
+      }
+    },
+    {
+      "id": "fresh-retry-id",
+      "scenario_id": "create-after",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-fresh-retry-id",
+        "mutant": "fresh-retry-id",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "fault",
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "restart"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "2f65ae8369bc0b917c04cc2fe5193173909974b686d4986dbf5de876304bbba2"
+      },
+      "detected": true,
+      "expected_violation": "duplicate-provider-create",
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "restart",
+            "process_recreated": true
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "duplicate-provider-create"
+            ]
+          },
+          {
+            "op": "capture",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "duplicate-provider-create"
+            ]
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 2,
+                "capture": 1,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "duplicate-provider-create"
+            ]
+          }
+        ],
+        "violations": [
+          "duplicate-provider-create"
+        ],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 2,
+            "capture": 1,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 2,
+            "capture": 1,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 2,
+            "capture": 1,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 1,
+        "live_provider_calls": 0,
+        "replay_digest": "2f65ae8369bc0b917c04cc2fe5193173909974b686d4986dbf5de876304bbba2"
+      },
+      "shrunk_trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-fresh-retry-id",
+        "mutant": "fresh-retry-id",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "fault",
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "create",
+            "approved": true
+          }
+        ],
+        "expected_digest": "ee938a209fb5f91aa6aae70e58a00fb4c69faaa9f4197d38d2c454353926a9f0"
+      },
+      "shrunk_outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "fault",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [],
+            "at": "create-after"
+          },
+          {
+            "op": "create",
+            "http_status": 502,
+            "response_status": null,
+            "uncertain": true,
+            "local_status": "CREATING",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 2,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "duplicate-provider-create"
+            ]
+          }
+        ],
+        "violations": [
+          "duplicate-provider-create"
+        ],
+        "local_status": "CREATED",
+        "ledger_counts": {
+          "commits": {
+            "create": 2,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 2,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 2,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "ee938a209fb5f91aa6aae70e58a00fb4c69faaa9f4197d38d2c454353926a9f0"
+      },
+      "shrink": {
+        "attempts": 12,
+        "invalid_candidates": 11,
+        "original_events": 10,
+        "reduced_events": 5,
+        "removal_minimal": true,
+        "limit": 80,
+        "operator": "single-event deletion with valid prerequisites and identical violation set"
+      }
+    },
+    {
+      "id": "order-completed",
+      "scenario_id": "order-completed",
+      "trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-order-completed",
+        "mutant": "order-completed",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "read"
+          },
+          {
+            "op": "completed-without-capture"
+          },
+          {
+            "op": "status"
+          },
+          {
+            "op": "read"
+          }
+        ],
+        "expected_digest": "b446212bf7adcc821f216994003d0b5a31caf4b5c5eb8e3bba0cbc642e537f7a"
+      },
+      "detected": true,
+      "expected_violation": "unsupported-completion",
+      "outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "completed-without-capture",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "unsupported-completion"
+            ]
+          },
+          {
+            "op": "read",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "unsupported-completion"
+            ]
+          }
+        ],
+        "violations": [
+          "unsupported-completion"
+        ],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "b446212bf7adcc821f216994003d0b5a31caf4b5c5eb8e3bba0cbc642e537f7a"
+      },
+      "shrunk_trace": {
+        "schema_version": "intentcart-replay-v1",
+        "id": "mutant-order-completed",
+        "mutant": "order-completed",
+        "source_sha256": {
+          "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+          "intentcart/workbench_routes.py": "94f1b638a7a713dd7c365eee81930972ae28a894dde6d36efcca28dd83742d61",
+          "intentcart/finite_budget.py": "3d561d766e5add2ec30642bc255c7b9fa17f6df3672ecf62036759f317a4d34e",
+          "intentcart/learned_acquisition.py": "be07e47658b6eaf478f07200ccb932e07d35ae6a04a63d95e0cadaa517edfe6f",
+          "intentcart/acquisition.py": "b72c92b2da463c3aa568b55b1c0097221b877053f569f6463f64a9edd7efd97e",
+          "intentcart/replay.py": "a6ad80c2013cc4013d21ebccf5e6e342ba447d622920e55763374fb505927918",
+          "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+          "intentcart/paypal.py": "80ef7f4347f8d179e7169efbc40ac6ac0c8f89b598a57150bb329ba7df6aafc4",
+          "intentcart/config.py": "76b4ff2111dab2f5afa726d655343d783341ba3be06f2b7fedf1ea7c2239d48e",
+          "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+          "intentcart/validity.py": "3ac50592e814e1a888353108d7b7f6028ea915c8fa76011d21784d10461606c1",
+          "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+          "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+          "scripts/evaluate_reliability.py": "3dbde29873dc85598ae973fd96e16541921dbe10322c621e691dee9f0d52bb99",
+          "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+          "intentcart/agent_routes.py": "d3c56c2e47d9f1b76fcf0ecd5aca89e06b380b1a48dcab6d7c792a25febfbc2c",
+          "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+          "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+          "intentcart/gateway.py": "98fccd61186b30f549cceee4d4dab6d5511f988777a64abaf8d83778c348ecd8",
+          "intentcart/research.py": "422f5d2bfa143f046aeab4812e682ce975e42fd2b0e0ceb98e58f90e25d4afeb",
+          "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3"
+        },
+        "steps": [
+          {
+            "op": "start"
+          },
+          {
+            "op": "quote"
+          },
+          {
+            "op": "create",
+            "approved": true
+          },
+          {
+            "op": "completed-without-capture"
+          },
+          {
+            "op": "status"
+          }
+        ],
+        "expected_digest": "d71ada53cfb7acec1b874c7abbb5aa98803284eff7b6bd8383c4a7730d3a0b22"
+      },
+      "shrunk_outcome": {
+        "events": [
+          {
+            "op": "start",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "quote",
+            "http_status": 200,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": null,
+            "ledger": {
+              "commits": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 0,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "create",
+            "http_status": 200,
+            "response_status": "CREATED",
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "completed-without-capture",
+            "http_status": null,
+            "response_status": null,
+            "uncertain": false,
+            "local_status": "CREATED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": []
+          },
+          {
+            "op": "status",
+            "http_status": 200,
+            "response_status": "COMPLETED",
+            "uncertain": false,
+            "local_status": "COMPLETED",
+            "ledger": {
+              "commits": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "attempts": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              },
+              "request_identities": {
+                "create": 1,
+                "capture": 0,
+                "refund": 0
+              }
+            },
+            "violations": [
+              "unsupported-completion"
+            ]
+          }
+        ],
+        "violations": [
+          "unsupported-completion"
+        ],
+        "local_status": "COMPLETED",
+        "ledger_counts": {
+          "commits": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "attempts": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          },
+          "request_identities": {
+            "create": 1,
+            "capture": 0,
+            "refund": 0
+          }
+        },
+        "completed": false,
+        "process_restarts": 0,
+        "live_provider_calls": 0,
+        "replay_digest": "d71ada53cfb7acec1b874c7abbb5aa98803284eff7b6bd8383c4a7730d3a0b22"
+      },
+      "shrink": {
+        "attempts": 7,
+        "invalid_candidates": 6,
+        "original_events": 8,
+        "reduced_events": 5,
+        "removal_minimal": true,
+        "limit": 80,
+        "operator": "single-event deletion with valid prerequisites and identical violation set"
+      }
+    }
+  ],
+  "live_provider_calls": 0,
+  "limits": [
+    "Finite scripted fake-provider scenarios, not a population reliability estimate or live PayPal experiment.",
+    "ProviderError injection before dispatch or after independent ledger commit; then an actual new interpreter, not an OS kill.",
+    "No claim of universal exactly-once processing, arbitrary failure coverage, concurrency safety, or a unique causal explanation.",
+    "Three deliberate tooling-only mutations are not discovered production incidents; same fixtures and checker can share blind spots.",
+    "Normalized outcomes omit random IDs, clock values and private session data; no wall-clock performance claim."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "tool": "Newman",
+  "version": "6.2.3",
+  "collection_schema": "v2.1.0",
+  "date": "2026-10-12 America/Phoenix",
+  "requests": 5,
+  "assertions": 6,
+  "failures": 0,
+  "provider_calls": 0,
+  "payment_calls": 0,
+  "notice": "Sanitized local collection run. Raw cookie/CSRF-bearing report is ignored; no public Postman workspace or live provider test implied.",
+  "first_verified_date": "2026-10-11 America/Phoenix",
+  "recheck": "Rerun against localhost using offline-cached Newman; five requests/six assertions, no provider/payment endpoint."
+}

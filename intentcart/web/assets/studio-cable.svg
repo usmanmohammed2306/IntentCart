@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Conceptual braided display cable</title><desc id="desc">Unbranded conceptual hardware illustration. Appearance does not establish product specifications or compatibility.</desc>
+<defs>
+ <linearGradient id="titanium" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#d5e0e8"/><stop offset=".28" stop-color="#8c9daa"/><stop offset=".54" stop-color="#617582"/><stop offset="1" stop-color="#263b49"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eff9fd"/><stop offset=".38" stop-color="#738c9b"/><stop offset="1" stop-color="#243744"/></linearGradient>
+ <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07141c"/><stop offset=".65" stop-color="#123443"/><stop offset="1" stop-color="#20596a"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9fbff" stop-opacity=".12"/><stop offset=".5" stop-color="#d9fbff" stop-opacity="0"/><stop offset="1" stop-color="#d9fbff" stop-opacity=".035"/></linearGradient>
+ <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#334956"/><stop offset="1" stop-color="#101e29"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-100%" width="180%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+
+<ellipse cx="80" cy="97" rx="56" ry="7" fill="#02090e" opacity=".7" filter="url(#shadow)"/>
+<path d="M37 44C8 59 23 98 58 94s62-21 49-44S56 48 68 71s42 15 54-2" stroke="#020b12" stroke-width="7" stroke-linecap="round"/>
+<path d="M37 43C8 58 23 97 58 93s62-21 49-44S56 47 68 70s42 15 54-2" stroke="#314b5a" stroke-width="4.7" stroke-linecap="round"/>
+<path d="M37 43C8 58 23 97 58 93s62-21 49-44S56 47 68 70s42 15 54-2" stroke="#8ba3af" stroke-opacity=".45" stroke-width="3.4" stroke-dasharray=".8 2.1"/>
+<path d="M36 42C8 57 22 96 57 92s62-21 49-44S55 46 67 69s42 15 54-2" stroke="#adc9d3" stroke-opacity=".55" stroke-width=".65" stroke-linecap="round"/>
+<path d="m29 26 23 10-8 20-23-11Z" fill="url(#side)" stroke="#7c99a7" stroke-width=".6"/>
+<path d="m30 27 19 8-4 12-19-8Z" fill="url(#titanium)"/><path d="m28 43 16 7m-18-4 16 7" stroke="#102a38" stroke-width="1.5"/>
+<path d="m34 16 19 8-4 10-19-8Z" fill="url(#edge)" stroke="#c8dfe7" stroke-width=".5"/><path d="m38 22 9 4" stroke="#091925" stroke-width="3"/><path d="m39 22 7 3" stroke="#b2c9d4" stroke-width=".6"/>
+<path d="m119 50 20 6-7 26-20-7Z" fill="url(#side)" stroke="#7c99a7" stroke-width=".6"/>
+<path d="m120 51 16 5-4 14-16-5Z" fill="url(#titanium)"/><path d="m117 70 15 5m-16-2 15 5" stroke="#102a38" stroke-width="1.5"/>
+<path d="m124 41 17 5-3 9-17-5Z" fill="url(#edge)" stroke="#c8dfe7" stroke-width=".5"/><path d="m127 47 9 2.5" stroke="#091925" stroke-width="2.5"/><path d="m128 47 6 1.8" stroke="#b2c9d4" stroke-width=".5"/>
+
+</svg>

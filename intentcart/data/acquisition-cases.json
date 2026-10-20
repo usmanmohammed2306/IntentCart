@@ -1,0 +1,2160 @@
+{
+  "schema": "intentcart-acquisition-cases/1",
+  "protocol_sha256": "c83fe266b1f913404d8fbeb472ebc94c9968f4b68239ec0fec71cafe715b9c53",
+  "catalog_sha256": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+  "oracle_sha256": "70a7ecd63f165cf8d51323e730d9359bf96f06daaf0a00aabd83c9ff9a545d56",
+  "cases": [
+    {
+      "family": "one-component-threshold",
+      "split": "development",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 20000,
+        "displays": 1,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "dev-single-charging",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-limited.pd_watts",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-solo.price_cents",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "dock-pro.max_hz",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-limited.pd_watts": "45",
+              "dock-solo.price_cents": "5900",
+              "dock-pro.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-solo\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":10000}"
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-limited.pd_watts": "45",
+              "dock-solo.price_cents": "5900",
+              "dock-pro.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-solo\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":10000}"
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-limited.pd_watts": "45",
+              "dock-solo.price_cents": "6500",
+              "dock-pro.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-solo\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":10600}"
+          },
+          {
+            "id": "w003",
+            "weight": 1,
+            "answers": {
+              "dock-limited.pd_watts": "45",
+              "dock-solo.price_cents": "6500",
+              "dock-pro.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-solo\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":10600}"
+          },
+          {
+            "id": "w004",
+            "weight": 2,
+            "answers": {
+              "dock-limited.pd_watts": "65",
+              "dock-solo.price_cents": "5900",
+              "dock-pro.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-limited\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":9000}"
+          },
+          {
+            "id": "w005",
+            "weight": 2,
+            "answers": {
+              "dock-limited.pd_watts": "65",
+              "dock-solo.price_cents": "5900",
+              "dock-pro.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-limited\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":9000}"
+          },
+          {
+            "id": "w006",
+            "weight": 2,
+            "answers": {
+              "dock-limited.pd_watts": "65",
+              "dock-solo.price_cents": "6500",
+              "dock-pro.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-limited\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":9000}"
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-limited.pd_watts": "65",
+              "dock-solo.price_cents": "6500",
+              "dock-pro.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-limited\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":9000}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "joint-capability-conjunction",
+      "split": "development",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 80000,
+        "displays": 2,
+        "height": 2160,
+        "hz": 60,
+        "reuse_monitor": false,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "dev-joint-dock",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-archive.protocol",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "dock-archive.max_height",
+            "cost": 3,
+            "version": "1"
+          },
+          {
+            "id": "dock-archive.pd_watts",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-limited.max_hz",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w001",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w002",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w003",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w004",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w005",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w006",
+            "weight": 8,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w007",
+            "weight": 8,
+            "answers": {
+              "dock-archive.protocol": "\"altmode\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w008",
+            "weight": 1,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w009",
+            "weight": 1,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w010",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w011",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "1080",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w012",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w013",
+            "weight": 2,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "45",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w014",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w015",
+            "weight": 4,
+            "answers": {
+              "dock-archive.protocol": "\"displaylink\"",
+              "dock-archive.max_height": "2160",
+              "dock-archive.pd_watts": "100",
+              "dock-limited.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": [],
+        "w008": [],
+        "w009": [],
+        "w010": [],
+        "w011": [],
+        "w012": [],
+        "w013": [],
+        "w014": [],
+        "w015": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "competing-path-prices",
+      "split": "development",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 60000,
+        "displays": 2,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": true
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "dev-alternative-prices",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-archive.price_cents",
+            "cost": 4,
+            "version": "1"
+          },
+          {
+            "id": "dock-mystery.protocol",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "dock-mystery.price_cents",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w002",
+            "weight": 4,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w003",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":23900}"
+          },
+          {
+            "id": "w004",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          },
+          {
+            "id": "w005",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w006",
+            "weight": 4,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":23900}"
+          },
+          {
+            "id": "w008",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          },
+          {
+            "id": "w009",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w010",
+            "weight": 4,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":26900}"
+          },
+          {
+            "id": "w011",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":27900}"
+          },
+          {
+            "id": "w012",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          },
+          {
+            "id": "w013",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "7900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w014",
+            "weight": 4,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":26900}"
+          },
+          {
+            "id": "w015",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "13900",
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.price_cents": "15900",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":27900}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": [],
+        "w008": [],
+        "w009": [],
+        "w010": [],
+        "w011": [],
+        "w012": [],
+        "w013": [],
+        "w014": [],
+        "w015": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "conflict-with-fallback",
+      "split": "development",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 60000,
+        "displays": 2,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "dev-conflict-source",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-conflict.displays",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-archive.price_cents",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "dock-archive.price_cents": "8900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "dock-archive.price_cents": "13900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":26900}"
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "dock-archive.price_cents": "8900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w003",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "dock-archive.price_cents": "13900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":26900}"
+          },
+          {
+            "id": "w004",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "dock-archive.price_cents": "8900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":20900}"
+          },
+          {
+            "id": "w005",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "dock-archive.price_cents": "13900"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":20900}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "cross-component-substitution-and-stock",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 90000,
+        "displays": 2,
+        "height": 2160,
+        "hz": 60,
+        "reuse_monitor": false,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-cross-component",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-archive.max_height",
+            "cost": 3,
+            "version": "1"
+          },
+          {
+            "id": "dock-twin.available",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "cable-mystery.connector",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-pro\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":66400}"
+          },
+          {
+            "id": "w001",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-pro\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":66400}"
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-pro\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":67000}"
+          },
+          {
+            "id": "w003",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-pro\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":67000}"
+          },
+          {
+            "id": "w004",
+            "weight": 4,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w005",
+            "weight": 4,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w006",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w008",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w009",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w010",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w011",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "false",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w012",
+            "weight": 4,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w013",
+            "weight": 4,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"hdmi\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w014",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w015",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "dock-twin.available": "true",
+              "cable-mystery.connector": "\"displayport\"",
+              "monitor-paper.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": [],
+        "w008": [],
+        "w009": [],
+        "w010": [],
+        "w011": [],
+        "w012": [],
+        "w013": [],
+        "w014": [],
+        "w015": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "budget-and-power-fallback",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 24000,
+        "displays": 2,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-budget-threshold",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-archive.price_cents",
+            "cost": 3,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "power-65.available",
+            "cost": 2,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "monitor-paper.connector": "\"hdmi\"",
+              "power-65.available": "false"
+            },
+            "decision": null
+          },
+          {
+            "id": "w001",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "monitor-paper.connector": "\"hdmi\"",
+              "power-65.available": "true"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":22900}"
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "monitor-paper.connector": "\"displayport\"",
+              "power-65.available": "false"
+            },
+            "decision": null
+          },
+          {
+            "id": "w003",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "8900",
+              "monitor-paper.connector": "\"displayport\"",
+              "power-65.available": "true"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":23900}"
+          },
+          {
+            "id": "w004",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "12900",
+              "monitor-paper.connector": "\"hdmi\"",
+              "power-65.available": "false"
+            },
+            "decision": null
+          },
+          {
+            "id": "w005",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "12900",
+              "monitor-paper.connector": "\"hdmi\"",
+              "power-65.available": "true"
+            },
+            "decision": null
+          },
+          {
+            "id": "w006",
+            "weight": 1,
+            "answers": {
+              "dock-archive.price_cents": "12900",
+              "monitor-paper.connector": "\"displayport\"",
+              "power-65.available": "false"
+            },
+            "decision": null
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-archive.price_cents": "12900",
+              "monitor-paper.connector": "\"displayport\"",
+              "power-65.available": "true"
+            },
+            "decision": null
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "three-way-source-with-no-compatible-fallback",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 25000,
+        "displays": 2,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "previous_goal": null,
+      "excluded": [
+        "dock-twin",
+        "dock-link",
+        "dock-pro",
+        "dock-mystery",
+        "dock-archive"
+      ],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-conflict-no-fallback",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-conflict.displays",
+            "cost": 4,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "dock-solo.max_hz",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": null
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": null
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": null
+          },
+          {
+            "id": "w003",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "\"CONFLICT\"",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": null
+          },
+          {
+            "id": "w004",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": null
+          },
+          {
+            "id": "w005",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": null
+          },
+          {
+            "id": "w006",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": null
+          },
+          {
+            "id": "w007",
+            "weight": 1,
+            "answers": {
+              "dock-conflict.displays": "1",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": null
+          },
+          {
+            "id": "w008",
+            "weight": 2,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":20900}"
+          },
+          {
+            "id": "w009",
+            "weight": 2,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "monitor-paper.connector": "\"hdmi\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":20900}"
+          },
+          {
+            "id": "w010",
+            "weight": 2,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "60"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          },
+          {
+            "id": "w011",
+            "weight": 2,
+            "answers": {
+              "dock-conflict.displays": "2",
+              "monitor-paper.connector": "\"displayport\"",
+              "dock-solo.max_hz": "120"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-conflict\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":21900}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": [],
+        "w008": [],
+        "w009": [],
+        "w010": [],
+        "w011": []
+      },
+      "prior_observation_cost": 0
+    },
+    {
+      "family": "changed-display-goal-with-reusable-observations",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 80000,
+        "displays": 2,
+        "height": 2160,
+        "hz": 60,
+        "reuse_monitor": false,
+        "allow_driver": false
+      },
+      "previous_goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 35000,
+        "displays": 1,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-goal-revision",
+        "revision": "2",
+        "queries": [
+          {
+            "id": "dock-archive.max_height",
+            "cost": 3,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "cable-mystery.connector",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-limited.pd_watts",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w002",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w003",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w004",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w005",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w006",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w008",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w009",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w010",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w011",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w012",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w013",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w014",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w015",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-limited.pd_watts": "65"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w001": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w002": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w003": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w004": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w005": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w006": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w007": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w008": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w009": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w010": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w011": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w012": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w013": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w014": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w015": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "monitor-paper.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ]
+      },
+      "prior_observation_cost": 4
+    },
+    {
+      "family": "source-replacement-invalidates-one-cached-fact",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 80000,
+        "displays": 2,
+        "height": 2160,
+        "hz": 60,
+        "reuse_monitor": false,
+        "allow_driver": false
+      },
+      "previous_goal": {
+        "laptop_id": "studio-pro",
+        "budget_cents": 35000,
+        "displays": 1,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": false
+      },
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-source-revision",
+        "revision": "2",
+        "queries": [
+          {
+            "id": "dock-archive.max_height",
+            "cost": 3,
+            "version": "2"
+          },
+          {
+            "id": "cable-mystery.connector",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-pro.pd_watts",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-pro.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w001",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-pro.pd_watts": "100"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":61400}"
+          },
+          {
+            "id": "w002",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-pro.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w003",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "1080",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-pro.pd_watts": "100"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-twin\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":62000}"
+          },
+          {
+            "id": "w004",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-pro.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w005",
+            "weight": 1,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "cable-mystery.connector": "\"hdmi\"",
+              "dock-pro.pd_watts": "100"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-mystery\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":57400}"
+          },
+          {
+            "id": "w006",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-pro.pd_watts": "45"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-archive.max_height": "2160",
+              "cable-mystery.connector": "\"displayport\"",
+              "dock-pro.pd_watts": "100"
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-archive\",\"quantity\":1},{\"product_id\":\"monitor-4k\",\"quantity\":2},{\"product_id\":\"cable-4k\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":58000}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w001": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w002": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w003": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "2160"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w004": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w005": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"hdmi\""
+          }
+        ],
+        "w006": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ],
+        "w007": [
+          {
+            "query_id": "dock-archive.max_height",
+            "version": "1",
+            "value": "1080"
+          },
+          {
+            "query_id": "cable-mystery.connector",
+            "version": "1",
+            "value": "\"displayport\""
+          }
+        ]
+      },
+      "prior_observation_cost": 5
+    },
+    {
+      "family": "transport-permission-charging-interaction",
+      "split": "structural_check",
+      "goal": {
+        "laptop_id": "studio-work",
+        "budget_cents": 28000,
+        "displays": 2,
+        "height": 1080,
+        "hz": 60,
+        "reuse_monitor": true,
+        "allow_driver": true
+      },
+      "previous_goal": null,
+      "excluded": [],
+      "problem": {
+        "schema": "intentcart-acquisition/1",
+        "id": "test-data-only-transport",
+        "revision": "1",
+        "queries": [
+          {
+            "id": "dock-mystery.protocol",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "dock-mystery.pd_watts",
+            "cost": 2,
+            "version": "1"
+          },
+          {
+            "id": "monitor-paper.connector",
+            "cost": 1,
+            "version": "1"
+          },
+          {
+            "id": "cable-mystery.connector",
+            "cost": 1,
+            "version": "1"
+          }
+        ],
+        "worlds": [
+          {
+            "id": "w000",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w001",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w002",
+            "weight": 1,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w003",
+            "weight": 1,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w004",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w005",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w006",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w007",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"altmode\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w008",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w009",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w010",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w011",
+            "weight": 2,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "45",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": null
+          },
+          {
+            "id": "w012",
+            "weight": 8,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":23900}"
+          },
+          {
+            "id": "w013",
+            "weight": 8,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"hdmi\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-paper\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":23900}"
+          },
+          {
+            "id": "w014",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"hdmi\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":24900}"
+          },
+          {
+            "id": "w015",
+            "weight": 4,
+            "answers": {
+              "dock-mystery.protocol": "\"displaylink\"",
+              "dock-mystery.pd_watts": "100",
+              "monitor-paper.connector": "\"displayport\"",
+              "cable-mystery.connector": "\"displayport\""
+            },
+            "decision": "{\"items\":[{\"product_id\":\"dock-mystery\",\"quantity\":1},{\"product_id\":\"monitor-hd\",\"quantity\":1},{\"product_id\":\"cable-basic\",\"quantity\":1},{\"product_id\":\"power-65\",\"quantity\":1}],\"total_cents\":24900}"
+          }
+        ],
+        "initial_evidence": []
+      },
+      "prior_observations_by_world": {
+        "w000": [],
+        "w001": [],
+        "w002": [],
+        "w003": [],
+        "w004": [],
+        "w005": [],
+        "w006": [],
+        "w007": [],
+        "w008": [],
+        "w009": [],
+        "w010": [],
+        "w011": [],
+        "w012": [],
+        "w013": [],
+        "w014": [],
+        "w015": []
+      },
+      "prior_observation_cost": 0
+    }
+  ]
+}

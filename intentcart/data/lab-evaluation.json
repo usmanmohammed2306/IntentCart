@@ -1,0 +1,168 @@
+{
+  "created_utc": "2026-10-20T02:36:19.105821+00:00",
+  "app_version": "4.3.0",
+  "kind": "One deterministic scripted local run; actual API endpoints, explicitly fake provider",
+  "live_provider_calls": 0,
+  "checks": {
+    "preview_leaves_state_unchanged": true,
+    "four_worlds_retain_comparisons": true,
+    "seven_scripted_gate_outcomes": true,
+    "dry_run_creates_no_order": true,
+    "lost_response_reconciles_once": true,
+    "fake_refund_completes": true,
+    "world_change_invalidates_old_quote": true,
+    "infeasible_world_retains_preferences": true
+  },
+  "challenge_cases": [
+    {
+      "id": "control",
+      "label": "Exact approved proposal",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 5800,
+        "currency": "USD",
+        "version": 5,
+        "approved": true
+      },
+      "eligible": true,
+      "failed": [],
+      "expected_eligible": true,
+      "matches_expectation": true
+    },
+    {
+      "id": "amount",
+      "label": "Increase total by $10",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 6800,
+        "currency": "USD",
+        "version": 5,
+        "approved": true
+      },
+      "eligible": false,
+      "failed": [
+        "amount"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    },
+    {
+      "id": "product",
+      "label": "Substitute another product",
+      "proposal": {
+        "product_id": "bag-01",
+        "total_cents": 5800,
+        "currency": "USD",
+        "version": 5,
+        "approved": true
+      },
+      "eligible": false,
+      "failed": [
+        "product"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    },
+    {
+      "id": "currency",
+      "label": "Change USD to EUR",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 5800,
+        "currency": "EUR",
+        "version": 5,
+        "approved": true
+      },
+      "eligible": false,
+      "failed": [
+        "currency"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    },
+    {
+      "id": "stale",
+      "label": "Reuse an earlier preference version",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 5800,
+        "currency": "USD",
+        "version": 4,
+        "approved": true
+      },
+      "eligible": false,
+      "failed": [
+        "version"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    },
+    {
+      "id": "consent",
+      "label": "Skip explicit approval",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 5800,
+        "currency": "USD",
+        "version": 5,
+        "approved": false
+      },
+      "eligible": false,
+      "failed": [
+        "consent"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    },
+    {
+      "id": "expiry",
+      "label": "Replay after quote expiration",
+      "proposal": {
+        "product_id": "bag-19",
+        "total_cents": 5800,
+        "currency": "USD",
+        "version": 5,
+        "approved": true
+      },
+      "eligible": false,
+      "failed": [
+        "expiry"
+      ],
+      "expected_eligible": false,
+      "matches_expectation": true
+    }
+  ],
+  "recovery": {
+    "capture_calls": 1,
+    "final_status": "REFUNDED",
+    "trace": [
+      {
+        "action": "Create under explicit test consent",
+        "result": "Fake buyer is scripted as APPROVED; no live PayPal approval."
+      },
+      {
+        "action": "Capture response disappears",
+        "result": "HTTP 502 uncertain; fake provider has already committed one capture."
+      },
+      {
+        "action": "Reconcile saved order",
+        "result": "COMPLETED with matching quote, currency and amount."
+      },
+      {
+        "action": "Retry capture safely",
+        "result": "Existing completed capture returned; capture call count remains one."
+      },
+      {
+        "action": "Refund the verified fake capture",
+        "result": "REFUNDED for the exact original total."
+      }
+    ]
+  },
+  "source_sha256": {
+    "intentcart/app.py": "21afaa17b1a6bf5d59c986673558eeb864f0176390007d06ecee6e4fe14e15a1",
+    "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
+    "intentcart/learning.py": "49d7c3c7b699cf4ce15af6f46173285766eb231a5cbde27948e5ed878870cbdf",
+    "scripts/evaluate_lab.py": "dc55efd86d645f7e1e2b1b6778094b94eac4874177ad0c1c63410d2af387525b"
+  },
+  "limits": "Not a human study, live outage experiment, general security benchmark, or proof of prompt-injection resistance."
+}

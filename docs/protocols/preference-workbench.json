@@ -1,0 +1,1 @@
+{"schema":"intentcart-preference-workbench-protocol/1","declared_on":"2026-10-19","seed":20261019,"synthetic_profiles":24,"training_comparisons":8,"tie_thresholds":[0.001,0.01,0.03],"evaluation":"Basket-ID-disjoint training/test pools from one fictional catalog; fixed synthetic linear utility; no human preference quality or outside-catalog generalization claim."}

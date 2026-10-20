@@ -1,0 +1,23 @@
+{
+  "schema": "intentcart-robustness-protocol/1",
+  "frozen_date": "2026-10-10",
+  "development_seed": 271828,
+  "heldout_seed": 314159,
+  "development_per_family": 20,
+  "heldout_per_family": 40,
+  "families": ["linear", "nonlinear", "noisy", "ties", "misleading_intake", "drift", "corrupted_features"],
+  "candidate_decays": [1.0, 0.8, 0.5],
+  "selection": "Minimum development mean candidate regret after four decision-aware questions, pooled with equal family weight. Ties favor decay 1.0. No held-out selection.",
+  "question_cost": 0.002,
+  "risk_limit": 0.025,
+  "bad_regret": 0.05,
+  "deferral_cost": 0.03,
+  "max_questions": 4,
+  "max_attempts": 8,
+  "bootstrap_resamples": 2000,
+  "sensitivity": {"question_costs": [0.0, 0.002, 0.005], "risk_limits": [0.01, 0.025, 0.05]},
+  "primary": "Paired candidate-regret reduction: fixed-four selected decay versus fixed-four decay 1.0. Stratified persona bootstrap, 95% interval. Null results retained.",
+  "secondary": "Ask/recommend/defer trade-offs: candidate regret over all personas, conditional recommended regret, coverage, bad-recommendation rate, deferral recall and unnecessary deferrals, questions, illustrative loss, latency and traced allocations.",
+  "pairing": "Shared personas, constraints, response draws by step, and disjoint held-out comparison pairs per persona. Draws pair steps, not identical pairs. Resample personas within families, never questions as independent people.",
+  "limits": "All fictional synthetic tasks. Known families, independent held-out personas; no unseen-family or human generalization claim. Drift occurs after two answers regardless of whether a policy asks. Models cannot observe unasked future changes. Feature corruption affects preference inputs, never authoritative prices/fit. No hypothesis of universal improvement. No sponsor or provider calls."
+}

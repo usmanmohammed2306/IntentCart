@@ -1,0 +1,360 @@
+{
+  "schema": "intentcart-fictional-persona-cohort/1",
+  "notice": "All identities, relationships, pressures, decisions and circumstances are invented. This is an authored software scenario suite, not interviews, user research or validated population behavior.",
+  "prior_profiles": "docs/protocols/complex-workstation-personas.json",
+  "conditions": ["ordinary", "late-cost-ambiguity", "conflicting-inventory", "stale-offer-after-interruption"],
+  "prior_reactions": {
+    "mira": ["stop", "correct", "refresh"],
+    "noah": ["stop", "correct", "stop"],
+    "leena": ["extend", "correct", "refresh"],
+    "jules": ["extend", "correct", "refresh"],
+    "sam": ["extend", "correct", "refresh"],
+    "ari": ["stop", "stop", "refresh"],
+    "tess": ["stop", "correct", "stop"],
+    "dev": ["stop", "correct", "refresh"]
+  },
+  "personas": [
+    {
+      "id": "ines", "name": "Ines — procurement assistant caught between two approvers",
+      "context": "Ines prepares a workstation proposal but does not own the purchasing decision. A team lead wants the cheapest usable setup and a finance reviewer wants an all-in ceiling. A verbal suggestion to spend more arrives before a written ceiling is settled. Ines wants to be helpful without converting someone else's enthusiasm into permission.",
+      "primary_goal": "Produce a supportable planning record while leaving unresolved spending authority explicit.",
+      "competing_priorities": ["Avoid an over-budget proposal", "Keep the technical plan useful", "Separate a suggestion from an explicit scenario revision", "Avoid presenting a planning report as approval"],
+      "initial_assumption": "A positive technical recommendation might also settle who can authorize spending.",
+      "behavior_rule": "First test the written USD 350 ceiling, mark shipping unknown, enter a USD 20 allowance and stop when that cannot fit. Do not adopt the verbal budget increase.",
+      "correction_trigger": "The all-in allowance exceeds the written ceiling.",
+      "recovery": "Export an explanatory decision record and request clarification outside this simulation.",
+      "stop_condition": "The written ceiling or shipping allowance remains unresolved.",
+      "decision_owner": "Fictional reviewer owns the ceiling; this script cannot supply their consent.",
+      "reactions": ["stop", "correct", "stop"],
+      "not_simulated": ["Actual procurement approval", "A real finance policy", "Organizational communication"],
+      "script": [
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":35000},"supported":true,"intent":"Use the written ceiling instead of the informal larger allowance"},
+        {"kind":"change","operation":"requirements","payload":{"shipping_cents":null},"supported":false,"intent":"Acknowledge that the shipping amount is not settled"},
+        {"kind":"change","operation":"requirements","payload":{"shipping_cents":2000},"supported":false,"intent":"Enter a fictional shipping allowance without inflating the approved ceiling"},
+        {"kind":"drive","expected":false,"intent":"Defer the proposal under the current written constraint"},
+        {"kind":"report","intent":"Keep the technical explanation available without granting checkout authority"}
+      ]
+    },
+    {
+      "id":"omar", "name":"Omar — developer coordinating a dense desk layout",
+      "context":"Omar uses several windows and believes a third screen would help. Existing desk notes describe two different cables, and the laptop specification is less permissive than the docking-station headline. Omar prefers a useful two-screen fallback to an unsupported promise, but does not want the fallback described as meeting the original request.",
+      "primary_goal":"Separate a three-screen aspiration from a supported two-screen fallback.",
+      "competing_priorities":["Keep enough visible workspace","Avoid changing every component","Preserve the reason for the fallback","Do not guess cable or charging capabilities"],
+      "initial_assumption":"The number of physical sockets is the number of supported external displays.",
+      "behavior_rule":"Try three displays, combine that with a USB-C output expectation, then relax each requirement explicitly and check an excessive charging target separately.",
+      "correction_trigger":"One resolved constraint leaves another independent hard requirement unsatisfied.",
+      "recovery":"Change the request to two HDMI displays and remove the charging target explicitly.",
+      "stop_condition":"Do not claim the original three-screen USB-C request is fulfilled.",
+      "decision_owner":"Omar owns the fallback scope, not the underlying hardware facts.",
+      "reactions":["extend","correct","refresh"],
+      "not_simulated":["Actual workspace productivity","Physical cable identification","Accessibility or visual-comfort outcomes"],
+      "script":[
+        {"kind":"change","operation":"revise_goal","payload":{"displays":3},"supported":false,"intent":"Try the originally requested third display"},
+        {"kind":"change","operation":"requirements","payload":{"connector":"usb-c"},"supported":false,"intent":"Add the connector expectation from the desk note"},
+        {"kind":"change","operation":"revise_goal","payload":{"displays":2},"supported":false,"intent":"Reduce the screen count while keeping the connector requirement"},
+        {"kind":"change","operation":"requirements","payload":{"connector":"hdmi","charging_watts":140},"supported":false,"intent":"Correct the connector but independently test the high charging target"},
+        {"kind":"change","operation":"requirements","payload":{"charging_watts":0},"supported":true,"intent":"Explicitly remove the unsupported charging requirement"},
+        {"kind":"drive","expected":true,"intent":"Request a fresh recommendation for the narrower fallback"}
+      ]
+    },
+    {
+      "id":"priya", "name":"Priya — maintainer of a version-frozen workstation",
+      "context":"A plugin in Priya's workflow depends on keeping an operating-system version fixed. A generic product description says macOS supported, but no inspected minimum-version fact establishes her exact configuration. A delivery deadline makes it tempting to clear the field and proceed; Priya keeps the requirement instead.",
+      "primary_goal":"Avoid interpreting a generic platform mention as exact-version support.",
+      "competing_priorities":["Preserve the existing software environment","Meet a near-term delivery need","Understand whether price changes matter","Keep missing evidence visible"],
+      "initial_assumption":"A platform name in a description guarantees compatibility with the pinned version.",
+      "behavior_rule":"Correct an invalid version string, require the actual numeric version, try a larger budget, then inspect a read-only alternative without deleting the version requirement.",
+      "correction_trigger":"No reviewed minimum-version fact supports the pinned system.",
+      "recovery":"Retain the requirement and defer rather than silently broadening its meaning.",
+      "stop_condition":"Exact-version support remains unproven in the represented catalog.",
+      "decision_owner":"Priya owns the pinned requirement; the planner cannot waive it.",
+      "reactions":["stop","correct","stop"],
+      "not_simulated":["Plugin behavior","Actual OS installation","Vendor support confirmation"],
+      "script":[
+        {"kind":"reject","operation":"requirements","payload":{"os_version":"latest stable"},"intent":"Attempt a vague version label and receive a bounded input rejection"},
+        {"kind":"change","operation":"requirements","payload":{"os_version":"13.0"},"supported":false,"intent":"Specify the pinned numeric version without inventing its support"},
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":70000},"supported":false,"intent":"Check whether a larger budget resolves missing version evidence"},
+        {"kind":"preview","scenarios":[{"budget_cents":10000}],"intent":"Explore a smaller allowance without waiving the pinned version"},
+        {"kind":"drive","expected":false,"intent":"Keep the version requirement and defer"}
+      ]
+    },
+    {
+      "id":"ren", "name":"Ren — security reviewer correcting an inherited permission",
+      "context":"Ren opens a planning state that assumes driver installation is acceptable. The machine is shared and Ren can review hardware, but cannot authorize changing its software. A tempting dock discount and a larger allowance arrive while the permission issue remains unresolved.",
+      "primary_goal":"Ensure inherited permission cannot survive the final explicit restriction.",
+      "competing_priorities":["Honor the software boundary","Preserve useful inspected facts","Avoid being distracted by a discount","Keep the final refusal unambiguous"],
+      "initial_assumption":"An inherited recommended state may already carry authority that is difficult to remove.",
+      "behavior_rule":"Withdraw permission, explicitly refuse the follow-up, enter a discounted offer and a larger ceiling, and refuse again.",
+      "correction_trigger":"Commercial changes are mistaken for resolution of the installation restriction.",
+      "recovery":"Preserve observations and maintain the final no-driver state.",
+      "stop_condition":"The requested represented setup still depends on restricted software.",
+      "decision_owner":"A separate fictional system owner would decide installation; no such consent is simulated as real.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Actual security policy","System-owner approval","A security assessment"],
+      "script":[
+        {"kind":"change","operation":"withdraw_driver","payload":{},"supported":false,"intent":"Correct the inherited installation assumption"},
+        {"kind":"drive","expected":false,"driver":false,"intent":"Explicitly refuse installation when asked again"},
+        {"kind":"offer","changes":{"price_cents":12000},"supported":false,"intent":"Record a hypothetical discount without overriding the restriction"},
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":80000,"allow_driver":false},"supported":false,"intent":"Keep permission denied despite a larger hardware ceiling"},
+        {"kind":"drive","expected":false,"driver":false,"intent":"Finish with the restriction intact"}
+      ]
+    },
+    {
+      "id":"eva", "name":"Eva — equipment reuser reconciling old notes",
+      "context":"Eva prefers to reuse equipment and keeps a notebook of specifications. One entry is stale and another is dated tomorrow because it was copied from a planned review. She wants a conservative review interval, but cannot make old evidence fresh by editing the interval without saying so.",
+      "primary_goal":"Distinguish stricter freshness policy, invalid review dates and a refreshed scenario declaration.",
+      "competing_priorities":["Reuse existing equipment","Avoid stale information","Keep review provenance clear","Avoid treating a future date as completed work"],
+      "initial_assumption":"Any filled-in review date is evidence of a completed check.",
+      "behavior_rule":"Tighten evidence age, restore the declared policy, reject a future-dated offer, then replace an expired offer with a current fictional declaration.",
+      "correction_trigger":"An invalid date or review interval removes usable support.",
+      "recovery":"Correct dates explicitly and preserve that freshness remains a declared snapshot property.",
+      "stop_condition":"A required record remains stale or future-dated.",
+      "decision_owner":"Eva owns the review policy; no automatic vendor verification is inferred.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Real equipment age","Manufacturer review activity","Live retailer data"],
+      "script":[
+        {"kind":"change","operation":"requirements","payload":{"evidence_max_age_days":1},"supported":false,"intent":"Require a stricter review interval than the current source snapshot meets"},
+        {"kind":"change","operation":"requirements","payload":{"evidence_max_age_days":90},"supported":true,"intent":"Explicitly restore the original scenario review policy"},
+        {"kind":"reject_offer","changes":{"observed_on":"$tomorrow"},"intent":"Reject tomorrow's planned review as a completed offer review"},
+        {"kind":"offer","changes":{"observed_on":"$stale"},"supported":false,"intent":"Record an old offer and expose its expiry"},
+        {"kind":"offer","changes":{},"supported":true,"intent":"Enter an explicitly current fictional declaration"},
+        {"kind":"drive","expected":true,"intent":"Request a new recommendation after the date corrections"}
+      ]
+    },
+    {
+      "id":"luis", "name":"Luis — support specialist revising an overpromised setup",
+      "context":"Luis previously described a four-display desk to a colleague before checking the represented laptop. He would like to preserve credibility, but a smaller working plan is more useful than a confident unsupported answer. The colleague's original request must remain distinct from the fallback.",
+      "primary_goal":"Correct an overpromise and document a narrower supported plan.",
+      "competing_priorities":["Provide a useful fallback","Avoid concealing the initial mismatch","Preserve exact variant identity","Avoid adding unsupported high-refresh claims"],
+      "initial_assumption":"A dock headline settles every display-count and refresh combination.",
+      "behavior_rule":"Reduce the request from four displays to three and then two, test a high-refresh expectation separately, and explicitly return to the represented refresh target.",
+      "correction_trigger":"Count and refresh remain independent constraints.",
+      "recovery":"Recommend only the explicitly narrowed two-display target.",
+      "stop_condition":"Do not describe the fallback as fulfillment of the four-display request.",
+      "decision_owner":"Luis owns the revised scenario description, not the colleague's actual acceptance.",
+      "reactions":["extend","correct","refresh"],
+      "not_simulated":["A real colleague","Customer satisfaction","A promise or contract"],
+      "script":[
+        {"kind":"change","operation":"revise_goal","payload":{"displays":4},"supported":false,"intent":"Test the original four-display claim"},
+        {"kind":"change","operation":"revise_goal","payload":{"displays":3},"supported":false,"intent":"Check the first reduced scope without inventing support"},
+        {"kind":"change","operation":"revise_goal","payload":{"displays":2,"hz":120},"supported":false,"intent":"Try two displays but retain a separate high-refresh expectation"},
+        {"kind":"change","operation":"revise_goal","payload":{"hz":60},"supported":true,"intent":"Explicitly choose the represented work-only refresh target"},
+        {"kind":"drive","expected":true,"intent":"Request a recommendation for the corrected scope only"}
+      ]
+    },
+    {
+      "id":"hana", "name":"Hana — coordinator separating reimbursements and allowances",
+      "context":"Hana has a strict reimbursement ceiling but can propose a separate discretionary allowance after reviewing the whole cost. She is careful about expenses, yet a tax line and shipping line come from different notes. She wants each revision visible instead of quietly padding the budget.",
+      "primary_goal":"Resolve tax and shipping separately and explicitly record any larger scenario ceiling.",
+      "competing_priorities":["Respect the original ceiling","Avoid hidden cost assumptions","Use a visible discretionary revision","Keep useful technical evidence"],
+      "initial_assumption":"Resolving one missing cost line resolves the final price.",
+      "behavior_rule":"Make both lines unknown, resolve tax first, observe shipping still blocks support, then resolve shipping and explicitly revise the ceiling.",
+      "correction_trigger":"A remaining unknown or known cost overrun prevents support.",
+      "recovery":"Make the hypothetical USD 400 planning ceiling explicit after reviewing both lines.",
+      "stop_condition":"No fresh recommendation until all declared costs fit the explicit ceiling.",
+      "decision_owner":"Hana controls this hypothetical ceiling; no reimbursement commitment exists.",
+      "reactions":["extend","correct","refresh"],
+      "not_simulated":["Actual taxes","A real reimbursement","A merchant quote"],
+      "script":[
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":35000},"supported":true,"intent":"Begin with the original ceiling"},
+        {"kind":"change","operation":"requirements","payload":{"tax_cents":null,"shipping_cents":null},"supported":false,"intent":"Expose both unresolved cost lines"},
+        {"kind":"change","operation":"requirements","payload":{"tax_cents":1500},"supported":false,"intent":"Resolve tax but leave shipping unknown"},
+        {"kind":"change","operation":"requirements","payload":{"shipping_cents":1000},"supported":false,"intent":"Resolve shipping and reveal the total overrun"},
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":40000},"supported":true,"intent":"Explicitly revise the planning ceiling after reviewing all costs"},
+        {"kind":"drive","expected":true,"intent":"Obtain a fresh recommendation under the new scenario allowance"}
+      ]
+    },
+    {
+      "id":"ben", "name":"Ben — consultant reconciling similar product tabs",
+      "context":"Ben compares several visually similar products while preparing a desk proposal. A copied model suffix belongs to another tab, and a merchant offer identifier is reused while transferring notes to a second item. Ben is willing to correct clerical errors but does not want the software to guess what he meant.",
+      "primary_goal":"Keep product, variant and merchant-offer identity bound to the exact selected item.",
+      "competing_priorities":["Reuse research notes","Avoid the wrong product","Detect cross-item copy errors","Recover without changing hard constraints"],
+      "initial_assumption":"If the product names look similar, copied identifiers are interchangeable.",
+      "behavior_rule":"Attempt a wrong variant, correct the dock offer, attempt to reuse its exact merchant-offer identity on the monitor, then keep the correctly bound record.",
+      "correction_trigger":"Variant or cross-product offer-identity rejection.",
+      "recovery":"Correct the identity rather than weakening the identity check.",
+      "stop_condition":"An offer cannot be bound to the exact intended product.",
+      "decision_owner":"Ben owns the copied declaration, not merchant authenticity.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["A real merchant","Offer authenticity","Actual discounts"],
+      "script":[
+        {"kind":"reject_offer","changes":{"variant":"copied-similar-model"},"intent":"Reject the suffix copied from a different product tab"},
+        {"kind":"offer","changes":{"price_cents":18500},"supported":true,"intent":"Bind the corrected declaration to the exact dock"},
+        {"kind":"duplicate_offer","intent":"Reject copying the same merchant offer identity onto another product"},
+        {"kind":"change","operation":"requirements","payload":{"shipping_cents":300},"supported":true,"intent":"Add a separate scenario shipping allowance"},
+        {"kind":"drive","expected":true,"intent":"Request a recommendation with the corrected identities"}
+      ]
+    },
+    {
+      "id":"zoya", "name":"Zoya — editor keeping protected-video support nonnegotiable",
+      "context":"Zoya wants the same desk to support ordinary editing and reviewing protected material. A discounted work-only basket is appealing, but removing a hard protected-video requirement would make the plan irrelevant. Zoya allows an entertainment preference to change while keeping the consequential requirement intact.",
+      "primary_goal":"Avoid substituting an attractive work-only plan for the required protected-video scenario.",
+      "competing_priorities":["Retain the hard media requirement","Avoid paying twice","Distinguish preferences from requirements","Keep a useful explanation of why the request cannot proceed"],
+      "initial_assumption":"General display compatibility may imply protected-video support.",
+      "behavior_rule":"Add gaming and HDCP, drop gaming only, try a discount, inspect a smaller budget preview and retain HDCP through final deferral.",
+      "correction_trigger":"The cheaper basket still lacks protected-video evidence.",
+      "recovery":"Export the unresolved explanation without claiming the original need was fulfilled.",
+      "stop_condition":"HDCP support remains unrepresented or uninspected.",
+      "decision_owner":"Zoya owns the hard media requirement; price cannot waive it.",
+      "reactions":["stop","stop","refresh"],
+      "not_simulated":["Protected content","Actual playback","Editorial acceptance"],
+      "script":[
+        {"kind":"change","operation":"requirements","payload":{"gaming":true,"hdcp":true},"supported":false,"intent":"Declare both mixed-use expectations"},
+        {"kind":"change","operation":"requirements","payload":{"gaming":false},"supported":false,"intent":"Drop the preference while retaining the hard media requirement"},
+        {"kind":"offer","changes":{"price_cents":15000},"supported":false,"intent":"Keep unsupported media capability blocked despite a discount"},
+        {"kind":"preview","scenarios":[{"budget_cents":10000}],"intent":"Explore an alternative budget without removing HDCP"},
+        {"kind":"drive","expected":false,"intent":"Retain the hard requirement and defer"},
+        {"kind":"report","intent":"Preserve the unresolved explanation"}
+      ]
+    },
+    {
+      "id":"theo", "name":"Theo — skeptical reviewer disputing a confident specification",
+      "context":"Theo wants to see where every consequential claim came from. A copied source record has an unsafe credential-bearing URL, and another proposed correction reduces the display count. Theo wants both invalid input and inconvenient evidence to be handled visibly rather than filtered for a positive recommendation.",
+      "primary_goal":"Keep invalid source input separate from a valid but unfavorable hypothetical correction.",
+      "competing_priorities":["Preserve provenance","Reject malformed source identities","Retain unfavorable outcomes","Avoid confusing a proposal with accepted truth"],
+      "initial_assumption":"A source-shaped record is sufficient to establish credibility.",
+      "behavior_rule":"Attempt the invalid URL, propose and separately accept a display-count reduction, inspect the changed field and keep the resulting deferral.",
+      "correction_trigger":"Source validation rejects the malformed identity or accepted evidence invalidates the previous plan.",
+      "recovery":"Keep the corrected evidence trail and do not reverse it merely to recover a recommendation.",
+      "stop_condition":"The accepted scenario supports fewer displays than required.",
+      "decision_owner":"Theo authors a hypothetical correction; no independent source verification occurs.",
+      "reactions":["stop","stop","refresh"],
+      "not_simulated":["Actual manufacturer content","A security audit","Independent expert validation"],
+      "script":[
+        {"kind":"invalid_source","intent":"Reject the credential-bearing URL copied into a source record"},
+        {"kind":"source","value":1,"intent":"Propose the unfavorable hypothetical display-count correction"},
+        {"kind":"accept","supported":false,"intent":"Accept the exact pending correction in a separate scripted step"},
+        {"kind":"drive","expected":false,"intent":"Reinspect and retain the unfavorable outcome"},
+        {"kind":"report","intent":"Export the explanation without restoring the old recommendation"}
+      ]
+    },
+    {
+      "id":"nia", "name":"Nia — household coordinator reconciling incompatible equipment notes",
+      "context":"Two people refer to the shared screen using different connector names. Nia copies a vague connector value and later discovers the note describes an older display. Changing a field must mean an explicit hypothetical inventory correction, not pretending the physical hardware changed.",
+      "primary_goal":"Keep declared inventory consistent with the represented connection path.",
+      "competing_priorities":["Reuse the existing screen","Avoid guessing connector details","Separate physical facts from corrected notes","Do not treat a cable purchase as a universal adapter"],
+      "initial_assumption":"A connector label can be approximate because a dock will adapt it.",
+      "behavior_rule":"Try a vague connector, enter a DisplayPort owned-screen declaration that conflicts with the represented HDMI path, correct the note explicitly and check an excessive refresh target separately.",
+      "correction_trigger":"Owned-screen connector or refresh does not meet the scenario requirement.",
+      "recovery":"Correct only the fictional note; keep physical verification outside the simulation.",
+      "stop_condition":"The actual connector or refresh would need verification outside the represented scenario.",
+      "decision_owner":"Nia owns the declaration; no physical measurement is claimed.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Actual household equipment","Cable adaptation","Human communication accuracy"],
+      "script":[
+        {"kind":"monitor","connector":"unknown","reject":true,"intent":"Reject a vague owned-screen connector"},
+        {"kind":"monitor","connector":"displayport","supported":false,"intent":"Expose the conflict between the copied inventory and HDMI requirement"},
+        {"kind":"monitor","connector":"hdmi","supported":true,"intent":"Explicitly correct the fictional inventory note"},
+        {"kind":"change","operation":"revise_goal","payload":{"hz":120},"supported":false,"intent":"Test a separately remembered high-refresh expectation"},
+        {"kind":"change","operation":"revise_goal","payload":{"hz":60},"supported":true,"intent":"Return explicitly to the represented refresh target"},
+        {"kind":"drive","expected":true,"intent":"Request a new plan for the corrected scenario"}
+      ]
+    },
+    {
+      "id":"adil", "name":"Adil — contractor separating connector convenience from capability",
+      "context":"Adil wants one convenient connection and assumes USB-C describes the entire display path. A work deadline encourages a simpler HDMI fallback, but a separate high-power charging requirement would remain unresolved. Adil will change connector convenience, not the charging requirement.",
+      "primary_goal":"Avoid presenting an easy connector fallback as fulfillment of a hard charging need.",
+      "competing_priorities":["Reduce desk complexity","Avoid an unsupported charging promise","Keep independent constraints separate","Retain an honest fallback explanation"],
+      "initial_assumption":"A single connector label guarantees display transport and charging power.",
+      "behavior_rule":"Add USB-C and 140-watt charging, relax only the connector, test a larger budget and keep the charging requirement through deferral.",
+      "correction_trigger":"The HDMI fallback still lacks the required charging capacity.",
+      "recovery":"Explain the remaining hard constraint and stop.",
+      "stop_condition":"The represented power path cannot support the requested charging target.",
+      "decision_owner":"Adil owns the charging requirement; the simulator cannot relax it for convenience.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Physical charging","Actual power negotiation","Travel or remote-work reliability"],
+      "script":[
+        {"kind":"change","operation":"requirements","payload":{"connector":"usb-c","charging_watts":140},"supported":false,"intent":"Declare both convenience and hard power requirements"},
+        {"kind":"change","operation":"requirements","payload":{"connector":"hdmi"},"supported":false,"intent":"Relax the connector without silently deleting the charging target"},
+        {"kind":"change","operation":"revise_goal","payload":{"budget_cents":90000},"supported":false,"intent":"Check that a larger budget does not create missing charging capability"},
+        {"kind":"drive","expected":false,"intent":"Preserve the nonnegotiable charging requirement"},
+        {"kind":"report","intent":"Retain the unresolved power explanation"}
+      ]
+    },
+    {
+      "id":"mei", "name":"Mei — reviewer using stricter freshness rules than teammates",
+      "context":"Mei wants offers reviewed within one day but accepts a longer interval for hardware specifications. A teammate's note merges those two clocks. Mei does not want to make a stale price acceptable merely by widening the policy after seeing a favorable number.",
+      "primary_goal":"Keep offer freshness independent of hardware-evidence freshness.",
+      "competing_priorities":["Preserve a strict price-review interval","Reuse still-current specifications","Avoid policy changes motivated by a bargain","Recover through explicit re-review"],
+      "initial_assumption":"One freshness interval governs every kind of evidence.",
+      "behavior_rule":"Set a one-day offer interval, enter a two-day-old declaration, check that increasing hardware evidence age does not fix it, then refresh the offer declaration without relaxing the price rule.",
+      "correction_trigger":"A price remains expired despite changing the separate specification interval.",
+      "recovery":"Enter a current fictional offer review while retaining the stricter price rule.",
+      "stop_condition":"A required offer cannot be explicitly re-reviewed within the declared price interval.",
+      "decision_owner":"Mei owns the freshness policy; actual live prices are not fetched.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Real team behavior","Live market changes","An actual re-review"],
+      "script":[
+        {"kind":"change","operation":"requirements","payload":{"price_max_age_days":1},"supported":true,"intent":"Set a strict offer-review interval independently of specifications"},
+        {"kind":"offer","changes":{"observed_on":"$two_days_ago"},"supported":false,"intent":"Expose the expired two-day-old price declaration"},
+        {"kind":"change","operation":"requirements","payload":{"evidence_max_age_days":365},"supported":false,"intent":"Check that a wider specification interval cannot fix stale pricing"},
+        {"kind":"offer","changes":{},"supported":true,"intent":"Refresh the scenario offer without weakening its price policy"},
+        {"kind":"drive","expected":true,"intent":"Request a new recommendation under the distinct review rules"}
+      ]
+    },
+    {
+      "id":"felix", "name":"Felix — lab coordinator avoiding duplicate equipment purchases",
+      "context":"Felix discovers that two suitable displays are already available in the fictional inventory. The original plan assumed one display needed to be bought. Felix wants to retain the dock and cables while preventing a redundant monitor line, then checks what happens when one borrowed display disappears.",
+      "primary_goal":"Keep purchased quantities consistent with changes in explicitly declared owned inventory.",
+      "competing_priorities":["Avoid redundant purchases","Preserve unaffected component choices","Handle borrowed equipment becoming unavailable","Keep quantities visible in the export"],
+      "initial_assumption":"Adding inventory is a note that does not change the basket quantities.",
+      "behavior_rule":"Declare two owned screens, inspect the bill of materials, reduce inventory to one, then restore two and request a fresh recommendation.",
+      "correction_trigger":"The monitor purchase count does not match the declared owned inventory.",
+      "recovery":"Recompute the basket after each inventory revision and require renewed recommendation.",
+      "stop_condition":"An inventory count cannot be reconciled with the requested number of displays.",
+      "decision_owner":"Felix owns the fictional inventory declaration; no physical inventory is verified.",
+      "reactions":["extend","correct","refresh"],
+      "not_simulated":["Physical inventory","Actual purchasing avoidance","A real equipment loan"],
+      "script":[
+        {"kind":"monitor","count":2,"supported":true,"intent":"Declare both requested screens already owned"},
+        {"kind":"quantity","expected":0,"intent":"Verify there is no redundant purchased monitor"},
+        {"kind":"monitor","count":1,"supported":true,"intent":"Remove the borrowed screen from the available inventory"},
+        {"kind":"quantity","expected":1,"intent":"Verify exactly one monitor is needed again"},
+        {"kind":"monitor","count":2,"supported":true,"intent":"Explicitly restore the second fictional owned screen"},
+        {"kind":"drive","expected":true,"intent":"Request a fresh recommendation for the current quantities"}
+      ]
+    },
+    {
+      "id":"sora", "name":"Sora — buyer resisting a technically incomplete shortcut",
+      "context":"Sora receives an appealing low-price proposal but needs both a pinned operating-system version and a high-power charging path. The headline price creates pressure to proceed. Sora treats reducing cost as useful only after the actual requirements are supported.",
+      "primary_goal":"Keep two missing hard-capability requirements visible despite commercial incentives.",
+      "competing_priorities":["Avoid an expensive mistake","Retain the pinned software environment","Meet the charging target","Avoid confusing a discount with technical validation"],
+      "initial_assumption":"A heavily discounted recommendation might justify trying an incompletely supported setup.",
+      "behavior_rule":"Add both hard constraints, enter a steep discount, reduce a secondary gaming preference and still defer.",
+      "correction_trigger":"The price improves but the capability evidence does not.",
+      "recovery":"Export the unsupported explanation and keep both hard requirements intact.",
+      "stop_condition":"Either hard capability remains unsupported.",
+      "decision_owner":"Sora owns these requirements and cannot substitute a sale for evidence.",
+      "reactions":["stop","stop","stop"],
+      "not_simulated":["Actual safety or reliability","Software compatibility testing","Buyer benefit"],
+      "script":[
+        {"kind":"change","operation":"requirements","payload":{"os_version":"13.0","charging_watts":140,"gaming":true},"supported":false,"intent":"Declare the full requirement set before considering price"},
+        {"kind":"offer","changes":{"price_cents":10000},"supported":false,"intent":"Check that a steep hypothetical discount cannot establish capabilities"},
+        {"kind":"change","operation":"requirements","payload":{"gaming":false},"supported":false,"intent":"Drop a secondary expectation while retaining both hard requirements"},
+        {"kind":"drive","expected":false,"intent":"Defer despite the attractive hypothetical price"},
+        {"kind":"report","intent":"Keep the missing-capability explanation available"}
+      ]
+    },
+    {
+      "id":"cam", "name":"Cam — planner exploring alternatives without authorizing changes",
+      "context":"Cam likes to compare options and expects a preview to be reversible. Two tabs contain different notes about the budget and software permission. Cam wants to explore a low-cost alternative and then change the active permission explicitly, without letting a preview or an obsolete comparison overwrite the current state.",
+      "primary_goal":"Keep exploration, actual revision and recommendation acceptance separate.",
+      "competing_priorities":["Explore freely","Preserve the current state until an explicit change","Avoid invented preference evidence","Honor the last permission decision"],
+      "initial_assumption":"Clicking or viewing an alternative may silently replace the current plan.",
+      "behavior_rule":"Run budget previews, reject a comparison of the same basket with itself, explicitly withdraw permission, preview again and keep the final refusal.",
+      "correction_trigger":"An exploratory action would change active state or imply a comparison that never occurred.",
+      "recovery":"Use non-mutating previews and explicit permission revision; retain no fabricated preference answer.",
+      "stop_condition":"The final active scenario cannot support the requested setup without the refused driver.",
+      "decision_owner":"Cam owns the active revision; previews have no authority.",
+      "reactions":["stop","correct","refresh"],
+      "not_simulated":["Actual browser tabs","Human preference elicitation","Usability of the comparison interface"],
+      "script":[
+        {"kind":"preview","scenarios":[{"budget_cents":10000},{"budget_cents":40000}],"intent":"Explore two budgets without replacing the active plan"},
+        {"kind":"invalid_comparison","intent":"Reject treating one basket compared with itself as preference evidence"},
+        {"kind":"change","operation":"withdraw_driver","payload":{},"supported":false,"intent":"Explicitly change the active permission instead of using a preview"},
+        {"kind":"preview","scenarios":[{"budget_cents":90000}],"intent":"Check that previewing a larger budget cannot restore permission"},
+        {"kind":"drive","expected":false,"driver":false,"intent":"Finish with the latest explicit refusal"}
+      ]
+    }
+  ]
+}

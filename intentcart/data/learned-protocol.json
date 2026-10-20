@@ -1,0 +1,72 @@
+{
+  "schema": "intentcart-learned-protocol/1",
+  "frozen_on": "2026-10-14",
+  "ridge": 1.0,
+  "budgets": [
+    null,
+    2,
+    5,
+    9
+  ],
+  "train": [
+    {
+      "family": "parity",
+      "queries": 3,
+      "maximum_cost": 3,
+      "seeds": [
+        710,
+        711,
+        712,
+        713,
+        714,
+        715,
+        716,
+        717
+      ]
+    },
+    {
+      "family": "any",
+      "queries": 3,
+      "maximum_cost": 3,
+      "seeds": [
+        810,
+        811,
+        812,
+        813,
+        814,
+        815,
+        816,
+        817
+      ]
+    }
+  ],
+  "test": [
+    {
+      "family": "threshold",
+      "queries": 4,
+      "maximum_cost": 5,
+      "seeds": [
+        1710,
+        1711,
+        1712,
+        1713,
+        1714,
+        1715
+      ]
+    },
+    {
+      "family": "conditional",
+      "queries": 4,
+      "maximum_cost": 5,
+      "seeds": [
+        1810,
+        1811,
+        1812,
+        1813,
+        1814,
+        1815
+      ]
+    }
+  ],
+  "notice": "Predefined structural family, query-count and cost shifts; no post-result tuning. Test is diagnostic once inspected. Exact objective is unrestricted expected cost."
+}

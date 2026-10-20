@@ -1,0 +1,264 @@
+{
+  "schema": "intentcart-synthetic-workstation-rehearsal/1",
+  "evidence_class": "synthetic_scripted_scenarios",
+  "notice": "FICTIONAL PERSONAS. No people, consent, human observations, usability ratings or live model trials.",
+  "snapshot_date": "2026-10-19",
+  "clock": "explicit frozen scenario date; not current source freshness",
+  "human_participants": 0,
+  "consent_records": 0,
+  "provider_requests": 0,
+  "payment_operations": 0,
+  "cash_spend_usd": 0,
+  "fictional_personas": 8,
+  "scenario_checks": 23,
+  "passed_checks": 23,
+  "all_checks_pass": true,
+  "sources": {
+    "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+    "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3",
+    "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+    "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+    "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+    "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+    "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+    "scripts/rehearse_workstation.py": "52e8199fe275ae4d51ad3b1ca728319b1e3b37cebd127a101658941365e29481"
+  },
+  "records": [
+    {
+      "id": "S01",
+      "fictional_name": "Mira \u2014 budget keeper",
+      "persona_is_fictional": true,
+      "scenario": "Two Full HD displays, one retained, USD 350 cap; scripted driver permission.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "final": {
+          "status": "RECOMMENDED",
+          "revision": 18,
+          "supported_baskets": 1,
+          "inspection_count": 13,
+          "recommended": true,
+          "best_total_cents": 34999,
+          "allow_driver": true,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "supported": true,
+        "recommended": true,
+        "within_budget": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S02",
+      "fictional_name": "Noah \u2014 driver cautious",
+      "persona_is_fictional": true,
+      "scenario": "Decline the driver request.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "final": {
+          "status": "DEFERRED",
+          "revision": 14,
+          "supported_baskets": 0,
+          "inspection_count": 9,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": false,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "permission_not_granted": true,
+        "no_supported_basket": true,
+        "no_recommendation": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S03",
+      "fictional_name": "Leena \u2014 price skeptic",
+      "persona_is_fictional": true,
+      "scenario": "Replace declared zero tax/shipping allowances with unknown values.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "before": {
+          "status": "RECOMMENDED",
+          "revision": 18,
+          "supported_baskets": 1,
+          "inspection_count": 13,
+          "recommended": true,
+          "best_total_cents": 34999,
+          "allow_driver": true,
+          "checkout_authority": false
+        },
+        "after": {
+          "status": "ACTIVE",
+          "revision": 19,
+          "supported_baskets": 0,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": true,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "unknown_cost_blocks_support": true,
+        "acceptance_cleared": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S04",
+      "fictional_name": "Jules \u2014 gamer",
+      "persona_is_fictional": true,
+      "scenario": "Require gaming capability without supporting reviewed evidence.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "after": {
+          "status": "ACTIVE",
+          "revision": 19,
+          "supported_baskets": 0,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": true,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "unsupported_capability_blocks_support": true,
+        "acceptance_cleared": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S05",
+      "fictional_name": "Sam \u2014 repair planner",
+      "persona_is_fictional": true,
+      "scenario": "Remove the only supporting dock; restore its availability in the scenario.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "removed": {
+          "status": "ACTIVE",
+          "revision": 19,
+          "supported_baskets": 0,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": true,
+          "checkout_authority": false
+        },
+        "restored": {
+          "status": "ACTIVE",
+          "revision": 20,
+          "supported_baskets": 1,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": 34999,
+          "allow_driver": true,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "removal_blocks_support": true,
+        "restoration_recovers_support": true,
+        "restoration_does_not_auto_accept": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S06",
+      "fictional_name": "Ari \u2014 source reviewer",
+      "persona_is_fictional": true,
+      "scenario": "Propose then script acceptance of a hypothetical two-to-one-display source correction.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "proposed": {
+          "status": "ACTIVE",
+          "revision": 19,
+          "supported_baskets": 1,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": 34999,
+          "allow_driver": true,
+          "checkout_authority": false
+        },
+        "accepted": {
+          "status": "ACTIVE",
+          "revision": 20,
+          "supported_baskets": 0,
+          "inspection_count": 12,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": true,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "proposal_does_not_replace_source": true,
+        "exact_acceptance_changes_source": true,
+        "changed_source_needs_reinspection": true,
+        "stale_recommendation_cleared": true,
+        "no_supported_basket": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S07",
+      "fictional_name": "Tess \u2014 permission revoker",
+      "persona_is_fictional": true,
+      "scenario": "Withdraw previously scripted driver permission.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "after": {
+          "status": "ACTIVE",
+          "revision": 19,
+          "supported_baskets": 0,
+          "inspection_count": 13,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": false,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "permission_revoked": true,
+        "no_supported_basket": true,
+        "stale_recommendation_cleared": true
+      },
+      "all_checks_pass": true
+    },
+    {
+      "id": "S08",
+      "fictional_name": "Dev \u2014 strict budget",
+      "persona_is_fictional": true,
+      "scenario": "Request the same setup under a USD 100 cap.",
+      "answer_provenance": "authored deterministic script",
+      "stages": {
+        "final": {
+          "status": "DEFERRED",
+          "revision": 3,
+          "supported_baskets": 0,
+          "inspection_count": 0,
+          "recommended": false,
+          "best_total_cents": null,
+          "allow_driver": false,
+          "checkout_authority": false
+        }
+      },
+      "checks": {
+        "no_supported_basket": true,
+        "no_recommendation": true
+      },
+      "all_checks_pass": true
+    }
+  ],
+  "limitations": [
+    "Authored correlated cases share one curated catalog and the same final validator.",
+    "Scripted permissions and source acceptance are simulated inputs, never actual user consent.",
+    "Passing checks establish these specified software behaviors only; usability and human benefit remain unmeasured.",
+    "No fabricated quotes, completion times, satisfaction scores or recruitment records.",
+    "Roadmap 88 remains pending: a consented participant study was not conducted."
+  ]
+}

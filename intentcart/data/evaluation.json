@@ -1,0 +1,81 @@
+{
+  "status": "measured",
+  "seed": 2026,
+  "personas": 120,
+  "human_participants": 0,
+  "results": [
+    {
+      "policy": "static",
+      "mean_regret": 0.018396,
+      "regret_ci": [
+        0.014215,
+        0.022882
+      ],
+      "top1_agreement": 0.375,
+      "heldout_pair_accuracy": 0.755556,
+      "questions": 0
+    },
+    {
+      "policy": "random",
+      "mean_regret": 0.016341,
+      "regret_ci": [
+        0.012417,
+        0.021122
+      ],
+      "top1_agreement": 0.425,
+      "heldout_pair_accuracy": 0.778472,
+      "questions": 4
+    },
+    {
+      "policy": "uncertainty",
+      "mean_regret": 0.015824,
+      "regret_ci": [
+        0.011612,
+        0.020259
+      ],
+      "top1_agreement": 0.458333,
+      "heldout_pair_accuracy": 0.761806,
+      "questions": 4
+    },
+    {
+      "policy": "decision",
+      "mean_regret": 0.016348,
+      "regret_ci": [
+        0.012681,
+        0.020646
+      ],
+      "top1_agreement": 0.425,
+      "heldout_pair_accuracy": 0.783333,
+      "questions": 4
+    }
+  ],
+  "paired_differences": {
+    "static": {
+      "regret_reduction": 0.002048,
+      "paired_ci": [
+        -0.000959,
+        0.005184
+      ]
+    },
+    "random": {
+      "regret_reduction": -7e-06,
+      "paired_ci": [
+        -0.00328,
+        0.003313
+      ]
+    },
+    "uncertainty": {
+      "regret_reduction": -0.000524,
+      "paired_ci": [
+        -0.004133,
+        0.002903
+      ]
+    }
+  },
+  "query_ms": {
+    "median": 5.464,
+    "p95": 15.05
+  },
+  "description": "Paired synthetic benchmark: Dirichlet(1.4) hidden linear weights; noisy logistic choices (beta=12); 24 fictional packs; 3 budget levels; 2 laptop-fit constraints; weak prior from the hidden top two attributes. 1,000 bootstrap resamples.",
+  "conclusion": "Performance is conditional on these simulation assumptions. Confidence intervals may overlap; inspect paired differences before claiming an improvement."
+}

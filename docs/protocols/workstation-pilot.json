@@ -1,0 +1,20 @@
+{
+ "schema":"intentcart-workstation-pilot-protocol/1",
+ "status":"prepared_not_conducted",
+ "human_participants":0,
+ "population":"Consenting adults; no automated recruitment or uniqueness verification",
+ "consent":"Participation is voluntary. Use fictional tasks and no personal payment/account information. You may stop and request removal of the local record. Exports already downloaded cannot be recalled. No payment, model dispatch or retailer order is part of this pilot.",
+ "retention_days":30,
+ "tasks":[
+  {"id":"evidence","brief":"Use the fictional fixture collection. Plan two Full HD displays under USD 350 while retaining one monitor. Inspect consequential facts and identify anything still unknown."},
+  {"id":"repair","brief":"Simulate the chosen dock becoming unavailable. Review a replacement or explain why the task must defer. Never approve checkout."},
+  {"id":"source-change","brief":"Review an explicitly hypothetical source replacement in the workbench. Explain why the previous recommendation is cleared and why the changed field needs inspection again."}
+ ],
+ "comprehension":[
+  {"id":"approval","question":"Does a supported recommendation authorize a payment?","correct":"no"},
+  {"id":"evidence","question":"Does manufacturer-source review equal a physical hardware test?","correct":"no"},
+  {"id":"price","question":"Are declared planning allowances guaranteed live merchant prices?","correct":"no"}
+ ],
+ "outcomes":["task completion reported by observer","time reported by observer","comprehension answers including mistakes","voluntary usability rating","withdrawals and incomplete tasks"],
+ "analysis":"Descriptive local pilot only. Do not infer unique people, causal benefit or superiority from self-reported/observer-entered records. Do not claim a human study occurred until actual consented records have been collected."
+}

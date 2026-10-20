@@ -1,0 +1,335 @@
+{
+  "schema": "intentcart-evidence-catalog/1",
+  "notice": "Curated manufacturer evidence, manually reviewed October 14, 2026. This bounded compatibility model is not a hardware test. All prices are declared scenario allowances, not current merchant quotes; taxes, shipping and fulfillment are unsupported. No retailer checkout is available.",
+  "warnings": [
+    "DisplayLink needs software and macOS Screen Recording permission; explicit driver consent is required.",
+    "Plugable does not recommend this dock for gaming, video editing or demanding graphics; HDCP content has restrictions.",
+    "The included power adapter belongs to the specified UD-6950PDH kit.",
+    "Existing monitor/cable capability and price allowances are scenario declarations requiring explicit confirmation.",
+    "The 30W charging target is based on the original MacBook Air adapter, not a measured charging rate."
+  ],
+  "laptops": [
+    {
+      "id": "macbook-air-m1-2020",
+      "name": "MacBook Air (M1, 2020)",
+      "variant": "M1 / 2020",
+      "protocols": [
+        "displaylink",
+        "usb-c",
+        "tb3"
+      ],
+      "native_displays": 1,
+      "charge_watts": 30,
+      "source_url": "https://support.apple.com/en-us/111883",
+      "observed_on": "2026-10-14",
+      "source_summary": "Apple lists one external display, Thunderbolt/USB4 ports and a supplied 30W adapter.",
+      "compatibility_source_url": "https://plugable.com/products/ud-6950pdh",
+      "transport_note": "Apple supports the native USB-C/Thunderbolt connection. DisplayLink compatibility is a separate Plugable vendor claim and requires user-permitted software."
+    }
+  ],
+  "products": [
+    {
+      "id": "plugable-ud6950pdh",
+      "name": "Plugable UD-6950PDH",
+      "kind": "dock",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "price_cents": 19999,
+      "price_basis": "declared scenario allowance; no merchant price verification",
+      "observations": [
+        {
+          "field": "protocol",
+          "value": "displaylink",
+          "source_id": "plugable-ud6950pdh-protocol",
+          "visible": false
+        },
+        {
+          "field": "displays",
+          "value": 2,
+          "source_id": "plugable-ud6950pdh-displays",
+          "visible": false
+        },
+        {
+          "field": "max_height",
+          "value": 2160,
+          "source_id": "plugable-ud6950pdh-max_height",
+          "visible": false
+        },
+        {
+          "field": "max_hz",
+          "value": 60,
+          "source_id": "plugable-ud6950pdh-max_hz",
+          "visible": false
+        },
+        {
+          "field": "pd_watts",
+          "value": 100,
+          "source_id": "plugable-ud6950pdh-pd_watts",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "dell-p2422h",
+      "name": "Dell P2422H",
+      "kind": "monitor",
+      "variant": "P2422H / HDMI 1.4 input",
+      "price_cents": 15000,
+      "price_basis": "declared scenario allowance; no merchant price verification",
+      "observations": [
+        {
+          "field": "height",
+          "value": 1080,
+          "source_id": "dell-p2422h-height",
+          "visible": false
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "dell-p2422h-hz",
+          "visible": false
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "dell-p2422h-connector",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "declared-hdmi-pair",
+      "name": "Two declared owned HDMI cables",
+      "kind": "cable",
+      "variant": "Example owned pair / explicitly declared 1080p60 capability",
+      "price_cents": 0,
+      "price_basis": "declared scenario allowance; no merchant price verification",
+      "observations": [
+        {
+          "field": "height",
+          "value": 1080,
+          "source_id": "declared-hdmi-pair-height",
+          "visible": false
+        },
+        {
+          "field": "hz",
+          "value": 60,
+          "source_id": "declared-hdmi-pair-hz",
+          "visible": false
+        },
+        {
+          "field": "count",
+          "value": 2,
+          "source_id": "declared-hdmi-pair-count",
+          "visible": false
+        },
+        {
+          "field": "connector",
+          "value": "hdmi",
+          "source_id": "declared-hdmi-pair-connector",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "id": "pdh-included-power",
+      "name": "UD-6950PDH included adapter",
+      "kind": "power",
+      "variant": "UD-6950PDH kit / 20V 6.5A adapter",
+      "price_cents": 0,
+      "price_basis": "declared scenario allowance; no merchant price verification",
+      "observations": [
+        {
+          "field": "watts",
+          "value": 130,
+          "source_id": "pdh-included-power-watts",
+          "visible": false
+        }
+      ],
+      "compatible_dock_id": "plugable-ud6950pdh"
+    }
+  ],
+  "sources": {
+    "plugable-ud6950pdh-protocol": {
+      "id": "plugable-ud6950pdh-protocol",
+      "product_id": "plugable-ud6950pdh",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "field": "protocol",
+      "value": "displaylink",
+      "unit": "transport enum",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "excerpt": "Curated paraphrase: DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "capture_method": "manual review of official specifications"
+    },
+    "plugable-ud6950pdh-displays": {
+      "id": "plugable-ud6950pdh-displays",
+      "product_id": "plugable-ud6950pdh",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "field": "displays",
+      "value": 2,
+      "unit": "independent displays",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "excerpt": "Curated paraphrase: DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "capture_method": "manual review of official specifications"
+    },
+    "plugable-ud6950pdh-max_height": {
+      "id": "plugable-ud6950pdh-max_height",
+      "product_id": "plugable-ud6950pdh",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "field": "max_height",
+      "value": 2160,
+      "unit": "vertical pixels",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "excerpt": "Curated paraphrase: DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "capture_method": "manual review of official specifications"
+    },
+    "plugable-ud6950pdh-max_hz": {
+      "id": "plugable-ud6950pdh-max_hz",
+      "product_id": "plugable-ud6950pdh",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "field": "max_hz",
+      "value": 60,
+      "unit": "Hz",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "excerpt": "Curated paraphrase: DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "capture_method": "manual review of official specifications"
+    },
+    "plugable-ud6950pdh-pd_watts": {
+      "id": "plugable-ud6950pdh-pd_watts",
+      "product_id": "plugable-ud6950pdh",
+      "variant": "UD-6950PDH / August 2024 revision, serial 4157+ / HDMI outputs",
+      "field": "pd_watts",
+      "value": 100,
+      "unit": "W",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "excerpt": "Curated paraphrase: DisplayLink provides two external displays up to 4K/60Hz; host charging is rated 100W. Exact revision must match.",
+      "capture_method": "manual review of official specifications"
+    },
+    "dell-p2422h-height": {
+      "id": "dell-p2422h-height",
+      "product_id": "dell-p2422h",
+      "variant": "P2422H / HDMI 1.4 input",
+      "field": "height",
+      "value": 1080,
+      "unit": "vertical pixels",
+      "kind": "manufacturer",
+      "url": "https://www.delltechnologies.com/asset/en-lt/products/electronics-and-accessories/technical-support/dell-24-monitor-p2422h-datasheet.pdf",
+      "observed_on": "2026-10-14",
+      "summary": "Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "excerpt": "Curated paraphrase: Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "capture_method": "manual review of official specifications"
+    },
+    "dell-p2422h-hz": {
+      "id": "dell-p2422h-hz",
+      "product_id": "dell-p2422h",
+      "variant": "P2422H / HDMI 1.4 input",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz",
+      "kind": "manufacturer",
+      "url": "https://www.delltechnologies.com/asset/en-lt/products/electronics-and-accessories/technical-support/dell-24-monitor-p2422h-datasheet.pdf",
+      "observed_on": "2026-10-14",
+      "summary": "Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "excerpt": "Curated paraphrase: Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "capture_method": "manual review of official specifications"
+    },
+    "dell-p2422h-connector": {
+      "id": "dell-p2422h-connector",
+      "product_id": "dell-p2422h",
+      "variant": "P2422H / HDMI 1.4 input",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum",
+      "kind": "manufacturer",
+      "url": "https://www.delltechnologies.com/asset/en-lt/products/electronics-and-accessories/technical-support/dell-24-monitor-p2422h-datasheet.pdf",
+      "observed_on": "2026-10-14",
+      "summary": "Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "excerpt": "Curated paraphrase: Dell specifies 1920x1080 at 60Hz and an HDMI input. The planning allowance is not a Dell price.",
+      "capture_method": "manual review of official specifications"
+    },
+    "declared-hdmi-pair-height": {
+      "id": "declared-hdmi-pair-height",
+      "product_id": "declared-hdmi-pair",
+      "variant": "Example owned pair / explicitly declared 1080p60 capability",
+      "field": "height",
+      "value": 1080,
+      "unit": "vertical pixels",
+      "kind": "scenario_declaration",
+      "url": null,
+      "observed_on": "2026-10-14",
+      "summary": "Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "excerpt": "Curated paraphrase: Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "capture_method": "explicit example scenario declaration"
+    },
+    "declared-hdmi-pair-hz": {
+      "id": "declared-hdmi-pair-hz",
+      "product_id": "declared-hdmi-pair",
+      "variant": "Example owned pair / explicitly declared 1080p60 capability",
+      "field": "hz",
+      "value": 60,
+      "unit": "Hz",
+      "kind": "scenario_declaration",
+      "url": null,
+      "observed_on": "2026-10-14",
+      "summary": "Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "excerpt": "Curated paraphrase: Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "capture_method": "explicit example scenario declaration"
+    },
+    "declared-hdmi-pair-count": {
+      "id": "declared-hdmi-pair-count",
+      "product_id": "declared-hdmi-pair",
+      "variant": "Example owned pair / explicitly declared 1080p60 capability",
+      "field": "count",
+      "value": 2,
+      "unit": "cables",
+      "kind": "scenario_declaration",
+      "url": null,
+      "observed_on": "2026-10-14",
+      "summary": "Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "excerpt": "Curated paraphrase: Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "capture_method": "explicit example scenario declaration"
+    },
+    "declared-hdmi-pair-connector": {
+      "id": "declared-hdmi-pair-connector",
+      "product_id": "declared-hdmi-pair",
+      "variant": "Example owned pair / explicitly declared 1080p60 capability",
+      "field": "connector",
+      "value": "hdmi",
+      "unit": "connector enum",
+      "kind": "scenario_declaration",
+      "url": null,
+      "observed_on": "2026-10-14",
+      "summary": "Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "excerpt": "Curated paraphrase: Example assumes two owned HDMI cables support 1080p60. This is a user-review declaration, not manufacturer evidence.",
+      "capture_method": "explicit example scenario declaration"
+    },
+    "pdh-included-power-watts": {
+      "id": "pdh-included-power-watts",
+      "product_id": "pdh-included-power",
+      "variant": "UD-6950PDH kit / 20V 6.5A adapter",
+      "field": "watts",
+      "value": 130,
+      "unit": "W",
+      "kind": "manufacturer",
+      "url": "https://plugable.com/products/ud-6950pdh",
+      "observed_on": "2026-10-14",
+      "summary": "Plugable lists a 20V 6.5A 130W dock supply. Only the matching complete dock kit is represented.",
+      "excerpt": "Curated paraphrase: Plugable lists a 20V 6.5A 130W dock supply. Only the matching complete dock kit is represented.",
+      "capture_method": "manual review of official specifications"
+    }
+  }
+}

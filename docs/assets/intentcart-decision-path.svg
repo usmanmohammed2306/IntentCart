@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+<title id="title">IntentCart: from a request to an explicitly approved sandbox checkout</title>
+<desc id="desc">A reviewed request feeds a finite planner. Evidence supports compatibility, an exact quote requires explicit approval, and only then can a PayPal sandbox transaction run. Changed requirements, sources or preferences invalidate the prior quote. The curated evidence workspace is separate from checkout.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101d2d"/><stop offset="1" stop-color="#080e18"/></linearGradient>
+<linearGradient id="line"><stop stop-color="#70e1d8"/><stop offset="1" stop-color="#86b9ff"/></linearGradient>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8" fill="none" stroke="#7dd3df" stroke-width="1.4"/></marker>
+</defs>
+<rect x="1" y="1" width="1198" height="438" rx="22" fill="url(#bg)" stroke="#293b50"/>
+<g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif">
+<text x="42" y="46" fill="#7fe1d6" font-size="12" font-weight="700" letter-spacing="2">INTENTCART / THE DECISION PATH</text>
+<text x="42" y="82" fill="#f0f5fc" font-size="25" font-weight="650">A plan earns confidence. A payment needs permission.</text>
+<g fill="#111f30" stroke="#33485e">
+<rect x="42" y="132" width="194" height="136" rx="14"/><rect x="272" y="132" width="194" height="136" rx="14"/>
+<rect x="502" y="132" width="194" height="136" rx="14"/><rect x="732" y="132" width="194" height="136" rx="14"/>
+<rect x="962" y="132" width="194" height="136" rx="14"/>
+</g>
+<g fill="none" stroke="url(#line)" stroke-width="2" marker-end="url(#arrow)">
+<path d="M236 199H263"/><path d="M466 199H493"/><path d="M696 199H723"/><path d="M926 199H953"/>
+</g>
+<g fill="#79dcd2" font-size="11" font-weight="700" letter-spacing="1.2">
+<text x="60" y="157">01 / DESCRIBE</text><text x="290" y="157">02 / INVESTIGATE</text><text x="520" y="157">03 / EXPLAIN</text><text x="750" y="157">04 / APPROVE</text><text x="980" y="157">05 / RECONCILE</text>
+</g>
+<g fill="#f0f5fc" font-size="18" font-weight="650">
+<text x="60" y="191">Your requirements</text><text x="290" y="191">Finite planner</text><text x="520" y="191">Decision evidence</text><text x="750" y="191">Exact quote</text><text x="980" y="191">PayPal sandbox</text>
+</g>
+<g fill="#b1c1d5" font-size="13">
+<text x="60" y="220">Budget, displays, power</text><text x="60" y="242">Review the typed goal</text>
+<text x="290" y="220">Resolve missing facts</text><text x="290" y="242">Check complete baskets</text>
+<text x="520" y="220">Show support and gaps</text><text x="520" y="242">Explain or repair conflicts</text>
+<text x="750" y="220">Bind basket and revision</text><text x="750" y="242">Require explicit consent</text>
+<text x="980" y="220">Verify capture evidence</text><text x="980" y="242">Reconcile before retry</text>
+</g>
+<path d="M829 282v26H139v-26" fill="none" stroke="#d4ad70" stroke-width="1.5" stroke-dasharray="5 5"/>
+<rect x="292" y="292" width="405" height="29" rx="14" fill="#1b2530" stroke="#4a453c"/>
+<text x="494" y="311" text-anchor="middle" fill="#e7c58e" font-size="12">Changed requirements or evidence → review a fresh quote</text>
+<path d="M42 353H1156" stroke="#283c51"/>
+<text x="42" y="381" fill="#b1c1d5" font-size="13">Local planning · Inspectable evidence · Human approval · Sandbox execution</text>
+<text x="42" y="407" fill="#7e93ac" font-size="12">The curated evidence workspace is a separate planning path; it cannot create checkout.</text>
+</g></svg>

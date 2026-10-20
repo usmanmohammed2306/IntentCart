@@ -1,0 +1,44 @@
+{
+  "schema": "intentcart-state-sequence-validation/1",
+  "snapshot_date": "2026-10-19",
+  "evidence_class": "synthetic_state_machine_validation",
+  "event_order_sequences": 1728,
+  "source_review_sequences": 240,
+  "mutation_operations": 15552,
+  "boundary_cases": 576,
+  "seeded_faults": 11,
+  "detected_faults": 11,
+  "noop_controls": 1,
+  "noop_false_alarms": 0,
+  "failed_records": 0,
+  "complete_event_orders": true,
+  "complete_review_orders": true,
+  "all_checks_pass": true,
+  "first_failures": [],
+  "human_participants": 0,
+  "provider_requests": 0,
+  "payment_operations": 0,
+  "sources": {
+    "scripts/validate_matrix.py": "7c74087a7c8f8ae246ab38df4692cef74c2e5c2506a3a61cd4d2589c658605bf",
+    "scripts/combination_fixture.py": "499f6d595c59c7f83a677b7e823dbd605aaa80a2cc6656831416bab73a6ffc61",
+    "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
+    "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+    "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+    "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
+    "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+    "intentcart/data/evidence-catalog.json": "69d8482d7a6d14e007d1c026edd54f97bc09206c2a62ef11e8d1ac407405a8a3",
+    "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+    "scripts/validate_state_sequences.py": "3dabc2665bfb5c9d20b26f4866e17c93f5bb444f139eb265aa8932b8791cffd0"
+  },
+  "limits": [
+    "Specified finite state machines and synthetic fixtures only.",
+    "Deliberate in-process faults are test-only patches, not deployed application changes.",
+    "Eleven seeded faults and one negative control do not establish detection of arbitrary bugs.",
+    "All failed records are retained in the compressed trace; summary lists the first twenty.",
+    "Mutation operations, boundary cases and source-order sequences are different denominators."
+  ],
+  "trace": {
+    "filename": "state-sequence-cases.jsonl.gz",
+    "sha256": "5b28dc43bebe1c2b44453f7b22961074ab9774c2448b2e834e46b08a0ba9e22c"
+  }
+}

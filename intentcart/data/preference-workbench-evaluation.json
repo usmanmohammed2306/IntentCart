@@ -1,0 +1,3798 @@
+{
+  "schema": "intentcart-preference-workbench-evaluation/1",
+  "protocol": {
+    "schema": "intentcart-preference-workbench-protocol/1",
+    "declared_on": "2026-10-19",
+    "seed": 20261019,
+    "synthetic_profiles": 24,
+    "training_comparisons": 8,
+    "tie_thresholds": [
+      0.001,
+      0.01,
+      0.03
+    ],
+    "evaluation": "Basket-ID-disjoint training/test pools from one fictional catalog; fixed synthetic linear utility; no human preference quality or outside-catalog generalization claim."
+  },
+  "source_sha256": {
+    "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
+    "intentcart/missions.py": "83a092635dd6703e4421f91132c44a54908540736d3de505da8ab0be8aa6464b",
+    "intentcart/data/missions-catalog.json": "2f84d1712661e542d5c9ee5dd2d66e93dcb9ae2d6a26cab8d5880c41d2478fe3",
+    "scripts/evaluate_preference_workbench.py": "93e7cda72e78b9a25fe349089deb3b847497cfee37ca223b7542bf2ace587998",
+    "docs/protocols/preference-workbench.json": "d4db395941a57cd729c6ebed87b2f1aaabbff744d089830e4275565f5f89d70f"
+  },
+  "denominators": {
+    "synthetic_profiles": 24,
+    "train_baskets": 60,
+    "heldout_baskets": 60,
+    "tie_conditions": 3,
+    "correlated_runs": 72
+  },
+  "checks": {
+    "basket_ids_disjoint": true,
+    "finite_nonnegative_regret": true
+  },
+  "summaries": [
+    {
+      "tie_threshold": 0.001,
+      "mean_baseline_regret": 8.534294055650056e-05,
+      "mean_learned_regret": 8.534294055650056e-05
+    },
+    {
+      "tie_threshold": 0.01,
+      "mean_baseline_regret": 8.534294055650056e-05,
+      "mean_learned_regret": 8.534294055650056e-05
+    },
+    {
+      "tie_threshold": 0.03,
+      "mean_baseline_regret": 8.534294055650056e-05,
+      "mean_learned_regret": 8.534294055650056e-05
+    }
+  ],
+  "records": [
+    {
+      "profile": 0,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 0,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 0,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 4,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 1,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 1,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 1,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 2,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 2,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 2,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 6,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "tie"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 3,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 3,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 3,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 4,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 4,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 4,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 5,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 1,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 5,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 5,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 6,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 6,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 6,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 7,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0020482305733560136,
+      "learned_regret": 0.0020482305733560136,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "a"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 7,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 6,
+      "baseline_regret": 0.0020482305733560136,
+      "learned_regret": 0.0020482305733560136,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "tie"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 7,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 6,
+      "baseline_regret": 0.0020482305733560136,
+      "learned_regret": 0.0020482305733560136,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "tie"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 8,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 8,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 8,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 9,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 9,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 4,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 9,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 6,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "tie"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 10,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 1,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 10,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 10,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 11,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 11,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 11,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 12,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 0,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "a"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 12,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 12,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 4,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 13,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 13,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 13,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 14,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 14,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 14,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 15,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 15,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 15,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 6,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "tie"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 16,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 16,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 16,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 4,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "tie"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 17,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 0,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "a"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 17,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 4,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 17,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 18,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 18,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 18,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 19,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 19,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 19,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 20,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 1,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 20,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 20,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 21,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 1,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "a"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 21,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 21,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 22,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 22,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 22,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 5,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "tie"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "tie"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 23,
+      "tie_threshold": 0.001,
+      "training_pairs": 8,
+      "ties": 2,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "b"
+        }
+      ]
+    },
+    {
+      "profile": 23,
+      "tie_threshold": 0.01,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    },
+    {
+      "profile": 23,
+      "tie_threshold": 0.03,
+      "training_pairs": 8,
+      "ties": 3,
+      "baseline_regret": 0.0,
+      "learned_regret": 0.0,
+      "baseline_basket": "2d02c07de01a9b197061",
+      "learned_basket": "2d02c07de01a9b197061",
+      "history": [
+        {
+          "a": "985b8620a5545dd60c43",
+          "b": "e18b758d396f653dbd9b",
+          "choice": "b"
+        },
+        {
+          "a": "d487931166108ac723cc",
+          "b": "310796a71533f77126d5",
+          "choice": "tie"
+        },
+        {
+          "a": "a4b37469b63cb54d2e7a",
+          "b": "985b8620a5545dd60c43",
+          "choice": "b"
+        },
+        {
+          "a": "fc29bd07ead50261d414",
+          "b": "91ccfb9bf3bc9a87c789",
+          "choice": "tie"
+        },
+        {
+          "a": "4c5fbf6c9d11a18d7f82",
+          "b": "48efca09851dd4af0be6",
+          "choice": "b"
+        },
+        {
+          "a": "cae7c0f2c11250006938",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "da612fad9069b685bc5f",
+          "b": "5dbd9fda460f980ad696",
+          "choice": "b"
+        },
+        {
+          "a": "5a8faba9a79ed70a8113",
+          "b": "13ead1df399429b327de",
+          "choice": "tie"
+        }
+      ]
+    }
+  ],
+  "limitations": "Basket-ID-disjoint training/test pools from one fictional catalog; fixed synthetic linear utility; no human preference quality or outside-catalog generalization claim."
+}

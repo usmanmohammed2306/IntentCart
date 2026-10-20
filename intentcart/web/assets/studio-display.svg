@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Conceptual titanium display</title><desc id="desc">Unbranded conceptual hardware illustration. Appearance does not establish product specifications or compatibility.</desc>
+<defs>
+ <linearGradient id="titanium" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#d5e0e8"/><stop offset=".28" stop-color="#8c9daa"/><stop offset=".54" stop-color="#617582"/><stop offset="1" stop-color="#263b49"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eff9fd"/><stop offset=".38" stop-color="#738c9b"/><stop offset="1" stop-color="#243744"/></linearGradient>
+ <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07141c"/><stop offset=".65" stop-color="#123443"/><stop offset="1" stop-color="#20596a"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9fbff" stop-opacity=".12"/><stop offset=".5" stop-color="#d9fbff" stop-opacity="0"/><stop offset="1" stop-color="#d9fbff" stop-opacity=".035"/></linearGradient>
+ <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#334956"/><stop offset="1" stop-color="#101e29"/></linearGradient>
+ <filter id="shadow" x="-40%" y="-100%" width="180%" height="300%"><feGaussianBlur stdDeviation="3"/></filter><clipPath id="screen-clip"><path d="M20 26 133 16v59L21 86Z"/></clipPath></defs>
+
+<ellipse cx="81" cy="107" rx="44" ry="5" fill="#02090e" opacity=".65" filter="url(#shadow)"/>
+<path d="m72 70 15-2v32l-15 3Z" fill="url(#titanium)"/><path d="m77 77 5-1v22l-5 1Z" fill="#c2d9e2" opacity=".35"/>
+<path d="m54 103 32-8 22 9-32 9-22-7Z" fill="url(#side)"/><path d="m54 101 32-8 22 9-32 9-22-7Z" fill="url(#titanium)" stroke="#cbdde4" stroke-width=".4"/>
+<path d="M14 19 136 9q6 0 6 6v63q0 5-5 6L17 95q-5 1-5-5V25q0-5 2-6Z" fill="url(#edge)"/>
+<path d="M16 22 137 12v68L17 91Z" fill="#0b1720"/>
+<path d="M20 26 133 16v59L21 86Z" fill="url(#screen)"/>
+<g clip-path="url(#screen-clip)">
+<path d="m20 63 113-10M20 73 113-10M48 23l1 61M79 20l1 60M110 17l1 61" stroke="#8bdae3" stroke-opacity=".10" stroke-width=".5"/>
+<path d="m35 61 26-13 23 10 29-28" stroke="#94e5ef" stroke-opacity=".24" stroke-width="5"/>
+<path d="m35 61 26-13 23 10 29-28" stroke="#95e7ef" stroke-width=".9"/>
+<g fill="#aeeef4" stroke="#0f2b36" stroke-width="1.5"><ellipse cx="35" cy="61" rx="2.3" ry="2"/><ellipse cx="61" cy="48" rx="2.3" ry="2"/><ellipse cx="84" cy="58" rx="2.3" ry="2"/><ellipse cx="113" cy="30" rx="2.3" ry="2"/></g>
+<path d="m20 26 58-5-22 62-35 3Z" fill="url(#glass)"/>
+<path d="m28 33 22-2m-22 6 13-1" stroke="#b7e0e6" stroke-opacity=".5" stroke-width=".7"/>
+</g>
+<path d="M20 26 133 16v59L21 86Z" stroke="#8ed9e5" stroke-opacity=".17" stroke-width=".6"/>
+<path d="m18 20 116-10" stroke="#e6f6fa" stroke-opacity=".75" stroke-width=".6"/>
+<path d="m20 89 111-10" stroke="#6d8997" stroke-opacity=".5" stroke-width=".4"/><circle cx="79" cy="85" r=".75" fill="#c8e1e8"/>
+
+</svg>

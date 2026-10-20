@@ -1,0 +1,116 @@
+{
+  "schema": "intentcart-fictional-persona-protocol/1",
+  "evidence_class": "authored_synthetic_behavior",
+  "notice": "Every identity, circumstance and decision rule below is fictional. These are design hypotheses, not interviews, demographic findings or calibrated human behavior.",
+  "variants": [
+    {"id": "baseline", "unexpected_cost_cents": 0, "resume_from_snapshot": false},
+    {"id": "cost-shock", "unexpected_cost_cents": 1500, "resume_from_snapshot": false},
+    {"id": "interrupted", "unexpected_cost_cents": 500, "resume_from_snapshot": true}
+  ],
+  "personas": [
+    {
+      "id": "mira",
+      "name": "Mira — independent video editor",
+      "context": "Her paid work and household use the same laptop. A client revision is due soon, while the second display is borrowed and must go back. She initially describes the budget as about four hundred dollars, then remembers a reimbursement ceiling of USD 350.",
+      "primary_goal": "Keep the existing Full HD monitor and add a second usable screen without a surprise out-of-pocket bill.",
+      "competing_priorities": ["Avoid losing work time", "Respect the reimbursement ceiling", "Reuse equipment instead of replacing it", "Get a reassuring answer quickly without hiding uncertainty"],
+      "initial_assumption": "The displayed subtotal is the amount she will pay; a recommendation means the remaining details have been settled.",
+      "behavior_rule": "Starts permissively, tightens the budget after a recommendation, then treats unknown tax as a blocker. She may explicitly add up to USD 5 of her own discretionary allowance after reviewing the total; a USD 15 discrepancy makes her defer.",
+      "correction_trigger": "The all-in total exceeds the ceiling or shipping/tax becomes unknown.",
+      "recovery": "Separate the declared scenario allowance from a live merchant quote; revise the ceiling explicitly only within her USD 5 discretionary allowance.",
+      "stop_condition": "The declared all-in total cannot fit her explicit ceiling.",
+      "not_simulated": ["Actual editing performance", "Time pressure as an observed psychological effect", "Willingness to pay in a real purchase"]
+    },
+    {
+      "id": "noah",
+      "name": "Noah — analyst on a managed laptop",
+      "context": "He is comfortable with spreadsheets but cannot install system software. A colleague says all USB-C docks are interchangeable. He can request a larger hardware allowance, but he cannot approve a driver exception on behalf of IT.",
+      "primary_goal": "Use two displays while staying inside the software restriction.",
+      "competing_priorities": ["Follow the installation restriction", "Avoid appearing unhelpful to his manager", "Reuse a monitor already at home", "Avoid buying a more expensive item that has the same limitation"],
+      "initial_assumption": "A higher-priced dock or a bigger budget will remove the need for software.",
+      "behavior_rule": "Declines every driver request. Tries a larger budget after the first deferral, then retries an explicit no-driver goal. Does not interpret another request as permission.",
+      "correction_trigger": "The represented laptop/dock combination still needs the restricted driver.",
+      "recovery": "Keep the unresolved constraint visible and defer instead of manufacturing a compatible alternative.",
+      "stop_condition": "No driver-free represented basket supports the requested two-display setup.",
+      "not_simulated": ["A real employer policy", "IT approval", "Unrepresented products or laptop capabilities"]
+    },
+    {
+      "id": "leena",
+      "name": "Leena — meticulous comparison shopper",
+      "context": "She keeps several product tabs open and copies offer details between them. She distrusts promotional language but can mistake a visually similar model suffix for the selected variant. She dislikes losing a bargain more than spending extra time checking it.",
+      "primary_goal": "Use the lowest reviewed all-in allowance while preserving the exact selected product identity.",
+      "competing_priorities": ["Keep the discount", "Avoid the wrong variant", "Know whether a price is stale", "Avoid being forced to repeat every previous inspection"],
+      "initial_assumption": "A copied offer for a similar-looking model is close enough, and last week's price is probably still available.",
+      "behavior_rule": "Attempts the mismatched variant, corrects it after rejection, declares a discounted offer, encounters its expiry, refreshes the declaration, then resolves shipping and tax separately.",
+      "correction_trigger": "Exact-variant rejection or an expired offer removes support.",
+      "recovery": "Correct the identity and review date explicitly; never treat the copied declaration as an independently fetched live price.",
+      "stop_condition": "An exact current declaration and known allowances cannot support the basket.",
+      "not_simulated": ["Real retailer availability", "A fetched promotional price", "Actual purchase or savings"]
+    },
+    {
+      "id": "jules",
+      "name": "Jules — developer sharing a work and gaming desk",
+      "context": "The same desk serves work during the day and games in the evening. Jules begins with a productivity request, remembers the gaming use after seeing a plan, then asks about protected video. Accepting software for work does not mean every entertainment requirement is satisfied.",
+      "primary_goal": "Understand which parts of the desired mixed-use desk are actually supported.",
+      "competing_priorities": ["Keep the work setup affordable", "Avoid buying twice", "Preserve gaming and video expectations", "Finish a useful work-only plan if the mixed-use plan is unsupported"],
+      "initial_assumption": "Two displays at the requested resolution imply gaming suitability and protected-video support.",
+      "behavior_rule": "Adds gaming and HDCP together, removes gaming first, notices HDCP is still unresolved, then explicitly changes scope to work-only and requests a fresh recommendation.",
+      "correction_trigger": "Removing one requirement does not resolve the other unsupported requirement.",
+      "recovery": "Make the scope change explicit instead of claiming the original mixed-use need was met.",
+      "stop_condition": "A work-only plan may proceed; the original entertainment requirements remain unverified.",
+      "not_simulated": ["Game latency", "Protected-media playback", "Physical hardware testing"]
+    },
+    {
+      "id": "sam",
+      "name": "Sam — operations lead replacing a failed desk component",
+      "context": "The rest of the workstation is useful, so replacing everything would be disruptive. Sam removes the chosen dock when a seller marks it unavailable. Later a product listing returns, but the particular reviewed offer is still unavailable.",
+      "primary_goal": "Recover the represented workstation while preserving unaffected components and avoiding stale acceptance.",
+      "competing_priorities": ["Minimize replacement work", "Recover quickly", "Do not confuse a catalog listing with an available offer", "Preserve useful evidence without silently approving a purchase"],
+      "initial_assumption": "Restoring a product in the list also restores its availability and the previous recommendation.",
+      "behavior_rule": "Removes the dock, declares its offer unavailable, restores the product, checks the still-blocked basket, then explicitly marks the scenario offer available before requesting a fresh recommendation.",
+      "correction_trigger": "Restoring the product does not override the unavailable offer.",
+      "recovery": "Keep catalog presence, reviewed offer availability and recommendation acceptance separate.",
+      "stop_condition": "The offer remains unavailable or recovery would require an unsupported substitute.",
+      "not_simulated": ["A real hardware failure", "Live stock changes", "A physical replacement or refund"]
+    },
+    {
+      "id": "ari",
+      "name": "Ari — engineer auditing a disputed specification",
+      "context": "Ari finds conflicting display-count information while reviewing the setup. They are technically confident but have several tabs open and can return to an obsolete review identifier after an interruption. They want the evidence trail preserved even when their own proposed correction turns out to be wrong.",
+      "primary_goal": "Test a disputed specification without turning a proposal into accepted evidence.",
+      "competing_priorities": ["Correct inaccurate evidence", "Keep the original decision trace", "Avoid accidental acceptance after an interruption", "Recover after reversing a mistaken correction"],
+      "initial_assumption": "Submitting a correction may be enough for the planner to start using it.",
+      "behavior_rule": "Proposes a one-display correction, attempts an obsolete acceptance identifier, accepts the exact pending proposal, reinspects the changed field, then proposes a separate two-display reversal and reinspects again.",
+      "correction_trigger": "The pending identifier is rejected or accepted evidence clears the old recommendation.",
+      "recovery": "Accept only the exact proposal; a reversal is another review operation with another inspection.",
+      "stop_condition": "Conflicting or uninspected evidence cannot support the requested display count.",
+      "not_simulated": ["Independent manufacturer verification", "A real conflicting publication", "An expert interview"]
+    },
+    {
+      "id": "tess",
+      "name": "Tess — consultant reconsidering software permission",
+      "context": "Tess initially agrees to a driver because the setup appears useful. After checking the constraints of a shared client machine, she withdraws that permission. Her personal laptop later becomes an option, so she explores a separate permissive revision before deciding the shared-machine plan is the one she actually needs.",
+      "primary_goal": "Keep permission attached to the current scenario rather than to a previous answer.",
+      "competing_priorities": ["Avoid an installation she cannot authorize", "Reuse the same physical desk", "Explore a personal-machine alternative", "Ensure a previous yes cannot override the final no"],
+      "initial_assumption": "Undoing permission may remove useful evidence, or the old accepted plan may survive in the background.",
+      "behavior_rule": "Withdraws permission, runs a fresh refusal, temporarily revises to a driver-allowed scenario, then withdraws again. The final state must reflect the last explicit decision.",
+      "correction_trigger": "A recommendation from the permissive revision conflicts with the final no-driver choice.",
+      "recovery": "Preserve observations while clearing recommendation authority after each change.",
+      "stop_condition": "The final restricted scenario has no supported basket.",
+      "not_simulated": ["Actual client consent", "Consent persistence across real devices", "An installation"]
+    },
+    {
+      "id": "dev",
+      "name": "Dev — household equipment coordinator",
+      "context": "Two people share a desk and describe the old monitor differently. Dev first enters too many owned displays, then corrects the count but copies a lower resolution from an old note. A second requirement for a high-power charger arrives later, and Dev wants to explore a smaller budget without changing the current plan.",
+      "primary_goal": "Reuse the actual represented monitor and understand the effect of changing requirements without silently changing the live scenario.",
+      "competing_priorities": ["Reduce waste", "Reconcile conflicting equipment notes", "Support charging expectations", "Experiment without losing the current setup"],
+      "initial_assumption": "Anything described as a monitor is adequate for the requested resolution, and a budget preview might replace the current plan.",
+      "behavior_rule": "Attempts an impossible inventory count, corrects it to one low-resolution monitor, fixes the resolution, adds an unsupported charging target, explicitly removes that target, then previews a low budget and checks that the active record is unchanged.",
+      "correction_trigger": "Inventory rejection, insufficient owned-monitor resolution or an unsupported charging target.",
+      "recovery": "Correct the inventory explicitly; keep read-only exploration separate from mutation.",
+      "stop_condition": "The represented inventory or charging requirement cannot support the requested setup.",
+      "not_simulated": ["Household interviews", "Physical inventory verification", "Actual charging performance"]
+    }
+  ]
+}

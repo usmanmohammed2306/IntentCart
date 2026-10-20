@@ -1,0 +1,18 @@
+[project]
+name = "intentcart"
+version = "4.3.0"
+description = "Complete purchase planning, evidence-guided investigation and minimal-change repair with PayPal sandbox checkout"
+requires-python = ">=3.12"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "numpy>=2,<3", "httpx>=0.28,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["intentcart*", "demandweave*"]
+
+[tool.setuptools.package-data]
+intentcart = ["data/*.json", "web/*", "web/assets/*", "web/vendor/*"]

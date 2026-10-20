@@ -10,9 +10,7 @@ Evidence-aware planning · Inspectable decisions · Explicit approval
 
 </div>
 
-![IntentCart Outcome studio: a complete workstation, its evidence and its exact quote](cinematic-setup.png)
-
-> **Publication status:** This repository currently contains the project overview and visual assets. The runnable application, tests and technical documents described below are complete locally and await source publication. Setup commands apply to that complete source checkout.
+![IntentCart Outcome studio: a complete workstation, its evidence and its exact quote](submission/cinematic-setup.png)
 
 ## It starts with a simple request
 
@@ -28,7 +26,7 @@ Then comes a separate decision: whether to buy. A supported plan does not author
 
 ## How a request becomes a plan
 
-![IntentCart architecture: reviewed requirements, finite planning, decision evidence, exact approval and PayPal sandbox reconciliation](intentcart-decision-path.svg)
+![IntentCart architecture: reviewed requirements, finite planning, decision evidence, exact approval and PayPal sandbox reconciliation](docs/assets/intentcart-decision-path.svg)
 
 1. **Describe the outcome.** Review the budget, displays, power and other supported requirements. The reviewed typed goal is authoritative.
 2. **Investigate what matters.** Inspect missing specifications and distinguish known, unknown and conflicting facts.
@@ -46,11 +44,21 @@ At `/agent`, a bounded evidence controller can **search, inspect, clarify, recom
 
 The curated example connects an Apple MacBook Air M1, a specific Plugable dock revision and Dell monitor specifications. Each inspected field carries its value, unit, exact variant, source URL and review date. Cable capabilities and price allowances remain explicitly declared scenario assumptions. Manufacturer review is evidence to inspect; it is not a physical hardware test or a live merchant offer.
 
-![The evidence workspace: reviewed source fields and a bounded action history](agent-workspace.png)
+![The evidence workspace: reviewed source fields and a bounded action history](submission/agent-workspace.png)
 
-This workspace is separate from the fictional merchant catalog and **cannot create checkout**. Its default controller is a deterministic local policy. An optional language-model proposal path is implemented and gated, but live model execution has not been verified.
+This workspace is separate from the fictional merchant catalog and **cannot create checkout**. Its default controller is a deterministic local policy. An optional language-model proposal path is gated and now has a small actual Haiku 4.5 validation through Astropods: seventeen requests, USD 0.026906 free-credit usage. Four native fixture trials completed; the harder driver task retained one supported, one rejected and two unattempted trials. Initial failures stay in the total. See [live evidence](submission/live-validation.json); these diagnostics do not establish model superiority. Permanent calls remain disabled.
 
 In the main Missions planner, explicit pairwise choices can also update a four-attribute Bayesian preference estimate. Hard constraints still apply, and a changed selection needs a fresh quote. Estimated preference does not establish true user utility or optimality.
+
+## Refine the decision without losing its history
+
+The **Planning workbench** adds explicit source expiry and replacement review, owned monitor specifications, exact variant selection, driver-permission withdrawal and availability restoration. Compare supported baskets, inspect changed component slots, edit or undo preference answers, and export a parts CSV or readable decision report. Unknown tax or shipping blocks a supported all-in price. Requested HDCP, gaming, numeric OS version, charging and connector capabilities need supporting observations. Three/four-display and USB-C paths are bounded prototypes with synthetic positive tests; the reviewed real-product scenario remains narrower.
+
+![Planning workbench: source review, constraints and supported configurations](submission/workbench-overview.png)
+
+Try a counterfactual without changing the active task. Review an exact source replacement in two steps. Structural changes clear old preference evidence and acceptance. The model action schema cannot perform these human review operations.
+
+The **Offline research** view compares an exact finite-budget reference with CPU students and ablations. The full learned student does not beat the references, and removing a budget feature improves the pooled diagnostic average. These negative results remain visible. [Release scope and remaining external gates](docs/RELEASE_STATUS.md).
 
 ## One project, several ways to inspect it
 
@@ -58,6 +66,8 @@ In the main Missions planner, explicit pairwise choices can also update a four-a
 |---|---|
 | `/missions` | Describe → Explore → Review; build a complete fixture setup in the cinematic 3D studio. |
 | `/agent` | Inspect curated manufacturer evidence and step through bounded agent actions. |
+| `/workbench` | Review sources, owned inventory, exact variants, all-in costs, preference history and decision exports. |
+| `/research` | Inspect finite-budget learning curves, ablations, prior/cost shifts and preference diagnostics. |
 | `/reliability` | Inspect decision claims, evidence-budget comparisons and saved failure traces. |
 | `/learn` | Explore the original Bayesian pairwise preference-learning lab. |
 | `/lab` | Rehearse fictional changes and inspect decision exports. |
@@ -108,11 +118,15 @@ These results are **dated local checks**, not live CI badges or claims about rea
 | Does repair preserve the declared objective? | **272/272** repair outcomes match the independent oracle. | 241 feasible repairs and 31 infeasible outcomes. |
 | Can payment failures be reproduced and reduced? | **11** scenarios, **three** deliberately introduced defects, **28** reduction candidates. | Local API replays, an independent fake-provider ledger and simulated interruption boundaries. |
 | Does a targeted agent policy use fewer inspections locally? | **121** inspections versus **280**; 19 versus 17 supported recommendations; zero invalid recommendations for either policy. | 12 authored structures × five budgets × two local policies = 120 correlated runs; not an LLM comparison. |
-| Does the local verification suite pass? | **230 Python tests, 24 JavaScript behavior tests, nine syntax checks.** | Verified October 14, 2026 on this machine; remote CI and outside reproduction remain pending. |
+| Does the local verification suite pass? | **Public export, October 20: 300 Python tests, 24 JavaScript behavior tests, 11 syntax checks pass.** | Disposable storage, blank provider credentials and a zero external-call ceiling. The original October 19 local/Linux snapshot passed 305 Python tests, including five private publication-guide checks omitted from this export. See docs/RELEASE_STATUS.md; remote CI and outside reproduction remain pending. |
 
 **The negative findings matter too.** A CPU ridge-imitation policy lost to the practical decision-splitting baseline on the structural-shift experiment and remains research-only. The earlier preference controller also did not improve pooled held-out quality. Those outcomes are retained instead of presented as wins.
 
-See evaluation methods and limitations (`docs/EVALUATION.md`, with source release), Missions and the independent oracle (`docs/MISSIONS.md`, with source release), adaptive acquisition (`docs/ACQUISITION.md`, with source release) and failure replay (`docs/REPLAY.md`, with source release). The fixture planner contains 17 fictional components and three fictional laptop profiles. No real-world compatibility or purchase-success rate follows from these tests.
+The application source and sanitized technical evidence are included in this checkout. The consented human pilot remains unperformed; public video upload, remote CI and final entry remain pending. See [release status](docs/RELEASE_STATUS.md). No model GPU deployment or training was used.
+
+See [evaluation methods and limitations](docs/EVALUATION.md), [Missions and the independent oracle](docs/MISSIONS.md), [adaptive acquisition](docs/ACQUISITION.md) and [failure replay](docs/REPLAY.md). The fixture planner contains 17 fictional components and three fictional laptop profiles. No real-world compatibility or purchase-success rate follows from these tests.
+
+The [combinatorial validation report](submission/COMBINATORIAL_VALIDATION.md) records a separate exhaustive 196,608-case synthetic capability/requirement matrix, ordered recovery and source-review tests, 960 fictional-persona disruption chains and actual local API guard combinations. Complete compressed traces, source identities and coverage counts are audited. These are finite software checks; no human study or model-quality result follows from that matrix.
 
 ## Reproduce the checks
 
@@ -120,10 +134,13 @@ With the Python environment active and Node.js installed:
 
 ```sh
 python scripts/verify.py
+python scripts/audit_external_validation.py
 python scripts/evaluate_missions.py --output /tmp/intentcart-missions.json
 python scripts/evaluate_acquisition.py --check
 python scripts/evaluate_agent.py --output /tmp/intentcart-agent.json
 python scripts/evaluate_learned_acquisition.py --output /tmp/intentcart-learning.json
+python scripts/evaluate_budget_roadmap.py --output /tmp/intentcart-budget.json
+python scripts/evaluate_preference_workbench.py --output /tmp/intentcart-preferences.json
 ```
 
 The canonical verifier uses disposable storage, blank provider credentials and a zero external-call ceiling. Read the experiment documentation before interpreting results; budgets, repeated task variants and shared catalogs affect the denominators.
@@ -138,7 +155,7 @@ Planning and quote review work without payment credentials. To exercise actual s
 4. Review a plan, generate its exact quote and explicitly approve the USD total before checkout.
 5. Inspect the saved receipt. After an uncertain capture, reconcile the saved order before retrying. Refund only a verified sandbox capture.
 
-A historical backpack sandbox capture and full refund were verified on October 7, 2026. A new complete-workstation sandbox capture/refund remains unverified. The UI does not substitute a fake-provider result for an actual PayPal receipt.
+The exact **USD 279 complete-workstation sandbox basket was captured and fully refunded on October 19, 2026**. Separate final provider reads verified the matching order, capture and full refund; ten server API calls stayed within the authorized twelve-call ceiling. [Sanitized verification](submission/workstation-sandbox-verification.json). The historical USD 62 backpack transaction is separate. No real money or goods are involved.
 
 ## Inside the repository
 
@@ -149,24 +166,27 @@ intentcart/
   agent.py                   Bounded evidence tools and action validation
   evidence_catalog.py        Curated fields, sources and exact product variants
   workspace_preferences.py   Bayesian estimates over valid configurations
+  workbench.py               Human review, inventory, constraints and exports
+  finite_budget.py            Exact finite-horizon reference and CPU diagnostics
+  transcripts.py              Strict offline imported-evidence analysis
   validity.py                Separate feasibility, optimality and consent claims
   acquisition.py             Finite adaptive evidence-acquisition research
   replay.py                  Reproducible fault traces and failure reduction
   web/                       Local interface, state guards and 3D rendering
-scripts/                     Verification, evaluation and packaging tools
+scripts/                     Verification, evaluation and bounded import tools
 tests/                       Python and JavaScript regression coverage
 docs/                        Methods, architecture, evidence and limitations
-submission/                  Demo assets and hackathon walkthroughs
+submission/                  Sanitized evidence, walkthroughs and selected UI images
 ```
 
 | Read next | What it explains |
 |---|---|
-| Architecture (`docs/ARCHITECTURE.md`, with source release) | How the planner, evidence, storage and interface fit together. |
-| Evidence agent (`docs/AGENT.md`, with source release) | Tool boundaries, source bindings, local comparisons and the learning experiment. |
-| Decision validity (`docs/VALIDITY.md`, with source release) | What each decision claim establishes and what invalidates it. |
-| Security and operations (`docs/SECURITY.md`, with source release) | Session ownership, exact approval, retry behavior and operational limits. |
-| Interface design (`docs/DESIGN.md`, with source release) | The spatial studio, interaction model and accessibility behavior. |
-| Demo walkthrough (`submission/DEMO_SCRIPT.md`, with source release) | A guided path through the project. |
+| [Architecture](docs/ARCHITECTURE.md) | How the planner, evidence, storage and interface fit together. |
+| [Evidence agent](docs/AGENT.md) | Tool boundaries, source bindings, local comparisons and the learning experiment. |
+| [Decision validity](docs/VALIDITY.md) | What each decision claim establishes and what invalidates it. |
+| [Security and operations](docs/SECURITY.md) | Session ownership, exact approval, retry behavior and operational limits. |
+| [Interface design](docs/DESIGN.md) | The spatial studio, interaction model and accessibility behavior. |
+| [Demo walkthrough](submission/DEMO_SCRIPT.md) | A guided path through the project. |
 
 `demandweave/` preserves an earlier experiment and is distinct from IntentCart.
 
@@ -174,6 +194,6 @@ submission/                  Demo assets and hackathon walkthroughs
 
 This is a **single-instance sandbox application**. It does not include account authentication, distributed coordination, webhook settlement, live inventory or fulfillment. Source fingerprints identify content and detect changes; they are not authenticity signatures. Local tests do not establish a production security certification.
 
-Optional Channel3 discovery is separate from fixture checkout. Optional inference requires explicit configuration and reviewed budgets. No live language-model trajectory, human-study outcome or public benchmark leadership is claimed. Keep credentials, raw feedback, private exports and runtime databases out of Git.
+Optional Channel3 discovery is separate from fixture checkout. Optional inference requires explicit configuration and reviewed budgets. The recorded live-model integration uses tiny authored fixtures; no human-study outcome, comparative model-quality advantage or public benchmark leadership is claimed. Keep credentials, raw feedback, private exports and runtime databases out of Git.
 
 Built for the **2026 PayPal AI Hackathon**. Released under the [MIT License](LICENSE); bundled third-party notices remain with their components.

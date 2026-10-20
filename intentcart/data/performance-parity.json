@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-10",
+  "seed": 2026,
+  "personas": 120,
+  "policies": 4,
+  "policy_sessions": 480,
+  "question_selections_compared": 1440,
+  "selected_pairs_identical": true,
+  "max_gain_absolute_error": 2.55351295663786e-15,
+  "policy_outcomes_and_paired_intervals_match_original": true,
+  "human_participants": 0,
+  "original_policy_result": "No demonstrated superiority; retained unchanged.",
+  "source_sha256": {
+    "intentcart/learning.py": "49d7c3c7b699cf4ce15af6f46173285766eb231a5cbde27948e5ed878870cbdf",
+    "scripts/benchmarks/learning_v2_1.py": "f198123e5a84614119c75e0031db87e760e1331f99528aef1cfa801da5f5bf92",
+    "scripts/evaluate.py": "e7712b37f1b5668f363cc43e3a3da5e3445178f6eb6e5746584fe0f8132c9ba3",
+    "scripts/verify_learning_parity.py": "3b8d3a9b6395fe0edc19e10639d9f8095f7e4076b108abfb9abd1fc4a779d728"
+  },
+  "trace_pair_sha256": {
+    "reference": "fc36e22d362d6f92eeff9f9b40316b6e02c0612ce14aec5cdef76db0813bae92",
+    "optimized": "fc36e22d362d6f92eeff9f9b40316b6e02c0612ce14aec5cdef76db0813bae92"
+  },
+  "optimized_reproduction": {
+    "status": "measured",
+    "seed": 2026,
+    "personas": 120,
+    "human_participants": 0,
+    "results": [
+      {
+        "policy": "static",
+        "mean_regret": 0.018396,
+        "regret_ci": [
+          0.014215,
+          0.022882
+        ],
+        "top1_agreement": 0.375,
+        "heldout_pair_accuracy": 0.755556,
+        "questions": 0
+      },
+      {
+        "policy": "random",
+        "mean_regret": 0.016341,
+        "regret_ci": [
+          0.012417,
+          0.021122
+        ],
+        "top1_agreement": 0.425,
+        "heldout_pair_accuracy": 0.778472,
+        "questions": 4
+      },
+      {
+        "policy": "uncertainty",
+        "mean_regret": 0.015824,
+        "regret_ci": [
+          0.011612,
+          0.020259
+        ],
+        "top1_agreement": 0.458333,
+        "heldout_pair_accuracy": 0.761806,
+        "questions": 4
+      },
+      {
+        "policy": "decision",
+        "mean_regret": 0.016348,
+        "regret_ci": [
+          0.012681,
+          0.020646
+        ],
+        "top1_agreement": 0.425,
+        "heldout_pair_accuracy": 0.783333,
+        "questions": 4
+      }
+    ],
+    "paired_differences": {
+      "static": {
+        "regret_reduction": 0.002048,
+        "paired_ci": [
+          -0.000959,
+          0.005184
+        ]
+      },
+      "random": {
+        "regret_reduction": -7e-06,
+        "paired_ci": [
+          -0.00328,
+          0.003313
+        ]
+      },
+      "uncertainty": {
+        "regret_reduction": -0.000524,
+        "paired_ci": [
+          -0.004133,
+          0.002903
+        ]
+      }
+    },
+    "query_ms": {
+      "median": 1.667,
+      "p95": 3.758
+    },
+    "description": "Paired synthetic benchmark: Dirichlet(1.4) hidden linear weights; noisy logistic choices (beta=12); 24 fictional packs; 3 budget levels; 2 laptop-fit constraints; weak prior from the hidden top two attributes. 1,000 bootstrap resamples.",
+    "conclusion": "Performance is conditional on these simulation assumptions. Confidence intervals may overlap; inspect paired differences before claiming an improvement."
+  }
+}
