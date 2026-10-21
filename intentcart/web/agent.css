@@ -5,3 +5,6 @@
 pre{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}textarea,select{max-width:100%}.source button{margin:.25rem}details form{margin:1rem 0}.panel{min-width:0}
 
 #configurations{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:12px}#dependencies .source{border-left:2px solid #5fc9c8;padding-left:16px}
+
+/* Local requirement recovery: readable comparisons without hiding current state. */
+.draft-review{border:1px solid var(--amber);border-radius:12px;padding:18px;margin-bottom:20px;background:#e8be8308}.draft-review[hidden]{display:none}.draft-review h3{margin:10px 0}.draft-review p{font-size:13px}.draft-comparison{margin:16px 0}.draft-field{padding:14px 0;border-top:1px solid var(--line)}.draft-field-heading{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;font-size:12px}.draft-field-heading span{color:var(--amber)}.draft-field dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 0}.draft-field dt{font-size:10px;color:var(--muted)}.draft-field dd{font-size:13px;margin:5px 0 0;overflow-wrap:anywhere}.draft-field dl>div:nth-child(2) dd{color:var(--ice)}.draft-review .controls{flex-wrap:wrap}.draft-review button{white-space:normal;flex:1 1 180px}.draft-review :focus-visible{outline:2px solid var(--ice);outline-offset:4px}

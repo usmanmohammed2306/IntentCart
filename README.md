@@ -82,6 +82,8 @@ Expected response: `{"status":"ok","environment":"sandbox"}`.
 | `/learn` and `/lab` | Explore Bayesian pairwise learning and rehearse fictional budget, shipping or stock changes. |
 | `/study` | Open the optional consent-based local pilot instrument. No conducted human study is claimed. |
 
+The workbench preserves unsaved requirement edits in tab memory when another tab changes the task. Compare your edits with the latest saved values, restore only your changed fields, then explicitly review and apply them. Nothing is automatically resubmitted or saved to browser storage.
+
 The evidence workspace uses curated manufacturer records and declared scenario assumptions. It cannot create checkout. Missions uses a separate fictional merchant catalog. Browser WebGL renders the locally served Three.js scene, with an illustrated fallback; the planning core runs on CPU.
 
 ## Optional configuration
