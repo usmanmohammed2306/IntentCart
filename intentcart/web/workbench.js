@@ -1,10 +1,10 @@
 const $=id=>document.getElementById(id);
-let csrf='',task=null,data=null,busy=false,requirementsBase=null,recovery=null;
+let csrf='',task=null,data=null,busy=false,requirementsBase=null,recovery=null,sourceConfirmation=null;
 const requirementFields=[['charging','Charging target','number'],['os','OS version','text'],['connector','Display connector','text'],['evidence-age','Evidence review interval','number'],['price-age','Price review interval','number'],['tax','Tax, USD','number'],['shipping','Shipping, USD','number'],['hdcp','HDCP required','checkbox'],['gaming','Gaming suitability required','checkbox']];
 const money=n=>n===null?'Unknown':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n/100);
 const text=(tag,value,className='')=>{const el=document.createElement(tag);el.textContent=value;el.className=className;return el;};
 async function api(path,body){const response=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json','x-csrf-token':csrf},...(body?{method:'POST',body:JSON.stringify(body)}:{})});const value=await response.json();if(!response.ok){const error=Error(typeof value.detail==='string'?value.detail:'Review the entered values and current task.');error.status=response.status;throw error;}return value;}
-async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();}}
+async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();syncSourceControls();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();syncSourceControls();}}
 function readRequirements(){return Object.fromEntries(requirementFields.map(([id,,type])=>[id,type==='checkbox'?$(id).checked:$(id).value]));}
 function sameValue(id,a,b){const type=requirementFields.find(f=>f[0]===id)[2];return type==='number'&&a!==''&&b!==''?Number(a)===Number(b):a===b;}
 function pendingRequirements(){
@@ -41,8 +41,12 @@ async function edit(operation,payload={},submittedRequirements=false){
   const updated=await api('/api/agent/workbench',{revision:task.revision,operation,payload});
   task=updated;data=task.workbench;recovery=submittedRequirements?null:draft;render();
   if(submittedRequirements)$('draft-status').textContent='Reviewed requirements saved.';
+  if(operation==='propose_source')$('source-review-heading').focus();
  }catch(error){
-  if(error.status===409&&draft){
+  if(operation==='accept_source'){
+   resetSourceConfirmation();
+   if(error.status===409){try{await load({draft});}catch{/* Keep the rejection and require a fresh review. */}}
+  }else if(error.status===409&&draft){
    try{await load({draft,onlyIfChanged:true});}catch{/* Keep the original form and error if refreshing fails. */}
   }
   throw error;
@@ -66,11 +70,67 @@ function render(){
  $('uncertainty').replaceChildren(...Object.entries(data.uncertainty).map(([name,v])=>text('p',`${name.replaceAll('_',' ')}: mean ${(100*v.mean).toFixed(1)}%; 5–95% particle interval ${(100*v.q05).toFixed(1)}–${(100*v.q95).toFixed(1)}%`,'fine')));$('uncertainty').append(text('p',data.uncertainty_notice,'fine'));
  $('burden').textContent=`${data.question_burden.permission_questions} permission questions in retained timeline; ${data.question_burden.retained_pairwise_answers} retained comparisons, including ${data.question_burden.skips} skips. Counts describe retained records, not unique people.`;
  $('source-id').replaceChildren(...task.evidence.map(s=>new Option(`${s.product_id} · ${s.field}`,s.source_id)));
- loadSource();$('pending').textContent=data.pending_source?JSON.stringify(data.pending_source,null,2):'No pending replacement.';$('accept-source').hidden=!data.pending_source;
+ if(data.pending_source&&task.evidence.some(s=>s.source_id===data.pending_source.source_id))$('source-id').value=data.pending_source.source_id;
+ loadSource();showSourceReview();
  requirementsBase=readRequirements();showRecovery();
  $('changes').replaceChildren(...task.events.filter(e=>e.response?.diff).slice(-8).map(e=>{const node=document.createElement('details');node.append(text('summary',`Revision ${e.revision}: ${e.action.action}`),text('pre',JSON.stringify(e.response.diff,null,2)));return node;}));
 }
-function loadSource(){const source=task?.evidence.find(s=>s.source_id===$('source-id').value);$('source-record').value=source?JSON.stringify(source,null,2):'';}
+function originalSource(){
+ const source=task?.evidence.find(s=>s.source_id===data?.pending_source?.source_id);
+ if(!source)return null;
+ const {source_id,...record}=source;return record;
+}
+function sourceReviewKey(){
+ const proposal=data?.pending_source,original=originalSource();
+ if(!proposal||!original||['product_id','variant','field'].some(k=>original[k]!==proposal.replacement[k]))return null;
+ return JSON.stringify([task.revision,proposal,original]);
+}
+function sourceEditorMatches(){
+ const proposal=data?.pending_source;
+ return !!proposal&&$('source-id').value===proposal.source_id&&$('source-record').value===JSON.stringify(proposal.replacement,null,2)&&$('source-reason').value===proposal.reason;
+}
+function syncSourceControls(){
+ $('source-review').querySelectorAll('input,select,textarea,button').forEach(el=>el.disabled=busy);
+ const key=sourceReviewKey(),matches=sourceEditorMatches();
+ $('source-reviewed').disabled=busy||!key||!matches;
+ $('accept-source').disabled=busy||!key||!matches||!$('source-reviewed').checked||sourceConfirmation!==key;
+ $('source-review-warning').textContent=!data?.pending_source?'':!key?'The original observed source is unavailable. Inspect it in the Evidence agent before accepting a replacement.':!matches?'The editor differs from this proposal. Propose your edited replacement, then review it again.':'';
+}
+function resetSourceConfirmation(){sourceConfirmation=null;$('source-reviewed').checked=false;syncSourceControls();}
+function showSourceReview(){
+ const proposal=data.pending_source,original=originalSource();
+ $('source-comparison').hidden=!proposal;$('source-empty').hidden=!!proposal;
+ resetSourceConfirmation();
+ if(!proposal)return;
+ $('pending').textContent=JSON.stringify(proposal,null,2);
+ $('source-identity').textContent=`${proposal.source_id} · ${proposal.replacement.product_id} · ${proposal.replacement.variant} · ${proposal.replacement.field}`;
+ $('source-proposal-reason').textContent=`Reason for review: ${proposal.reason}`;
+ const labels={value:'Observed value',unit:'Unit',url:'Source URL',observed_on:'Review date',kind:'Evidence kind',summary:'Summary',excerpt:'Excerpt',capture_method:'Review method'};
+ const essential=['value','unit','url','observed_on','kind'];
+ const keys=[...new Set([...essential,...Object.keys(original||{}),...Object.keys(proposal.replacement)])];
+ const equal=key=>JSON.stringify(original?.[key])===JSON.stringify(proposal.replacement[key]);
+ const changed=keys.filter(key=>!equal(key));
+ $('source-change-summary').textContent=original?`${changed.length} field${changed.length===1?'':'s'} change. Unchanged values are shown for context.`:'Original values are unavailable; acceptance is blocked.';
+ const display=value=>value===undefined?'Not present':value===null?'None declared':typeof value==='string'?value:JSON.stringify(value);
+ $('source-diff').replaceChildren(...keys.filter(key=>essential.includes(key)||!equal(key)).map(key=>{
+  const card=text('article','','source-change');card.dataset.changed=String(!equal(key));
+  const heading=text('div','','draft-field-heading');heading.append(text('strong',labels[key]||key),text('span',equal(key)?'Unchanged':'Changed','fine'));
+  const values=document.createElement('dl');
+  for(const [label,value] of [['Current',original?display(original[key]):'Unavailable'],['Proposed',display(proposal.replacement[key])]]){const cell=document.createElement('div');cell.append(text('dt',label),text('dd',value));values.append(cell);}
+  card.append(heading,values);return card;
+ }));
+}
+function loadSource(){
+ const source=task?.evidence.find(s=>s.source_id===$('source-id').value),proposal=data?.pending_source;
+ const {source_id,...record}=source||{};
+ const pending=proposal?.source_id===$('source-id').value;
+ $('source-record').value=pending?JSON.stringify(proposal.replacement,null,2):source?JSON.stringify(record,null,2):'';
+ $('source-reason').value=pending?proposal.reason:'';
+ resetSourceConfirmation();
+}
+$('source-reviewed').addEventListener('change',()=>{sourceConfirmation=$('source-reviewed').checked&&sourceEditorMatches()?sourceReviewKey():null;syncSourceControls();});
+for(const id of ['source-record','source-reason'])$(id).addEventListener('input',resetSourceConfirmation);
+
 async function load({draft=pendingRequirements(),onlyIfChanged=false}={}){
  const status=await api('/api/agent');
  if(onlyIfChanged&&status.task?.revision===task?.revision)return;
@@ -101,5 +161,9 @@ form('source-review',()=>edit('propose_source',{source_id:$('source-id').value,r
 form('counterfactual',async()=>{$('counterfactual-result').textContent=JSON.stringify(await api('/api/agent/counterfactual',{revision:task.revision,changes:[{budget_cents:Math.round(Number($('cf-budget').value)*100),displays:Number($('cf-displays').value)}]}),null,2);});
 form('clarify',async()=>{$('clarification').textContent=JSON.stringify(await api('/api/agent/clarify-query',{text:$('request-text').value}),null,2);});
 form('import',()=>{if(!$('catalog-reviewed').checked)throw Error('Review the collection first.');return edit('import_catalog',{catalog:JSON.parse($('catalog-json').value),base_sha256:data.catalog_sha256,reviewed:true});});
-$('withdraw').addEventListener('click',()=>run(()=>edit('withdraw_driver')));$('undo').addEventListener('click',()=>run(()=>edit('undo_preference')));$('refresh').addEventListener('click',()=>run(load));$('source-id').addEventListener('change',loadSource);$('accept-source').addEventListener('click',()=>run(()=>edit('accept_source',{proposal_id:data.pending_source.id,reviewed:true})));
+$('withdraw').addEventListener('click',()=>run(()=>edit('withdraw_driver')));$('undo').addEventListener('click',()=>run(()=>edit('undo_preference')));$('refresh').addEventListener('click',()=>run(load));$('source-id').addEventListener('change',loadSource);$('accept-source').addEventListener('click',()=>run(()=>{
+ const key=sourceReviewKey();
+ if(!key||!sourceEditorMatches()||!$('source-reviewed').checked||sourceConfirmation!==key)throw Error('Review and confirm this exact displayed source replacement before acceptance.');
+ return edit('accept_source',{proposal_id:data.pending_source.id,reviewed:true});
+}));
 await run(async()=>{csrf=(await api('/api/session')).csrf_token;await load();});

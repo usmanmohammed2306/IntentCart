@@ -84,6 +84,8 @@ Expected response: `{"status":"ok","environment":"sandbox"}`.
 
 The workbench preserves unsaved requirement edits in tab memory when another tab changes the task. Compare your edits with the latest saved values, restore only your changed fields, then explicitly review and apply them. Nothing is automatically resubmitted or saved to browser storage.
 
+Before accepting a source replacement, compare its current and proposed values, units, URL and review date. Changed metadata is highlighted, and confirmation is bound to the displayed proposal and task revision. Refreshing, changing the proposal or editing its form clears that confirmation; acceptance never replaces a fresh inspection.
+
 The evidence workspace uses curated manufacturer records and declared scenario assumptions. It cannot create checkout. Missions uses a separate fictional merchant catalog. Browser WebGL renders the locally served Three.js scene, with an illustrated fallback; the planning core runs on CPU.
 
 ## Optional configuration
