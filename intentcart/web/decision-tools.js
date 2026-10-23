@@ -143,3 +143,7 @@ add("expiry-forecast","Source review expiry forecast","Evidence review","Forecas
 add("source-blast-radius","Observed-source dependency blast radius","Evidence review","Map each inspected product field to returned baskets containing that exact product.",[],function(s,i){
  return output(['Source','Field','Containing options','Containing setup IDs'],s.sources.map(e=>{const a=s.options.filter(o=>o.items.some(x=>x.product_id===e.product_id));return [e.id,e.field,a.length,a.map(o=>o.id).join(', ')||'None'];}),['Product-level exposure is conservative: it does not prove every containing basket depends on this exact field.']);
 });
+
+add("source-concentration","Source origin concentration audit","Evidence review","Group observed fields by cited URL origin and evidence kind; do not confuse repeated fields with independent sources.",[],function(s,i){
+ const groups=new Map();for(const e of s.sources){let origin='No external origin';if(e.url){try{origin=new URL(e.url).origin;}catch{origin='Invalid URL';}}const key=e.kind+' / '+origin;const g=groups.get(key)||{fields:0,products:new Set()};g.fields++;g.products.add(e.product_id);groups.set(key,g);}return output(['Evidence kind / origin','Observed fields','Distinct products'],[...groups].map(([k,v])=>[k,v.fields,v.products.size]),['Concentration describes citations, not credibility, truth, independent corroboration or supply-chain independence.']);
+});
