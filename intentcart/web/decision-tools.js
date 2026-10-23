@@ -103,3 +103,7 @@ add("ownership-cost","Declared operating-cost horizon","Cost planning","Compare 
 add("session-cost","Cost per productive session","Cost planning","Translate one-time planning costs into a stated number of work sessions without implying financing or resale value.",[countInput('sessions','Work sessions per year',200,1,366),countInput('years','Years of use',3,1,10)],function(s,i){
  const sessions=int(i.sessions,1,366)*int(i.years,1,10);return output(['Setup','Purchase total','Declared sessions','Cost per session'],s.options.map(o=>[o.id,usd(o.total_cents),sessions,usd(Math.round(o.total_cents/sessions))]),['Simple allocation of purchase cost, not a productivity or investment return claim.']);
 });
+
+add("price-interval","Worst-case price interval screen","Cost planning","Screen setups against a declared component-price uncertainty band; saved extras remain fixed.",[percentInput('percent','Symmetric hardware uncertainty, percent',15,0,100),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const band=basisPoints(i.percent),budget=cents(i.budget);return output(['Setup','Low scenario','High scenario','Worst case fits'],s.options.map(o=>{const hardware=sub(s,o),extras=o.total_cents-hardware,low=Math.max(0,Math.floor(hardware*(10000-band)/10000))+extras,high=Math.ceil(hardware*(10000+band)/10000)+extras;return [o.id,usd(low),usd(high),high<=budget?'Yes':'No'];}),['Declared intervals have no probability or forecast interpretation.']);
+});
