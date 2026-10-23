@@ -171,6 +171,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Price-scenario minimax regret** — Find the smallest worst-case excess cost across baseline, hardware-inflation and one-product-shock scenarios among returned options.
 - **Cost and model-trade-off Pareto frontier** — Identify returned setups dominated on total price, changed slots and the three estimated non-price contributions.
 - **Exact-component shortlist locks** — Filter supported alternatives while keeping up to four explicitly selected components.
+- **Preference-contribution reweighting sandbox** — Explore user-supplied multipliers over the current model contribution estimates; no learned preference is changed.
 
 </details>
 
