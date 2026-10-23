@@ -158,6 +158,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Single-product outage recovery** — Find the least disruptive returned fallback when one exact product is unavailable.
 - **Correlated stock-out stress** — Remove up to four products together and inspect surviving complete baskets.
 - **Dock dependency resilience matrix** — Stress every represented dock independently and see the fallback cost for your starting setup.
+- **Diversified three-setup shortlist** — Choose three returned options that maximize their minimum component-slot distance, then minimize combined price.
 
 </details>
 
