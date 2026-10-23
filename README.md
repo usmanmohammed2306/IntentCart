@@ -164,6 +164,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Per-product price-rise tolerance** — Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.
 - **Uniform hardware inflation stress** — Apply a user-declared percentage price increase to component subtotals while keeping saved tax/shipping fixed.
 - **Exact-product price shock** — Change one component unit price hypothetically, respecting the quantity in each supported basket.
+- **Tax and shipping scenario estimator** — Replace saved extras with a declared tax rate on hardware and a fixed shipping amount.
 
 </details>
 

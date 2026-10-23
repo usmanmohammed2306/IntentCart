@@ -91,3 +91,7 @@ add("inflation-stress","Uniform hardware inflation stress","Cost planning","Appl
 add("price-shock","Exact-product price shock","Cost planning","Change one component unit price hypothetically, respecting the quantity in each supported basket.",[productInput,moneyInput('price','Hypothetical unit price, USD',150),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
  const p=selected(s,i.product),price=cents(i.price),budget=cents(i.budget);return output(['Setup','Product quantity','Stressed all-in total','Within hypothetical budget'],s.options.map(o=>{const q=o.items.find(x=>x.product_id===p.id)?.quantity||0,total=o.total_cents+q*(price-p.price_cents);return [o.id,q,usd(total),total<=budget?'Yes':'No'];}));
 });
+
+add("tax-scenario","Tax and shipping scenario estimator","Cost planning","Replace saved extras with a declared tax rate on hardware and a fixed shipping amount.",[percentInput('tax','Illustrative tax rate, percent',8,0,100),moneyInput('shipping','Illustrative shipping, USD',10),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const rate=basisPoints(i.tax),ship=cents(i.shipping),budget=cents(i.budget);return output(['Setup','Hardware','Illustrative tax','Shipping','Scenario total','Fits'],s.options.map(o=>{const hardware=sub(s,o),tax=Math.ceil(hardware*rate/10000),total=hardware+tax+ship;return [o.id,usd(hardware),usd(tax),usd(ship),usd(total),total<=budget?'Yes':'No'];}),['Illustrative tax arithmetic only; taxability and jurisdiction are not determined.']);
+});
