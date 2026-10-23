@@ -47,3 +47,7 @@ const percentInput=(name,label,value)=>({name,label,type:'number',min:0,max:100,
 add("budget-frontier","Budget coverage staircase","Cost planning","See which returned setups remain affordable at each budget step; no plan is recomputed.",[moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
  const budget=cents(i.budget);const levels=[...new Set([0,...s.options.map(o=>o.total_cents),budget])].sort((a,b)=>a-b);return output(['Budget','Affordable options','Cheapest option','Your threshold'],levels.map(b=>{const a=sortCost(s.options.filter(o=>o.total_cents<=b));return [usd(b),a.length,a[0]?.id||'None',b===budget?'Your input':'Breakpoint'];}));
 });
+
+add("extra-cost-cap","Tax and shipping allowance","Cost planning","Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.",[moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const budget=cents(i.budget);return output(['Setup','Hardware subtotal','Maximum extras','Fits before extras'],s.options.map(o=>{const subtotal=sub(s,o);return [o.id,usd(subtotal),budget>=subtotal?usd(budget-subtotal):'None',budget>=subtotal?'Yes':'No'];}));
+});

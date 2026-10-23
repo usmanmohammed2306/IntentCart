@@ -153,6 +153,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 <summary>Available planning tools</summary>
 
 - **Budget coverage staircase** — See which returned setups remain affordable at each budget step; no plan is recomputed.
+- **Tax and shipping allowance** — Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.
 
 </details>
 
