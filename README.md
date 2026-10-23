@@ -159,6 +159,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Correlated stock-out stress** — Remove up to four products together and inspect surviving complete baskets.
 - **Dock dependency resilience matrix** — Stress every represented dock independently and see the fallback cost for your starting setup.
 - **Diversified three-setup shortlist** — Choose three returned options that maximize their minimum component-slot distance, then minimize combined price.
+- **Least-change replacement graph** — Map the closest supported alternatives by changed component slots, with exact transition cost.
 
 </details>
 

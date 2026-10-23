@@ -71,3 +71,7 @@ add("dock-resilience","Dock dependency resilience matrix","Availability","Stress
 add("diverse-shortlist","Diversified three-setup shortlist","Availability","Choose three returned options that maximize their minimum component-slot distance, then minimize combined price.",[],function(s,i){
  check(s.options.length>=3,'At least three supported options are needed.');let best=null;for(let a=0;a<s.options.length;a++)for(let b=a+1;b<s.options.length;b++)for(let c=b+1;c<s.options.length;c++){const set=[s.options[a],s.options[b],s.options[c]],spread=Math.min(distance(s,set[0],set[1]),distance(s,set[0],set[2]),distance(s,set[1],set[2])),cost=sum(set.map(o=>o.total_cents));if(!best||spread>best.spread||spread===best.spread&&cost<best.cost)best={set,spread,cost};}return output(['Setup','All-in total','Minimum pairwise distance'],best.set.map(o=>[o.id,usd(o.total_cents),best.spread]),['Component diversity is not a statistical independence or supply-chain guarantee.']);
 });
+
+add("replacement-graph","Least-change replacement graph","Availability","Map the closest supported alternatives by changed component slots, with exact transition cost.",[optionInput],function(s,i){
+ const base=pick(s,i.setup);return output(['Alternative','Slot distance','Changed categories','Cost difference'],s.options.filter(o=>o.id!==base.id).map(o=>[o.id,distance(s,base,o),kinds.filter(k=>{const f=x=>JSON.stringify(parts(s,x).filter(p=>p.kind===k).map(p=>[p.id,p.quantity]).sort());return f(base)!==f(o);}).join(', '),signed(o.total_cents-base.total_cents)]).sort((a,b)=>a[1]-b[1]));
+});
