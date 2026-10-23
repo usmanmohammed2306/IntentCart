@@ -51,3 +51,7 @@ add("budget-frontier","Budget coverage staircase","Cost planning","See which ret
 add("extra-cost-cap","Tax and shipping allowance","Cost planning","Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.",[moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
  const budget=cents(i.budget);return output(['Setup','Hardware subtotal','Maximum extras','Fits before extras'],s.options.map(o=>{const subtotal=sub(s,o);return [o.id,usd(subtotal),budget>=subtotal?usd(budget-subtotal):'None',budget>=subtotal?'Yes':'No'];}));
 });
+
+add("spend-exposure","Component spend exposure","Cost planning","Identify which component categories account for the largest share of one complete basket.",[optionInput],function(s,i){
+ const o=pick(s,i.setup),p=parts(s,o),rows=kinds.map(k=>[k,sum(p.filter(x=>x.kind===k).map(x=>x.line_cents))]);rows.push(['Tax and shipping',o.total_cents-sub(s,o)]);return output(['Category','Spend','Share of total'],rows.sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,usd(v),o.total_cents?(100*v/o.total_cents).toFixed(2)+'%':'0%']));
+});
