@@ -180,6 +180,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Source origin concentration audit** — Group observed fields by cited URL origin and evidence kind; do not confuse repeated fields with independent sources.
 - **Observed-value contradiction audit** — Find distinct values observed for the same exact product and field without resolving the contradiction automatically.
 - **Evidence review priority queue** — Order inspected fields by overdue/unknown age and number of exposed returned setups.
+- **Portable private-data-minimized decision snapshot** — Export supported plans, product declarations and observed fields without query text, sessions or raw event history.
 
 </details>
 

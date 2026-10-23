@@ -155,3 +155,7 @@ add("source-conflicts","Observed-value contradiction audit","Evidence review","F
 add("review-priority","Evidence review priority queue","Evidence review","Order inspected fields by overdue/unknown age and number of exposed returned setups.",[],function(s,i){
  const rows=s.sources.map(e=>{const age=e.freshness.age_days,remaining=Number.isInteger(age)?s.evidence_max_age_days-age:null,exposed=s.options.filter(o=>o.items.some(x=>x.product_id===e.product_id)).length;return {e,remaining,exposed};}).sort((a,b)=>(a.remaining??-100000)-(b.remaining??-100000)||b.exposed-a.exposed);return output(['Source','Review status','Days to boundary','Exposed options'],rows.map(({e,remaining,exposed})=>[e.id,e.freshness.status,remaining??'Unknown',exposed]),['A declared triage rule, not a confidence estimate. Unknown dates require human review; no source is fetched.']);
 });
+
+add("portable-snapshot","Portable private-data-minimized decision snapshot","Review and handoff","Export supported plans, product declarations and observed fields without query text, sessions or raw event history.",[],function(s,i){
+ const portable={...copy(s),history:[]};return {...output(['Snapshot','Revision','Supported options','Observed fields'],[['intentcart-decision-snapshot/1',s.revision,s.options.length,s.sources.length]],['The downloaded JSON includes snapshot_data for later comparison. Review selected product/source content before sharing; hashes identify content sources, not authenticity.']),snapshot_data:portable};
+});
