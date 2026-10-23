@@ -144,3 +144,16 @@ IntentCart is a **single-instance sandbox application** built for the 2026 PayPa
 The local planning experience works without external services. Actual inference, discovery and sandbox payments require your own deliberate configuration. The project does not include account authentication, distributed settlement, live inventory, fulfillment or production security certification. Source fingerprints detect content changes; they are not authenticity signatures.
 
 Released under the [MIT License](LICENSE). Bundled Three.js retains its [upstream notice](intentcart/web/vendor/THREE_LICENSE.md).
+
+## Decision Studio
+
+Open **Planning workbench → Decision Studio** after the evidence agent has returned supported configurations. Explore the decision without changing it: all analyses run locally in the browser, over at most the twelve returned options in the loaded revision. They do not search the full catalog, fetch sources, predict actual prices or grant checkout authority. Refresh the task to obtain a newer revision; results are discarded when the loaded task changes.
+
+<details>
+<summary>Available planning tools</summary>
+
+- **Budget coverage staircase** — See which returned setups remain affordable at each budget step; no plan is recomputed.
+
+</details>
+
+Each result can be downloaded as JSON. Review product and source content before sharing. Price scenarios use integer cents with explicit rounding; operating costs use your declared assumptions. Preference contributions describe a finite model, not measured hardware performance or personal satisfaction. None of these tools updates the basket, requirements, evidence, preference history or payment approval.

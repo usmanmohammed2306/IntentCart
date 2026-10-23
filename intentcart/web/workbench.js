@@ -1,11 +1,13 @@
+import {mountDecisionStudio} from './decision-studio.js';
 import {compareSetups,comparisonReport} from './setup-comparison.js';
 const $=id=>document.getElementById(id);
 let csrf='',task=null,data=null,busy=false,requirementsBase=null,recovery=null,sourceConfirmation=null,setupComparison=null;
+const decisionStudio=mountDecisionStudio($('decision-studio'),()=>task,()=>busy);
 const requirementFields=[['charging','Charging target','number'],['os','OS version','text'],['connector','Display connector','text'],['evidence-age','Evidence review interval','number'],['price-age','Price review interval','number'],['tax','Tax, USD','number'],['shipping','Shipping, USD','number'],['hdcp','HDCP required','checkbox'],['gaming','Gaming suitability required','checkbox']];
 const money=n=>n===null?'Unknown':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n/100);
 const text=(tag,value,className='')=>{const el=document.createElement(tag);el.textContent=value;el.className=className;return el;};
 async function api(path,body){const response=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json','x-csrf-token':csrf},...(body?{method:'POST',body:JSON.stringify(body)}:{})});const value=await response.json();if(!response.ok){const error=Error(typeof value.detail==='string'?value.detail:'Review the entered values and current task.');error.status=response.status;throw error;}return value;}
-async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();syncSourceControls();syncComparisonControls();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();syncSourceControls();syncComparisonControls();}}
+async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();syncSourceControls();syncComparisonControls();decisionStudio.sync();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();syncSourceControls();syncComparisonControls();decisionStudio.sync();}}
 function readRequirements(){return Object.fromEntries(requirementFields.map(([id,,type])=>[id,type==='checkbox'?$(id).checked:$(id).value]));}
 function sameValue(id,a,b){const type=requirementFields.find(f=>f[0]===id)[2];return type==='number'&&a!==''&&b!==''?Number(a)===Number(b):a===b;}
 function pendingRequirements(){
@@ -75,7 +77,7 @@ function render(){
  $('source-id').replaceChildren(...task.evidence.map(s=>new Option(`${s.product_id} · ${s.field}`,s.source_id)));
  if(data.pending_source&&task.evidence.some(s=>s.source_id===data.pending_source.source_id))$('source-id').value=data.pending_source.source_id;
  loadSource();showSourceReview();
- requirementsBase=readRequirements();showRecovery();
+ requirementsBase=readRequirements();showRecovery();decisionStudio.refresh();
  $('changes').replaceChildren(...task.events.filter(e=>e.response?.diff).slice(-8).map(e=>{const node=document.createElement('details');node.append(text('summary',`Revision ${e.revision}: ${e.action.action}`),text('pre',JSON.stringify(e.response.diff,null,2)));return node;}));
 }
 function syncComparisonControls(){
