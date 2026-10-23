@@ -173,6 +173,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Exact-component shortlist locks** — Filter supported alternatives while keeping up to four explicitly selected components.
 - **Preference-contribution reweighting sandbox** — Explore user-supplied multipliers over the current model contribution estimates; no learned preference is changed.
 - **Preference sensitivity sweep** — Count which options lead on a fixed 35-profile multiplier grid, retaining exact ties rather than inventing probabilities.
+- **Preference cycle audit** — Detect directed cycles in the last 48 retained explicit A/B answers, with ties and skips kept separate.
 
 </details>
 
