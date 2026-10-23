@@ -75,3 +75,7 @@ add("diverse-shortlist","Diversified three-setup shortlist","Availability","Choo
 add("replacement-graph","Least-change replacement graph","Availability","Map the closest supported alternatives by changed component slots, with exact transition cost.",[optionInput],function(s,i){
  const base=pick(s,i.setup);return output(['Alternative','Slot distance','Changed categories','Cost difference'],s.options.filter(o=>o.id!==base.id).map(o=>[o.id,distance(s,base,o),kinds.filter(k=>{const f=x=>JSON.stringify(parts(s,x).filter(p=>p.kind===k).map(p=>[p.id,p.quantity]).sort());return f(base)!==f(o);}).join(', '),signed(o.total_cents-base.total_cents)]).sort((a,b)=>a[1]-b[1]));
 });
+
+add("upgrade-ladder","Least-disruption budget ladder","Cost planning","For each affordable price breakpoint, find the option with the fewest changed slots relative to your current choice.",[optionInput,moneyInput('budget','Maximum hypothetical budget, USD',350)],function(s,i){
+ const base=pick(s,i.setup),limit=cents(i.budget),levels=[...new Set(s.options.filter(o=>o.total_cents<=limit).map(o=>o.total_cents))].sort((a,b)=>a-b);return output(['Budget breakpoint','Least-change option','Changed slots','Option cost'],levels.map(b=>{const a=s.options.filter(o=>o.total_cents<=b).sort((a,b)=>distance(s,base,a)-distance(s,base,b)||a.total_cents-b.total_cents);return [usd(b),a[0].id,distance(s,base,a[0]),usd(a[0].total_cents)];}));
+});
