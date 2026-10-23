@@ -159,3 +159,21 @@ add("review-priority","Evidence review priority queue","Evidence review","Order 
 add("portable-snapshot","Portable private-data-minimized decision snapshot","Review and handoff","Export supported plans, product declarations and observed fields without query text, sessions or raw event history.",[],function(s,i){
  const portable={...copy(s),history:[]};return {...output(['Snapshot','Revision','Supported options','Observed fields'],[['intentcart-decision-snapshot/1',s.revision,s.options.length,s.sources.length]],['The downloaded JSON includes snapshot_data for later comparison. Review selected product/source content before sharing; hashes identify content sources, not authenticity.']),snapshot_data:portable};
 });
+
+add("snapshot-diff","Earlier-versus-current decision snapshot diff","Review and handoff","Paste an exported studio snapshot to compare prices, available setup IDs, observed values and source identities without importing authority.",[{name:'previous',label:'Previously downloaded portable snapshot JSON',type:'textarea',value:''}],function(s,i){
+ check(typeof i.previous==='string'&&i.previous.length>0&&i.previous.length<=120000,'Paste a bounded exported portable snapshot.');
+let raw;try{raw=JSON.parse(i.previous);}catch{throw Error('The snapshot is not valid JSON.');}
+const old=raw?.snapshot_data;
+check(raw?.tool==='portable-snapshot'&&old?.schema==='intentcart-decision-snapshot/1'&&Array.isArray(old.options)&&old.options.length<=12&&Array.isArray(old.sources)&&old.sources.length<=256&&Array.isArray(old.products)&&old.products.length<=24,'Only portable decision snapshots are accepted.');
+for(const list of [old.options,old.sources,old.products]){check(list.every(x=>x&&typeof x==='object'&&typeof x.id==='string'&&x.id.length>0&&x.id.length<=200)&&new Set(list.map(x=>x.id)).size===list.length,'Snapshot record identities must be bounded and unique.');}
+int(old.budget_cents);int(old.evidence_max_age_days,1,3650);
+for(const p of old.products){int(p.price_cents);check(kinds.includes(p.kind)&&typeof p.name==='string'&&typeof p.variant==='string','Invalid portable product.');}
+for(const o of old.options){int(o.total_cents);check(Array.isArray(o.items)&&o.items.length<=8&&o.items.every(x=>x&&typeof x.product_id==='string'&&Number.isSafeInteger(x.quantity)&&x.quantity>=1&&x.quantity<=8)&&Array.isArray(o.changed_slots)&&o.changed_slots.length<=4&&o.contributions&&['lower_cost',...dims].every(k=>Number.isFinite(o.contributions[k])&&o.contributions[k]>=0&&o.contributions[k]<=1),'Invalid portable setup.');}
+const rows=[],compare=(label,a,b)=>{const left=JSON.stringify(a),right=JSON.stringify(b);if(left!==right)rows.push([label,left??'Absent',right??'Absent']);};
+compare('Catalog identity',old.catalog_sha256,s.catalog_sha256);compare('Compiler identity',old.source_sha256,s.source_sha256);compare('Budget, cents',old.budget_cents,s.budget_cents);compare('Evidence review interval, days',old.evidence_max_age_days,s.evidence_max_age_days);
+const product=p=>p?{name:p.name,variant:p.variant,kind:p.kind,price_cents:p.price_cents}:null;
+const setup=o=>o?{total_cents:o.total_cents,items:[...o.items].sort((a,b)=>a.product_id.localeCompare(b.product_id)),changed_slots:[...o.changed_slots].sort(),contributions:Object.fromEntries(['lower_cost',...dims].map(k=>[k,o.contributions[k]]))}:null;
+const source=e=>e?{product_id:e.product_id,field:e.field,value:e.value,unit:e.unit,kind:e.kind,url:e.url,observed_on:e.observed_on}:null;
+for(const [label,key,project] of [['Product','products',product],['Setup','options',setup],['Observed source','sources',source]])for(const id of new Set([...old[key].map(x=>x.id),...s[key].map(x=>x.id)])){const a=old[key].find(x=>x.id===id),b=s[key].find(x=>x.id===id);if(!a||!b)rows.push([label+' '+id,a?JSON.stringify(project(a)):'Absent',b?JSON.stringify(project(b)):'Absent']);else compare(label+' '+id,project(a),project(b));}
+return output(['Changed record','Earlier snapshot','Loaded current snapshot'],rows,['Imported JSON is untrusted comparison material only. It cannot restore state, support a plan, change a fact or approve payment. Dates and field contents are compared; changing server-computed source ages alone is not a fact change.']);
+});

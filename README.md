@@ -181,6 +181,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Observed-value contradiction audit** — Find distinct values observed for the same exact product and field without resolving the contradiction automatically.
 - **Evidence review priority queue** — Order inspected fields by overdue/unknown age and number of exposed returned setups.
 - **Portable private-data-minimized decision snapshot** — Export supported plans, product declarations and observed fields without query text, sessions or raw event history.
+- **Earlier-versus-current decision snapshot diff** — Paste an exported studio snapshot to compare prices, available setup IDs, observed values and source identities without importing authority.
 
 </details>
 
