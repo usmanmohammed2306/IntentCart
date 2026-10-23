@@ -178,6 +178,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Source review expiry forecast** — Forecast review deadlines from observed dates and the declared review interval, separating undated/fictional fields.
 - **Observed-source dependency blast radius** — Map each inspected product field to returned baskets containing that exact product.
 - **Source origin concentration audit** — Group observed fields by cited URL origin and evidence kind; do not confuse repeated fields with independent sources.
+- **Observed-value contradiction audit** — Find distinct values observed for the same exact product and field without resolving the contradiction automatically.
 
 </details>
 
