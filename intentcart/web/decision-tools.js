@@ -79,3 +79,7 @@ add("replacement-graph","Least-change replacement graph","Availability","Map the
 add("upgrade-ladder","Least-disruption budget ladder","Cost planning","For each affordable price breakpoint, find the option with the fewest changed slots relative to your current choice.",[optionInput,moneyInput('budget','Maximum hypothetical budget, USD',350)],function(s,i){
  const base=pick(s,i.setup),limit=cents(i.budget),levels=[...new Set(s.options.filter(o=>o.total_cents<=limit).map(o=>o.total_cents))].sort((a,b)=>a-b);return output(['Budget breakpoint','Least-change option','Changed slots','Option cost'],levels.map(b=>{const a=s.options.filter(o=>o.total_cents<=b).sort((a,b)=>distance(s,base,a)-distance(s,base,b)||a.total_cents-b.total_cents);return [usd(b),a[0].id,distance(s,base,a[0]),usd(a[0].total_cents)];}));
 });
+
+add("price-ceiling","Per-product price-rise tolerance","Cost planning","Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.",[moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const budget=cents(i.budget);return output(['Product','Containing options','Best unit-price tolerance'],s.products.filter(p=>s.options.some(o=>o.items.some(x=>x.product_id===p.id))).map(p=>{const rows=s.options.filter(o=>o.items.some(x=>x.product_id===p.id)),tolerance=Math.max(...rows.map(o=>Math.floor((budget-o.total_cents)/o.items.find(x=>x.product_id===p.id).quantity)));return [p.name,rows.length,tolerance>=0?usd(tolerance):'Already above budget'];}));
+});

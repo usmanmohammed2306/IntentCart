@@ -161,6 +161,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Diversified three-setup shortlist** — Choose three returned options that maximize their minimum component-slot distance, then minimize combined price.
 - **Least-change replacement graph** — Map the closest supported alternatives by changed component slots, with exact transition cost.
 - **Least-disruption budget ladder** — For each affordable price breakpoint, find the option with the fewest changed slots relative to your current choice.
+- **Per-product price-rise tolerance** — Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.
 
 </details>
 
