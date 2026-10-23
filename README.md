@@ -169,6 +169,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Cost per productive session** — Translate one-time planning costs into a stated number of work sessions without implying financing or resale value.
 - **Worst-case price interval screen** — Screen setups against a declared component-price uncertainty band; saved extras remain fixed.
 - **Price-scenario minimax regret** — Find the smallest worst-case excess cost across baseline, hardware-inflation and one-product-shock scenarios among returned options.
+- **Cost and model-trade-off Pareto frontier** — Identify returned setups dominated on total price, changed slots and the three estimated non-price contributions.
 
 </details>
 
