@@ -155,6 +155,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Budget coverage staircase** — See which returned setups remain affordable at each budget step; no plan is recomputed.
 - **Tax and shipping allowance** — Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.
 - **Component spend exposure** — Identify which component categories account for the largest share of one complete basket.
+- **Single-product outage recovery** — Find the least disruptive returned fallback when one exact product is unavailable.
 
 </details>
 

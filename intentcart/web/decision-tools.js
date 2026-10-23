@@ -55,3 +55,7 @@ add("extra-cost-cap","Tax and shipping allowance","Cost planning","Find the maxi
 add("spend-exposure","Component spend exposure","Cost planning","Identify which component categories account for the largest share of one complete basket.",[optionInput],function(s,i){
  const o=pick(s,i.setup),p=parts(s,o),rows=kinds.map(k=>[k,sum(p.filter(x=>x.kind===k).map(x=>x.line_cents))]);rows.push(['Tax and shipping',o.total_cents-sub(s,o)]);return output(['Category','Spend','Share of total'],rows.sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,usd(v),o.total_cents?(100*v/o.total_cents).toFixed(2)+'%':'0%']));
 });
+
+add("product-outage","Single-product outage recovery","Availability","Find the least disruptive returned fallback when one exact product is unavailable.",[optionInput,productInput],function(s,i){
+ const base=pick(s,i.setup);selected(s,i.product);const a=s.options.filter(o=>!o.items.some(p=>p.product_id===i.product)).sort((a,b)=>distance(s,base,a)-distance(s,base,b)||a.total_cents-b.total_cents);return output(['Fallback','Changed slots','All-in cost','Difference'],a.map(o=>[o.id,distance(s,base,o),usd(o.total_cents),signed(o.total_cents-base.total_cents)]),['Returned options only; absence of a fallback is not proof that the entire catalog is infeasible.']);
+});
