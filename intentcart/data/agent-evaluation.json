@@ -1,8 +1,8 @@
 {
   "schema": "intentcart-agent-evaluation/1",
-  "created_utc": "2026-10-20T04:44:36.109994+00:00",
+  "created_utc": "2026-10-23T19:26:21.150826+00:00",
   "source_sha256": {
-    "intentcart/workbench.py": "d8131d2ee6ead8533c0a73feea8ba6b45d0c6784d1443a423ec0ebe32457c3d5",
+    "intentcart/workbench.py": "6041d8b47c3212447192baf4f4abf5cfdbe7542e8f74597a0da6efe6e965520b",
     "intentcart/agent.py": "5c450a62582eba902fed01100502883f60d464c77f3c3998c0443e07fcce9e60",
     "intentcart/evidence_catalog.py": "08a8c6c6811ed4103865459dafea87d7541364941e294c944d8104987b561dea",
     "intentcart/workspace_preferences.py": "8ef88ef238ade85333532ba4e03862dc0e2d3b574ec24550a5943d1b43665f7c",
@@ -70,7 +70,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 7.663666037842631,
+      "elapsed_ms": 6.9272080436348915,
       "errors": [],
       "events": [
         {
@@ -156,7 +156,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 6.276999949477613,
+      "elapsed_ms": 4.890416981652379,
       "errors": [],
       "events": [
         {
@@ -242,7 +242,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 13.215708080679178,
+      "elapsed_ms": 9.901707991957664,
       "errors": [],
       "events": [
         {
@@ -378,7 +378,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 13.581624953076243,
+      "elapsed_ms": 13.82333307992667,
       "errors": [],
       "events": [
         {
@@ -541,7 +541,7 @@
       "inspections": 8,
       "questions": 0,
       "steps": 10,
-      "elapsed_ms": 24.172124918550253,
+      "elapsed_ms": 25.804916978813708,
       "errors": [],
       "events": [
         {
@@ -827,7 +827,7 @@
       "inspections": 8,
       "questions": 1,
       "steps": 12,
-      "elapsed_ms": 29.255125089548528,
+      "elapsed_ms": 27.775540947914124,
       "errors": [],
       "events": [
         {
@@ -1140,7 +1140,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 41.52745800092816,
+      "elapsed_ms": 42.20112494658679,
       "errors": [],
       "events": [
         {
@@ -1579,7 +1579,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 41.36829206254333,
+      "elapsed_ms": 41.29104095045477,
       "errors": [],
       "events": [
         {
@@ -2018,7 +2018,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 41.695666033774614,
+      "elapsed_ms": 44.161709025502205,
       "errors": [],
       "events": [
         {
@@ -2457,7 +2457,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 39.39229203388095,
+      "elapsed_ms": 48.88470901641995,
       "errors": [],
       "events": [
         {
@@ -2896,7 +2896,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 5.406333017162979,
+      "elapsed_ms": 5.0074170576408505,
       "errors": [],
       "events": [
         {
@@ -2982,7 +2982,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 5.691666970960796,
+      "elapsed_ms": 5.055167013779283,
       "errors": [],
       "events": [
         {
@@ -3068,7 +3068,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 8.639459032565355,
+      "elapsed_ms": 10.678625083528459,
       "errors": [],
       "events": [
         {
@@ -3204,7 +3204,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 12.403832981362939,
+      "elapsed_ms": 13.188207987695932,
       "errors": [],
       "events": [
         {
@@ -3367,7 +3367,7 @@
       "inspections": 8,
       "questions": 0,
       "steps": 10,
-      "elapsed_ms": 25.449124979786575,
+      "elapsed_ms": 25.618207990191877,
       "errors": [],
       "events": [
         {
@@ -3653,7 +3653,7 @@
       "inspections": 8,
       "questions": 1,
       "steps": 12,
-      "elapsed_ms": 25.70391690824181,
+      "elapsed_ms": 30.612625065259635,
       "errors": [],
       "events": [
         {
@@ -3966,7 +3966,7 @@
       "inspections": 9,
       "questions": 1,
       "steps": 13,
-      "elapsed_ms": 28.98824994917959,
+      "elapsed_ms": 32.64749993104488,
       "errors": [],
       "events": [
         {
@@ -4304,7 +4304,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 37.97037503682077,
+      "elapsed_ms": 42.75374999269843,
       "errors": [],
       "events": [
         {
@@ -4742,7 +4742,7 @@
       "inspections": 9,
       "questions": 1,
       "steps": 13,
-      "elapsed_ms": 28.06212496943772,
+      "elapsed_ms": 31.8294579628855,
       "errors": [],
       "events": [
         {
@@ -5080,7 +5080,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 38.15329202916473,
+      "elapsed_ms": 40.36800004541874,
       "errors": [],
       "events": [
         {
@@ -5518,7 +5518,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 4.925374989397824,
+      "elapsed_ms": 4.89129195921123,
       "errors": [],
       "events": [
         {
@@ -5604,7 +5604,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 6.00558309815824,
+      "elapsed_ms": 5.631124950014055,
       "errors": [],
       "events": [
         {
@@ -5690,7 +5690,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 5.033458000980318,
+      "elapsed_ms": 4.891915945336223,
       "errors": [],
       "events": [
         {
@@ -5776,7 +5776,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 12.517250026576221,
+      "elapsed_ms": 12.638000072911382,
       "errors": [],
       "events": [
         {
@@ -5939,7 +5939,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 4.517792025581002,
+      "elapsed_ms": 4.934333963319659,
       "errors": [],
       "events": [
         {
@@ -6025,7 +6025,7 @@
       "inspections": 8,
       "questions": 1,
       "steps": 12,
-      "elapsed_ms": 28.382749995216727,
+      "elapsed_ms": 26.585291023366153,
       "errors": [],
       "events": [
         {
@@ -6338,7 +6338,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 4.390500020235777,
+      "elapsed_ms": 5.161792039871216,
       "errors": [],
       "events": [
         {
@@ -6424,7 +6424,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 37.923375028185546,
+      "elapsed_ms": 39.678625063970685,
       "errors": [],
       "events": [
         {
@@ -6862,7 +6862,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 5.899875075556338,
+      "elapsed_ms": 5.331416032277048,
       "errors": [],
       "events": [
         {
@@ -6948,7 +6948,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 40.93958297744393,
+      "elapsed_ms": 39.296832983382046,
       "errors": [],
       "events": [
         {
@@ -7386,7 +7386,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 9.731375030241907,
+      "elapsed_ms": 5.010291934013367,
       "errors": [],
       "events": [
         {
@@ -7472,7 +7472,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 5.539415986277163,
+      "elapsed_ms": 5.542333936318755,
       "errors": [],
       "events": [
         {
@@ -7558,7 +7558,7 @@
       "inspections": 1,
       "questions": 0,
       "steps": 3,
-      "elapsed_ms": 57.85829201340675,
+      "elapsed_ms": 7.356124930083752,
       "errors": [],
       "events": [
         {
@@ -7669,7 +7669,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 14.673541998490691,
+      "elapsed_ms": 12.972917058505118,
       "errors": [],
       "events": [
         {
@@ -7832,7 +7832,7 @@
       "inspections": 1,
       "questions": 0,
       "steps": 3,
-      "elapsed_ms": 9.259417071007192,
+      "elapsed_ms": 7.25904107093811,
       "errors": [],
       "events": [
         {
@@ -7943,7 +7943,7 @@
       "inspections": 8,
       "questions": 1,
       "steps": 12,
-      "elapsed_ms": 51.29754194058478,
+      "elapsed_ms": 27.668708004057407,
       "errors": [],
       "events": [
         {
@@ -8256,7 +8256,7 @@
       "inspections": 1,
       "questions": 0,
       "steps": 3,
-      "elapsed_ms": 9.744583046995103,
+      "elapsed_ms": 7.497292011976242,
       "errors": [],
       "events": [
         {
@@ -8367,7 +8367,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 40.575957973487675,
+      "elapsed_ms": 41.56674991827458,
       "errors": [],
       "events": [
         {
@@ -8805,7 +8805,7 @@
       "inspections": 1,
       "questions": 0,
       "steps": 3,
-      "elapsed_ms": 9.232125012204051,
+      "elapsed_ms": 7.732584024779499,
       "errors": [],
       "events": [
         {
@@ -8916,7 +8916,7 @@
       "inspections": 13,
       "questions": 1,
       "steps": 17,
-      "elapsed_ms": 39.635792025364935,
+      "elapsed_ms": 40.97479197662324,
       "errors": [],
       "events": [
         {
@@ -9354,7 +9354,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 68.83374997414649,
+      "elapsed_ms": 66.76954193972051,
       "errors": [],
       "events": [
         {
@@ -9526,7 +9526,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 82.96033390797675,
+      "elapsed_ms": 68.42837505973876,
       "errors": [],
       "events": [
         {
@@ -9698,7 +9698,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 166.91045800689608,
+      "elapsed_ms": 153.02391699515283,
       "errors": [],
       "events": [
         {
@@ -9916,7 +9916,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 134.8130840342492,
+      "elapsed_ms": 139.37154109589756,
       "errors": [],
       "events": [
         {
@@ -10134,7 +10134,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 254.8903749557212,
+      "elapsed_ms": 256.1160000041127,
       "errors": [],
       "events": [
         {
@@ -10376,7 +10376,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 319.9487079400569,
+      "elapsed_ms": 345.9263329859823,
       "errors": [],
       "events": [
         {
@@ -10664,7 +10664,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 250.98216603510082,
+      "elapsed_ms": 267.39924994762987,
       "errors": [],
       "events": [
         {
@@ -10906,7 +10906,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 316.65770802646875,
+      "elapsed_ms": 346.2013329844922,
       "errors": [],
       "events": [
         {
@@ -11194,7 +11194,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 277.23479201085865,
+      "elapsed_ms": 277.98670798074454,
       "errors": [],
       "events": [
         {
@@ -11436,7 +11436,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 317.4663749523461,
+      "elapsed_ms": 370.21483294665813,
       "errors": [],
       "events": [
         {
@@ -11724,7 +11724,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 128.18758306093514,
+      "elapsed_ms": 142.71704095881432,
       "errors": [],
       "events": [
         {
@@ -11923,7 +11923,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 131.81141705717891,
+      "elapsed_ms": 130.97758393269032,
       "errors": [],
       "events": [
         {
@@ -12122,7 +12122,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 274.85383301973343,
+      "elapsed_ms": 329.7057079616934,
       "errors": [],
       "events": [
         {
@@ -12368,7 +12368,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 213.9253750210628,
+      "elapsed_ms": 237.24104196298867,
       "errors": [],
       "events": [
         {
@@ -12613,7 +12613,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 267.8336660610512,
+      "elapsed_ms": 282.99520805012435,
       "errors": [],
       "events": [
         {
@@ -12859,7 +12859,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 432.18570901080966,
+      "elapsed_ms": 456.29737502895296,
       "errors": [],
       "events": [
         {
@@ -13174,7 +13174,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 284.4992500031367,
+      "elapsed_ms": 279.41408299375325,
       "errors": [],
       "events": [
         {
@@ -13420,7 +13420,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 438.77983291167766,
+      "elapsed_ms": 434.7273330204189,
       "errors": [],
       "events": [
         {
@@ -13735,7 +13735,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 280.31870792619884,
+      "elapsed_ms": 275.28095804154873,
       "errors": [],
       "events": [
         {
@@ -13981,7 +13981,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 448.7581659341231,
+      "elapsed_ms": 442.77508393861353,
       "errors": [],
       "events": [
         {
@@ -14296,7 +14296,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 57.55358294118196,
+      "elapsed_ms": 88.18995906040072,
       "errors": [],
       "events": [
         {
@@ -14468,7 +14468,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 60.56820892263204,
+      "elapsed_ms": 67.37466703634709,
       "errors": [],
       "events": [
         {
@@ -14640,7 +14640,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 151.36016602627933,
+      "elapsed_ms": 191.38216692954302,
       "errors": [],
       "events": [
         {
@@ -14859,7 +14859,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 117.05991590861231,
+      "elapsed_ms": 129.94954094756395,
       "errors": [],
       "events": [
         {
@@ -15077,7 +15077,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 153.60162500292063,
+      "elapsed_ms": 151.30495803896338,
       "errors": [],
       "events": [
         {
@@ -15296,7 +15296,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 244.08683297224343,
+      "elapsed_ms": 253.46899998839945,
       "errors": [],
       "events": [
         {
@@ -15584,7 +15584,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 151.25704102683812,
+      "elapsed_ms": 152.81733404845,
       "errors": [],
       "events": [
         {
@@ -15803,7 +15803,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 254.0729580214247,
+      "elapsed_ms": 251.31670897826552,
       "errors": [],
       "events": [
         {
@@ -16091,7 +16091,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 148.83674995508045,
+      "elapsed_ms": 155.78629192896187,
       "errors": [],
       "events": [
         {
@@ -16310,7 +16310,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 248.82679199799895,
+      "elapsed_ms": 255.8178330073133,
       "errors": [],
       "events": [
         {
@@ -16598,7 +16598,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 162.934459047392,
+      "elapsed_ms": 170.93491705600172,
       "errors": [],
       "events": [
         {
@@ -16797,7 +16797,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 161.21737495996058,
+      "elapsed_ms": 166.1467079538852,
       "errors": [],
       "events": [
         {
@@ -16996,7 +16996,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 163.93795900512487,
+      "elapsed_ms": 168.08304202277213,
       "errors": [],
       "events": [
         {
@@ -17195,7 +17195,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 324.31941700633615,
+      "elapsed_ms": 275.89670789893717,
       "errors": [],
       "events": [
         {
@@ -17440,7 +17440,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 167.29574999772012,
+      "elapsed_ms": 164.20120804104954,
       "errors": [],
       "events": [
         {
@@ -17639,7 +17639,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 490.6847500242293,
+      "elapsed_ms": 424.7256249655038,
       "errors": [],
       "events": [
         {
@@ -17953,7 +17953,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 170.3993750270456,
+      "elapsed_ms": 160.70337500423193,
       "errors": [],
       "events": [
         {
@@ -18152,7 +18152,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 438.207000028342,
+      "elapsed_ms": 429.28154196124524,
       "errors": [],
       "events": [
         {
@@ -18466,7 +18466,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 172.10520908702165,
+      "elapsed_ms": 168.34320803172886,
       "errors": [],
       "events": [
         {
@@ -18665,7 +18665,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 432.2405830025673,
+      "elapsed_ms": 418.63270895555615,
       "errors": [],
       "events": [
         {
@@ -18979,7 +18979,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 163.00333407707512,
+      "elapsed_ms": 187.21879192162305,
       "errors": [],
       "events": [
         {
@@ -19178,7 +19178,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 161.52899991720915,
+      "elapsed_ms": 162.23162494134158,
       "errors": [],
       "events": [
         {
@@ -19377,7 +19377,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 164.12050009239465,
+      "elapsed_ms": 159.12091708742082,
       "errors": [],
       "events": [
         {
@@ -19576,7 +19576,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 275.85562504827976,
+      "elapsed_ms": 266.1877499194816,
       "errors": [],
       "events": [
         {
@@ -19821,7 +19821,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 166.69520898722112,
+      "elapsed_ms": 166.95133305620402,
       "errors": [],
       "events": [
         {
@@ -20020,7 +20020,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 449.42487496882677,
+      "elapsed_ms": 455.11358289513737,
       "errors": [],
       "events": [
         {
@@ -20334,7 +20334,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 166.55462502967566,
+      "elapsed_ms": 183.14683297649026,
       "errors": [],
       "events": [
         {
@@ -20533,7 +20533,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 440.6102920183912,
+      "elapsed_ms": 454.0803339332342,
       "errors": [],
       "events": [
         {
@@ -20847,7 +20847,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 162.0885409647599,
+      "elapsed_ms": 167.97987499739975,
       "errors": [],
       "events": [
         {
@@ -21046,7 +21046,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 450.43029193766415,
+      "elapsed_ms": 437.4199169687927,
       "errors": [],
       "events": [
         {
@@ -21360,7 +21360,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 74.49716702103615,
+      "elapsed_ms": 74.38545802142471,
       "errors": [],
       "events": [
         {
@@ -21532,7 +21532,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 72.35204102471471,
+      "elapsed_ms": 68.45195894129574,
       "errors": [],
       "events": [
         {
@@ -21704,7 +21704,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 157.9293339746073,
+      "elapsed_ms": 152.4489999283105,
       "errors": [],
       "events": [
         {
@@ -21922,7 +21922,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 145.58662509080023,
+      "elapsed_ms": 142.17341702897102,
       "errors": [],
       "events": [
         {
@@ -22140,7 +22140,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 239.03104197233915,
+      "elapsed_ms": 278.2082499470562,
       "errors": [],
       "events": [
         {
@@ -22382,7 +22382,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 299.0767500596121,
+      "elapsed_ms": 294.2014579894021,
       "errors": [],
       "events": [
         {
@@ -22670,7 +22670,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 235.0972080603242,
+      "elapsed_ms": 231.50116601027548,
       "errors": [],
       "events": [
         {
@@ -22912,7 +22912,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 298.3909579925239,
+      "elapsed_ms": 292.91691700927913,
       "errors": [],
       "events": [
         {
@@ -23200,7 +23200,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 236.4025410497561,
+      "elapsed_ms": 228.49879192654043,
       "errors": [],
       "events": [
         {
@@ -23442,7 +23442,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 292.80270799063146,
+      "elapsed_ms": 288.5884999996051,
       "errors": [],
       "events": [
         {
@@ -23730,7 +23730,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 109.46212499402463,
+      "elapsed_ms": 107.81983402557671,
       "errors": [],
       "events": [
         {
@@ -23902,7 +23902,7 @@
       "inspections": 0,
       "questions": 0,
       "steps": 2,
-      "elapsed_ms": 107.46666591148823,
+      "elapsed_ms": 110.67495902534574,
       "errors": [],
       "events": [
         {
@@ -24074,7 +24074,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 268.40437506325543,
+      "elapsed_ms": 270.7429579459131,
       "errors": [],
       "events": [
         {
@@ -24292,7 +24292,7 @@
       "inspections": 2,
       "questions": 0,
       "steps": 4,
-      "elapsed_ms": 249.57870796788484,
+      "elapsed_ms": 308.6515830364078,
       "errors": [],
       "events": [
         {
@@ -24510,7 +24510,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 459.89733398891985,
+      "elapsed_ms": 454.6486670151353,
       "errors": [],
       "events": [
         {
@@ -24752,7 +24752,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 683.1762499641627,
+      "elapsed_ms": 693.8414169708267,
       "errors": [],
       "events": [
         {
@@ -25040,7 +25040,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 474.3537500035018,
+      "elapsed_ms": 492.55195807199925,
       "errors": [],
       "events": [
         {
@@ -25282,7 +25282,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 1081.0510000446811,
+      "elapsed_ms": 664.5986669464037,
       "errors": [],
       "events": [
         {
@@ -25570,7 +25570,7 @@
       "inspections": 3,
       "questions": 0,
       "steps": 5,
-      "elapsed_ms": 761.5852080052719,
+      "elapsed_ms": 468.66925002541393,
       "errors": [],
       "events": [
         {
@@ -25812,7 +25812,7 @@
       "inspections": 5,
       "questions": 0,
       "steps": 7,
-      "elapsed_ms": 1423.6547079635784,
+      "elapsed_ms": 758.1307080108672,
       "errors": [],
       "events": [
         {
@@ -26100,7 +26100,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 235.90225004591048,
+      "elapsed_ms": 176.44375003874302,
       "errors": [],
       "events": [
         {
@@ -26299,7 +26299,7 @@
       "inspections": 0,
       "questions": 1,
       "steps": 4,
-      "elapsed_ms": 216.81962499860674,
+      "elapsed_ms": 163.29083393793553,
       "errors": [],
       "events": [
         {
@@ -26498,7 +26498,7 @@
       "inspections": 1,
       "questions": 1,
       "steps": 5,
-      "elapsed_ms": 285.971499979496,
+      "elapsed_ms": 231.306083034724,
       "errors": [],
       "events": [
         {
@@ -26720,7 +26720,7 @@
       "inspections": 2,
       "questions": 1,
       "steps": 6,
-      "elapsed_ms": 654.3599589494988,
+      "elapsed_ms": 270.9426659857854,
       "errors": [],
       "events": [
         {
@@ -26965,7 +26965,7 @@
       "inspections": 1,
       "questions": 1,
       "steps": 5,
-      "elapsed_ms": 252.0212500821799,
+      "elapsed_ms": 223.50783296860754,
       "errors": [],
       "events": [
         {
@@ -27187,7 +27187,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 486.63133406080306,
+      "elapsed_ms": 493.4745829086751,
       "errors": [],
       "events": [
         {
@@ -27501,7 +27501,7 @@
       "inspections": 1,
       "questions": 1,
       "steps": 5,
-      "elapsed_ms": 237.3354589799419,
+      "elapsed_ms": 220.09812504984438,
       "errors": [],
       "events": [
         {
@@ -27723,7 +27723,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 489.7578749805689,
+      "elapsed_ms": 469.1804170142859,
       "errors": [],
       "events": [
         {
@@ -28037,7 +28037,7 @@
       "inspections": 1,
       "questions": 1,
       "steps": 5,
-      "elapsed_ms": 237.69241699483246,
+      "elapsed_ms": 223.92395790666342,
       "errors": [],
       "events": [
         {
@@ -28259,7 +28259,7 @@
       "inspections": 5,
       "questions": 1,
       "steps": 9,
-      "elapsed_ms": 488.8959580566734,
+      "elapsed_ms": 453.2494170125574,
       "errors": [],
       "events": [
         {

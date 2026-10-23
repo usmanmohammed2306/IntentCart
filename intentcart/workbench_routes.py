@@ -10,7 +10,7 @@ class Edit(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True)
     revision:int=Field(ge=1)
     operation:Literal['requirements','restore_product','withdraw_driver','select_variant','offer',
-                      'propose_source','accept_source','undo_preference','delete_preference','edit_preference','revise_goal','import_catalog']
+                      'propose_source','accept_source','cancel_source','undo_preference','delete_preference','edit_preference','revise_goal','import_catalog']
     payload:dict=Field(default_factory=dict)
 
 class Counterfactual(BaseModel):

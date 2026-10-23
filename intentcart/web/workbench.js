@@ -42,8 +42,9 @@ async function edit(operation,payload={},submittedRequirements=false){
   task=updated;data=task.workbench;recovery=submittedRequirements?null:draft;render();
   if(submittedRequirements)$('draft-status').textContent='Reviewed requirements saved.';
   if(operation==='propose_source')$('source-review-heading').focus();
+  if(operation==='cancel_source'){$('source-empty').textContent='Source proposal withdrawn. Accepted evidence and preference answers are unchanged.';$('source-empty').focus();}
  }catch(error){
-  if(operation==='accept_source'){
+  if(operation==='accept_source'||operation==='cancel_source'){
    resetSourceConfirmation();
    if(error.status===409){try{await load({draft});}catch{/* Keep the rejection and require a fresh review. */}}
   }else if(error.status===409&&draft){
@@ -92,6 +93,7 @@ function sourceEditorMatches(){
 function syncSourceControls(){
  $('source-review').querySelectorAll('input,select,textarea,button').forEach(el=>el.disabled=busy);
  const key=sourceReviewKey(),matches=sourceEditorMatches();
+ $('cancel-source').disabled=busy||!data?.pending_source;
  $('source-reviewed').disabled=busy||!key||!matches;
  $('accept-source').disabled=busy||!key||!matches||!$('source-reviewed').checked||sourceConfirmation!==key;
  $('source-review-warning').textContent=!data?.pending_source?'':!key?'The original observed source is unavailable. Inspect it in the Evidence agent before accepting a replacement.':!matches?'The editor differs from this proposal. Propose your edited replacement, then review it again.':'';
@@ -165,5 +167,10 @@ $('withdraw').addEventListener('click',()=>run(()=>edit('withdraw_driver')));$('
  const key=sourceReviewKey();
  if(!key||!sourceEditorMatches()||!$('source-reviewed').checked||sourceConfirmation!==key)throw Error('Review and confirm this exact displayed source replacement before acceptance.');
  return edit('accept_source',{proposal_id:data.pending_source.id,reviewed:true});
+}));
+$('cancel-source').addEventListener('click',()=>run(()=>{
+ const proposal=data?.pending_source;
+ if(!proposal)throw Error('There is no pending source proposal to withdraw.');
+ return edit('cancel_source',{proposal_id:proposal.id});
 }));
 await run(async()=>{csrf=(await api('/api/session')).csrf_token;await load();});

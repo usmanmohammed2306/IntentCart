@@ -183,6 +183,23 @@ def mutate(record, operation, payload):
     agent.ensure_current(record)
     if type(payload) is not dict or len(json.dumps(payload)) > 24000:
         raise ValueError('Supply a bounded workbench object.')
+    # Withdrawing a proposal changes no accepted facts or preference evidence.
+    # Handle it before structural mutation bookkeeping can change prior plans.
+    if operation == 'cancel_source':
+        proposal = record.get('workbench', {}).get('pending_source')
+        if (set(payload) != {'proposal_id'} or not proposal
+                or payload['proposal_id'] != proposal['id']):
+            raise ValueError('Cancel only the exact pending source proposal; refresh and review again.')
+        new = deepcopy(record)
+        del new['workbench']['pending_source']
+        new['revision'] += 1
+        new['events'] = (new['events'] + [{
+            'index': agent.event_index(new), 'origin': 'human',
+            'action': {'action': operation, 'proposal_id': proposal['id']},
+            'response': {'source_id': proposal['source_id'], 'proposal_cancelled': True,
+                         'accepted_evidence_changed': False},
+            'revision': new['revision']}])[-48:]
+        return new
     new = deepcopy(record)
     wb = new.setdefault('workbench', {})
     wb.setdefault('requirements', {})
