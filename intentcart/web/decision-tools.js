@@ -63,3 +63,7 @@ add("product-outage","Single-product outage recovery","Availability","Find the l
 add("correlated-outage","Correlated stock-out stress","Availability","Remove up to four products together and inspect surviving complete baskets.",[{name:'products',label:'Unavailable product IDs, comma separated',type:'text',value:''}],function(s,i){
  const banned=ids(i.products);check(banned.length>0&&banned.length<=4,'Choose one to four exact product IDs.');banned.forEach(id=>selected(s,id));const a=sortCost(s.options.filter(o=>!o.items.some(p=>banned.includes(p.product_id))));return output(['Surviving setup','All-in total','Unavailable products'],a.map(o=>[o.id,usd(o.total_cents),banned.join(', ')]),['Correlated what-if over returned options, not live stock monitoring.']);
 });
+
+add("dock-resilience","Dock dependency resilience matrix","Availability","Stress every represented dock independently and see the fallback cost for your starting setup.",[optionInput],function(s,i){
+ const base=pick(s,i.setup),docks=s.products.filter(p=>p.kind==='dock'&&s.options.some(o=>o.items.some(x=>x.product_id===p.id)));return output(['Unavailable dock','Survivors','Least-change fallback','Cost difference'],docks.map(p=>{const a=s.options.filter(o=>!o.items.some(x=>x.product_id===p.id)).sort((a,b)=>distance(s,base,a)-distance(s,base,b)||a.total_cents-b.total_cents);return [p.name,a.length,a[0]?.id||'None',a[0]?signed(a[0].total_cents-base.total_cents):'No represented fallback'];}));
+});

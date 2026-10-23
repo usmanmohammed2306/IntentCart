@@ -157,6 +157,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Component spend exposure** — Identify which component categories account for the largest share of one complete basket.
 - **Single-product outage recovery** — Find the least disruptive returned fallback when one exact product is unavailable.
 - **Correlated stock-out stress** — Remove up to four products together and inspect surviving complete baskets.
+- **Dock dependency resilience matrix** — Stress every represented dock independently and see the fallback cost for your starting setup.
 
 </details>
 
