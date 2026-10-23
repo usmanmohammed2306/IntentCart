@@ -87,3 +87,7 @@ add("price-ceiling","Per-product price-rise tolerance","Cost planning","Calculat
 add("inflation-stress","Uniform hardware inflation stress","Cost planning","Apply a user-declared percentage price increase to component subtotals while keeping saved tax/shipping fixed.",[percentInput('percent','Hardware price increase, percent',10,0,100),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
  const rate=basisPoints(i.percent),budget=cents(i.budget);return output(['Setup','Original total','Stressed total','Within hypothetical budget'],s.options.map(o=>{const total=o.total_cents+Math.ceil(sub(s,o)*rate/10000);return [o.id,usd(o.total_cents),usd(total),total<=budget?'Yes':'No'];}),['A declared arithmetic scenario; no live price prediction or changed checkout quote.']);
 });
+
+add("price-shock","Exact-product price shock","Cost planning","Change one component unit price hypothetically, respecting the quantity in each supported basket.",[productInput,moneyInput('price','Hypothetical unit price, USD',150),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const p=selected(s,i.product),price=cents(i.price),budget=cents(i.budget);return output(['Setup','Product quantity','Stressed all-in total','Within hypothetical budget'],s.options.map(o=>{const q=o.items.find(x=>x.product_id===p.id)?.quantity||0,total=o.total_cents+q*(price-p.price_cents);return [o.id,q,usd(total),total<=budget?'Yes':'No'];}));
+});

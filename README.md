@@ -163,6 +163,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Least-disruption budget ladder** — For each affordable price breakpoint, find the option with the fewest changed slots relative to your current choice.
 - **Per-product price-rise tolerance** — Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.
 - **Uniform hardware inflation stress** — Apply a user-declared percentage price increase to component subtotals while keeping saved tax/shipping fixed.
+- **Exact-product price shock** — Change one component unit price hypothetically, respecting the quantity in each supported basket.
 
 </details>
 
