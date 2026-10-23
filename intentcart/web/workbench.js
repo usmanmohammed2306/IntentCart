@@ -1,10 +1,11 @@
+import {compareSetups,comparisonReport} from './setup-comparison.js';
 const $=id=>document.getElementById(id);
-let csrf='',task=null,data=null,busy=false,requirementsBase=null,recovery=null,sourceConfirmation=null;
+let csrf='',task=null,data=null,busy=false,requirementsBase=null,recovery=null,sourceConfirmation=null,setupComparison=null;
 const requirementFields=[['charging','Charging target','number'],['os','OS version','text'],['connector','Display connector','text'],['evidence-age','Evidence review interval','number'],['price-age','Price review interval','number'],['tax','Tax, USD','number'],['shipping','Shipping, USD','number'],['hdcp','HDCP required','checkbox'],['gaming','Gaming suitability required','checkbox']];
 const money=n=>n===null?'Unknown':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n/100);
 const text=(tag,value,className='')=>{const el=document.createElement(tag);el.textContent=value;el.className=className;return el;};
 async function api(path,body){const response=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json','x-csrf-token':csrf},...(body?{method:'POST',body:JSON.stringify(body)}:{})});const value=await response.json();if(!response.ok){const error=Error(typeof value.detail==='string'?value.detail:'Review the entered values and current task.');error.status=response.status;throw error;}return value;}
-async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();syncSourceControls();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();syncSourceControls();}}
+async function run(fn){if(busy)return;busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);syncRequirementsControls();syncSourceControls();syncComparisonControls();try{await fn();$('message').hidden=true;}catch(error){$('message').textContent=error.message;$('message').hidden=false;}finally{busy=false;document.querySelectorAll('button').forEach(b=>b.disabled=false);syncRequirementsControls();syncSourceControls();syncComparisonControls();}}
 function readRequirements(){return Object.fromEntries(requirementFields.map(([id,,type])=>[id,type==='checkbox'?$(id).checked:$(id).value]));}
 function sameValue(id,a,b){const type=requirementFields.find(f=>f[0]===id)[2];return type==='number'&&a!==''&&b!==''?Number(a)===Number(b):a===b;}
 function pendingRequirements(){
@@ -64,6 +65,7 @@ function render(){
  products('laptop-source',data.laptop_sources);$('laptop-source').value=task.goal.laptop_id;$('laptop-provenance').textContent=data.laptop_sources.map(p=>`${p.name} · ${p.variant} · source ${p.source_sha256.slice(0,12)} · reviewed ${p.observed_on||'fictional fixture'}`).join(' / ');
  products('variant-product',data.products);products('offer-product',data.products);products('restore-product',data.products.filter(p=>data.excluded.includes(p.id)));
  $('cf-budget').value=task.goal.budget_cents/100;$('cf-displays').value=task.goal.displays;
+ renderComparisonChoices();
  $('configurations').replaceChildren(...data.configurations.slice(0,6).map(c=>{const box=text('div','','basket');box.append(text('h3',money(c.total_cents)),text('p',c.items.map(i=>`${i.quantity} × ${data.products.find(p=>p.id===i.product_id)?.name||i.product_id}`).join(' / ')),text('p',`Changed slots: ${c.changed_slots.join(', ')||'None / initial plan'}`,'fine'));const list=document.createElement('ul');for(const [name,value] of Object.entries(c.contributions))list.append(text('li',`${name.replaceAll('_',' ')}: ${value.toFixed(4)} estimated utility contribution`));box.append(list);return box;}));
  if(!data.configurations.length)$('configurations').append(text('p',`No supported plan. Review: ${data.conflicts.join(', ')||'unresolved evidence'}.`));
  $('dependencies').replaceChildren(...data.sources.map(s=>{const box=text('div','','source');box.append(text('strong',`${s.product_id} → ${s.field}`),text('p',s.checks.length?`Supports checks: ${s.checks.join(' → ')}`:'Not used by a currently supported basket','fine'),text('p',`${s.freshness.status}${s.freshness.age_days===null?'':` · ${s.freshness.age_days} days since review`}`,'fine'));return box;}));
@@ -76,6 +78,41 @@ function render(){
  requirementsBase=readRequirements();showRecovery();
  $('changes').replaceChildren(...task.events.filter(e=>e.response?.diff).slice(-8).map(e=>{const node=document.createElement('details');node.append(text('summary',`Revision ${e.revision}: ${e.action.action}`),text('pre',JSON.stringify(e.response.diff,null,2)));return node;}));
 }
+function syncComparisonControls(){
+ $('compare-a').disabled=$('compare-b').disabled=busy;
+ $('compare-setups').disabled=busy||!data||data.configurations.length<2||$('compare-a').value===$('compare-b').value;
+ $('download-comparison').disabled=busy||!setupComparison||setupComparison.revision!==task?.revision;
+}
+function clearSetupComparison(){setupComparison=null;$('comparison-result').hidden=true;syncComparisonControls();}
+function renderComparisonChoices(){
+ clearSetupComparison();
+ const choices=data.configurations.map((c,i)=>new Option(`Setup ${i+1} · ${money(c.total_cents)} · ${c.id.slice(0,12)}`,c.id));
+ $('compare-a').replaceChildren(...choices);
+ $('compare-b').replaceChildren(...data.configurations.map((c,i)=>new Option(`Setup ${i+1} · ${money(c.total_cents)} · ${c.id.slice(0,12)}`,c.id)));
+ if(data.configurations.length>1)$('compare-b').selectedIndex=1;
+ $('comparison-availability').textContent=data.configurations.length>1?`Compare any two of the ${data.configurations.length} supported options shown in this revision.`:data.configurations.length===1?'One supported setup is available. Two are needed for a comparison.':'No supported setups to compare. Resolve the evidence or requirements first.';
+ syncComparisonControls();
+}
+function showSetupComparison(){
+ setupComparison=compareSetups(task,$('compare-a').value,$('compare-b').value);
+ const c=setupComparison,delta=c.delta_cents;
+ $('comparison-price').textContent=delta===0?'Same all-in planning total':`Setup B is ${money(Math.abs(delta))} ${delta<0?'less':'more'} than A`;
+ $('comparison-total-a').textContent=`A · ${money(c.a.total_cents)}`;$('comparison-total-b').textContent=`B · ${money(c.b.total_cents)}`;
+ $('comparison-context').textContent=`Revision ${c.revision} · ${c.slots.filter(s=>s.changed).length} changed component slots · shared tax/shipping ${money(c.a.extra_cents)}. Both pass the represented checks; neither is automatically selected.`;
+ const component=items=>items.map(i=>`${i.quantity} × ${i.name} · ${i.variant} · ${money(i.line_cents)}`).join(' / ')||'No purchase in this slot';
+ $('comparison-parts').replaceChildren(...c.slots.map(slot=>{const box=text('article','','source-change');box.dataset.changed=String(slot.changed);const head=text('div','','draft-field-heading');head.append(text('strong',slot.kind),text('span',slot.changed?'Different':'Same','fine'));const values=document.createElement('dl');for(const [label,value] of [['Setup A',component(slot.a)],['Setup B',component(slot.b)]]){const cell=document.createElement('div');cell.append(text('dt',label),text('dd',value));values.append(cell);}box.append(head,values);return box;}));
+ const labels={lower_cost:'Lower cost',no_driver:'Driver simplicity',charging_capacity:'Charging capacity',dock_refresh_capacity:'Dock refresh capacity'};
+ $('comparison-preferences').replaceChildren(...Object.entries(c.contribution_deltas).map(([key,value])=>text('p',`${labels[key]}: ${value>=0?'+':''}${value.toFixed(4)} contribution difference (B − A)`,'fine')));
+ $('comparison-evidence').replaceChildren(...['a','b'].map(label=>{const side=c[label],box=text('section','','comparison-evidence-side');box.append(text('h3',`Setup ${label.toUpperCase()} · ${Object.keys(side.checks).length} represented checks · ${side.sources.length} inspected source fields`));for(const source of side.sources)box.append(text('p',`${source.product_id} / ${source.field}: ${JSON.stringify(source.value)} ${source.unit} · ${source.freshness.status} · ${source.observed_on||'fixture / undated'}`,'fine'));if(!side.sources.length)box.append(text('p','No separately inspected source fields are recorded for these items; visible catalog declarations may support the plan.','fine'));return box;}));
+ $('comparison-result').hidden=false;syncComparisonControls();$('comparison-price').focus();
+}
+for(const id of ['compare-a','compare-b'])$(id).addEventListener('change',clearSetupComparison);
+$('compare-setups').addEventListener('click',()=>run(showSetupComparison));
+$('download-comparison').addEventListener('click',()=>run(()=>{
+ if(!setupComparison||setupComparison.revision!==task?.revision)throw Error('Compare the current setups again before exporting.');
+ const report=comparisonReport(setupComparison),blob=new Blob([report],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob);
+ const link=document.createElement('a');link.href=url;link.download=`intentcart-comparison-r${setupComparison.revision}.txt`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}));
 function originalSource(){
  const source=task?.evidence.find(s=>s.source_id===data?.pending_source?.source_id);
  if(!source)return null;
