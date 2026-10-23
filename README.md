@@ -174,6 +174,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Preference-contribution reweighting sandbox** — Explore user-supplied multipliers over the current model contribution estimates; no learned preference is changed.
 - **Preference sensitivity sweep** — Count which options lead on a fixed 35-profile multiplier grid, retaining exact ties rather than inventing probabilities.
 - **Preference cycle audit** — Detect directed cycles in the last 48 retained explicit A/B answers, with ties and skips kept separate.
+- **Distinctive comparison pair finder** — Surface supported pairs absent from the last 48 retained comparisons with large differences in model-contribution vectors.
 
 </details>
 
