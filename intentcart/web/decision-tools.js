@@ -83,3 +83,7 @@ add("upgrade-ladder","Least-disruption budget ladder","Cost planning","For each 
 add("price-ceiling","Per-product price-rise tolerance","Cost planning","Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.",[moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
  const budget=cents(i.budget);return output(['Product','Containing options','Best unit-price tolerance'],s.products.filter(p=>s.options.some(o=>o.items.some(x=>x.product_id===p.id))).map(p=>{const rows=s.options.filter(o=>o.items.some(x=>x.product_id===p.id)),tolerance=Math.max(...rows.map(o=>Math.floor((budget-o.total_cents)/o.items.find(x=>x.product_id===p.id).quantity)));return [p.name,rows.length,tolerance>=0?usd(tolerance):'Already above budget'];}));
 });
+
+add("inflation-stress","Uniform hardware inflation stress","Cost planning","Apply a user-declared percentage price increase to component subtotals while keeping saved tax/shipping fixed.",[percentInput('percent','Hardware price increase, percent',10,0,100),moneyInput('budget','Hypothetical budget, USD',350)],function(s,i){
+ const rate=basisPoints(i.percent),budget=cents(i.budget);return output(['Setup','Original total','Stressed total','Within hypothetical budget'],s.options.map(o=>{const total=o.total_cents+Math.ceil(sub(s,o)*rate/10000);return [o.id,usd(o.total_cents),usd(total),total<=budget?'Yes':'No'];}),['A declared arithmetic scenario; no live price prediction or changed checkout quote.']);
+});
