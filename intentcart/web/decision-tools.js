@@ -139,3 +139,7 @@ add("comparison-pairs","Distinctive comparison pair finder","Shortlisting","Surf
 add("expiry-forecast","Source review expiry forecast","Evidence review","Forecast review deadlines from observed dates and the declared review interval, separating undated/fictional fields.",[countInput('days','Forecast horizon, days',30,0,365)],function(s,i){
  const horizon=int(i.days,0,365);return output(['Source','Product / field','Days until review boundary','Within horizon'],s.sources.map(e=>{const age=e.freshness.age_days,remaining=Number.isInteger(age)?s.evidence_max_age_days-age:null;return [e.id,e.product_id+' / '+e.field,remaining===null?'Undated / fictional':remaining,remaining===null?'Unresolved':remaining<=horizon?'Yes':'No'];}),['Boundary uses the loaded server age; expiry occurs after the allowed age, not at it. Refresh for a new clock reading.']);
 });
+
+add("source-blast-radius","Observed-source dependency blast radius","Evidence review","Map each inspected product field to returned baskets containing that exact product.",[],function(s,i){
+ return output(['Source','Field','Containing options','Containing setup IDs'],s.sources.map(e=>{const a=s.options.filter(o=>o.items.some(x=>x.product_id===e.product_id));return [e.id,e.field,a.length,a.map(o=>o.id).join(', ')||'None'];}),['Product-level exposure is conservative: it does not prove every containing basket depends on this exact field.']);
+});
