@@ -166,6 +166,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Exact-product price shock** — Change one component unit price hypothetically, respecting the quantity in each supported basket.
 - **Tax and shipping scenario estimator** — Replace saved extras with a declared tax rate on hardware and a fixed shipping amount.
 - **Declared operating-cost horizon** — Compare purchase plus explicitly assumed electricity and maintenance costs over a chosen horizon; no device consumption is inferred.
+- **Cost per productive session** — Translate one-time planning costs into a stated number of work sessions without implying financing or resale value.
 
 </details>
 
