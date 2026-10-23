@@ -156,6 +156,7 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 - **Tax and shipping allowance** — Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.
 - **Component spend exposure** — Identify which component categories account for the largest share of one complete basket.
 - **Single-product outage recovery** — Find the least disruptive returned fallback when one exact product is unavailable.
+- **Correlated stock-out stress** — Remove up to four products together and inspect surviving complete baskets.
 
 </details>
 

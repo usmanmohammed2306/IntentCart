@@ -59,3 +59,7 @@ add("spend-exposure","Component spend exposure","Cost planning","Identify which 
 add("product-outage","Single-product outage recovery","Availability","Find the least disruptive returned fallback when one exact product is unavailable.",[optionInput,productInput],function(s,i){
  const base=pick(s,i.setup);selected(s,i.product);const a=s.options.filter(o=>!o.items.some(p=>p.product_id===i.product)).sort((a,b)=>distance(s,base,a)-distance(s,base,b)||a.total_cents-b.total_cents);return output(['Fallback','Changed slots','All-in cost','Difference'],a.map(o=>[o.id,distance(s,base,o),usd(o.total_cents),signed(o.total_cents-base.total_cents)]),['Returned options only; absence of a fallback is not proof that the entire catalog is infeasible.']);
 });
+
+add("correlated-outage","Correlated stock-out stress","Availability","Remove up to four products together and inspect surviving complete baskets.",[{name:'products',label:'Unavailable product IDs, comma separated',type:'text',value:''}],function(s,i){
+ const banned=ids(i.products);check(banned.length>0&&banned.length<=4,'Choose one to four exact product IDs.');banned.forEach(id=>selected(s,id));const a=sortCost(s.options.filter(o=>!o.items.some(p=>banned.includes(p.product_id))));return output(['Surviving setup','All-in total','Unavailable products'],a.map(o=>[o.id,usd(o.total_cents),banned.join(', ')]),['Correlated what-if over returned options, not live stock monitoring.']);
+});
