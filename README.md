@@ -221,6 +221,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Canonical citation duplicate audit** — Find citations sharing a URL after removing fragments and sorting query parameters, while retaining distinct source IDs.
 - **Time-budgeted evidence review plan** — Choose observed fields under a declared review-time budget using exact knapsack optimization of summed setup exposures.
 - **Cross-snapshot changed-source impact** — Compare observed values and cite current returned setups containing products whose prior evidence changed.
+- **Cross-snapshot migration parts list** — Calculate retained, additional and surplus exact-product units between one earlier setup and a current supported setup.
 
 </details>
 
