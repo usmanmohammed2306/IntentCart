@@ -222,6 +222,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Time-budgeted evidence review plan** — Choose observed fields under a declared review-time budget using exact knapsack optimization of summed setup exposures.
 - **Cross-snapshot changed-source impact** — Compare observed values and cite current returned setups containing products whose prior evidence changed.
 - **Cross-snapshot migration parts list** — Calculate retained, additional and surplus exact-product units between one earlier setup and a current supported setup.
+- **Analysis receipt difference review** — Compare assumptions and changed result cells from two downloaded analyses of the same tool without executing imported instructions.
 
 </details>
 
