@@ -195,6 +195,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 <summary>Additional capabilities</summary>
 
 - **Searchable tool navigator** — Find analyses by name, group or description, with an explicit no-match state.
+- **Reproducible analysis receipts** — Export whitelisted parameters and source/revision identities; pasted documents are omitted and marked non-replayable.
 
 </details>
 
