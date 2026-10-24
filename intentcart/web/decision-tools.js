@@ -207,3 +207,8 @@ add("budget-portfolio","Budgeted maximum outage coverage","Contingency portfolio
 
 const budget=cents(i.budget),a=portfolioSearch(s),best=a.rows.filter(r=>r.cost<=budget).sort((a,b)=>b.covered.length-a.covered.length||a.cost-b.cost||a.options.length-b.options.length)[0];return output(['Setup','Shared inventory cost','Covered single outages','Outage cases'],best?best.options.map(o=>[o.id,usd(best.cost),best.covered.length,a.pool.length]):[],['No purchase or budget certification. Shared inventory covers alternative operation, not simultaneous use; tax/shipping are excluded.']);
 });
+
+add("critical-cut-sets","Minimum component cut sets","Contingency portfolios","Enumerate the smallest sets of up to three product failures that eliminate every returned supported option.",[countInput('limit','Maximum cut size',3,1,3)],function(s,i){
+
+const pool=productPool(s),limit=int(i.limit,1,3);let cuts=[];for(let k=1;k<=limit;k++){combinations(pool,k,set=>{if(s.options.every(o=>o.items.some(x=>set.includes(x.product_id))))cuts.push(set);});if(cuts.length)break;}return output(['Failed exact products','Cut size','Eliminated options'],cuts.slice(0,100).map(c=>[c.join(', '),c.length,s.options.length]),[cuts.length?`${cuts.length} minimum cuts found; first 100 shown.`:'No cut found within the declared size; larger cuts remain unsearched.','Finite returned options only; this is not a full-catalog impossibility proof.']);
+});
