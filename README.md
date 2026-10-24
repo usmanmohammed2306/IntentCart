@@ -217,6 +217,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Repeated-comparison consistency audit** — Group the last 48 explicit pairwise answers, retaining orientation, ties, skips and opposing answers.
 - **Preference comparison coverage graph** — Identify disconnected groups and unanswered setup connections within the last 48 retained comparisons.
 - **Minimum observed-field explanation cover** — Find a smallest set of observed fields covering every represented check label in the loaded source links.
+- **Observed evidence-to-check matrix** — Expose check labels with and without product-matched inspected source links for every returned setup.
 
 </details>
 

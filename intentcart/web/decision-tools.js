@@ -297,3 +297,8 @@ add("source-explanation-cover","Minimum observed-field explanation cover","Evide
 
 const labels=[...new Set(s.sources.flatMap(e=>e.checks||[]))];check(labels.length<=12,'At most twelve represented check labels can be covered.');let dp=new Map([[0,[]]]);for(const e of s.sources){const mask=(e.checks||[]).reduce((m,k)=>m|(1<<labels.indexOf(k)),0);for(const [state,list]of [...dp]){const next=state|mask;if(!dp.has(next)||dp.get(next).length>list.length+1)dp.set(next,[...list,e]);}}const chosen=dp.get((1<<labels.length)-1)||[];return output(['Observed source','Covered check labels','Total target labels'],chosen.map(e=>[e.id,e.checks.join(', '),labels.length]),['Minimum explanation-label coverage only. Linked citations do not prove checks independently or identify which field must be inspected to discover a plan.']);
 });
+
+add("check-traceability","Observed evidence-to-check matrix","Evidence traceability","Expose check labels with and without product-matched inspected source links for every returned setup.",[],function(s,i){
+
+const rows=[];for(const o of s.options)for(const k of o.check_names||[]){const links=s.sources.filter(e=>o.items.some(x=>x.product_id===e.product_id)&&(e.checks||[]).includes(k));rows.push([o.id,k,links.length,links.map(e=>e.id).join(', ')||'No observed product-field link']);}return output(['Setup','Represented check','Observed field links','Source IDs'],rows,['A missing observed link does not negate the server-supported check: declared requirements, prices and fixture assumptions can supply other inputs. No new source validation is performed.']);
+});
