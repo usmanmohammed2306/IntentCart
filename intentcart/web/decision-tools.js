@@ -232,3 +232,8 @@ add("marginal-spares","Marginal spare-product unlocks","Contingency portfolios",
 
 const base=pick(s,i.setup),owned=inventory(s,[base]);return output(['One extra product','Additional hardware cost','Newly constructible setups','Unlocked setup IDs'],s.products.filter(p=>kinds.includes(p.kind)).map(p=>{const extra=new Map(owned);extra.set(p.id,(extra.get(p.id)||0)+1);const fits=(o,kit)=>o.items.every(x=>(kit.get(x.product_id)||0)>=x.quantity),unlocks=s.options.filter(o=>fits(o,extra)&&!fits(o,owned));return [p.id,usd(p.price_cents),unlocks.length,unlocks.map(o=>o.id).join(', ')||'None'];}).sort((a,b)=>b[2]-a[2]),['Inventory construction only; no new compatibility, ownership, availability or checkout authority.']);
 });
+
+add("coverage-cost-frontier","Contingency coverage cost frontier","Contingency portfolios","Compute exact shared-inventory cost breakpoints where the maximum number of covered single-product outages increases.",[],function(s,i){
+
+const a=portfolioSearch(s),sorted=a.rows.sort((a,b)=>a.cost-b.cost||b.covered.length-a.covered.length),rows=[];let best=-1;for(const r of sorted)if(r.covered.length>best){best=r.covered.length;rows.push([usd(r.cost),best,a.pool.length,r.options.map(o=>o.id).join(', ')]);}return output(['Hardware cost breakpoint','Covered outages','Single-product cases','Witness portfolio'],rows,['Exact over at most 4,095 nonempty subsets of the twelve returned options. Shared quantities are maximums, extras excluded.']);
+});

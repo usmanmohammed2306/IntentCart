@@ -204,6 +204,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Declared spare inventory reuse** — Calculate additional exact-product quantities for each returned setup from a declared inventory without assuming ownership.
 - **Backup-pair shared-failure matrix** — Compare every returned pair by common failure points and shared inventory cost rather than assuming independent backups.
 - **Marginal spare-product unlocks** — Find how many returned alternatives one additional unit of each product unlocks from a starting setup.
+- **Contingency coverage cost frontier** — Compute exact shared-inventory cost breakpoints where the maximum number of covered single-product outages increases.
 
 </details>
 
