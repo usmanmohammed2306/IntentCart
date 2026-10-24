@@ -227,3 +227,8 @@ add("backup-pair-matrix","Backup-pair shared-failure matrix","Contingency portfo
 
 const rows=[];for(let a=0;a<s.options.length;a++)for(let b=a+1;b<s.options.length;b++){const x=s.options[a],y=s.options[b],common=x.items.filter(p=>y.items.some(q=>q.product_id===p.product_id)).map(p=>p.product_id);rows.push([x.id,y.id,common.length,common.join(', ')||'None',usd(inventoryCost(s,inventory(s,[x,y])))]);}return output(['Setup A','Setup B','Shared failure products','Exact shared IDs','Shared hardware cost'],rows.sort((a,b)=>a[2]-b[2]),['A shared product outage disables both setups. Different products may still share an unmodeled supplier or failure cause.']);
 });
+
+add("marginal-spares","Marginal spare-product unlocks","Contingency portfolios","Find how many returned alternatives one additional unit of each product unlocks from a starting setup.",[optionInput],function(s,i){
+
+const base=pick(s,i.setup),owned=inventory(s,[base]);return output(['One extra product','Additional hardware cost','Newly constructible setups','Unlocked setup IDs'],s.products.filter(p=>kinds.includes(p.kind)).map(p=>{const extra=new Map(owned);extra.set(p.id,(extra.get(p.id)||0)+1);const fits=(o,kit)=>o.items.every(x=>(kit.get(x.product_id)||0)>=x.quantity),unlocks=s.options.filter(o=>fits(o,extra)&&!fits(o,owned));return [p.id,usd(p.price_cents),unlocks.length,unlocks.map(o=>o.id).join(', ')||'None'];}).sort((a,b)=>b[2]-a[2]),['Inventory construction only; no new compatibility, ownership, availability or checkout authority.']);
+});
