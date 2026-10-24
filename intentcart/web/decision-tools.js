@@ -272,3 +272,8 @@ add("rank-consensus","Tie-aware rank consensus","Preference diagnostics","Aggreg
 
 const keys=['lower_cost',...dims],rows=s.options.map(o=>{const ranks=keys.map(k=>{const better=s.options.filter(x=>x.contributions[k]>o.contributions[k]).length,equal=s.options.filter(x=>x.contributions[k]===o.contributions[k]).length;return 1+better+(equal-1)/2;});return [o.id,sum(ranks),...ranks];});return output(['Setup','Rank sum',...keys],rows.sort((a,b)=>a[1]-b[1]),['Rank aggregation gives each dimension equal importance; it is a declared rule, not learned personal utility.']);
 });
+
+add("priority-order","Lexicographic priority ordering","Preference diagnostics","Order returned setups by an explicit sequence of priorities, avoiding arbitrary numerical trade-off weights.",[{name:'priority',label:'Priority order: price, disruption, driver, charging, refresh',type:'text',value:'price,driver,charging,refresh,disruption'}],function(s,i){
+
+const keys=ids(i.priority),functions={price:o=>o.total_cents,disruption:o=>o.changed_slots.length,driver:o=>-o.contributions.no_driver,charging:o=>-o.contributions.charging_capacity,refresh:o=>-o.contributions.dock_refresh_capacity};check(keys.length>0&&keys.length<=5&&keys.every(k=>Object.hasOwn(functions,k)),'Use one to five supported unique priorities.');return output(['Order','Setup','All-in price','Applied priorities'],[...s.options].sort((a,b)=>{for(const k of keys){const d=functions[k](a)-functions[k](b);if(d)return d;}return a.id.localeCompare(b.id);}).map((o,n)=>[n+1,o.id,usd(o.total_cents),keys.join(' → ')]),['An analysis ordering only. Hard support and stored preference answers are unchanged.']);
+});
