@@ -214,6 +214,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Tie-aware rank consensus** — Aggregate four single-contribution rankings with average tied ranks and expose the per-dimension ranks.
 - **Lexicographic priority ordering** — Order returned setups by an explicit sequence of priorities, avoiding arbitrary numerical trade-off weights.
 - **Price versus model-value envelope** — Find the upper concave price/value envelope and its diminishing marginal contribution gains.
+- **Repeated-comparison consistency audit** — Group the last 48 explicit pairwise answers, retaining orientation, ties, skips and opposing answers.
 
 </details>
 
