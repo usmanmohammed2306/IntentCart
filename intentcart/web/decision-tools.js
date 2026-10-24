@@ -212,3 +212,8 @@ add("critical-cut-sets","Minimum component cut sets","Contingency portfolios","E
 
 const pool=productPool(s),limit=int(i.limit,1,3);let cuts=[];for(let k=1;k<=limit;k++){combinations(pool,k,set=>{if(s.options.every(o=>o.items.some(x=>set.includes(x.product_id))))cuts.push(set);});if(cuts.length)break;}return output(['Failed exact products','Cut size','Eliminated options'],cuts.slice(0,100).map(c=>[c.join(', '),c.length,s.options.length]),[cuts.length?`${cuts.length} minimum cuts found; first 100 shown.`:'No cut found within the declared size; larger cuts remain unsearched.','Finite returned options only; this is not a full-catalog impossibility proof.']);
 });
+
+add("spare-bom","Shared spare-kit bill of materials","Contingency portfolios","Combine chosen returned setups using maximum component quantities, avoiding double-counting shared parts.",[portfolioInput],function(s,i){
+
+const options=portfolioOptions(s,i.setups),kit=inventory(s,options);return output(['Exact product','Required shared quantity','Unit cost','Line cost','Containing setups'],[...kit].map(([id,q])=>{const p=selected(s,id);return [id,q,usd(p.price_cents),usd(q*p.price_cents),options.filter(o=>o.items.some(x=>x.product_id===id)).length];}),['One alternative setup at a time, not simultaneous workstations. Shared hardware total: '+usd(inventoryCost(s,kit))+'. Tax, shipping, ownership and live stock are not inferred.']);
+});

@@ -200,6 +200,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Minimum contingency portfolio** — Exhaustively find the smallest set of returned options covering every representable single-product outage, breaking ties by shared-inventory cost.
 - **Budgeted maximum outage coverage** — Search all returned-option subsets for the most single-product outages covered within a hypothetical shared-hardware budget.
 - **Minimum component cut sets** — Enumerate the smallest sets of up to three product failures that eliminate every returned supported option.
+- **Shared spare-kit bill of materials** — Combine chosen returned setups using maximum component quantities, avoiding double-counting shared parts.
 
 </details>
 
