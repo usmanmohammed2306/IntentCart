@@ -198,6 +198,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Reproducible analysis receipts** — Export whitelisted parameters and source/revision identities; pasted documents are omitted and marked non-replayable.
 - **Saved-analysis replay verifier** — Recompute a non-import analysis on the same loaded revision and identify edited or incompatible receipts.
 - **Minimum contingency portfolio** — Exhaustively find the smallest set of returned options covering every representable single-product outage, breaking ties by shared-inventory cost.
+- **Budgeted maximum outage coverage** — Search all returned-option subsets for the most single-product outages covered within a hypothetical shared-hardware budget.
 
 </details>
 

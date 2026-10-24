@@ -202,3 +202,8 @@ add("minimum-portfolio","Minimum contingency portfolio","Contingency portfolios"
 
 const a=portfolioSearch(s),coverable=a.pool.filter(id=>a.rows.some(r=>r.covered.includes(id))),best=a.rows.filter(r=>r.covered.length===coverable.length).sort((a,b)=>a.options.length-b.options.length||a.cost-b.cost)[0];return output(['Portfolio setup','Shared hardware inventory','Covered outages','Representable outages'],best.options.map(o=>[o.id,usd(best.cost),best.covered.length,coverable.length]),['Uncoverable product outages: '+(a.pool.filter(id=>!coverable.includes(id)).join(', ')||'None')+'. Inventory uses maximum required quantity, not simultaneous operation; extras are excluded.']);
 });
+
+add("budget-portfolio","Budgeted maximum outage coverage","Contingency portfolios","Search all returned-option subsets for the most single-product outages covered within a hypothetical shared-hardware budget.",[moneyInput('budget','Hardware inventory budget, USD',500)],function(s,i){
+
+const budget=cents(i.budget),a=portfolioSearch(s),best=a.rows.filter(r=>r.cost<=budget).sort((a,b)=>b.covered.length-a.covered.length||a.cost-b.cost||a.options.length-b.options.length)[0];return output(['Setup','Shared inventory cost','Covered single outages','Outage cases'],best?best.options.map(o=>[o.id,usd(best.cost),best.covered.length,a.pool.length]):[],['No purchase or budget certification. Shared inventory covers alternative operation, not simultaneous use; tax/shipping are excluded.']);
+});
