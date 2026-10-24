@@ -223,6 +223,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Cross-snapshot changed-source impact** — Compare observed values and cite current returned setups containing products whose prior evidence changed.
 - **Cross-snapshot migration parts list** — Calculate retained, additional and surplus exact-product units between one earlier setup and a current supported setup.
 - **Analysis receipt difference review** — Compare assumptions and changed result cells from two downloaded analyses of the same tool without executing imported instructions.
+- **Readable analysis handoff export** — Download a plain-language Markdown brief with assumptions, source identities, table and limitations; private task query and pasted documents stay excluded.
 
 </details>
 
