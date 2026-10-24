@@ -242,3 +242,8 @@ add("outage-probability","Shared-component availability model","Declared outage 
 
 const options=portfolioOptions(s,i.setups,8),q=basisPoints(i.failure)/10000,rows=options.map(o=>[o.id,(100*(1-q)**o.items.length).toFixed(6)+'%']);rows.push(['At least one chosen setup',(100*availability(options,q)).toFixed(6)+'%']);return output(['Declared event','Model probability'],rows,['Independent product-level failures and one common probability are explicit hypothetical assumptions. Shared parts are modeled; real failure rates, correlations and availability are unknown.']);
 });
+
+add("failure-importance","Component outage importance","Declared outage models","Compare portfolio availability conditional on each exact component working or failing, retaining shared-part dependence.",[portfolioInput,percentInput('failure','Assumed other-product failure probability, percent',5)],function(s,i){
+
+const options=portfolioOptions(s,i.setups,8),q=basisPoints(i.failure)/10000,pool=[...new Set(options.flatMap(o=>o.items.map(x=>x.product_id)))];return output(['Exact product','Availability if working','Availability if failed','Conditional difference'],pool.map(id=>{const up=availability(options,q,id,1),down=availability(options,q,id,0);return [id,(100*up).toFixed(6)+'%',(100*down).toFixed(6)+'%',(100*(up-down)).toFixed(6)+' percentage points'];}).sort((a,b)=>parseFloat(b[3])-parseFloat(a[3])),['A sensitivity derivative under the declared independence model; no measured causal impact or reliability guarantee.']);
+});

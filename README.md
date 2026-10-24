@@ -206,6 +206,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Marginal spare-product unlocks** — Find how many returned alternatives one additional unit of each product unlocks from a starting setup.
 - **Contingency coverage cost frontier** — Compute exact shared-inventory cost breakpoints where the maximum number of covered single-product outages increases.
 - **Shared-component availability model** — Use exact inclusion-exclusion to calculate alternative-setup availability under a declared independent per-product outage probability.
+- **Component outage importance** — Compare portfolio availability conditional on each exact component working or failing, retaining shared-part dependence.
 
 </details>
 
