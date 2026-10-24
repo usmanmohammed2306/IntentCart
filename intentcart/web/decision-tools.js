@@ -267,3 +267,8 @@ add("contribution-intervals","Contribution-interval robust shortlist","Preferenc
 
 const e=num(i.epsilon,0,1),keys=['lower_cost',...dims],values=s.options.map(o=>({o,low:sum(keys.map(k=>Math.max(0,o.contributions[k]-e)))/4,high:sum(keys.map(k=>Math.min(1,o.contributions[k]+e)))/4})),best=Math.max(...values.map(x=>x.low));return output(['Setup','Worst uniform estimate','Best uniform estimate','Can reach best lower bound'],values.map(x=>[x.o.id,x.low.toFixed(6),x.high.toFixed(6),x.high>=best?'Yes':'No']),['User-declared interval arithmetic, not statistically estimated error bars or calibrated uncertainty.']);
 });
+
+add("rank-consensus","Tie-aware rank consensus","Preference diagnostics","Aggregate four single-contribution rankings with average tied ranks and expose the per-dimension ranks.",[],function(s,i){
+
+const keys=['lower_cost',...dims],rows=s.options.map(o=>{const ranks=keys.map(k=>{const better=s.options.filter(x=>x.contributions[k]>o.contributions[k]).length,equal=s.options.filter(x=>x.contributions[k]===o.contributions[k]).length;return 1+better+(equal-1)/2;});return [o.id,sum(ranks),...ranks];});return output(['Setup','Rank sum',...keys],rows.sort((a,b)=>a[1]-b[1]),['Rank aggregation gives each dimension equal importance; it is a declared rule, not learned personal utility.']);
+});
