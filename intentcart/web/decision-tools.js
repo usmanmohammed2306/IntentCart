@@ -307,3 +307,8 @@ add("citation-duplicates","Canonical citation duplicate audit","Evidence traceab
 
 const groups=new Map();for(const e of s.sources){if(!e.url)continue;let key;try{const u=new URL(e.url);u.hash='';u.searchParams.sort();key=u.href;}catch{continue;}const a=groups.get(key)||[];a.push(e);groups.set(key,a);}return output(['Canonical URL','Observed fields','Exact source IDs'],[...groups].filter(([,v])=>v.length>1).map(([k,v])=>[k,v.length,v.map(e=>e.id).join(', ')]),['Canonicalization is a citation grouping rule, not proof of equivalent pages, independence or source credibility. URLs are never fetched.']);
 });
+
+add("review-knapsack","Time-budgeted evidence review plan","Evidence traceability","Choose observed fields under a declared review-time budget using exact knapsack optimization of summed setup exposures.",[countInput('minutes','Available review minutes',30,0,240),countInput('cost','Assumed minutes per field',5,1,60)],function(s,i){
+
+const budget=int(i.minutes,0,240),cost=int(i.cost,1,60),dp=Array.from({length:budget+1},()=>({value:0,items:[]}));for(const e of s.sources){const value=s.options.filter(o=>o.items.some(x=>x.product_id===e.product_id)).length;for(let b=budget;b>=cost;b--){const prev=dp[b-cost],candidate=prev.value+value;if(candidate>dp[b].value)dp[b]={value:candidate,items:[...prev.items,{e,value}]};}}const best=dp[budget];return output(['Source to review','Declared minutes','Containing setups'],best.items.map(x=>[x.e.id,cost,x.value]),[`Objective: ${best.value} summed source/setup exposures; repeated setups count once per selected field, not as unique verified baskets. Time is a user assumption; no field is fetched or marked reviewed.`]);
+});
