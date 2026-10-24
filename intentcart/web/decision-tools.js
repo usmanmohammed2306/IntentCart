@@ -247,3 +247,8 @@ add("failure-importance","Component outage importance","Declared outage models",
 
 const options=portfolioOptions(s,i.setups,8),q=basisPoints(i.failure)/10000,pool=[...new Set(options.flatMap(o=>o.items.map(x=>x.product_id)))];return output(['Exact product','Availability if working','Availability if failed','Conditional difference'],pool.map(id=>{const up=availability(options,q,id,1),down=availability(options,q,id,0);return [id,(100*up).toFixed(6)+'%',(100*down).toFixed(6)+'%',(100*(up-down)).toFixed(6)+' percentage points'];}).sort((a,b)=>parseFloat(b[3])-parseFloat(a[3])),['A sensitivity derivative under the declared independence model; no measured causal impact or reliability guarantee.']);
 });
+
+add("outage-sensitivity","Outage-assumption sensitivity curve","Declared outage models","Evaluate a chosen portfolio at five points between declared common product-failure probabilities.",[portfolioInput,percentInput('low','Low assumed failure probability, percent',0),percentInput('high','High assumed failure probability, percent',20)],function(s,i){
+
+const options=portfolioOptions(s,i.setups,8),low=basisPoints(i.low),high=basisPoints(i.high);check(low<=high,'Low probability must not exceed high probability.');return output(['Assumed product failure probability','At least one setup available'],Array.from({length:5},(_,n)=>{const q=(low+(high-low)*n/4)/10000;return [(100*q).toFixed(4)+'%',(100*availability(options,q)).toFixed(6)+'%'];}),['Hypothetical independent-product model, not a calibrated forecast or confidence interval.']);
+});

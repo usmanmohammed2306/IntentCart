@@ -207,6 +207,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Contingency coverage cost frontier** — Compute exact shared-inventory cost breakpoints where the maximum number of covered single-product outages increases.
 - **Shared-component availability model** — Use exact inclusion-exclusion to calculate alternative-setup availability under a declared independent per-product outage probability.
 - **Component outage importance** — Compare portfolio availability conditional on each exact component working or failing, retaining shared-part dependence.
+- **Outage-assumption sensitivity curve** — Evaluate a chosen portfolio at five points between declared common product-failure probabilities.
 
 </details>
 
