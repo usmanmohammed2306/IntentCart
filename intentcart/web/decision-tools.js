@@ -252,3 +252,8 @@ add("outage-sensitivity","Outage-assumption sensitivity curve","Declared outage 
 
 const options=portfolioOptions(s,i.setups,8),low=basisPoints(i.low),high=basisPoints(i.high);check(low<=high,'Low probability must not exceed high probability.');return output(['Assumed product failure probability','At least one setup available'],Array.from({length:5},(_,n)=>{const q=(low+(high-low)*n/4)/10000;return [(100*q).toFixed(4)+'%',(100*availability(options,q)).toFixed(6)+'%'];}),['Hypothetical independent-product model, not a calibrated forecast or confidence interval.']);
 });
+
+add("tradeoff-exchange","Incremental trade-off exchange rates","Preference diagnostics","Relate an exact price change between two returned options to each estimated non-price contribution change.",[optionInput,{name:'other',label:'Alternative setup',type:'setup'}],function(s,i){
+
+const a=choice(s,i.setup),b=choice(s,i.other);check(a.id!==b.id,'Choose different setups.');return output(['Model contribution','Contribution change','Cost change','USD per +0.01 contribution'],dims.map(k=>{const d=b.contributions[k]-a.contributions[k];return [k,d.toFixed(6),signed(b.total_cents-a.total_cents),Math.abs(d)>1e-12?((b.total_cents-a.total_cents)/100/d*.01).toFixed(4):'No contribution change'];}),['Model units only, not hardware performance, willingness to pay or a recommended exchange rate.']);
+});
