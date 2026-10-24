@@ -237,3 +237,8 @@ add("coverage-cost-frontier","Contingency coverage cost frontier","Contingency p
 
 const a=portfolioSearch(s),sorted=a.rows.sort((a,b)=>a.cost-b.cost||b.covered.length-a.covered.length),rows=[];let best=-1;for(const r of sorted)if(r.covered.length>best){best=r.covered.length;rows.push([usd(r.cost),best,a.pool.length,r.options.map(o=>o.id).join(', ')]);}return output(['Hardware cost breakpoint','Covered outages','Single-product cases','Witness portfolio'],rows,['Exact over at most 4,095 nonempty subsets of the twelve returned options. Shared quantities are maximums, extras excluded.']);
 });
+
+add("outage-probability","Shared-component availability model","Declared outage models","Use exact inclusion-exclusion to calculate alternative-setup availability under a declared independent per-product outage probability.",[portfolioInput,percentInput('failure','Assumed per-product failure probability, percent',5)],function(s,i){
+
+const options=portfolioOptions(s,i.setups,8),q=basisPoints(i.failure)/10000,rows=options.map(o=>[o.id,(100*(1-q)**o.items.length).toFixed(6)+'%']);rows.push(['At least one chosen setup',(100*availability(options,q)).toFixed(6)+'%']);return output(['Declared event','Model probability'],rows,['Independent product-level failures and one common probability are explicit hypothetical assumptions. Shared parts are modeled; real failure rates, correlations and availability are unknown.']);
+});
