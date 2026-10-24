@@ -186,3 +186,16 @@ Open **Planning workbench → Decision Studio** after the evidence agent has ret
 </details>
 
 Each result can be downloaded as JSON. Review product and source content before sharing. Price scenarios use integer cents with explicit rounding; operating costs use your declared assumptions. Preference contributions describe a finite model, not measured hardware performance or personal satisfaction. None of these tools updates the basket, requirements, evidence, preference history or payment approval.
+
+## Contingency and reproducibility tools
+
+Decision Studio now supports deeper local investigation over the same returned options. Portfolio costs count the maximum units needed to build one alternative at a time; they exclude tax/shipping. Declared outage probabilities are hypothetical independent-product assumptions, with shared components retained. No purchases, source fetches, model requests or task mutations occur.
+
+<details>
+<summary>Additional capabilities</summary>
+
+- **Searchable tool navigator** — Find analyses by name, group or description, with an explicit no-match state.
+
+</details>
+
+Exact subset searches are bounded by twelve returned setups. Probability portfolios are capped at eight setups; imported JSON is capped at 120,000 characters. These diagnostics do not establish full-catalog optimality, measured reliability, source truth, human utility or payment permission. Refresh explicitly for a newer task revision. Review exported structured product/source records before sharing.
