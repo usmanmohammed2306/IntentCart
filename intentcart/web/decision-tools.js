@@ -336,3 +336,38 @@ export function analysisBrief(r){
  if(!r.rows.length)lines.push('','No matching rows in the returned options.');
  lines.push('','## Review notes',...(r.notes||[]).map(n=>'- '+escape(n)),'','Checkout authority: none. This is a local analysis, not a signed verification or purchase authorization. Review product/source contents before sharing.');return lines.join('\n')+'\n';
 }
+
+add('shared-cause-outages','Correlated shared-cause outage scenarios','Declared outage models','Declare up to six independent causes that can each disable several exact products. Enumerate overlapping failures and surviving returned setups; these are hypothetical assumptions.',[
+ portfolioInput,
+ documentInput('causes','Hypothetical causes JSON: [{"name":"Shared shipment","failure_percent":10,"products":["exact-product-id"]}]. Use [] for no declared failures.','[]')
+],function(s,i){
+ const options=portfolioOptions(s,i.setups),raw=readDocument(i.causes);
+ check(Array.isArray(raw)&&raw.length<=6,'Declare a JSON array with at most six failure causes.');
+ const pool=new Set(options.flatMap(o=>o.items.map(x=>x.product_id))),names=new Set();
+ const causes=raw.map(c=>{
+  check(c&&typeof c==='object'&&!Array.isArray(c)&&Object.keys(c).length===3&&['name','failure_percent','products'].every(k=>Object.hasOwn(c,k)),'Each cause needs only name, failure_percent and products.');
+  check(typeof c.name==='string'&&c.name.trim().length>0&&c.name.length<=64,'Cause names must be nonempty text up to 64 characters.');
+  const name=c.name.trim();check(!names.has(name),'Cause names must be unique.');names.add(name);
+  const probability=basisPoints(c.failure_percent)/10000;
+  check(Array.isArray(c.products)&&c.products.length>0&&c.products.length<=24&&c.products.every(id=>typeof id==='string'&&pool.has(id))&&new Set(c.products).size===c.products.length,'Use unique exact product IDs from the chosen setups in every cause.');
+  return {name,failure_percent:c.failure_percent,products:[...c.products],probability};
+ });
+ const scenarios=[],marginals=new Map(options.map(o=>[o.id,0]));let any=0,mass=0;
+ for(let mask=0;mask<2**causes.length;mask++){
+  let probability=1;const failed=new Set(),active=[];
+  causes.forEach((cause,n)=>{const down=!!(mask&(1<<n));probability*=down?cause.probability:1-cause.probability;if(down){active.push(cause.name);cause.products.forEach(id=>failed.add(id));}});
+  const surviving=options.filter(o=>o.items.every(x=>!failed.has(x.product_id)));mass+=probability;
+  if(surviving.length)any+=probability;
+  for(const o of surviving)marginals.set(o.id,marginals.get(o.id)+probability);
+  scenarios.push({active_causes:active,probability,surviving_setup_ids:surviving.map(o=>o.id),failed_product_ids:[...failed].sort()});
+ }
+ check(Math.abs(mass-1)<1e-10,'Scenario probabilities did not sum to one.');
+ const percent=p=>(100*Math.max(0,Math.min(1,p))).toFixed(6)+'%';
+ const rows=[['At least one chosen setup available',percent(any),'See scenarios',''],...options.map(o=>['Setup '+o.id,percent(marginals.get(o.id)),o.id,'']),...scenarios.map((c,n)=>['Scenario '+(n+1)+': '+(c.active_causes.join(' + ')||'No declared cause active'),percent(c.probability),c.surviving_setup_ids.join(', ')||'None',c.failed_product_ids.join(', ')||'None'])];
+ return {...output(['Declared event / scenario','Model probability','Surviving setup IDs','Failed exact products'],rows,[
+  `${causes.length} user-declared causes; ${scenarios.length} enumerated states, including zero-probability states. Causes are assumed mutually independent; products within and across overlapping causes are not treated as independent.`,
+  'Only declared causes can fail products; all unlisted products remain available in this model. No background product failures, real supplier relationships, measured probabilities, timing or physical reliability are inferred.',
+  'Exact product identity represents shared stock across setups: its declared failure disables every occurrence regardless of quantity. Surviving means not disabled by this scenario; existing support checks are not recomputed. No task, inventory, source, preference or payment authority changes.',
+  'Exports include normalized cause names, product IDs and scenario assumptions. Review these before sharing. Raw pasted document text is omitted; this document-based analysis is not receipt-replayable.'
+ ]),declared_causes:causes.map(({probability,...c})=>c),scenario_data:scenarios};
+});

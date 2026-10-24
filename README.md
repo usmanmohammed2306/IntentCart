@@ -228,3 +228,15 @@ Decision Studio now supports deeper local investigation over the same returned o
 </details>
 
 Exact subset searches are bounded by twelve returned setups. Probability portfolios are capped at eight setups; imported JSON is capped at 120,000 characters. These diagnostics do not establish full-catalog optimality, measured reliability, source truth, human utility or payment permission. Refresh explicitly for a newer task revision. Review exported structured product/source records before sharing.
+
+### Correlated shared-cause outage scenarios
+
+In **Decision Studio**, select **Correlated shared-cause outage scenarios**. Choose returned setup IDs (blank uses the first two), then declare up to six hypothetical causes. Each cause has a unique name, a probability in percent (0–100, at most two decimal places) and exact product IDs from the chosen setups:
+
+```json
+[{"name":"Shared shipment","failure_percent":10,"products":["exact-product-id"]}]
+```
+
+Replace the example ID with an ID in the setup legend. One cause may disable multiple products; products may appear in several causes. All cause combinations are enumerated (at most 64), with their probabilities, failed products and surviving setups. The result includes per-setup and portfolio availability under these assumptions. An empty array models no failures.
+
+Causes are assumed mutually independent. Products are correlated through declared causes; unlisted products remain available, and no other failures are modeled. No supplier relationships, live stock, measured reliability or timing are inferred. Results do not change support, task state or payment approval. JSON and readable exports include cause names/IDs and assumptions; review before sharing. Pasted document text is omitted from receipt parameters, and this analysis is not receipt-replayable.
