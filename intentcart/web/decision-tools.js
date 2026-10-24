@@ -287,3 +287,8 @@ add("repeat-consistency","Repeated-comparison consistency audit","Preference dia
 
 const groups=new Map();for(const h of s.history){const pair=[h.a,h.b].sort(),key=JSON.stringify(pair),g=groups.get(key)||{pair,a:0,b:0,tie:0,skip:0};if(h.choice==='a'||h.choice==='b'){const win=h.choice==='a'?h.a:h.b;g[win===pair[0]?'a':'b']++;}else if(h.choice==='tie'||h.choice==='skip')g[h.choice]++;groups.set(key,g);}return output(['Setup A','Setup B','A answers','B answers','Ties','Skips','Opposing answers present'],[...groups.values()].map(g=>[...g.pair,g.a,g.b,g.tie,g.skip,g.a&&g.b?'Yes':'No']),['Retained answers are correlated historical records, not independent people. Changed context can explain opposing choices.']);
 });
+
+add("comparison-connectivity","Preference comparison coverage graph","Preference diagnostics","Identify disconnected groups and unanswered setup connections within the last 48 retained comparisons.",[],function(s,i){
+
+const ids=s.options.map(o=>o.id),neighbors=new Map(ids.map(id=>[id,new Set()]));for(const h of s.history)if(h.choice!=='skip'&&neighbors.has(h.a)&&neighbors.has(h.b)&&h.a!==h.b){neighbors.get(h.a).add(h.b);neighbors.get(h.b).add(h.a);}const groups=new Map();let component=0;for(const id of ids)if(!groups.has(id)){component++;const stack=[id];while(stack.length){const a=stack.pop();if(groups.has(a))continue;groups.set(a,component);stack.push(...neighbors.get(a));}}return output(['Setup','Comparison neighbors','Connected group'],ids.map(id=>[id,neighbors.get(id).size,groups.get(id)]),[`${component} connected groups; at least ${Math.max(0,component-1)} cross-group answered comparisons would connect them. This is structural coverage, not expected information gain.`]);
+});
