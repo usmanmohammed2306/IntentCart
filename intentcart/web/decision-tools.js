@@ -222,3 +222,8 @@ add("inventory-reuse","Declared spare inventory reuse","Contingency portfolios",
 
 const owned=quantityMap(s,readDocument(i.inventory));return output(['Setup','Additional hardware','Reusable units','Saved extras','Incremental planning total'],s.options.map(o=>{let cost=0,reused=0;for(const x of o.items){const keep=Math.min(owned.get(x.product_id)||0,x.quantity);reused+=keep;cost+=(x.quantity-keep)*selected(s,x.product_id).price_cents;}const extras=o.total_cents-sub(s,o);return [o.id,usd(cost),reused,usd(extras),usd(cost+extras)];}),['Declared inventory is hypothetical. Exact variants only; saved extras may differ from a future partial purchase.']);
 });
+
+add("backup-pair-matrix","Backup-pair shared-failure matrix","Contingency portfolios","Compare every returned pair by common failure points and shared inventory cost rather than assuming independent backups.",[],function(s,i){
+
+const rows=[];for(let a=0;a<s.options.length;a++)for(let b=a+1;b<s.options.length;b++){const x=s.options[a],y=s.options[b],common=x.items.filter(p=>y.items.some(q=>q.product_id===p.product_id)).map(p=>p.product_id);rows.push([x.id,y.id,common.length,common.join(', ')||'None',usd(inventoryCost(s,inventory(s,[x,y])))]);}return output(['Setup A','Setup B','Shared failure products','Exact shared IDs','Shared hardware cost'],rows.sort((a,b)=>a[2]-b[2]),['A shared product outage disables both setups. Different products may still share an unmodeled supplier or failure cause.']);
+});
