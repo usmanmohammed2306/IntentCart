@@ -201,6 +201,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Budgeted maximum outage coverage** — Search all returned-option subsets for the most single-product outages covered within a hypothetical shared-hardware budget.
 - **Minimum component cut sets** — Enumerate the smallest sets of up to three product failures that eliminate every returned supported option.
 - **Shared spare-kit bill of materials** — Combine chosen returned setups using maximum component quantities, avoiding double-counting shared parts.
+- **Declared spare inventory reuse** — Calculate additional exact-product quantities for each returned setup from a declared inventory without assuming ownership.
 
 </details>
 

@@ -217,3 +217,8 @@ add("spare-bom","Shared spare-kit bill of materials","Contingency portfolios","C
 
 const options=portfolioOptions(s,i.setups),kit=inventory(s,options);return output(['Exact product','Required shared quantity','Unit cost','Line cost','Containing setups'],[...kit].map(([id,q])=>{const p=selected(s,id);return [id,q,usd(p.price_cents),usd(q*p.price_cents),options.filter(o=>o.items.some(x=>x.product_id===id)).length];}),['One alternative setup at a time, not simultaneous workstations. Shared hardware total: '+usd(inventoryCost(s,kit))+'. Tax, shipping, ownership and live stock are not inferred.']);
 });
+
+add("inventory-reuse","Declared spare inventory reuse","Contingency portfolios","Calculate additional exact-product quantities for each returned setup from a declared inventory without assuming ownership.",[documentInput('inventory','Declared product quantities JSON','{}')],function(s,i){
+
+const owned=quantityMap(s,readDocument(i.inventory));return output(['Setup','Additional hardware','Reusable units','Saved extras','Incremental planning total'],s.options.map(o=>{let cost=0,reused=0;for(const x of o.items){const keep=Math.min(owned.get(x.product_id)||0,x.quantity);reused+=keep;cost+=(x.quantity-keep)*selected(s,x.product_id).price_cents;}const extras=o.total_cents-sub(s,o);return [o.id,usd(cost),reused,usd(extras),usd(cost+extras)];}),['Declared inventory is hypothetical. Exact variants only; saved extras may differ from a future partial purchase.']);
+});
