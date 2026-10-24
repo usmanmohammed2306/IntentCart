@@ -210,6 +210,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Outage-assumption sensitivity curve** — Evaluate a chosen portfolio at five points between declared common product-failure probabilities.
 - **Incremental trade-off exchange rates** — Relate an exact price change between two returned options to each estimated non-price contribution change.
 - **Minimum preference transfer to tie the leader** — Find the smallest normalized weight mass moved from uniform weights that lets each rival tie the current uniform-score leader.
+- **Contribution-interval robust shortlist** — Screen uniform-score rankings under a declared independent interval around each estimated contribution.
 
 </details>
 
