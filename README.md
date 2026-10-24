@@ -218,6 +218,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Preference comparison coverage graph** — Identify disconnected groups and unanswered setup connections within the last 48 retained comparisons.
 - **Minimum observed-field explanation cover** — Find a smallest set of observed fields covering every represented check label in the loaded source links.
 - **Observed evidence-to-check matrix** — Expose check labels with and without product-matched inspected source links for every returned setup.
+- **Canonical citation duplicate audit** — Find citations sharing a URL after removing fragments and sorting query parameters, while retaining distinct source IDs.
 
 </details>
 

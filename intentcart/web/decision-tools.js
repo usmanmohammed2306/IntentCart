@@ -302,3 +302,8 @@ add("check-traceability","Observed evidence-to-check matrix","Evidence traceabil
 
 const rows=[];for(const o of s.options)for(const k of o.check_names||[]){const links=s.sources.filter(e=>o.items.some(x=>x.product_id===e.product_id)&&(e.checks||[]).includes(k));rows.push([o.id,k,links.length,links.map(e=>e.id).join(', ')||'No observed product-field link']);}return output(['Setup','Represented check','Observed field links','Source IDs'],rows,['A missing observed link does not negate the server-supported check: declared requirements, prices and fixture assumptions can supply other inputs. No new source validation is performed.']);
 });
+
+add("citation-duplicates","Canonical citation duplicate audit","Evidence traceability","Find citations sharing a URL after removing fragments and sorting query parameters, while retaining distinct source IDs.",[],function(s,i){
+
+const groups=new Map();for(const e of s.sources){if(!e.url)continue;let key;try{const u=new URL(e.url);u.hash='';u.searchParams.sort();key=u.href;}catch{continue;}const a=groups.get(key)||[];a.push(e);groups.set(key,a);}return output(['Canonical URL','Observed fields','Exact source IDs'],[...groups].filter(([,v])=>v.length>1).map(([k,v])=>[k,v.length,v.map(e=>e.id).join(', ')]),['Canonicalization is a citation grouping rule, not proof of equivalent pages, independence or source credibility. URLs are never fetched.']);
+});
