@@ -216,6 +216,7 @@ Decision Studio now supports deeper local investigation over the same returned o
 - **Price versus model-value envelope** — Find the upper concave price/value envelope and its diminishing marginal contribution gains.
 - **Repeated-comparison consistency audit** — Group the last 48 explicit pairwise answers, retaining orientation, ties, skips and opposing answers.
 - **Preference comparison coverage graph** — Identify disconnected groups and unanswered setup connections within the last 48 retained comparisons.
+- **Minimum observed-field explanation cover** — Find a smallest set of observed fields covering every represented check label in the loaded source links.
 
 </details>
 
