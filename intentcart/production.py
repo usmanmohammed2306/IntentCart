@@ -35,6 +35,8 @@ def configuration(config):
             issues.append('Stateless public previews cannot hold provider credentials or positive spending caps.')
     if profile == 'production':
         authentication=os.getenv('INTENTCART_AUTH','basic')
+        termination=os.getenv('INTENTCART_TLS_TERMINATION','')
+        if termination not in ('','astropods') or (termination=='astropods' and (authentication!='astropods' or not (url.hostname or '').endswith('.agents.astropods.ai'))):issues.append('Managed TLS termination requires verified Astropods identity and its assigned HTTPS hostname.')
         if authentication=='astropods':
             try:
                 from .astro_auth import authorizer
@@ -75,7 +77,10 @@ def access(request, config):
         return None
     if request.url.path in ('/healthz','/readyz'):
         return None
-    if request.url.scheme != 'https':
+    # The managed frontend terminates TLS before its private HTTP upstream.
+    # This explicit profile still requires exact Host and signed platform identity.
+    managed_tls=(os.getenv('INTENTCART_AUTH','basic')=='astropods' and os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and (origin.hostname or '').endswith('.agents.astropods.ai'))
+    if request.url.scheme != 'https' and not managed_tls:
         return JSONResponse({'detail':'HTTPS is required.'},status_code=400)
     if os.getenv('INTENTCART_AUTH','basic')=='astropods':
         return JSONResponse({'detail':'Sign in through Astropods.'},status_code=401)
@@ -97,7 +102,7 @@ def access(request, config):
 def cache_policy(request, response, web_root):
     response.headers['Cache-Control'] = 'private, no-store'
     response.headers['Vary'] = 'Cookie, Authorization'
-    if mode()=='production' and request.url.scheme=='https':response.headers['Strict-Transport-Security']='max-age=31536000'
+    if mode()=='production' and (request.url.scheme=='https' or (os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and request.scope.get('intentcart_auth_subject'))):response.headers['Strict-Transport-Security']='max-age=31536000'
     name = request.url.path.removeprefix('/static/')
     if request.url.path.startswith('/static/'):
         path = (web_root/name).resolve()

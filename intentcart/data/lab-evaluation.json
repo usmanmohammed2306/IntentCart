@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-25T16:13:06.335669+00:00",
+  "created_utc": "2026-10-25T17:10:59.112916+00:00",
   "app_version": "4.3.0",
   "kind": "One deterministic scripted local run; actual API endpoints, explicitly fake provider",
   "live_provider_calls": 0,

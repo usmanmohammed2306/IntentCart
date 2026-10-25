@@ -22,6 +22,9 @@ agent:
   - name: INTENTCART_AUTH
     datatype: string
     default: astropods
+  - name: INTENTCART_TLS_TERMINATION
+    datatype: string
+    default: astropods
   - name: INTENTCART_STORAGE_ACK
     datatype: string
     default: durable
