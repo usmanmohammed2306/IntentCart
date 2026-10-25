@@ -379,7 +379,7 @@ def main():
     args=parser.parse_args();from . import app
     app.initialize();token=secrets.token_urlsafe(32)
     with app.database() as db:
-        db.execute('DELETE FROM account_invites WHERE expires<? OR used=1',(time.time(),))
+        db.execute('DELETE FROM account_invites WHERE expires<?',(time.time(),))
         db.execute('INSERT INTO account_invites VALUES (?,?,?,?,0)',(digest(token),'admin',int(args.ai),time.time()+86400))
     print(token)
 if __name__=='__main__':main()
