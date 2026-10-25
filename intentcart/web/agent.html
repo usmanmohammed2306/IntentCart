@@ -18,11 +18,11 @@
 <section id="agent-input-panel">
 <div id="welcome-screen" data-screen="start" class="welcome-screen">
 <div class="welcome-heading"><h1>A setup that fits.</h1><p>Tell us what you need. We’ll put the pieces together.</p></div>
-<aside id="agent-preview" class="desk-preview" aria-label="An illustrated workstation preview">
+<div id="welcome-spatial-mount" class="welcome-spatial-mount"><aside id="agent-preview" class="desk-preview" aria-label="Explore an illustrated workstation">
 <div class="scene-caption"><span class="small-orb" aria-hidden="true"></span><span id="scene-caption">MacBook Air example</span></div>
 <div class="desk-scene" id="desk-scene"><div class="desk-halo" aria-hidden="true"></div><img src="/static/assets/studio-workstation.svg" alt="Illustration of a laptop, dock and two screens" class="workstation-art"><button class="scene-hotspot screen-hotspot" type="button" data-scene-note="screen" aria-label="Explore screens"><span>+</span></button><button class="scene-hotspot dock-hotspot" type="button" data-scene-note="dock" aria-label="Explore connections"><span>+</span></button></div>
 <div class="scene-story" aria-live="polite"><strong id="scene-story-title"></strong><p id="scene-story-note">Illustrated preview</p></div>
-</aside>
+</aside></div>
 <div class="welcome-copy"><div class="request-card"><label for="query">What do you have in mind?</label><textarea id="query" rows="2" maxlength="1000" placeholder="Two screens for my MacBook, under $350…"></textarea><div class="request-bottom"><span class="service-state" id="engine">Getting ready…</span><button id="research-intake" type="button" class="primary" disabled>Let’s plan <span aria-hidden="true">↗</span></button></div></div>
 <div class="suggestions" aria-label="Ideas to get started"><button type="button" data-prompt="simple"><img src="/static/assets/studio-display.svg" alt="" aria-hidden="true"><span>One screen</span><span aria-hidden="true">↗</span></button><button type="button" data-prompt="two"><span class="double-screen" aria-hidden="true"><img src="/static/assets/studio-display.svg" alt=""><img src="/static/assets/studio-display.svg" alt=""></span><span>Two screens</span><span aria-hidden="true">↗</span></button></div>
 <div class="welcome-foot"><button type="button" id="manual-details" class="text-button">Choose the details myself</button><span class="example-note">Example parts &amp; prices</span></div>
@@ -36,7 +36,7 @@
 <details class="input-advanced"><summary>More preferences <span aria-hidden="true">+</span></summary><div class="fields"><label for="height">Picture quality<select id="height"><option value="1080">Standard · Full HD</option><option value="2160">Sharper · 4K</option></select></label><label for="hz">Screen refresh<select id="hz"><option value="60">Everyday use · 60 Hz</option><option value="120">Smoother motion · 120 Hz</option></select></label></div><label class="check"><input id="driver" type="checkbox">I’m comfortable installing extra display software and granting its required permissions.</label></details>
 <div id="assumptions-label" class="assumption-card"><span class="assumption-icon" aria-hidden="true">i</span><div><strong>Before you continue</strong><p>Prices are planning allowances. The example assumes you already own two HDMI cables.</p><label class="check"><input id="assumptions" type="checkbox">Use these example prices and owned cables.</label></div></div>
 <p id="intake-note" class="review-note" role="status"></p><div class="review-actions"><button class="primary" type="submit" id="find-setup">Find my setup <span aria-hidden="true">↗</span></button><span>No purchase. Just a plan.</span></div></div>
-<aside class="review-illustration"><div class="review-illustration-art"><img src="/static/assets/studio-workstation.svg" alt="A visual preview of your workstation"></div><div class="review-summary" id="review-summary"></div><div class="review-promise"><span aria-hidden="true">✓</span>Your choices stay yours.</div></aside></div>
+<aside class="review-illustration"><div id="review-spatial-mount" class="review-spatial-mount"></div><div class="review-summary" id="review-summary"></div><div class="review-promise"><span aria-hidden="true">✓</span>Your choices stay yours.</div></aside></div>
 </section>
 </section>
 </form>

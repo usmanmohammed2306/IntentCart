@@ -20,7 +20,7 @@ CMD ["python","-m","intentcart"]
 # the default high-port runtime for compose and other hosting providers.
 FROM runtime AS astropods
 USER root
-RUN apt-get update && apt-get install -y --no-install-recommends libcap2-bin && setcap cap_net_bind_service=+ep /usr/local/bin/python3.12 && mkdir -p /data && chown appuser:appuser /data && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /data && chown appuser:appuser /data
 ENV PORT=80 DATABASE_PATH=/data/intentcart.sqlite3 INTENTCART_MANAGED_INSTALL=true
 EXPOSE 80
 USER 10001:10001

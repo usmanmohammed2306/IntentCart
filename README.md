@@ -20,6 +20,12 @@ IntentCart starts with the outcome. Describe what you want, review a few details
 
 Payment is a separate decision. A supported plan never grants permission to spend: an exact basket, current quote and explicit approval precede PayPal **sandbox** checkout.
 
+## Explore the pieces together
+
+The illustrated desk is interactive: drag to look around, select a component, or separate the parts to see how the workspace is arranged. The **Parts** menu offers the same inspection with a keyboard; **View** rotates, zooms and resets the camera. The supported result uses the exact part names from your reviewed plan. Shapes and spacing are illustrative, rather than measured product dimensions.
+
+Three.js renders the scene on demand, while Anime.js 4.5 provides short spring transitions. There is no continuous idle render loop or model call behind the visual controls. Reduced-motion preferences are respected, and a static illustration plus text controls keep the request flow usable when graphics are unavailable. These are browser graphics, not a rented GPU or WebGPU deployment. React, R3F, Rapier and Rive are not dependencies of this plain-JavaScript interface.
+
 ## From a request to a reviewed decision
 
 ```mermaid

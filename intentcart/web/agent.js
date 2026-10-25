@@ -1,7 +1,9 @@
+import {createSpatialWorkspace,presentation,animateJourney} from './spatial.js';
 import {initLibrary} from './library.js';
 import {componentCards} from './interface.js';
 const $=id=>document.getElementById(id),money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n/100);
 const node=(tag,text,cls='')=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
+const spatial=createSpatialWorkspace(document.getElementById('agent-preview'));
 let progressStream=null;
 let csrf='',task=null,catalog=null,research=null,enabled=false,busy=false,dirty=false,view='start',researching=false,stopRequested=false,lastError='',allowanceUsed=false;
 const examples={two:'I want two Full HD screens for my MacBook Air M1, while keeping my current HDMI monitor. My budget is $350.',simple:'I want one Full HD screen for my MacBook Air M1 and a simple desk setup. My budget is $350.'};
@@ -103,7 +105,7 @@ function renderPlan(r){
  for(const [i,card] of [...gallery.children].entries()){const product=catalog.products.find(p=>p.id===plan.items[i].product_id);const title=card.querySelector('h4'),model=card.querySelector('small');title.textContent=kinds[product?.kind]||'Part';model.textContent=product?.name||plan.items[i].product_id;title.parentNode.prepend(title);}
  const bottom=node('div',undefined,'result-board-bottom'),note=node('p','Illustrated parts · example prices, not a live quote.');
  const link=node('a',r.report.visual_handoff_available?'Explore in 3D ↗':'Review the parts ↗','next-workbench');link.href=r.report.visual_handoff_available?'/missions?from=research':'/workbench';bottom.append(note,link);
- board.append(top,benefits,gallery,bottom);container.append(board);
+ const spatialMount=node('div',undefined,'result-spatial-mount');spatialMount.id='result-spatial-mount';board.append(top,benefits,spatialMount,gallery,bottom);container.append(board);
 }
 function disclosure(title,container){const d=node('details'),s=node('summary',title);d.append(s);container.append(d);return d;}
 function renderBrief(r){
@@ -165,7 +167,7 @@ function render(){
  for(const panel of document.querySelectorAll('[data-screen]'))panel.hidden=panel.dataset.screen!==view;
  document.body.dataset.view=view;document.body.classList.toggle('is-investigating',researching);
  for(const step of document.querySelectorAll('[data-journey]')){const active=step.dataset.journey===(result?'working':view),order={start:0,review:1,working:2};step.toggleAttribute('aria-current',active);if(active)step.setAttribute('aria-current','step');step.classList.toggle('is-done',order[step.dataset.journey]<order[result?'working':view]);}
- for(const button of $('task-form').querySelectorAll('button'))button.disabled=busy;
+ for(const button of $('task-form').querySelectorAll('button'))if(!button.closest('.spatial-tools'))button.disabled=busy;
  for(const b of document.querySelectorAll('[data-screen-count]')){b.setAttribute('aria-pressed',String(b.dataset.screenCount===$('displays').value));b.disabled=busy||!![...$('displays').options].find(o=>o.value===b.dataset.screenCount)?.disabled;}
  $('research-intake').disabled=busy||!enabled||!$('query').value.trim();$('research-intake').textContent=busy&&view==='start'?'Thinking…':'Let’s plan ↗';
  $('find-setup').disabled=busy||($('research-mode').value==='gateway'&&!enabled);$('find-setup').textContent=busy?'Getting started…':'Find my setup ↗';
@@ -180,6 +182,9 @@ function render(){
  $('status').textContent=r?.status==='WAITING_FOR_USER'?'Let’s check one thing.':r?.status==='CANCELLED'?'Your progress\nis saved.':r?.status==='PAUSED'?'We can pick up\nfrom here.':researching?'Finding the pieces\nthat fit together.':'Ready when\nyou are.';
  $('guidance').textContent=r?.status==='WAITING_FOR_USER'?'Some options need a choice only you can make.':researching?'We’re checking the details and looking at your options.':'Continue the search or refine your request.';
  renderResearch(r);renderDetails();if(result){renderPlan(r);renderBrief(r);}
+ const supported=result&&r?.report?.outcome==='supported'&&r.audit?.passed?task?.result.plan:null;
+ const mount=view==='review'?$('review-spatial-mount'):supported?$('result-spatial-mount'):$('welcome-spatial-mount');if(mount&&!mount.contains(spatial.host))mount.append(spatial.host);
+ spatial.update(presentation(supported?task.goal:goal(),supported,catalog?.products||[],catalog?.laptops||[]));animateJourney(view);
 }
 function openAdvanced(section){const dialog=$('advanced-dialog');if(!dialog.open)dialog.showModal();if(section){const selector={connection:'#connection-details',sources:'#sources'}[section],target=selector&&document.querySelector(selector);const details=target?.closest('details');if(details)details.open=true;target?.scrollIntoView({block:'nearest'});}}
 $('advanced-open').addEventListener('click',()=>openAdvanced());$('advanced-close').addEventListener('click',()=>$('advanced-dialog').close());

@@ -9,7 +9,6 @@ agent:
     messaging: false
   healthcheck:
     test:
-    - CMD
     - python
     - -c
     - import urllib.request,os;urllib.request.urlopen('http://127.0.0.1:'+os.getenv('PORT','80')+'/healthz',timeout=3)
