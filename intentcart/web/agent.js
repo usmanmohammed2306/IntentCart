@@ -169,10 +169,10 @@ function render(){
  for(const step of document.querySelectorAll('[data-journey]')){const active=step.dataset.journey===(result?'working':view),order={start:0,review:1,working:2};step.toggleAttribute('aria-current',active);if(active)step.setAttribute('aria-current','step');step.classList.toggle('is-done',order[step.dataset.journey]<order[result?'working':view]);}
  for(const button of $('task-form').querySelectorAll('button'))if(!button.closest('.spatial-tools'))button.disabled=busy;
  for(const b of document.querySelectorAll('[data-screen-count]')){b.setAttribute('aria-pressed',String(b.dataset.screenCount===$('displays').value));b.disabled=busy||!![...$('displays').options].find(o=>o.value===b.dataset.screenCount)?.disabled;}
- $('research-intake').disabled=busy||!enabled||!$('query').value.trim();$('research-intake').textContent=busy&&view==='start'?'Thinking…':'Let’s plan ↗';
+ $('research-intake').disabled=busy||!enabled||!$('query').value.trim();$('research-intake').textContent=busy&&view==='start'?'Please wait…':'Let’s plan ↗';
  $('find-setup').disabled=busy||($('research-mode').value==='gateway'&&!enabled);$('find-setup').textContent=busy?'Getting started…':'Find my setup ↗';
  $('agent-edit').disabled=busy;$('start-another').disabled=busy;$('review-back').disabled=busy;
- $('engine').textContent=busy&&view==='start'?'Understanding your request':r?.options.engine==='local'?'Comparison mode':enabled?'Ready':allowanceUsed?'AI allowance used':'AI connection needed';
+ $('engine').textContent=busy&&view==='start'?'Getting things ready':r?.options.engine==='local'?'Comparison mode':enabled?'Ready':allowanceUsed?'AI allowance used':'AI connection needed';
  $('result-context').textContent=task?.catalog_kind==='fixture'?'Fictional workstation demo':'MacBook Air example';
  $('review-summary').replaceChildren(...[`${$('displays').value} screen${$('displays').value==='1'?'':'s'}`,money(Math.round(Number($('budget').value||0)*100))+' budget',$('reuse').checked?'Keep your monitor':'New screens'].map(t=>node('span',t)));
  $('next').disabled=busy||!task||task.status!=='ACTIVE'||dirty;$('model').disabled=$('next').disabled||!enabled;
