@@ -3,7 +3,7 @@ import { validityCards } from './validity-view.js';
 const $ = id => document.getElementById(id);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = c => new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(c / 100);
-let csrf, config, catalog, mission, activeQuote, busy = false, paypalPromise;
+let csrf, config, catalog, mission, activeQuote, busy = false, paypalPromise, modelAvailable = false;
 let timer, selectedPart = 'dock', scenario = false, currentTab = 'setup';
 let flowStep = 'brief', reviewedText = $('goal-text').value.trim(), tourIndex = -1, inspecting = false, pendingReviewFocus = false;
 const needsReview = () => $('goal-text').value.trim() !== reviewedText;
@@ -17,6 +17,8 @@ async function api(path, body) {
 const dirty = () => isDraftDirty(mission, goal(), $('goal-text').value);
 function syncControls() {
   const changed = dirty();
+  $('interpret').disabled=busy||!modelAvailable;
+  $('interpret-local').disabled=busy;
   $('draft-banner').hidden = !changed;
   $('apply-draft').textContent = needsReview() ? 'Review request →' : 'Update setup →';
   document.body.classList.toggle('draft-dirty', changed);
@@ -102,10 +104,10 @@ function render() {
   $('revision').textContent = 'REV ' + String(mission.revision).padStart(2,'0');
   const r = mission.result, p = r.plan;
   $('validity-summary').innerHTML = validityCards(r.validity).map(c => `<div><small>${esc(c.title)}</small><b class="${c.tone === 'good' ? 'passed' : ''}">${esc(c.label)}</b></div>`).join('');
-  $('plan-title').textContent = p ? 'One setup.\nEvery connection.' : r.status === 'NEEDS_EVIDENCE' ? 'One unknown.\nA clearer plan.' : 'A constraint.\nA way forward.';
-  $('plan-state').textContent = p ? 'YOUR INTENT, ENGINEERED TOGETHER' : 'A COMPLETE PLAN COMES FIRST';
+  $('plan-title').textContent = p ? 'Your setup.' : r.status === 'NEEDS_EVIDENCE' ? 'One detail to check.' : 'Let’s adjust the plan.';
+  $('plan-state').textContent = p ? 'YOUR WORKSPACE' : 'PLAN STATUS';
   $('plan-subtitle').textContent = p ? `${mission.goal.displays} display${mission.goal.displays === 1 ? '' : 's'} · ${mission.goal.height === 2160 ? '4K' : 'Full HD'} · ${mission.goal.hz} Hz · one cable to your laptop` : 'No complete basket is ready. Review the open questions or adjust your brief.';
-  $('plan-badge').textContent = p ? '✓ Compatible in this catalog' : r.status === 'NEEDS_EVIDENCE' ? 'EVIDENCE NEEDED' : 'REVIEW REQUIREMENTS';
+  $('plan-badge').textContent = p ? 'Supported in demo catalog' : r.status === 'NEEDS_EVIDENCE' ? 'EVIDENCE NEEDED' : 'REVIEW REQUIREMENTS';
   $('plan-price').hidden = !p; $('plan-price').textContent = p ? money(p.total_cents) : '';
   $('candidate-count').textContent = `${r.feasible_count} OF ${r.candidate_count} BASKETS FIT`;
   $('hotspots').hidden = !p; $('part-inspector').hidden = !p; $('graph').hidden = !p;
@@ -168,7 +170,8 @@ $('goal-form').onsubmit = e => { e.preventDefault(); if (needsReview()) { toast(
 $('apply-draft').onclick = () => { setFlowStep('brief'); if(needsReview()) $('interpret').click(); else $('goal-form').requestSubmit(); };
 $('empty-build').onclick = () => setFlowStep('brief',true);
 $('start-fresh').onclick = () => { if (needsReview() || !$('goal-form').reportValidity()) return; task(async () => { mission = await api('missions',{text:$('goal-text').value,goal:goal()}); scenario = false; currentTab = 'setup'; render(); focusPlan(); toast('Fresh plan created. Saved orders remain; previous quotes are invalidated.'); }); };
-$('interpret').onclick = () => task(async () => { const a = await api('missions/interpret',{query:$('goal-text').value}); fillGoal({...goal(),...a.suggestions}); $('compiler-note').textContent = a.notice; reviewedText = $('goal-text').value.trim(); draftChanged(); reviewGoalFields(); toast('Requirements extracted. Review the fields before building.'); });
+$('interpret-local').onclick = () => task(async () => { const a = await api('missions/interpret',{query:$('goal-text').value}); fillGoal({...goal(),...a.suggestions}); $('compiler-note').textContent = a.notice; reviewedText = $('goal-text').value.trim(); draftChanged(); reviewGoalFields(); toast('Requirements extracted. Review the fields before building.'); });
+$('interpret').onclick=()=>task(async()=>{const a=await api('agent/research/intake',{query:$('goal-text').value,catalog_kind:'fixture'});fillGoal({...goal(),...a.suggestions});$('compiler-note').textContent=a.notice;reviewedText=$('goal-text').value.trim();draftChanged();reviewGoalFields();toast('AI proposal ready. Review every field; software permission is off.');});
 $('import-proposal').onclick = () => task(async () => { let proposed; try { proposed = JSON.parse($('proposal').value); } catch { throw Error('Paste one valid JSON goal object.'); } const result = await api('missions/proposal',{goal:proposed}); fillGoal(result.goal); $('compiler-note').textContent = result.notice; reviewedText = $('goal-text').value.trim(); draftChanged(); reviewGoalFields(); toast('Proposal loaded for review. Driver permission reset.'); });
 $('scenario-toggle').onclick = () => { scenario = !scenario; $('scenario-note').hidden = !scenario; $('scenario-toggle').setAttribute('aria-pressed',String(scenario)); document.querySelectorAll('[data-exclude]').forEach(b => b.hidden = !scenario); };
 $('show-investigations').onclick = () => { selectTab('evidence',true); };
@@ -184,7 +187,14 @@ $('evidence-open').onclick=()=>task(async()=>{const e=await api('missions/evalua
 for(const b of document.querySelectorAll('dialog .close'))b.onclick=()=>b.closest('dialog').close();
 $('discover-open').onclick=()=>{$('discovery-status').textContent=`${config.channel3_calls_remaining} authorized calls remaining. Search is opt-in; search is disabled while the call ceiling is zero.`;syncControls();$('discovery-dialog').showModal();};
 $('discovery-form').onsubmit=e=>{e.preventDefault();task(async()=>{const r=await api('discover',{query:$('discovery-query').value});config.channel3_calls_remaining=r.calls_remaining;$('discovery-status').textContent=`${r.calls_remaining} calls remaining. Discovery only.`;$('discovery-results').innerHTML=r.products.map(p=>`<article class="receipt-card"><b>${esc(p.title)}</b><p>${esc(p.description)}</p>${p.url?`<a class="quiet" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Visit retailer ↗</a>`:''}</article>`).join('');});};
-async function start(){syncControls();const s=await api('session');csrf=s.csrf_token;config=s.config;catalog=await api('missions/catalog');const saved=await api('missions');mission=saved.mission;if(saved.stale)toast('Planner source changed. Compile a new mission; prior exports remain available.');if(mission){$('goal-text').value=mission.text;render();setFlowStep('explore');}const status=await api('missions/model-status');if(status.enabled){$('engine-mode').textContent='Local planner · model interpretation opt-in';const b=document.createElement('button');b.type='button';b.className='text-button';b.textContent='Interpret with Astropods model ↗';b.onclick=()=>task(async()=>{const a=await api('missions/model-interpret',{query:$('goal-text').value});fillGoal({...goal(),...a.suggestions});$('compiler-note').textContent=a.notice;reviewedText=$('goal-text').value.trim();draftChanged(); reviewGoalFields();toast('Model proposal received. Review before building.');});$('interpret').after(b);}syncControls();}
+async function start(){syncControls();const s=await api('session');csrf=s.csrf_token;config=s.config;catalog=await api('missions/catalog');const saved=await api('missions');mission=saved.mission;if(saved.stale)toast('Planner source changed. Compile a new mission; prior exports remain available.');if(mission){$('goal-text').value=mission.text;render();setFlowStep('explore');}const status=await api('missions/model-status');modelAvailable=status.enabled;$('engine-mode').textContent=modelAvailable?'Astropods AI · reviewed proposals':'AI inference connection needed';
+if(new URLSearchParams(location.search).get('from')==='research'){
+ const savedResearch=await api('agent/research'),run=savedResearch.run;
+ if(run?.status==='COMPLETE'&&run.report.visual_handoff_available){
+  $('goal-text').value=run.task.query;reviewedText=run.task.query.trim();fillGoal({...run.task.goal,allow_driver:false});setFlowStep('brief');reviewGoalFields();draftChanged();$('compiler-note').textContent='Research requirements loaded for review. Software permission reset. No evidence, recommendation or approval has been transferred.';
+ }else toast('No current eligible research brief. Review this setup independently.');
+}
+syncControls();}
 // Guidance explains existing state. It is not a model response or permission to pay.
 function setFlowStep(step, focus = false) {
   if (step === 'review') { if (canQuote(mission,dirty(),busy)) $('quote').click(); return; }
@@ -204,7 +214,7 @@ function setFlowStep(step, focus = false) {
 function syncGuidance() {
   const state = getGuideState(mission,{dirty:dirty(),busy,needsReview:needsReview()});
   const plan = mission?.result.plan, useful = mission?.result.investigations?.filter(x=>x.could_improve_cost) || [];
-  if (mission) $('plan-badge').textContent=dirty() ? 'Previous plan · edits pending' : plan ? '✓ Compatible in this catalog' : mission.result.status==='NEEDS_EVIDENCE' ? 'EVIDENCE NEEDED' : 'REVIEW REQUIREMENTS';
+  if (mission) $('plan-badge').textContent=dirty() ? 'Previous plan · edits pending' : plan ? 'Supported in demo catalog' : mission.result.status==='NEEDS_EVIDENCE' ? 'EVIDENCE NEEDED' : 'REVIEW REQUIREMENTS';
   document.body.dataset.guide=state;
   $('edit-brief').hidden=flowStep==='brief';
   const copy = {
@@ -214,8 +224,8 @@ function syncGuidance() {
     update:['Ready to update.','Check your new settings against the catalog.','Update setup'],
     evidence:['One detail to check.','A missing specification needs a closer look.','Check specification'],
     conflict:['A small change is needed.','See what conflicts and choose a way forward.','Resolve issue'],
-    opportunity:['Everything fits.','Your reviewed requirements work together.','Review quote'],
-    ready:['Everything fits.','Your setup is ready for quote review.','Review quote'],
+    opportunity:['A supported setup.','Fits the represented catalog checks.','Review quote'],
+    ready:['A supported setup.','Review the exact basket before approval.','Review quote'],
   }[state];
   $('guide-title').textContent=copy[0]; $('guide-description').textContent=copy[1];
   $('guide-primary').innerHTML=`${copy[2]} <span>→</span>`; $('guide-primary').disabled=busy || !catalog;
@@ -341,7 +351,7 @@ function syncSpatialState() {
   lastSceneRevision = mission?.revision;
   const draft = goal();
   $('brief-digest').textContent = `${draft.displays} display${draft.displays === 1 ? '' : 's'} · ${draft.height === 2160 ? '4K' : 'Full HD'} · ${Number.isFinite(draft.budget_cents) ? money(draft.budget_cents) : '—'} budget`;
-  if (spatial) $('renderer-status').textContent = dirty() ? 'BRIEF CHANGED / UPDATE YOUR SETUP' : mission?.result.plan ? 'SPATIAL VIEW / ASSEMBLED' : 'SPATIAL VIEW / CONCEPT';
+  if (spatial) $('renderer-status').textContent = dirty() ? 'Update needed' : mission?.result.plan ? '3D setup' : 'Preview';
 }
 function fallbackScene() {
   spatial?.dispose(); spatial = null;

@@ -1,0 +1,65 @@
+name: intentcart-production
+services:
+  app:
+    image: ${INTENTCART_IMAGE:?Supply an audited immutable image digest}
+    environment:
+      HOST: 0.0.0.0
+      PORT: "4000"
+      PUBLIC_URL: https://${APP_DOMAIN:?Supply the HTTPS domain}
+      COOKIE_SECURE: "true"
+      INTENTCART_MODE: production
+      INTENTCART_STORAGE_ACK: durable
+      FORWARDED_ALLOW_IPS: 172.31.91.2
+      DATABASE_PATH: /app/var/intentcart.sqlite3
+    env_file:
+      - ${INTENTCART_PRIVATE_ENV:?Supply the private production allocation file}
+    volumes:
+      - intentcart-data:/app/var
+    networks:
+      private:
+        ipv4_address: 172.31.91.3
+    restart: unless-stopped
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256m
+    mem_limit: 3g
+    cpus: 2
+  proxy:
+    image: caddy:2-alpine@sha256:eb4d35b7452d1ab6171fbdbe8d9275b2301dad6dad92115d91e19fb9b24d510f
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      private:
+        ipv4_address: 172.31.91.2
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    mem_limit: 128m
+volumes:
+  intentcart-data:
+    name: intentcart-production-data
+  caddy-data:
+    name: intentcart-production-caddy-data
+  caddy-config:
+    name: intentcart-production-caddy-config
+networks:
+  private:
+    ipam:
+      config:
+        - subnet: 172.31.91.0/28

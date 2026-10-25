@@ -1,0 +1,17 @@
+FROM python:3.12-slim@sha256:a0f57064cbdcd6285fa45f51237ab0b35ea8ebaed06a1f5973e89e19dfb86704
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 HF_HUB_DISABLE_TELEMETRY=1 TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt /app/requirements.txt
+RUN python -m pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 'torch==2.14.1' && python -m pip install --no-cache-dir -r requirements.txt && python -m pip check
+COPY intentcart /app/intentcart
+COPY scripts /app/scripts
+COPY docs/protocols /app/docs/protocols
+COPY LICENSE README.md /app/
+RUN python scripts/setup_encoder.py --directory /opt/encoder && useradd --uid 10001 --create-home appuser && mkdir -p /app/var && chown appuser:appuser /app/var
+ENV HOST=0.0.0.0 PORT=4000 DATABASE_PATH=/app/var/intentcart.sqlite3 INTENTCART_EMBEDDING_DIR=/opt/encoder HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 EXTERNAL_CALL_LIMIT=0 ASTRO_BUDGET_MICROUSD=0
+USER 10001:10001
+VOLUME ["/app/var"]
+EXPOSE 4000
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:'+__import__('os').getenv('PORT','4000')+'/healthz',timeout=3)"
+CMD ["python","-m","intentcart"]

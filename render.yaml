@@ -1,0 +1,27 @@
+# A free read-only preview. Durable AI production requires the separate profile.
+services:
+  - type: web
+    name: intentcart-preview
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    autoDeployTrigger: off
+    envVars:
+      - key: INTENTCART_MODE
+        value: public-preview
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: EXTERNAL_CALL_LIMIT
+        value: "0"
+      - key: ASTRO_BUDGET_MICROUSD
+        value: "0"
+      - key: PAYPAL_CLIENT_ID
+        value: ""
+      - key: PAYPAL_CLIENT_SECRET
+        value: ""
+      - key: ASTRO_GATEWAY_API_KEY
+        value: ""
+      - key: CHANNEL3_API_KEY
+        value: ""
+      - key: PORT
+        value: "10000"

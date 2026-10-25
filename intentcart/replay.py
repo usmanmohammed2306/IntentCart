@@ -34,6 +34,8 @@ SOURCE_FILES = (
     'intentcart/data/missions-catalog.json', 'scripts/evaluate_reliability.py',
     'intentcart/agent.py', 'intentcart/agent_routes.py', 'intentcart/evidence_catalog.py',
     'intentcart/workspace_preferences.py', 'intentcart/gateway.py', 'intentcart/research.py',
+    'intentcart/orchestrator.py', 'intentcart/orchestrator_routes.py',
+    'intentcart/workflow.py', 'intentcart/observability.py', 'intentcart/semantic.py', 'intentcart/sdk_transport.py', 'intentcart/production.py', 'intentcart/model_usage.py', 'intentcart/progress.py', 'intentcart/documents.py', 'intentcart/document_routes.py', 'intentcart/vector_search.py',
     'intentcart/data/evidence-catalog.json',
 )
 MAX_TRACE_BYTES = 65536
@@ -307,6 +309,8 @@ def _segment(payload):
         # the production provider request boundary are independently disabled.
         stack.enter_context(patch('httpx.HTTPTransport.handle_request', network_forbidden))
         stack.enter_context(patch('httpx.AsyncHTTPTransport.handle_async_request', network_forbidden))
+        stack.enter_context(patch('httpx2.HTTPTransport.handle_request', network_forbidden))
+        stack.enter_context(patch('httpx2.AsyncHTTPTransport.handle_async_request', network_forbidden))
         stack.enter_context(patch.object(PayPal, 'request', network_forbidden))
         if trace.mutant == 'stale-approval':
             stack.enter_context(patch.object(module, 'valid_quote', lambda *args: None))
@@ -600,7 +604,7 @@ def evaluate_suite(*, shrink: bool = True) -> dict:
         'kind': 'Declared local fault injection and mutation testing through real API endpoints; independent fake SQLite provider',
         'source_sha256': source_hashes(),
         'environment': {'python': platform.python_version(), 'platform': platform.system(),
-                        'packages': {name: package_version(name) for name in ('fastapi', 'starlette', 'pydantic', 'httpx')}},
+                        'packages': {name: package_version(name) for name in ('fastapi', 'starlette', 'pydantic', 'httpx', 'httpx2', 'openai', 'torch', 'transformers', 'langgraph', 'mcp', 'opentelemetry-sdk')}},
         'denominators': {'fault_cases': len(cases) - len(controls), 'controls': len(controls),
                          'baseline_replays': len(cases) * 2, 'mutants': len(mutations), 'mutant_cases': len(mutations),
                          'interruption_points': len(FAULTS),

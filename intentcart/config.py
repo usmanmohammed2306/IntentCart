@@ -10,7 +10,7 @@ def load_env():
                 os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
 
 load_env()
-PUBLIC_URL = os.getenv('PUBLIC_URL', 'http://127.0.0.1:4000').rstrip('/')
+PUBLIC_URL = os.getenv('PUBLIC_URL', os.getenv('RENDER_EXTERNAL_URL','http://127.0.0.1:4000')).rstrip('/')
 DATABASE_PATH = os.getenv('DATABASE_PATH', 'var/intentcart.sqlite3')
 CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID', '')
 CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET', '')

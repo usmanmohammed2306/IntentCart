@@ -27,3 +27,7 @@ docs/RESUME_METRICS.md
 docs/GITHUB_90_DAY_PLAN.md
 docs/commit-plan.json
 *.zip
+
+# Deployment secrets and operator sessions
+*.env
+azure-state/

@@ -40,6 +40,8 @@ class Compare(Revision):
 
 def register(module):
     app = module.app
+    from . import orchestrator_routes
+    orchestrator_routes.register(module)
     def current(state, revision=None):
         record = state.get('evidence_agent')
         if not record:

@@ -1,0 +1,26 @@
+name: intentcart-local
+services:
+  app:
+    build: .
+    image: intentcart:final
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      PUBLIC_URL: http://127.0.0.1:4000
+      EXTERNAL_CALL_LIMIT: "0"
+      ASTRO_BUDGET_MICROUSD: "0"
+    volumes:
+      - intentcart-data:/app/var
+    restart: "no"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=256m
+    mem_limit: 3g
+    cpus: 2
+volumes:
+  intentcart-data:
+    name: intentcart-local-data

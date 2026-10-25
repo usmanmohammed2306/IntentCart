@@ -1,3 +1,4 @@
+import {updateWorkbench} from './interface.js';
 import {mountDecisionStudio} from './decision-studio.js';
 import {compareSetups,comparisonReport} from './setup-comparison.js';
 const $=id=>document.getElementById(id);
@@ -59,7 +60,7 @@ async function edit(operation,payload={},submittedRequirements=false){
 
 function products(id,values){$(id).replaceChildren(...values.map(p=>new Option(`${p.name} · ${p.variant||p.id}`,p.id)));}
 function render(){
- $('content').hidden=!task;if(!task)return;
+ $('content').hidden=!task;if(!task){updateWorkbench(null);return;}
  const r=data.requirements;
  $('notice').textContent=`Revision ${task.revision} · ${data.supported_count} supported configurations / ${data.candidate_count} candidates. ${data.notice}`;
  for(const [id,value] of [['charging',r.charging_watts],['os',r.os_version],['connector',r.connector],['evidence-age',r.evidence_max_age_days],['price-age',r.price_max_age_days],['tax',r.tax_cents===null?'':r.tax_cents/100],['shipping',r.shipping_cents===null?'':r.shipping_cents/100]])$(id).value=value;
@@ -77,7 +78,7 @@ function render(){
  $('source-id').replaceChildren(...task.evidence.map(s=>new Option(`${s.product_id} · ${s.field}`,s.source_id)));
  if(data.pending_source&&task.evidence.some(s=>s.source_id===data.pending_source.source_id))$('source-id').value=data.pending_source.source_id;
  loadSource();showSourceReview();
- requirementsBase=readRequirements();showRecovery();decisionStudio.refresh();
+ requirementsBase=readRequirements();showRecovery();decisionStudio.refresh();updateWorkbench(task);
  $('changes').replaceChildren(...task.events.filter(e=>e.response?.diff).slice(-8).map(e=>{const node=document.createElement('details');node.append(text('summary',`Revision ${e.revision}: ${e.action.action}`),text('pre',JSON.stringify(e.response.diff,null,2)));return node;}));
 }
 function syncComparisonControls(){

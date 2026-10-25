@@ -1,0 +1,12 @@
+.env
+.env.*
+.venv
+var
+output
+.git
+**/__pycache__
+**/*.pyc
+.pytest_cache
+node_modules
+tests
+AGENTS.md

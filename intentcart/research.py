@@ -38,7 +38,9 @@ SOURCES = {
                     'intentcart/assurance.py','intentcart/data/missions-catalog.json',
                     'scripts/evaluate_reliability.py','intentcart/agent.py','intentcart/agent_routes.py',
                     'intentcart/evidence_catalog.py','intentcart/workspace_preferences.py',
-                    'intentcart/gateway.py','intentcart/research.py','intentcart/data/evidence-catalog.json'},
+                    'intentcart/gateway.py','intentcart/research.py','intentcart/orchestrator.py',
+                    'intentcart/orchestrator_routes.py','intentcart/workflow.py','intentcart/observability.py',
+                    'intentcart/semantic.py','intentcart/sdk_transport.py', 'intentcart/production.py', 'intentcart/model_usage.py', 'intentcart/progress.py', 'intentcart/documents.py', 'intentcart/document_routes.py', 'intentcart/vector_search.py','intentcart/data/evidence-catalog.json'},
 }
 
 

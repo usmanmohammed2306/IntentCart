@@ -69,25 +69,30 @@ def parse(payload):
             'notice':'Review all fields. Model output supplies no product facts or payment consent; driver permission is reset to false.'}
 
 def raw_call(base_url,key,body):
+    """OpenAI SDK transport for Astropods, with zero retries and bounded reads."""
+    from openai import OpenAI, DefaultHttpxClient, APIError, omit
+    import httpx2
+    from .sdk_transport import CappedTransport
     url=urlsplit(base_url)
     if url.scheme!='https' or not url.hostname or url.username or url.password or url.query or url.fragment:
         raise GatewayError('The server-configured gateway must be an HTTPS host without credentials or query parameters.')
     try:
-        # No redirects: a bearer credential must not migrate to another host.
-        with httpx.Client(timeout=20,follow_redirects=False,trust_env=False) as client:
-            with client.stream('POST',base_url.rstrip('/')+'/v1/chat/completions',
-                               headers={'Authorization':'Bearer '+key},json=body) as response:
-                response.raise_for_status()
+        transport=DefaultHttpxClient(timeout=20, follow_redirects=False, trust_env=False, transport=CappedTransport())
+        with OpenAI(api_key=key, base_url=base_url.rstrip('/')+'/v1', max_retries=0,
+                    organization='', project='', default_headers={'OpenAI-Organization':omit,'OpenAI-Project':omit},
+                    timeout=20, http_client=transport) as client:
+            with client.chat.completions.with_streaming_response.create(**body) as response:
                 content=bytearray()
                 for chunk in response.iter_bytes():
                     content.extend(chunk)
-                    if len(content)>65536: raise GatewayError('Gateway output exceeded the response limit.')
+                    if len(content)>65536:
+                        raise GatewayError('Gateway output exceeded the response limit.')
         payload=json.loads(content)
         if not isinstance(payload,dict):
             raise GatewayError('Gateway returned an invalid response envelope.')
         return payload
-    except (httpx.HTTPError,ValueError) as exc:
-        raise GatewayError('Astropods interpretation is unavailable. No retry was sent; the reviewed local compiler remains available.') from exc
+    except (APIError, httpx2.HTTPError, ValueError) as exc:
+        raise GatewayError('Astropods interpretation is unavailable. No retry was sent; your reviewed task remains unchanged.') from exc
 
 def call(base_url,key,body):
     return parse(raw_call(base_url,key,body))

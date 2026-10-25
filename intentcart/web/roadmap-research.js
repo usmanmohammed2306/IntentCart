@@ -1,3 +1,4 @@
+import {updateResearch} from './interface.js';
 const $=id=>document.getElementById(id);let csrf='';
 const cell=(tag,value)=>{const n=document.createElement(tag);n.textContent=value;return n;};
 function table(target,rows,columns){const t=document.createElement('table');t.style.fontSize='.8rem';t.style.width='100%';const head=document.createElement('tr');columns.forEach(c=>head.append(cell('th',c[0])));t.append(head);for(const row of rows){const tr=document.createElement('tr');columns.forEach(c=>tr.append(cell('td',c[1](row))));t.append(tr);}$(target).replaceChildren(t);}
@@ -9,6 +10,7 @@ try{const [budget,pref,session]=await Promise.all([report('budget'),report('pref
  $('preference-protocol').textContent=`${pref.denominators.synthetic_profiles} synthetic profiles · ${pref.denominators.train_baskets} training baskets / ${pref.denominators.heldout_baskets} held-out baskets · ${pref.denominators.correlated_runs} correlated runs.`;
  $('preference-limit').textContent=pref.limitations;
  table('preference-results',pref.summaries,[['Tie threshold',r=>r.tie_threshold],['Initial regret',r=>r.mean_baseline_regret.toFixed(6)],['Learned regret',r=>r.mean_learned_regret.toFixed(6)]]);
+ updateResearch(budget,pref);
 }catch(error){$('message').textContent=error.message;$('message').hidden=false;}
 $('problem').value=JSON.stringify({schema:'intentcart-acquisition/1',id:'example',revision:'1',queries:[{id:'spec',cost:1,version:'1'}],worlds:[{id:'yes',weight:1,answers:{spec:'yes'},decision:'supported-A'},{id:'no',weight:1,answers:{spec:'no'},decision:null}],initial_evidence:[]},null,2);
 $('cost-preview').addEventListener('submit',async e=>{e.preventDefault();const button=e.target.querySelector('button');button.disabled=true;try{const response=await fetch('/api/research/cost-preview',{method:'POST',headers:{'Content-Type':'application/json','x-csrf-token':csrf},body:JSON.stringify({problem:JSON.parse($('problem').value),costs:JSON.parse($('costs').value),budget:Number($('budget').value)})});const value=await response.json();if(!response.ok)throw Error(value.detail);$('cost-result').textContent=JSON.stringify(value,null,2);}catch(error){$('cost-result').textContent=error.message;}finally{button.disabled=false;}});

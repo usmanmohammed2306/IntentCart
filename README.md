@@ -4,9 +4,9 @@
 
 ### Before you buy the parts, know whether the whole thing works.
 
-Evidence-aware planning · Interactive 3D · Explicit approval
+Your workspace assistant—from an idea to a plan you can inspect.
 
-[Run locally](#run-locally) · [Explore](#explore-the-workspaces) · [How it works](#from-a-request-to-a-reviewed-decision)
+[Run locally](#run-locally) · [File research](#read-your-own-spec-sheets) · [How it works](#from-a-request-to-a-reviewed-decision)
 
 </div>
 
@@ -16,7 +16,7 @@ Evidence-aware planning · Interactive 3D · Explicit approval
 
 The dock looks right. The monitors fit the budget. The cables are in the cart. But can the laptop drive both displays? Is a driver required? Does the power supply deliver enough charging power?
 
-IntentCart starts with the outcome. Review your requirements, explore a complete workstation in a cinematic 3D studio, and inspect the evidence behind each decision. Missing information stays visible. An impossible request gets an explanation. When availability changes, the planner looks for a repair that changes the fewest component slots.
+IntentCart starts with the outcome. Describe what you want, review a few details, and let the AI investigate. Watch the actual progress, answer a permission question when needed, and see the recommended parts together. Open the sources or the interactive 3D studio when you want more detail. Missing information stays visible. An impossible request gets an explanation. When availability changes, the planner looks for a repair that changes the fewest component slots.
 
 Payment is a separate decision. A supported plan never grants permission to spend: an exact basket, current quote and explicit approval precede PayPal **sandbox** checkout.
 
@@ -40,7 +40,7 @@ flowchart LR
 
 The application keeps these boundaries explicit:
 
-- **Requirements before recommendations.** A bounded text interpreter proposes settings for review; typed requirements remain authoritative.
+- **Requirements before recommendations.** AI proposes settings for your review; the fields you approve remain authoritative.
 - **Evidence before support.** Known, unknown and conflicting facts are distinct. Source dates, exact variants, prices and permissions matter.
 - **Preferences within constraints.** Pairwise choices update a Bayesian estimate without weakening hard requirements.
 - **Approval for one exact decision.** Changed plans invalidate old quotes. Payment retries preserve operation identities, and uncertain results require reconciliation.
@@ -58,7 +58,7 @@ python -m pip install -r requirements.txt
 python -m intentcart
 ```
 
-Open **http://127.0.0.1:4000**. Choose an example, review its settings and build a setup. Local SQLite storage is created automatically in `var/`.
+Open **http://127.0.0.1:4000** for the guided AI assistant. Connect Astropods with an explicitly approved credit budget to use the model agent. The deterministic research baseline and `/missions` 3D planner remain runnable without keys. Local SQLite storage is created automatically in `var/`.
 
 On Windows, create the environment with `py -3.12 -m venv .venv`, activate it with `.venv\Scripts\Activate.ps1`, then run the same install and start commands.
 
@@ -74,8 +74,8 @@ Expected response: `{"status":"ok","environment":"sandbox"}`.
 
 | Address | Experience |
 |---|---|
-| `/` or `/missions` | Describe → Explore → Review. Inspect parts, orbit the 3D setup and repair fictional-catalog plans. |
-| `/agent` | Step through a bounded evidence controller: search, inspect, clarify, recommend or defer. |
+| `/missions` | Describe → Explore → Review. Inspect parts, orbit the 3D setup and repair fictional-catalog plans. |
+| `/` or `/agent` | Start a checkpointed research workflow: investigate, verify, explore a fallback and download a cited brief. |
 | `/workbench` | Review manufacturer records, exact variants, owned inventory, source expiry, all-in costs and preference history; export the decision. |
 | `/research` | Explore saved finite-budget comparisons, CPU learning curves, ablations and preference diagnostics. |
 | `/reliability` | Inspect separate decision claims, evidence-budget comparisons and recorded fake-provider failure traces. |
@@ -89,6 +89,123 @@ Before accepting a source replacement, compare its current and proposed values, 
 The **Trade-off lens** compares two currently supported setups from the same revision: all-in price difference, exact component/quantity changes, estimated preference contributions and inspected source fields. Download a readable comparison without changing the task, selecting a basket or granting checkout approval. Refreshing or changing the choices clears the old comparison.
 
 The evidence workspace uses curated manufacturer records and declared scenario assumptions. It cannot create checkout. Missions uses a separate fictional merchant catalog. Browser WebGL renders the locally served Three.js scene, with an illustrated fallback; the planning core runs on CPU.
+
+## An agent that finishes the investigation
+
+Open `/` or `/agent`. Write a request or choose a visual example, select **Let’s plan**, review the details, then choose **Find my setup**. The request, review, investigation and result appear one at a time. **Details** holds the source records and advanced controls. Screen counts use illustrated buttons; results lead with part pictures and everyday labels. The workflow decides which missing detail to inspect next, pauses for your software permission, verifies the supported result and explores what changes if the selected dock becomes unavailable. With driver permission enabled, it also checks the alternative without that permission. A concise brief keeps the recommendation, supporting observations and unresolved questions together.
+
+```mermaid
+flowchart LR
+    R[Reviewed request] --> P[Plan investigation]
+    P --> T[Retrieve observed evidence]
+    T --> A[Propose one typed action]
+    A --> V{Local tool validator}
+    V -->|Allowed| O[Observe and checkpoint]
+    O --> T
+    V -->|Human decision| H[Pause for your answer]
+    H --> A
+    O --> C[Verify citations and arithmetic]
+    C --> F[Re-solve a hypothetical fallback]
+    F --> B[Evidence brief]
+```
+
+**AI is the primary engine.** Astropods first generates a bounded investigation plan, then proposes the next action using the reviewed task, recent observations and hybrid retrieval from visible/inspected evidence. The server validates every proposal. At completion, the model selects and orders already verified claim IDs for the brief; it cannot invent report facts. The deterministic research baseline remains explicitly separate under **Details → Advanced controls**. Local verification shares the existing finite compatibility evaluator, so it is not an independent hardware oracle or source-truth check.
+
+**Progress survives a refresh.** SQLite stores the current workflow and a hash-linked journal. Run identity, task fingerprint, revision, source identity and review date reject stale work. Each explicit request performs at most four local transitions or one model request. The primary visual-planner interpreter also uses real model inference and resets software permission before human review. Closing the page starts no background worker. Cancellation stops future steps; an already dispatched response cannot restore a cancelled or changed run. Lost or rejected model replies retain their durable call/cost reservation and trigger no automatic retry.
+
+**Inspectable output.** The brief includes supported claims with exact source IDs, structural checks, counterfactuals and limitations. Markdown and JSON exports omit the free-text request and raw journal, but still contain product/evidence details: review them before sharing. Retrieval combines BM25 with a pinned local Hugging Face MiniLM encoder when configured. PyTorch runs masked mean pooling and normalized 384-dimensional embeddings on CPU; reciprocal-rank fusion combines the ranks. Only already visible or inspected, current sources enter retrieval. Without the reviewed local encoder, the response explicitly reports lexical fallback. Neither cosine similarity nor rank is factual confidence; this does not browse the open web. An eligible fictional-catalog brief can seed the 3D planner’s requirement form for fresh review; this resets software permission and transfers no evidence, quote or approval. All budgets remain active, and neither engine grants scenario confirmation, software permission or payment approval.
+
+## Engineering behind the experience
+
+| Layer | Actual implementation |
+| --- | --- |
+| Application | Python 3.12, FastAPI, strict Pydantic schemas, HTTPX |
+| Model inference | OpenAI Python SDK pointed at the optional Astropods gateway; no OpenAI account required |
+| Orchestration | LangGraph routes one guarded transition at a time; SQLite transactions persist run checkpoints, ownership and revisions |
+| Retrieval | BM25 + CPU PyTorch/Hugging Face Transformers; Sentence Transformers and Qdrant for owned file passages |
+| File parsing | Docling, pypdf, LlamaIndex passage boundaries; bounded network-disabled parser process |
+| Storage/search | SQLite durable state, source-bound JSON, exact private Qdrant vector search and a bounded embedding cache |
+| Tools | Strict product search, evidence inspection, human questions and recommendation actions; separate read-only MCP snapshot server |
+| Observability | OpenTelemetry SDK with an in-process 128-span buffer and owned-run export; no network exporter or prompt capture |
+| Interface | Build-free browser JavaScript, responsive CSS, SVG illustrations and Three.js in the optional 3D studio |
+
+The model proposes; server-side validation checks every action, citation, permission and price calculation. The SDK has **zero automatic retries**, disallows redirects and bounds decoded success/error bodies to 64 KiB. Call and cost reservations persist before dispatch and remain consumed after an uncertain or invalid response. LangGraph does not replace the SQLite transaction boundary. Hosted tracing, distributed training, fine-tuning, GPU serving and edge inference are not activated or claimed. The release uses one implementation for each implemented job; it does not claim every alternative framework in the ecosystem. Jev’s typed API was reviewed and protocol-tested privately, but no live TypeSafe key or approved provider allocation was supplied, so no Jev inference result is claimed.
+
+### Local semantic retrieval
+
+The explicit setup step downloads public encoder weights once; starting the application never downloads a model or starts a GPU job.
+
+```sh
+python scripts/setup_encoder.py --directory var/encoder
+INTENTCART_EMBEDDING_DIR=var/encoder HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m intentcart
+```
+
+The encoder is [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), revision `173eb854beababc71d6c2962980f98ac8f7a975d`, licensed Apache-2.0. Setup saves provenance and file hashes; runtime validates them and uses local safetensors without remote model code. Weights stay outside Git. This is pretrained encoder inference, not training or a newly developed model. Field-level retrieval evaluations are separate from end-to-end recommendation quality.
+
+### Read a brief through MCP
+
+Download a completed research brief as JSON from **Details**, or **Save my plan** on the result, review its product/source content, then select that one artifact when starting the official MCP stdio server:
+
+```sh
+python -m intentcart.mcp_server --snapshot /absolute/path/intentcart-research.json
+```
+
+An MCP client can call `get_setup`, `verify_snapshot`, `get_claims`, `search_sources` and `get_fallbacks`. All five tools are read-only. There is no file-selection, model-dispatch, task-mutation or payment tool. The selected artifact is untrusted data. Citation consistency is not an authenticity signature, a freshness guarantee or a physical hardware test.
+
+## Read your own spec sheets
+
+Open **Details → Read a spec sheet**. Add a PDF with selectable text, Markdown or a text file. The server reads it with Docling and pypdf, splits passages with LlamaIndex, then searches them with local Sentence Transformers embeddings and exact Qdrant search. No hosted embedding service or vector account is needed.
+
+Files are limited to 1.5 MB, eight PDF pages, 40,000 readable characters and five files per browser session. Original uploads are deleted after extraction; the owned extracted text is stored in SQLite. Images and external resources are not fetched. Scanned PDFs need a text layer; no OCR is claimed.
+
+**Find passages** reads locally. **Ask AI** appears after you review the retrieved passages and explicitly agree to send the question and excerpts to Astropods. AI selects from those passages; the answer quotes the actual text with page references. It cannot invent a quotation or turn a file into verified compatibility evidence. Changing the question clears the reviewed context and sharing choice. Removing a file leaves the workstation plan and approvals untouched.
+
+Every AI operation reserves its shared call/cost allowance before dispatch. Exact operation IDs prevent an HTTP retry from repeating the model call. A lost response can recover the recorded answer through a read-only status request. Invalid responses retain the reservation. File text is private to its owning browser session; it is not included in public logs, traces or source exports.
+
+## Run the container
+
+The image includes the pinned CPU encoder. Building it downloads public packages and weights; starting it performs no model download or automatic inference.
+
+```sh
+docker compose up --build
+```
+
+Open **http://127.0.0.1:4000**. The default container has zero external-call and inference ceilings. Configure a deliberately approved model allocation privately to enable real inference. SQLite uses the stable named `intentcart-local-data` volume. The app runs as a non-root user, with a read-only image filesystem and a bounded temporary directory.
+
+## Public launch profiles
+
+| Profile | Intended behavior |
+| --- | --- |
+| `local` | Private laptop development and explicitly bounded manual inference |
+| `public-preview` | Read-only, no provider keys and zero external ceilings; suitable for the included free Render preview blueprint |
+| `production` | Invited public launch over HTTPS, a private access password, confirmed durable storage and a separately approved model allocation |
+
+The production profile refuses startup when those prerequisites are missing. It uses one process and one instance; it is not a horizontally distributed payment service. `GET /readyz` checks configuration and storage access. Progress streams contain owned checkpoints, never advance the agent, and close automatically; they are not token-generation or idle model jobs. API and HTML responses are private/non-cacheable. Only versioned public static assets receive immutable caching headers; this is not distributed edge inference or an AI-CDN deployment.
+
+Before exposing a production instance:
+
+1. Put private settings outside Git. Set `PUBLIC_URL` to the exact HTTPS origin, `COOKIE_SECURE=true`, `INTENTCART_MODE=production`, a private `INTENTCART_ACCESS_PASSWORD` of at least 32 bytes and `INTENTCART_STORAGE_ACK=durable`.
+2. Configure the Astropods endpoint, key, reviewed rates, credit-only confirmation and **separate** positive call/cost ceilings. Set `INTENTCART_PUBLIC_INFERENCE_APPROVED=true` only for the allocation approved for this public launch. Do not copy or renew another session's allowance.
+3. Mount a durable local block-backed volume, then explicitly run `python -m intentcart.release --init-storage` on that volume. This creates an installation marker without resetting receipts or counters.
+4. Use the immutable audited application image in `compose.production.yaml`, supply `APP_DOMAIN` and the private environment-file path, then start the app behind the included Caddy HTTPS proxy. The application trusts only that proxy's fixed private address. Username is `intentcart`; the password is the private value from step 1.
+
+The [official hackathon Render page](https://paypalaihackathon.devpost.com/details/render) links the [$50 organizer claim flow](https://credits-portal-mmdm.onrender.com/claim/paypal-ai-hackathon). Redeem it into the intended workspace and verify the balance. Free Render services have ephemeral storage and are represented here by the read-only preview. A durable AI launch needs a paid compute instance and persistent disk; verify credit-only eligibility and payment-method requirements before creating either. Do not add a card or create cash exposure just to consume a grant. The Azure fallback in `deploy/azure/main.bicep` provisions one CPU-only ARM Linux host with a local disk and one administrator `/32` SSH rule. The template does not provision a GPU, Kubernetes, paid inference or a registry. Compile and review it before deploying:
+
+```sh
+az bicep build --file deploy/azure/main.bicep
+az deployment group what-if --resource-group YOUR_GROUP --template-file deploy/azure/main.bicep \
+  --parameters location=westus2 sshPublicKey=YOUR_PUBLIC_KEY adminIpv4=YOUR_IP dnsLabel=YOUR_AVAILABLE_LABEL
+```
+
+Check the actual subscription's region policy, CPU quota, credit balance and spending limit first. The supported host size is configurable because account eligibility varies. Use a Linux/ARM64 application image with the default ARM host. The template prepares infrastructure; source delivery, private settings, volume initialization, TLS and a successful external smoke check are required before calling the site live. No subscription upgrade or paid plan is automatically selected.
+
+For an explicit private backup, while preserving the live allowance ledger:
+
+```sh
+python -m intentcart.backup --output /private/backups/intentcart.sqlite3
+```
+
+Backups can contain private sessions, uploaded text and sandbox records. Keep them out of Git. The command creates a new mode-600 backup and verifies integrity and the usage counters. It does not upload, schedule or automatically restore old counters. Stop the service and reconcile any later usage before a restore.
 
 ## Optional configuration
 
@@ -105,7 +222,7 @@ If you change the port, set `PORT` in the shell before starting and make `PUBLIC
 
 **PayPal sandbox:** create a sandbox REST application in the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/applications/sandbox), set `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` privately, restart the server and use a separate Personal sandbox buyer. Review and approve the exact quote before opening checkout. No real funds or goods are involved. After an uncertain capture, reconcile the existing order before retrying.
 
-**Optional hosted inference:** the Astropods adapter requires `ASTRO_GATEWAY_URL`, `ASTRO_GATEWAY_API_KEY`, `MODEL_DEFAULT`, explicitly reviewed input/output rates, `ASTRO_CREDIT_ONLY_CONFIRMED=true`, and positive call and cost ceilings. Costs are configured in micro-USD; the rate variables are `ASTRO_INPUT_MICROUSD_PER_MILLION` and `ASTRO_OUTPUT_MICROUSD_PER_MILLION`. Keep ceilings at zero unless you deliberately authorize usage. Hosted inference is separate from the default deterministic controller.
+**Optional hosted inference:** the Astropods adapter requires `ASTRO_GATEWAY_URL`, `ASTRO_GATEWAY_API_KEY`, `MODEL_DEFAULT`, explicitly reviewed input/output rates, `ASTRO_CREDIT_ONLY_CONFIRMED=true`, and positive call and cost ceilings. Costs are configured in micro-USD; the rate variables are `ASTRO_INPUT_MICROUSD_PER_MILLION` and `ASTRO_OUTPUT_MICROUSD_PER_MILLION`. Keep ceilings at zero unless you deliberately authorize usage. The main workspace selects real inference. A missing connection or exhausted budget is shown explicitly; it is never presented as a working model. Deterministic policies remain available as named research baselines.
 
 **Optional discovery:** `CHANNEL3_API_KEY` and an explicitly positive `EXTERNAL_CALL_LIMIT` enable separate product discovery. Discovery listings do not authorize checkout or establish compatibility.
 
@@ -116,6 +233,19 @@ intentcart/
   app.py, *_routes.py         HTTP routes, session ownership and persisted state
   missions.py                Finite planning, investigation and minimal-change repair
   agent.py, workbench.py      Bounded actions and human evidence review
+  orchestrator.py            Strict research transitions, verification and briefs
+  workflow.py                LangGraph routing over those guarded transitions
+  semantic.py                Offline PyTorch/Transformers evidence retrieval
+  documents.py               Bounded, network-disabled file parsing
+  document_routes.py         Owned file lookup, consent and idempotent AI answers
+  vector_search.py            LlamaIndex / Sentence Transformers / local Qdrant
+  model_usage.py              Shared durable model reservations
+  production.py, release.py   Fail-closed launch configuration and readiness
+  progress.py                Bounded owned server-sent checkpoints
+  backup.py                  Explicit private SQLite backup verification
+  observability.py           Bounded local OpenTelemetry spans
+  sdk_transport.py           Bounded OpenAI-compatible HTTPX transport
+  mcp_server.py              Read-only selected-brief MCP tools
   evidence_catalog.py        Curated sources and exact product variants
   learning.py                Bayesian preference learning
   workspace_preferences.py   Preferences over supported configurations
@@ -126,7 +256,7 @@ intentcart/
   paypal.py, gateway.py      Optional bounded external transports
   data/                      Catalogs, settings and results used by the interface
   web/                       HTML, CSS, JavaScript, illustrations and Three.js
-scripts/                     Sources required to validate the saved research views
+scripts/                     Saved-view evaluators and explicit encoder setup
 docs/protocols/              Two machine-readable inputs for those views
 requirements.txt             Pinned runtime dependencies
 ```

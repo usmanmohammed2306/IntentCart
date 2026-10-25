@@ -18,7 +18,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ConfigDict
-from . import config
+from . import config, production
 from .learning import FEATURES, PARTICLES, posterior, choose_pair, infer_intake
 from .decision import assess, distribution, QUESTION_COST, RISK_LIMIT
 from . import study as pilot
@@ -62,6 +62,8 @@ def initialize():
               request_id TEXT NOT NULL, capture_request TEXT NOT NULL, refund_request TEXT NOT NULL,
               provider_id TEXT, capture_id TEXT, refund_id TEXT, status TEXT NOT NULL, updated REAL NOT NULL);
             CREATE TABLE IF NOT EXISTS calls (name TEXT PRIMARY KEY, count INTEGER NOT NULL);
+            CREATE TABLE IF NOT EXISTS research_documents (id TEXT PRIMARY KEY,owner TEXT NOT NULL REFERENCES sessions(id),revision INTEGER NOT NULL,data TEXT NOT NULL,created REAL NOT NULL);
+            CREATE TABLE IF NOT EXISTS document_answers (id TEXT PRIMARY KEY,owner TEXT NOT NULL REFERENCES sessions(id),document_id TEXT NOT NULL,data TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS feedback (owner TEXT NOT NULL, data TEXT NOT NULL, created REAL NOT NULL);
             CREATE TABLE IF NOT EXISTS studies (owner TEXT PRIMARY KEY REFERENCES sessions(id), data TEXT NOT NULL);
         ''')
@@ -78,6 +80,7 @@ def initialize():
 async def lifespan(application):
     # Opening storage belongs to server startup, not module import. This keeps
     # tooling and test collection from touching a user's saved payment state.
+    production.validate(config)
     initialize()
     yield
 
@@ -89,6 +92,8 @@ async def payment_error(request, exc):
 
 @app.middleware('http')
 async def boundaries(request: Request, call_next):
+    denied=production.access(request,config)
+    if denied is not None:return denied
     if request.method not in ('GET', 'HEAD', 'OPTIONS'):
         if request.headers.get('origin') != config.PUBLIC_URL:
             return JSONResponse({'detail': 'Request origin is not allowed.'}, status_code=403)
@@ -96,7 +101,7 @@ async def boundaries(request: Request, call_next):
         body = bytearray()
         async for chunk in request.stream():
             body.extend(chunk)
-            if len(body) > 65536:
+            if len(body) > (1_600_000 if request.url.path=='/api/documents/import' else 65536):
                 return JSONResponse({'detail': 'Request body is too large.'}, status_code=413)
         request._body = bytes(body)
     if request.url.path.startswith('/api/'):
@@ -120,7 +125,7 @@ async def boundaries(request: Request, call_next):
     response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
     response.headers['Cache-Control'] = 'no-store' if request.url.path.startswith('/api/') else 'no-cache'
     response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' https://*.paypal.com https://*.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.paypal.com https://*.paypalobjects.com; connect-src 'self' https://*.paypal.com https://*.paypalobjects.com; frame-src https://*.paypal.com https://*.paypalobjects.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.paypal.com; frame-ancestors 'none'"
-    return response
+    return production.cache_policy(request,response,ROOT/'web')
 
 def fresh_state():
     return {'version': 0, 'mission': None, 'history': [], 'excluded': [], 'question': None, 'answered_ids': [],
@@ -970,6 +975,16 @@ def robustness():
         raise HTTPException(409, 'Controller configuration differs from the evaluation.')
     return {k: v for k, v in data.items() if k != 'records'}
 
+@app.get('/readyz')
+def ready():
+    result=production.configuration(config)
+    try:
+        with database() as db:db.execute('SELECT 1')
+        storage=True
+    except (OSError,sqlite3.Error):storage=False
+    ready=result['configuration_ready'] and storage
+    return JSONResponse({'status':'ready' if ready else 'not_ready','profile':result['profile'],'storage':storage,'scope':'Single-instance readiness, not a durability or security certification.'},status_code=200 if ready else 503)
+
 @app.get('/healthz')
 def health():
     with database() as db:
@@ -978,7 +993,7 @@ def health():
 
 @app.get('/')
 def home():
-    return FileResponse(ROOT/'web/missions.html')
+    return FileResponse(ROOT/'web/agent.html')
 
 @app.get('/learn')
 @app.get('/evidence')
@@ -995,3 +1010,9 @@ agent_routes.register(sys.modules[__name__])
 
 from . import workbench_routes
 workbench_routes.register(sys.modules[__name__])
+
+from . import document_routes
+document_routes.register(sys.modules[__name__])
+
+from . import progress
+progress.register(sys.modules[__name__])
