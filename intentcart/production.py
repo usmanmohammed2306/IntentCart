@@ -36,12 +36,14 @@ def configuration(config):
     if profile == 'production':
         authentication=os.getenv('INTENTCART_AUTH','basic')
         termination=os.getenv('INTENTCART_TLS_TERMINATION','')
-        if termination not in ('','astropods') or (termination=='astropods' and (authentication!='astropods' or not (url.hostname or '').endswith('.agents.astropods.ai'))):issues.append('Managed TLS termination requires verified Astropods identity and its assigned HTTPS hostname.')
+        if termination not in ('','astropods') or (termination=='astropods' and (authentication not in ('astropods','accounts') or not (url.hostname or '').endswith('.agents.astropods.ai'))):issues.append('Managed TLS termination requires verified Astropods identity and its assigned HTTPS hostname.')
         if authentication=='astropods':
             try:
                 from .astro_auth import authorizer
                 authorizer()
             except Exception:issues.append('Astropods production requires a valid deployed authorization identity.')
+        elif authentication=='accounts':
+            if os.getenv('INTENTCART_PUBLIC_ACCOUNTS_APPROVED')!='true':issues.append('Public account authentication requires explicit operator approval.')
         elif authentication=='basic':
             if len(os.getenv('INTENTCART_ACCESS_PASSWORD','').encode())<32:issues.append('Production requires a private access password of at least32 bytes.')
         else:issues.append('Unknown production authentication policy.')
@@ -79,9 +81,11 @@ def access(request, config):
         return None
     # The managed frontend terminates TLS before its private HTTP upstream.
     # This explicit profile still requires exact Host and signed platform identity.
-    managed_tls=(os.getenv('INTENTCART_AUTH','basic')=='astropods' and os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and (origin.hostname or '').endswith('.agents.astropods.ai'))
+    managed_tls=(os.getenv('INTENTCART_AUTH','basic') in ('astropods','accounts') and os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and (origin.hostname or '').endswith('.agents.astropods.ai'))
     if request.url.scheme != 'https' and not managed_tls:
         return JSONResponse({'detail':'HTTPS is required.'},status_code=400)
+    if os.getenv('INTENTCART_AUTH','basic')=='accounts':
+        return None if os.getenv('INTENTCART_PUBLIC_ACCOUNTS_APPROVED')=='true' else JSONResponse({'detail':'Account access is not approved.'},status_code=503)
     if os.getenv('INTENTCART_AUTH','basic')=='astropods':
         return JSONResponse({'detail':'Sign in through Astropods.'},status_code=401)
     header = request.headers.get('authorization','')
@@ -102,7 +106,7 @@ def access(request, config):
 def cache_policy(request, response, web_root):
     response.headers['Cache-Control'] = 'private, no-store'
     response.headers['Vary'] = 'Cookie, Authorization'
-    if mode()=='production' and (request.url.scheme=='https' or (os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and request.scope.get('intentcart_auth_subject'))):response.headers['Strict-Transport-Security']='max-age=31536000'
+    if mode()=='production' and (request.url.scheme=='https' or (os.getenv('INTENTCART_TLS_TERMINATION')=='astropods' and (request.scope.get('intentcart_auth_subject') or os.getenv('INTENTCART_AUTH')=='accounts' and os.getenv('INTENTCART_PUBLIC_ACCOUNTS_APPROVED')=='true'))):response.headers['Strict-Transport-Security']='max-age=31536000'
     name = request.url.path.removeprefix('/static/')
     if request.url.path.startswith('/static/'):
         path = (web_root/name).resolve()

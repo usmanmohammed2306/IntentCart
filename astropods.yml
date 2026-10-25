@@ -22,6 +22,18 @@ agent:
   - name: INTENTCART_AUTH
     datatype: string
     default: astropods
+  - name: INTENTCART_PUBLIC_ACCOUNTS_APPROVED
+    datatype: string
+    default: 'false'
+  - name: INTENTCART_OPERATOR_INVITE_SHA256
+    datatype: string
+    default: ''
+  - name: INTENTCART_OPERATOR_INVITE_EXPIRES
+    datatype: string
+    default: '0'
+  - name: INTENTCART_OPERATOR_AI_ACCESS
+    datatype: string
+    default: 'false'
   - name: INTENTCART_TLS_TERMINATION
     datatype: string
     default: astropods

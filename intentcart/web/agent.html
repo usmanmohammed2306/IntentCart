@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7f5">
 <title>IntentCart — Find your workspace</title>
-<link rel="stylesheet" href="/static/agent.css"><link rel="stylesheet" href="/static/interface.css"><link rel="stylesheet" href="/static/experience.css">
+<link rel="stylesheet" href="/static/agent.css"><link rel="stylesheet" href="/static/interface.css"><link rel="stylesheet" href="/static/experience.css"><link rel="stylesheet" href="/static/immersive.css">
 </head>
-<body class="calm-ui agent guided-agent" data-experience="guided">
+<body class="calm-ui agent guided-agent immersive-agent" data-experience="guided">
 <a class="skip" href="#workspace">Skip to your setup</a>
 <header class="concierge-header">
 <a class="brand" href="/" aria-label="IntentCart home"><span class="brand-symbol" aria-hidden="true">↗</span> IntentCart<span class="brand-dot" aria-hidden="true"></span></a>
-<nav class="product-nav" aria-label="Main navigation"><a href="/agent" aria-current="page">Your workspace</a></nav>
+<nav class="product-nav" aria-label="Main navigation"><a href="/agent" aria-current="page">Your workspace</a><a href="/customers" id="customer-nav" hidden>Customers</a><a href="/account" id="account-nav" hidden>Sign in</a></nav>
 <button id="advanced-open" class="quiet-button menu-button" aria-haspopup="dialog">Details <span aria-hidden="true">☷</span></button>
 </header>
 <main id="workspace" class="concierge-main"><p id="release-banner" class="release-banner" role="status" hidden></p>
@@ -17,19 +17,19 @@
 <form id="task-form">
 <section id="agent-input-panel">
 <div id="welcome-screen" data-screen="start" class="welcome-screen">
-<div class="welcome-heading"><h1>A setup that fits.</h1><p>Tell us what you need. We’ll put the pieces together.</p></div>
+<div class="welcome-heading"><h1>Make space.</h1><p>Your next workspace, brought together.</p></div>
 <div id="welcome-spatial-mount" class="welcome-spatial-mount"><aside id="agent-preview" class="desk-preview" aria-label="Explore an illustrated workstation">
 <div class="scene-caption"><span class="small-orb" aria-hidden="true"></span><span id="scene-caption">MacBook Air example</span></div>
 <div class="desk-scene" id="desk-scene"><div class="desk-halo" aria-hidden="true"></div><img src="/static/assets/studio-workstation.svg" alt="Illustration of a laptop, dock and two screens" class="workstation-art"><button class="scene-hotspot screen-hotspot" type="button" data-scene-note="screen" aria-label="Explore screens"><span>+</span></button><button class="scene-hotspot dock-hotspot" type="button" data-scene-note="dock" aria-label="Explore connections"><span>+</span></button></div>
 <div class="scene-story" aria-live="polite"><strong id="scene-story-title"></strong><p id="scene-story-note">Illustrated preview</p></div>
 </aside></div>
-<div class="welcome-copy"><div class="request-card"><label for="query">What do you have in mind?</label><textarea id="query" rows="2" maxlength="1000" placeholder="Two screens for my MacBook, under $350…"></textarea><div class="request-bottom"><span class="service-state" id="engine">Getting ready…</span><button id="research-intake" type="button" class="primary" disabled>Let’s plan <span aria-hidden="true">↗</span></button></div></div>
+<div class="welcome-copy"><div class="request-card"><label for="query">What are you imagining?</label><textarea id="query" rows="1" maxlength="1000" placeholder="Two screens for my MacBook, under $350…"></textarea><div class="request-bottom"><span class="service-state" id="engine">Getting ready…</span><button id="research-intake" type="button" class="primary" disabled>Let’s plan <span aria-hidden="true">↗</span></button></div></div>
 <div class="suggestions" aria-label="Ideas to get started"><button type="button" data-prompt="simple"><img src="/static/assets/studio-display.svg" alt="" aria-hidden="true"><span>One screen</span><span aria-hidden="true">↗</span></button><button type="button" data-prompt="two"><span class="double-screen" aria-hidden="true"><img src="/static/assets/studio-display.svg" alt=""><img src="/static/assets/studio-display.svg" alt=""></span><span>Two screens</span><span aria-hidden="true">↗</span></button></div>
-<div class="welcome-foot"><button type="button" id="manual-details" class="text-button">Choose the details myself</button><span class="example-note">Example parts &amp; prices</span></div>
-<p class="privacy-note">AI requests share your text and checked product details with Astropods. <button type="button" data-open-section="connection">Details</button></p></div>
+<div class="welcome-foot"><button type="button" id="manual-details" class="text-button">Choose visually</button><span class="example-note">Illustrated examples</span></div>
+<p class="privacy-note">Your request &amp; checked facts go to Astropods when you ask AI. <button type="button" data-open-section="connection">Details</button></p></div>
 </div>
 <section id="review-screen" data-screen="review" hidden class="review-screen">
-<div class="review-heading"><button id="review-back" type="button" class="back-link">← Your idea</button><span class="eyebrow">Make it yours</span><h1>A few details. That’s all.</h1><p>Check these before we start.</p></div>
+<div class="review-heading"><button id="review-back" type="button" class="back-link">← Your idea</button><span class="eyebrow">Your choices</span><h1>Make it yours.</h1><p>Review, then continue.</p></div>
 <div class="review-grid"><div class="review-form">
 <div class="review-cards"><label class="review-card" for="laptop"><span class="field-icon" aria-hidden="true">▱</span><span>Your laptop</span><select id="laptop"></select></label><label class="review-card" for="budget"><span class="field-icon" aria-hidden="true">$</span><span>Your budget · USD</span><input id="budget" type="number" min="10" max="3000" step="0.01" value="350" required></label><div class="review-card screen-card"><span id="screen-count-label">How many screens?</span><div class="screen-picks" role="group" aria-labelledby="screen-count-label"><button type="button" data-screen-count="1" aria-pressed="false" aria-label="1 screen"><span class="screen-glyphs" aria-hidden="true"><i></i></span><span>1</span></button><button type="button" data-screen-count="2" aria-pressed="true" aria-label="2 screens"><span class="screen-glyphs" aria-hidden="true"><i></i><i></i></span><span>2</span></button><button type="button" data-screen-count="3" aria-pressed="false" aria-label="3 screens"><span class="screen-glyphs" aria-hidden="true"><i></i><i></i><i></i></span><span>3</span></button><button type="button" data-screen-count="4" aria-pressed="false" aria-label="4 screens"><span class="screen-glyphs" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>4</span></button></div><select id="displays" aria-label="Screen count" aria-hidden="true" tabindex="-1" class="visually-stored"><option value="1">One screen</option><option value="2" selected>Two screens</option><option value="3">Three screens</option><option value="4">Four screens</option></select></div></div>
 <label class="toggle-card" for="reuse"><span><strong>Keep my current monitor</strong><small>One Full HD screen, 60 Hz, with HDMI.</small></span><input id="reuse" type="checkbox" checked><span class="toggle-switch" aria-hidden="true"></span></label>
@@ -42,7 +42,7 @@
 </form>
 <section class="task-panel" id="agent-results-panel" hidden>
 <div class="result-toolbar"><button type="button" id="agent-edit" class="back-link">← Edit details</button><span id="result-context" class="context-pill"></span></div>
-<section id="working-screen" data-screen="working" hidden class="working-screen"><div class="working-art" aria-hidden="true"><div class="thinking-ring"></div><img src="/static/assets/studio-dock.svg" alt=""><span class="working-spark">✦</span></div><span class="eyebrow" id="work-eyebrow">On it</span><h1 id="status" tabindex="-1">Finding the pieces<br>that fit together.</h1><p id="guidance">Your progress is saved as we go.</p><ol class="research-graph" id="research-graph" aria-label="What we’re checking"></ol>
+<section id="working-screen" data-screen="working" hidden class="working-screen"><div id="working-spatial-mount" class="working-spatial-mount"></div><div class="working-art" aria-hidden="true"><div class="thinking-ring"></div><img src="/static/assets/studio-dock.svg" alt=""><span class="working-spark">✦</span></div><span class="eyebrow" id="work-eyebrow">On it</span><h1 id="status" tabindex="-1">Finding the pieces<br>that fit together.</h1><p id="guidance">Your progress is saved as we go.</p><ol class="research-graph" id="research-graph" aria-label="What we’re checking"></ol>
 <div id="question" class="permission-card" hidden><span class="permission-symbol" aria-hidden="true">?</span><h2>One quick question.</h2><p id="question-text"></p><p class="fine">Some display software needs extra permissions. You can say no.</p><div class="controls"><button id="permit" class="primary">Allow and continue</button><button id="decline">Continue without it</button></div></div>
 <div class="working-actions"><button id="research-run" class="primary" disabled>Continue looking <span aria-hidden="true">↗</span></button><button id="research-stop" class="quiet-button" hidden>Pause after this step</button></div><p id="research-note" class="fine" role="status"></p><div id="activity-card" class="activity-card" aria-live="polite"></div>
 </section>

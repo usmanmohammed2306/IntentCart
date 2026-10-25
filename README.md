@@ -26,6 +26,22 @@ The illustrated desk is interactive: drag to look around, select a component, or
 
 Three.js renders the scene on demand, while Anime.js 4.5 provides short spring transitions. There is no continuous idle render loop or model call behind the visual controls. Reduced-motion preferences are respected, and a static illustration plus text controls keep the request flow usable when graphics are unavailable. These are browser graphics, not a rented GPU or WebGPU deployment. React, R3F, Rapier and Rive are not dependencies of this plain-JavaScript interface.
 
+## Your account, your customers
+
+The optional account profile adds IntentCart sign-up/sign-in/sign-out, saved workspace ownership, editable profiles, active-session controls and a private customer pipeline. Add contacts, search by name/company/notes, move them through **New → Planning → Ready → Archived**, and download your own workspace. Each account has its own records; an operator can manage account enablement and AI invitations without an application route for reading another account’s plans or customer notes. The infrastructure owner still controls storage and backups.
+
+To try accounts locally, keep the model/payment caps at zero and start with:
+
+```bash
+INTENTCART_AUTH=accounts python -m intentcart
+```
+
+Open `/login`. Use a unique username and a password of at least15 characters, then save the displayed recovery key. Passwords use salted scrypt (N=131072,r=8,p=1); login cookies are HttpOnly, revocable and expire after seven days or one inactive day. A changed password or recovered account revokes all previous sessions and replaces the recovery key. No email address is needed and no verification/reset email is sent. Losing both password and recovery key can prevent recovery. Deactivation blocks access and retains records for operator-assisted restoration; it is not permanent erasure. `/privacy` describes storage and AI sharing.
+
+There is no automatic operator role or AI allocation for the first sign-up. On your own server, create a private, one-use,24-hour operator invitation with `python -m intentcart.accounts invite-admin`; add `--ai` only to grant use of the already configured shared model allowance. Never publish the invitation. Public deployment requires the explicit `INTENTCART_PUBLIC_ACCOUNTS_APPROVED=true` setting, exact HTTPS origin, secure cookies and durable storage. A fixed hashed bootstrap invitation and fixed expiry can be supplied privately through the hosting configuration when an interactive shell is unavailable. These settings do not renew model usage.
+
+This single-instance release bounds registration to1000 accounts and customer records to100/account, with durable authentication throttles, exact-Origin/CSRF protection and revision checks on updates. These are controlled demo limits, not a scale or security-certification claim. New accounts cannot spend model/discovery credits unless the operator explicitly grants AI access. Hosted AI access is limited; account creation, customer management and the labelled deterministic example planner do not call a model. PayPal remains sandbox-only and requires server credentials plus separate exact-basket approval.
+
 ## From a request to a reviewed decision
 
 ```mermaid

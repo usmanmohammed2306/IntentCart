@@ -5,6 +5,7 @@ const $=id=>document.getElementById(id),money=n=>new Intl.NumberFormat('en-US',{
 const node=(tag,text,cls='')=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const spatial=createSpatialWorkspace(document.getElementById('agent-preview'));
 let progressStream=null;
+let accountStatus={enabled:false,user:null};
 let csrf='',task=null,catalog=null,research=null,enabled=false,busy=false,dirty=false,view='start',researching=false,stopRequested=false,lastError='',allowanceUsed=false;
 const examples={two:'I want two Full HD screens for my MacBook Air M1, while keeping my current HDMI monitor. My budget is $350.',simple:'I want one Full HD screen for my MacBook Air M1 and a simple desk setup. My budget is $350.'};
 const stages={plan:'Make a plan',investigate:'Look closer',verify:'Check the fit',stress:'Explore backups',report:'Your choice'};
@@ -55,7 +56,7 @@ async function investigate(){
   }
   if(!stopRequested&&research.status==='COMPLETE'&&research.options.engine==='gateway'&&research.audit?.passed&&!research.brief_selection){research=await api('/api/agent/research/model-brief',revision(research));task=research.task;}
   if(stopRequested&&!['COMPLETE','CANCELLED'].includes(research.status)){research=await api('/api/agent/research/cancel',revision(research));task=research.task;}
-  if(research.status==='COMPLETE')view='result';
+  if(research.status==='COMPLETE')setView('result',true);
   if(research.status==='WAITING_FOR_USER'){$('question-text').tabIndex=-1;render();$('question-text').focus({preventScroll:true});}
  }finally{if(progressStream)progressStream.close();progressStream=null;researching=false;stopRequested=false;}
 }
@@ -67,6 +68,8 @@ function watchProgress(run){
 }
 initLibrary(()=>csrf);
 async function intake(){
+ if(accountStatus.enabled&&!accountStatus.user){location.assign('/login');return;}
+ if(accountStatus.enabled&&!accountStatus.user.ai_access){$('intake-note').textContent='Visual planner · choose the details yourself. No AI request is sent.';setView('review',true);return;}
  if(!$('query').value.trim()){message('Tell us a little about the setup you have in mind.');$('query').focus();return;}
  const query=$('query').value,kind=$('collection').value,before=JSON.stringify({goal:goal(),assumptions:$('assumptions').checked});
  const result=await api('/api/agent/research/intake',{query,catalog_kind:kind});
@@ -105,7 +108,7 @@ function renderPlan(r){
  for(const [i,card] of [...gallery.children].entries()){const product=catalog.products.find(p=>p.id===plan.items[i].product_id);const title=card.querySelector('h4'),model=card.querySelector('small');title.textContent=kinds[product?.kind]||'Part';model.textContent=product?.name||plan.items[i].product_id;title.parentNode.prepend(title);}
  const bottom=node('div',undefined,'result-board-bottom'),note=node('p','Illustrated parts · example prices, not a live quote.');
  const link=node('a',r.report.visual_handoff_available?'Explore in 3D ↗':'Review the parts ↗','next-workbench');link.href=r.report.visual_handoff_available?'/missions?from=research':'/workbench';bottom.append(note,link);
- const spatialMount=node('div',undefined,'result-spatial-mount');spatialMount.id='result-spatial-mount';board.append(top,benefits,spatialMount,gallery,bottom);container.append(board);
+ const spatialMount=node('div',undefined,'result-spatial-mount');spatialMount.id='result-spatial-mount';const partsDrawer=disclosure('Parts & prices',board);partsDrawer.className='parts-drawer';partsDrawer.append(gallery);board.replaceChildren(top,benefits,spatialMount,partsDrawer,bottom);container.append(board);
 }
 function disclosure(title,container){const d=node('details'),s=node('summary',title);d.append(s);container.append(d);return d;}
 function renderBrief(r){
@@ -167,12 +170,13 @@ function render(){
  for(const panel of document.querySelectorAll('[data-screen]'))panel.hidden=panel.dataset.screen!==view;
  document.body.dataset.view=view;document.body.classList.toggle('is-investigating',researching);
  for(const step of document.querySelectorAll('[data-journey]')){const active=step.dataset.journey===(result?'working':view),order={start:0,review:1,working:2};step.toggleAttribute('aria-current',active);if(active)step.setAttribute('aria-current','step');step.classList.toggle('is-done',order[step.dataset.journey]<order[result?'working':view]);}
- for(const button of $('task-form').querySelectorAll('button'))if(!button.closest('.spatial-tools'))button.disabled=busy;
+ for(const button of $('task-form').querySelectorAll('button'))if(!button.closest('#agent-preview'))button.disabled=busy;
  for(const b of document.querySelectorAll('[data-screen-count]')){b.setAttribute('aria-pressed',String(b.dataset.screenCount===$('displays').value));b.disabled=busy||!![...$('displays').options].find(o=>o.value===b.dataset.screenCount)?.disabled;}
- $('research-intake').disabled=busy||!enabled||!$('query').value.trim();$('research-intake').textContent=busy&&view==='start'?'Please wait…':'Let’s plan ↗';
+ const visualAccount=accountStatus.enabled&&!accountStatus.user?.ai_access;
+ $('research-intake').disabled=busy||!visualAccount&&(!enabled||!$('query').value.trim());$('research-intake').textContent=busy&&view==='start'?'Please wait…':visualAccount?'Choose my setup ↗':'Let’s plan ↗';$('manual-details').hidden=visualAccount;
  $('find-setup').disabled=busy||($('research-mode').value==='gateway'&&!enabled);$('find-setup').textContent=busy?'Getting started…':'Find my setup ↗';
  $('agent-edit').disabled=busy;$('start-another').disabled=busy;$('review-back').disabled=busy;
- $('engine').textContent=busy&&view==='start'?'Getting things ready':r?.options.engine==='local'?'Comparison mode':enabled?'Ready':allowanceUsed?'AI allowance used':'AI connection needed';
+ $('engine').textContent=busy&&view==='start'?'Getting things ready':r?.options.engine==='local'?'Comparison mode':enabled?'Ready':allowanceUsed?'AI allowance used':accountStatus.enabled&&!accountStatus.user?.ai_access?'AI by invitation':'AI connection needed';
  $('result-context').textContent=task?.catalog_kind==='fixture'?'Fictional workstation demo':'MacBook Air example';
  $('review-summary').replaceChildren(...[`${$('displays').value} screen${$('displays').value==='1'?'':'s'}`,money(Math.round(Number($('budget').value||0)*100))+' budget',$('reuse').checked?'Keep your monitor':'New screens'].map(t=>node('span',t)));
  $('next').disabled=busy||!task||task.status!=='ACTIVE'||dirty;$('model').disabled=$('next').disabled||!enabled;
@@ -183,8 +187,10 @@ function render(){
  $('guidance').textContent=r?.status==='WAITING_FOR_USER'?'Some options need a choice only you can make.':researching?'We’re checking the details and looking at your options.':'Continue the search or refine your request.';
  renderResearch(r);renderDetails();if(result){renderPlan(r);renderBrief(r);}
  const supported=result&&r?.report?.outcome==='supported'&&r.audit?.passed?task?.result.plan:null;
- const mount=view==='review'?$('review-spatial-mount'):supported?$('result-spatial-mount'):$('welcome-spatial-mount');if(mount&&!mount.contains(spatial.host))mount.append(spatial.host);
- spatial.update(presentation(supported?task.goal:goal(),supported,catalog?.products||[],catalog?.laptops||[]));animateJourney(view);
+ const mount=view==='working'?$('working-spatial-mount'):view==='review'?$('review-spatial-mount'):supported?$('result-spatial-mount'):$('welcome-spatial-mount');if(mount&&!mount.contains(spatial.host))mount.append(spatial.host);
+ spatial.update(presentation(supported?task.goal:goal(),supported,catalog?.products||[],catalog?.laptops||[]));
+ if(working){const event=r?.events.filter(e=>e.kind==='tool_result').at(-1),source=catalog?.sources?.[event?.data?.action?.target],part=catalog?.products.find(p=>p.id===source?.product_id)?.kind;if(part)spatial.focus(part);}
+ animateJourney(view);
 }
 function openAdvanced(section){const dialog=$('advanced-dialog');if(!dialog.open)dialog.showModal();if(section){const selector={connection:'#connection-details',sources:'#sources'}[section],target=selector&&document.querySelector(selector);const details=target?.closest('details');if(details)details.open=true;target?.scrollIntoView({block:'nearest'});}}
 $('advanced-open').addEventListener('click',()=>openAdvanced());$('advanced-close').addEventListener('click',()=>$('advanced-dialog').close());
@@ -213,4 +219,9 @@ for(const button of document.querySelectorAll('[data-choice]'))button.addEventLi
 $('research-search-go').addEventListener('click',()=>act(async()=>{const result=await api('/api/agent/research/retrieve?query='+encodeURIComponent($('research-search').value)+'&limit=6');$('research-hits').replaceChildren(...result.hits.map(hit=>{const article=node('article');article.append(node('strong',hit.source.product_id+' · '+hit.source.field),node('p',hit.source.summary||hit.source.excerpt||String(hit.source.value)),node('small',hit.source_id+' · relevance '+hit.score));return article;}));if(!result.hits.length)$('research-hits').append(node('p','No matching checked evidence.','fine'));}));
 const scene=$('desk-scene');scene.addEventListener('pointermove',event=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches||event.pointerType==='touch')return;const rect=scene.getBoundingClientRect();scene.style.setProperty('--tilt-x',((.5-(event.clientY-rect.top)/rect.height)*4).toFixed(2)+'deg');scene.style.setProperty('--tilt-y',(((event.clientX-rect.left)/rect.width-.5)*6).toFixed(2)+'deg');});scene.addEventListener('pointerleave',()=>{scene.style.setProperty('--tilt-x','0deg');scene.style.setProperty('--tilt-y','0deg');});
 for(const button of document.querySelectorAll('[data-scene-note]'))button.addEventListener('click',()=>{const screen=button.dataset.sceneNote==='screen';$('scene-story-title').textContent=screen?'More room for your work.':'One connection. Everything together.';$('scene-story-note').textContent=screen?'We’ll check which screens this setup supports.':'The dock, cables and power supply all need to fit.';});
-await act(async()=>{const session=await api('/api/session');csrf=session.csrf_token;const saved=await api('/api/agent');task=saved.task;enabled=saved.model_enabled;const workflow=await api('/api/agent/research');if(workflow.model_budget?.profile==='public-preview'){$('release-banner').hidden=false;$('release-banner').textContent='Public preview · AI actions run in the private app.';}allowanceUsed=enabled&&!workflow.model_enabled;enabled=enabled&&workflow.model_enabled;research=workflow.run;if(task)$('collection').value=task.catalog_kind;await collection();if(task){fillGoal(task.goal);$('query').value=task.query;$('assumptions').checked=task.scenario_confirmed;view=research?.status==='COMPLETE'?'result':'working';}if(research){$('research-mode').value=research.options.engine;$('research-policy').value=research.options.policy;}});
+document.querySelector('.request-card').append(document.querySelector('.privacy-note'));
+accountStatus=await api('/api/account');
+if(accountStatus.enabled){$('account-nav').hidden=false;$('customer-nav').hidden=!accountStatus.user;$('account-nav').textContent=accountStatus.user?'Account':'Sign in';}
+if(accountStatus.enabled&&!accountStatus.user){
+ $('engine').textContent='Your private workspace';$('research-intake').disabled=false;$('research-intake').textContent='Create your workspace ↗';$('release-banner').hidden=false;$('release-banner').replaceChildren(node('span','Save your plans and customers in an account. '));const signin=node('a','Sign in or create an account ↗');signin.href='/login';$('release-banner').append(signin);$('manual-details').textContent='Create your workspace ↗';$('manual-details').addEventListener('click',event=>{event.stopImmediatePropagation();location.assign('/login');},{capture:true});for(const b of document.querySelectorAll('[data-prompt]'))b.addEventListener('click',event=>{event.stopImmediatePropagation();location.assign('/login');},{capture:true});
+}else await act(async()=>{const session=await api('/api/session');csrf=session.csrf_token;const saved=await api('/api/agent');task=saved.task;enabled=saved.model_enabled;const workflow=await api('/api/agent/research');if(workflow.model_budget?.profile==='public-preview'){$('release-banner').hidden=false;$('release-banner').textContent='Public preview · AI actions run in the private app.';}allowanceUsed=enabled&&!workflow.model_enabled;enabled=enabled&&workflow.model_enabled;const invited=!accountStatus.enabled||!!accountStatus.user?.ai_access;if(!invited){enabled=false;$('release-banner').hidden=false;$('release-banner').textContent='Plan visually · AI assistance by invitation.';$('research-mode').value='local';}research=workflow.run;if(task)$('collection').value=task.catalog_kind;await collection();if(task){fillGoal(task.goal);$('query').value=task.query;$('assumptions').checked=task.scenario_confirmed;view=research?.status==='COMPLETE'?'result':'working';}if(research){$('research-mode').value=research.options.engine;$('research-policy').value=research.options.policy;}});

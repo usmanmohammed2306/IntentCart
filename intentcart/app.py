@@ -18,7 +18,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ConfigDict
-from . import config, production
+from . import config, production, accounts
 from .learning import FEATURES, PARTICLES, posterior, choose_pair, infer_intake
 from .decision import assess, distribution, QUESTION_COST, RISK_LIMIT
 from . import study as pilot
@@ -67,6 +67,7 @@ def initialize():
             CREATE TABLE IF NOT EXISTS feedback (owner TEXT NOT NULL, data TEXT NOT NULL, created REAL NOT NULL);
             CREATE TABLE IF NOT EXISTS studies (owner TEXT PRIMARY KEY REFERENCES sessions(id), data TEXT NOT NULL);
         ''')
+        accounts.initialize(db)
         # Upgrade existing installations without losing receipts. An old pending
         # operation has no trustworthy first-attempt time: require review.
         columns = {r['name'] for r in db.execute('PRAGMA table_info(orders)')}
@@ -118,6 +119,8 @@ async def boundaries(request: Request, call_next):
                 for old in list(RATES):
                     if not RATES[old] or RATES[old][-1] < now - 60:
                         del RATES[old]
+    denied=accounts.bind(request,__import__(__name__,fromlist=['app']))
+    if denied is not None:return denied
     response = await call_next(request)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'no-referrer'
@@ -132,8 +135,13 @@ def fresh_state():
             'shipping_surcharge_cents': 0, 'scenario_events': []}
 
 def owner(request, db, mutation=False):
+    if accounts.enabled():
+        account=accounts.current(request,db,mutation)
+        request.scope['intentcart_account_workspace']=account['workspace']
+        request.scope['intentcart_account_csrf']=account['csrf']
+        request.scope['intentcart_auth_subject']='account:'+account['id']
     token = request.cookies.get('intentcart_session', '')
-    digest = hashlib.sha256(token.encode()).hexdigest()
+    digest = request.scope.get('intentcart_account_workspace') or hashlib.sha256(token.encode()).hexdigest()
     row = db.execute('SELECT * FROM sessions WHERE id=? AND expires>?', (digest, time.time())).fetchone()
     if row is None:
         raise HTTPException(401, 'Session expired. Reload the page to start a new session.')
@@ -141,7 +149,8 @@ def owner(request, db, mutation=False):
     state=json.loads(row['state'])
     if subject is not None and state.get('_auth_subject')!=subject:
         raise HTTPException(401,'Session belongs to a different signed-in account. Reload to start your own session.')
-    if mutation and not secrets.compare_digest(row['csrf'], request.headers.get('x-csrf-token', '')):
+    expected=request.scope.get('intentcart_account_csrf',row['csrf'])
+    if mutation and not secrets.compare_digest(expected, request.headers.get('x-csrf-token', '')):
         raise HTTPException(403, 'Request security token is missing or invalid.')
     return digest, state
 
@@ -303,8 +312,10 @@ def session(request: Request):
             sid, state = owner(request, db)
             row = db.execute('SELECT csrf FROM sessions WHERE id=?', (sid,)).fetchone()
             token = None
-            csrf = row['csrf']
+            csrf = request.scope.get('intentcart_account_csrf',row['csrf'])
+            if accounts.enabled():db.execute('UPDATE sessions SET expires=? WHERE id=?',(time.time()+7*86400,sid))
         except HTTPException:
+            if accounts.enabled():raise
             token = secrets.token_urlsafe(32)
             sid = hashlib.sha256(token.encode()).hexdigest()
             csrf = secrets.token_urlsafe(32)
@@ -1024,3 +1035,5 @@ document_routes.register(sys.modules[__name__])
 
 from . import progress
 progress.register(sys.modules[__name__])
+
+accounts.register(sys.modules[__name__])
