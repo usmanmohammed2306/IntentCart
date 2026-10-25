@@ -122,6 +122,7 @@ flowchart LR
 | Application | Python 3.12, FastAPI, strict Pydantic schemas, HTTPX |
 | Model inference | OpenAI Python SDK pointed at the optional Astropods gateway; no OpenAI account required |
 | Orchestration | LangGraph routes one guarded transition at a time; SQLite transactions persist run checkpoints, ownership and revisions |
+| Hosted identity | Official Astropods auth SDK, signed and expiring platform claims, private access-list checks and account-bound sessions |
 | Retrieval | BM25 + CPU PyTorch/Hugging Face Transformers; Sentence Transformers and Qdrant for owned file passages |
 | File parsing | Docling, pypdf, LlamaIndex passage boundaries; bounded network-disabled parser process |
 | Storage/search | SQLite durable state, source-bound JSON, exact private Qdrant vector search and a bounded embedding cache |
@@ -172,17 +173,33 @@ docker compose up --build
 
 Open **http://127.0.0.1:4000**. The default container has zero external-call and inference ceilings. Configure a deliberately approved model allocation privately to enable real inference. SQLite uses the stable named `intentcart-local-data` volume. The app runs as a non-root user, with a read-only image filesystem and a bounded temporary directory.
 
+## Sponsor-hosted frontend
+
+`astropods.yml` packages this same application as a custom Astropods frontend, with its managed gateway and persistent `/data` storage. The dedicated `Dockerfile.astropods` serves port80 as an unprivileged user; the default `Dockerfile` keeps its original high port. The explicit file also supports CLI versions that ignore multi-stage build targets. Check the account's actual eligibility and deploy-form estimate before provisioning. Astropods documents free compute for its oldest running agent; model usage and any separately billed storage still need limits. Render credits are an alternative subject to its payment-method requirements; Azure is the fallback.
+
+The hosted profile uses the official `astropods-adapter-core` authorization SDK with signed, expiring ALB identity headers and the deployment's private access list. A bare user-ID header is insufficient. Missing deployment identity, a development identity, an anonymous outage fallback, invalid signature, access denial and authorization outage all fail closed. Browser sessions bind to the verified signed-in subject; changing accounts starts a separate owned session. Authorization decisions may remain cached for30 seconds.
+
+Set the declared production origin to the exact assigned HTTPS hostname. Deployment requires an explicit fixed allocation ID, reviewed starting usage totals and one-time installation approval. `intentcart.installation` seeds a new volume with those totals; restarts retain later usage and reject changed allocation declarations, counters below the declared migration baseline, missing markers or a missing database on previously marked storage. An older valid backup can still omit later usage; reconcile that usage before any manual restore. Remove `INTENTCART_FIRST_INSTALL_APPROVED` after the initial installation and verify a restart before inviting anyone. This is a single-instance migration mechanism, not an automatic backup restoration or budget renewal service.
+
+```sh
+ast spec validate
+ast blueprint push intentcart --visibility private
+ast blueprint deploy intentcart --vars-file /private/approved-launch.env --dry-run
+```
+
+Only deploy after reviewing the resolved configuration, access list, compute/storage estimate and persistent-volume settings. Keep credentials and operator migration files outside Git. A build, schema validation or dry-run alone does not confirm a live deployment.
+
 ## Public launch profiles
 
 | Profile | Intended behavior |
 | --- | --- |
 | `local` | Private laptop development and explicitly bounded manual inference |
 | `public-preview` | Read-only, no provider keys and zero external ceilings; suitable for the included free Render preview blueprint |
-| `production` | Invited public launch over HTTPS, a private access password, confirmed durable storage and a separately approved model allocation |
+| `production` | Invited HTTPS launch with a private access password or verified Astropods authorization, confirmed durable storage and a separately approved model allocation |
 
-The production profile refuses startup when those prerequisites are missing. It uses one process and one instance; it is not a horizontally distributed payment service. `GET /readyz` checks configuration and storage access. Progress streams contain owned checkpoints, never advance the agent, and close automatically; they are not token-generation or idle model jobs. API and HTML responses are private/non-cacheable. Only versioned public static assets receive immutable caching headers; this is not distributed edge inference or an AI-CDN deployment.
+The production profile refuses startup when those prerequisites are missing. `INTENTCART_AUTH=astropods` selects the signed platform identity flow and requires its injected deployment token; the default `basic` policy uses the private launch password. It uses one process and one instance; it is not a horizontally distributed payment service. `GET /readyz` checks configuration and storage access. Progress streams contain owned checkpoints, never advance the agent, and close automatically; they are not token-generation or idle model jobs. API and HTML responses are private/non-cacheable. Only versioned public static assets receive immutable caching headers; this is not distributed edge inference or an AI-CDN deployment.
 
-Before exposing a production instance:
+For the standalone Caddy deployment, before exposing the instance:
 
 1. Put private settings outside Git. Set `PUBLIC_URL` to the exact HTTPS origin, `COOKIE_SECURE=true`, `INTENTCART_MODE=production`, a private `INTENTCART_ACCESS_PASSWORD` of at least 32 bytes and `INTENTCART_STORAGE_ACK=durable`.
 2. Configure the Astropods endpoint, key, reviewed rates, credit-only confirmation and **separate** positive call/cost ceilings. Set `INTENTCART_PUBLIC_INFERENCE_APPROVED=true` only for the allocation approved for this public launch. Do not copy or renew another session's allowance.

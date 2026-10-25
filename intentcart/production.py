@@ -34,9 +34,15 @@ def configuration(config):
         if config.CALL_LIMIT != 0 or config.ASTRO_BUDGET != 0 or any((config.CLIENT_ID,config.CLIENT_SECRET,config.ASTRO_KEY,config.CHANNEL3_KEY)):
             issues.append('Stateless public previews cannot hold provider credentials or positive spending caps.')
     if profile == 'production':
-        password = os.getenv('INTENTCART_ACCESS_PASSWORD','')
-        if len(password.encode()) < 32:
-            issues.append('Production requires a private access password of at least32 bytes.')
+        authentication=os.getenv('INTENTCART_AUTH','basic')
+        if authentication=='astropods':
+            try:
+                from .astro_auth import authorizer
+                authorizer()
+            except Exception:issues.append('Astropods production requires a valid deployed authorization identity.')
+        elif authentication=='basic':
+            if len(os.getenv('INTENTCART_ACCESS_PASSWORD','').encode())<32:issues.append('Production requires a private access password of at least32 bytes.')
+        else:issues.append('Unknown production authentication policy.')
         root = Path(config.DATABASE_PATH).resolve().parent
         if os.getenv('INTENTCART_STORAGE_ACK') != 'durable' or not (root/'.intentcart-volume').is_file():
             issues.append('Production requires an operator-confirmed durable volume and installation marker.')
@@ -71,6 +77,8 @@ def access(request, config):
         return None
     if request.url.scheme != 'https':
         return JSONResponse({'detail':'HTTPS is required.'},status_code=400)
+    if os.getenv('INTENTCART_AUTH','basic')=='astropods':
+        return JSONResponse({'detail':'Sign in through Astropods.'},status_code=401)
     header = request.headers.get('authorization','')
     valid = False
     try:
@@ -101,3 +109,11 @@ def cache_policy(request, response, web_root):
             else:
                 response.headers['Cache-Control'] = 'public, max-age=0, must-revalidate'
     return response
+
+
+async def access_async(request,config):
+    denied=access(request,config)
+    if denied is not None and denied.status_code==401 and mode()=='production' and os.getenv('INTENTCART_AUTH','basic')=='astropods':
+        from .astro_auth import access as authorize
+        return await authorize(request)
+    return denied

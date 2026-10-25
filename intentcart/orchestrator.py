@@ -53,7 +53,7 @@ def identity():
     return digest({'encoder': semantic.configured_identity(), **{name: hashlib.sha256((base / name).read_bytes()).hexdigest()
                    for name in ('orchestrator.py', 'orchestrator_routes.py', 'agent.py',
                                 'missions.py', 'workbench.py', 'evidence_catalog.py',
-                                'workspace_preferences.py', 'gateway.py', 'workflow.py', 'observability.py', 'semantic.py', 'sdk_transport.py', 'model_usage.py', 'production.py')}})
+                                'workspace_preferences.py', 'gateway.py', 'workflow.py', 'observability.py', 'semantic.py', 'sdk_transport.py', 'model_usage.py', 'production.py', 'astro_auth.py', 'installation.py', '__main__.py')}})
 
 
 def checkpoint(run, record):

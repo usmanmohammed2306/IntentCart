@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-25T14:41:07.547191+00:00",
+  "created_utc": "2026-10-25T16:13:06.335669+00:00",
   "app_version": "4.3.0",
   "kind": "One deterministic scripted local run; actual API endpoints, explicitly fake provider",
   "live_provider_calls": 0,
@@ -159,7 +159,7 @@
     ]
   },
   "source_sha256": {
-    "intentcart/app.py": "69b4cffe2724c048efcb3f7d5ed3fb381a9385737059d303418b6a3a73650971",
+    "intentcart/app.py": "bcc47a4bf4e9c3f89574d8247c9549ca73291107c571fa581d119824a0adb7c8",
     "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
     "intentcart/learning.py": "49d7c3c7b699cf4ce15af6f46173285766eb231a5cbde27948e5ed878870cbdf",
     "scripts/evaluate_lab.py": "dc55efd86d645f7e1e2b1b6778094b94eac4874177ad0c1c63410d2af387525b"

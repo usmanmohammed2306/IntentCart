@@ -92,7 +92,7 @@ async def payment_error(request, exc):
 
 @app.middleware('http')
 async def boundaries(request: Request, call_next):
-    denied=production.access(request,config)
+    denied=await production.access_async(request,config)
     if denied is not None:return denied
     if request.method not in ('GET', 'HEAD', 'OPTIONS'):
         if request.headers.get('origin') != config.PUBLIC_URL:
@@ -137,11 +137,18 @@ def owner(request, db, mutation=False):
     row = db.execute('SELECT * FROM sessions WHERE id=? AND expires>?', (digest, time.time())).fetchone()
     if row is None:
         raise HTTPException(401, 'Session expired. Reload the page to start a new session.')
+    subject=request.scope.get('intentcart_auth_subject')
+    state=json.loads(row['state'])
+    if subject is not None and state.get('_auth_subject')!=subject:
+        raise HTTPException(401,'Session belongs to a different signed-in account. Reload to start your own session.')
     if mutation and not secrets.compare_digest(row['csrf'], request.headers.get('x-csrf-token', '')):
         raise HTTPException(403, 'Request security token is missing or invalid.')
-    return digest, json.loads(row['state'])
+    return digest, state
 
 def save(db, sid, state):
+    row=db.execute('SELECT state FROM sessions WHERE id=?',(sid,)).fetchone()
+    previous=json.loads(row['state']) if row else {}
+    if previous.get('_auth_subject') is not None:state={**state,'_auth_subject':previous['_auth_subject']}
     db.execute('UPDATE sessions SET state=? WHERE id=?', (json.dumps(state), sid))
 
 def feasible(state):
@@ -302,6 +309,7 @@ def session(request: Request):
             sid = hashlib.sha256(token.encode()).hexdigest()
             csrf = secrets.token_urlsafe(32)
             state = fresh_state()
+            if request.scope.get('intentcart_auth_subject') is not None:state['_auth_subject']=request.scope['intentcart_auth_subject']
             db.execute('INSERT INTO sessions VALUES (?,?,?,?)', (sid, csrf, json.dumps(state), time.time()+7*86400))
         result = public_state(state)
         save(db, sid, state)

@@ -31,3 +31,5 @@ docs/commit-plan.json
 # Deployment secrets and operator sessions
 *.env
 azure-state/
+.astropods/
+.astro/

@@ -1,0 +1,74 @@
+spec: blueprint/v1
+name: intentcart
+agent:
+  build:
+    context: .
+    dockerfile: Dockerfile.astropods
+  interfaces:
+    frontend: true
+    messaging: false
+  healthcheck:
+    test:
+    - CMD
+    - python
+    - -c
+    - import urllib.request,os;urllib.request.urlopen('http://127.0.0.1:'+os.getenv('PORT','80')+'/healthz',timeout=3)
+    interval: 10s
+    timeout: 5s
+    retries: 3
+  inputs:
+  - name: INTENTCART_MODE
+    datatype: string
+    default: production
+  - name: INTENTCART_AUTH
+    datatype: string
+    default: astropods
+  - name: INTENTCART_STORAGE_ACK
+    datatype: string
+    default: durable
+  - name: COOKIE_SECURE
+    datatype: string
+    default: 'true'
+  - name: PORT
+    datatype: string
+    default: '80'
+  - name: HOST
+    datatype: string
+    default: 0.0.0.0
+  - name: DATABASE_PATH
+    datatype: string
+    default: /data/intentcart.sqlite3
+  - name: FORWARDED_ALLOW_IPS
+    datatype: string
+    default: '*'
+  - name: INTENTCART_MANAGED_INSTALL
+    datatype: string
+    default: 'true'
+  - name: INTENTCART_FIRST_INSTALL_APPROVED
+    datatype: string
+    default: 'false'
+  - name: PUBLIC_URL
+    datatype: string
+  - name: INTENTCART_ALLOCATION_ID
+    datatype: string
+  - name: INTENTCART_BASELINE_CALLS
+    datatype: string
+  - name: INTENTCART_BASELINE_RESERVED_MICROUSD
+    datatype: string
+  - name: EXTERNAL_CALL_LIMIT
+    datatype: string
+  - name: ASTRO_BUDGET_MICROUSD
+    datatype: string
+  - name: ASTRO_INPUT_MICROUSD_PER_MILLION
+    datatype: string
+  - name: ASTRO_OUTPUT_MICROUSD_PER_MILLION
+    datatype: string
+  - name: INTENTCART_PUBLIC_INFERENCE_APPROVED
+    datatype: string
+  - name: ASTRO_CREDIT_ONLY_CONFIRMED
+    datatype: string
+models:
+  default:
+    provider: gateway
+    models:
+    - claude-haiku-4-5
