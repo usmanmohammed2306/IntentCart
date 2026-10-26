@@ -87,7 +87,9 @@ def register(module):
  @app.get('/api/commerce/config')
  def config(request:Request):
   with module.database() as db:module.owner(request,db)
-  return {'sandbox':True,'paypal_connected':bool(module.config.CLIENT_ID and module.config.CLIENT_SECRET),'paypal_client_id':module.config.CLIENT_ID if module.config.CLIENT_SECRET else '',**catalog.public_catalog()}
+  from . import paypal_limits
+  allowance=paypal_limits.status()
+  return {'sandbox':True,'paypal_connected':bool(module.config.CLIENT_ID and module.config.CLIENT_SECRET and allowance['available']),'paypal_test':allowance,'paypal_client_id':module.config.CLIENT_ID if module.config.CLIENT_SECRET else '',**catalog.public_catalog()}
  @app.get('/api/commerce/runs')
  def runs(request:Request):
   with module.database() as db:_,state=module.owner(request,db);return {'runs':[view(r) for r in state.get('commerce_runs',{}).values()]}

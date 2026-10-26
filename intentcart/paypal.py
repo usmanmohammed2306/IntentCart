@@ -4,6 +4,7 @@ import threading
 import httpx
 from decimal import Decimal
 from . import config
+from . import paypal_limits
 
 BASE = 'https://api-m.sandbox.paypal.com'
 
@@ -25,6 +26,7 @@ class PayPal:
             if self.token and self.until > time.time():
                 return self.token
             try:
+                paypal_limits.reserve('POST','/v1/oauth2/token')
                 response = httpx.post(BASE + '/v1/oauth2/token', auth=(config.CLIENT_ID, config.CLIENT_SECRET),
                                       data={'grant_type': 'client_credentials'}, timeout=15)
                 response.raise_for_status()
@@ -33,6 +35,8 @@ class PayPal:
                 expires = int(payload.get('expires_in', 60))
                 if not isinstance(token, str) or not token:
                     raise ValueError('Missing token')
+            except paypal_limits.LimitError as exc:
+                raise ProviderError(str(exc)) from exc
             except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError) as exc:
                 raise ProviderError('PayPal sandbox authentication is unavailable.') from exc
             self.token = token
@@ -45,6 +49,7 @@ class PayPal:
         if request_id:
             headers['PayPal-Request-Id'] = request_id
         try:
+            paypal_limits.reserve(method,path,body,request_id)
             response = httpx.request(method, BASE + path, headers=headers, json=body, timeout=20)
             if response.status_code >= 400:
                 raise ProviderError('PayPal could not complete this sandbox request. Reconcile its status before retrying.',
@@ -52,8 +57,11 @@ class PayPal:
             payload = response.json()
             if not isinstance(payload, dict):
                 raise ValueError('Invalid response object')
+            paypal_limits.observe(method,path,payload)
             return payload
-        except (httpx.HTTPError, ValueError) as exc:
+        except paypal_limits.LimitError as exc:
+            raise ProviderError(str(exc)) from exc
+        except (httpx.HTTPError, ValueError, KeyError, TypeError, ArithmeticError) as exc:
             raise ProviderError('PayPal response was interrupted. Your request is saved; check its status before retrying.', uncertain=True) from exc
 
     def create(self, quote, request_id):

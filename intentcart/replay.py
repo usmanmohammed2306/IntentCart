@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = 'intentcart-replay-v1'
 SOURCE_FILES = (
     'intentcart/workbench.py','intentcart/workbench_routes.py','intentcart/finite_budget.py','intentcart/learned_acquisition.py','intentcart/acquisition.py',
-    'intentcart/replay.py', 'intentcart/app.py', 'intentcart/paypal.py',
+    'intentcart/replay.py', 'intentcart/app.py', 'intentcart/paypal.py', 'intentcart/paypal_limits.py',
     'intentcart/config.py', 'intentcart/missions.py', 'intentcart/validity.py', 'intentcart/assurance.py',
     'intentcart/data/missions-catalog.json', 'scripts/evaluate_reliability.py',
     'intentcart/agent.py', 'intentcart/agent_routes.py', 'intentcart/evidence_catalog.py',

@@ -495,6 +495,9 @@ def create(body: Approval, request: Request):
             return {'id': row['provider_id'], 'status': row['status']}
         if time.time() - row['create_started'] > 5*3600:
             raise HTTPException(409, 'Creation requires operator reconciliation; the safe retry window ended.')
+        # Account authentication refreshes a session row. Release that write
+        # transaction before the provider durably reserves its own call.
+        db.commit()
         result = provider.create(quote,row['request_id'])
         order_id = result.get('id', '')
         if not re.fullmatch(r'[A-Za-z0-9-]{1,64}',order_id):
@@ -531,6 +534,7 @@ def capture(body: OrderAction,request: Request):
     with database() as db:
         sid,state = owner(request,db,True)
         quote,row = owned_order(db,sid,body.quote_id)
+        db.commit()  # Release the authenticated-session write before call accounting.
         payload = provider.get(row['provider_id'])
         if payload.get('status') == 'COMPLETED':
             return reconcile(db,quote,row,payload)
@@ -550,6 +554,7 @@ def payment_status(body: OrderAction,request: Request):
     with database() as db:
         sid,_ = owner(request,db,True)
         quote,row = owned_order(db,sid,body.quote_id)
+        db.commit()  # The independent provider ledger must acquire its writer lock.
         return reconcile(db,quote,row,provider.get(row['provider_id']))
 
 @app.post('/api/paypal/refund')
@@ -565,7 +570,7 @@ def refund(body: OrderAction,request: Request):
             raise HTTPException(409,'The refund needs operator reconciliation; its safe retry window ended.')
         if row['status'] != 'REFUND_PENDING':
             db.execute('UPDATE orders SET status=?,updated=?,refund_started=? WHERE quote_id=?',('REFUND_PENDING',time.time(),time.time(),quote['id']))
-            db.commit()
+        db.commit()  # Also release session refresh on a saved REFUND_PENDING retry.
         result = provider.refund(row['capture_id'],row['refund_request'])
         amount = result.get('amount',{}) if isinstance(result,dict) else {}
         from decimal import Decimal, InvalidOperation

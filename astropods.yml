@@ -81,6 +81,24 @@ agent:
     datatype: string
   - name: ASTRO_CREDIT_ONLY_CONFIRMED
     datatype: string
+  - name: PAYPAL_CLIENT_ID
+    datatype: string
+    secret: true
+  - name: PAYPAL_CLIENT_SECRET
+    datatype: string
+    secret: true
+  - name: PAYPAL_TEST_ALLOCATION_ID
+    datatype: string
+    default: ''
+  - name: PAYPAL_TEST_CALL_LIMIT
+    datatype: string
+    default: '0'
+  - name: PAYPAL_TEST_AMOUNT_CENTS
+    datatype: string
+    default: '0'
+  - name: PAYPAL_TEST_EXPIRES
+    datatype: string
+    default: '0'
 models:
   default:
     provider: gateway
