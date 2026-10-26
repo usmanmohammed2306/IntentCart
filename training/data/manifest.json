@@ -1,0 +1,28 @@
+{
+  "schema": "intentcart-training-data/1",
+  "provenance": "Authored synthetic templates and explicitly declared finite-policy teacher. No humans, real customer data or provider generation.",
+  "split_rule": "command and intake phrase families assigned before optimization; policy states share declared logic but disjoint sampled input rows",
+  "counts": {
+    "train": {
+      "command": 219,
+      "intake": 384,
+      "policy": 312
+    },
+    "dev": {
+      "command": 102,
+      "intake": 128,
+      "policy": 59
+    },
+    "test": {
+      "command": 103,
+      "intake": 128,
+      "policy": 59
+    }
+  },
+  "sha256": {
+    "train.jsonl": "5cacb1f33d09a3eec2630940c25c301ae32b7a5d4026dbf6dd47692755400fec",
+    "test.jsonl": "59a4f4908f4d307df74a1757e08ec0a223dfe5ab01190779210f4da4a46c6be9",
+    "dev.jsonl": "3c9947a6fcaeede61b05f3d047f65b5bba08f547f252a1268e2789ea7eb40bd3"
+  },
+  "limits": "Same-family synthetic evaluation. No independent user utility, broad reasoning, research novelty or human preference claims."
+}

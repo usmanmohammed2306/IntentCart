@@ -47,6 +47,9 @@ class Profile(Strict):
 class Password(Strict):
     current_password: SecretStr
     password: SecretStr
+class ClaimInvite(Strict):
+    password:str=Field(min_length=1,max_length=128)
+    invite:str=Field(min_length=20,max_length=300)
 class Confirm(Strict):
     password: SecretStr
 class Contact(Strict):
@@ -183,7 +186,7 @@ def bind(request,module):
             request.scope['intentcart_auth_subject']='account:'+row['id']
             # New accounts cannot spend the owner's five remaining shared actions.
             path=request.url.path
-            if request.method=='POST' and not row['ai_access'] and (path in AI_PATHS or path=='/api/agent/research/advance' and json.loads(db.execute('SELECT state FROM sessions WHERE id=?',(row['workspace'],)).fetchone()['state']).get('research_run',{}).get('options',{}).get('engine')!='local' or path.endswith('/ask') and path.startswith('/api/documents/')):
+            if request.method=='POST' and not row['ai_access'] and (path in AI_PATHS or path=='/api/agent/research/advance' and json.loads(db.execute('SELECT state FROM sessions WHERE id=?',(row['workspace'],)).fetchone()['state']).get('research_run',{}).get('options',{}).get('engine') not in ('local','trained') or path.endswith('/ask') and path.startswith('/api/documents/')):
                 return JSONResponse({'detail':'AI access is available by invitation. You can still use the planner and customer workspace.'},status_code=403)
     except HTTPException as exc:return JSONResponse({'detail':exc.detail},status_code=exc.status_code)
     return None
@@ -277,6 +280,21 @@ def register(module):
             result=db.execute('UPDATE accounts SET password=?,recovery=?,revision=revision+1 WHERE id=? AND recovery=? AND active=1',(hashed,digest(key),row['id'],row['recovery']))
             if result.rowcount!=1:raise HTTPException(409,'That recovery key was already used.')
             db.execute('DELETE FROM account_sessions WHERE account_id=?',(row['id'],));db.execute('DELETE FROM signin_tokens WHERE token=?',(digest(request.cookies.get(PREAUTH,'')),));event(db,row['id'],'Recovered account; all sessions revoked');return issue(db,row['id'],module.config.COOKIE_SECURE,key)
+
+    @app.post('/api/account/invitation')
+    def claim_invitation(body:ClaimInvite,request:Request):
+        auth_limit(request,'invitation')
+        with module.database() as db:row=account(request,db,True);old=row['password']
+        if not verify(body.password,old):raise HTTPException(403,'Current password was not accepted.')
+        with module.database() as db:
+            row=account(request,db,True)
+            if row['password']!=old:raise HTTPException(409,'Account changed. Sign in again.')
+            invite=db.execute('SELECT * FROM account_invites WHERE token=? AND used=0 AND expires>?',(digest(body.invite),time.time())).fetchone()
+            if not invite:raise HTTPException(403,'Invitation is invalid, expired or already used.')
+            if db.execute('UPDATE account_invites SET used=1 WHERE token=? AND used=0',(invite['token'],)).rowcount!=1:raise HTTPException(409,'Invitation was already used.')
+            db.execute('UPDATE accounts SET role=?,ai_access=?,revision=revision+1 WHERE id=?',(invite['role'],invite['ai_access'],row['id']))
+            db.execute('DELETE FROM account_sessions WHERE account_id=?',(row['id'],));event(db,row['id'],'Applied operator invitation; previous sessions revoked')
+            return issue(db,row['id'],module.config.COOKIE_SECURE)
 
     @app.post('/api/account/logout')
     def logout(request:Request):

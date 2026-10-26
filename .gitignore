@@ -33,3 +33,8 @@ docs/commit-plan.json
 azure-state/
 .astropods/
 .astro/
+
+intentcart/data/trained-agent/base/
+training/checkpoints/
+
+**/*.gguf

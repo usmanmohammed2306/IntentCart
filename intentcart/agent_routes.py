@@ -71,7 +71,7 @@ def register(module):
 
     @app.get('/agent')
     def page():
-        return FileResponse(module.ROOT / 'web/agent.html')
+        return FileResponse(module.ROOT / 'web/workspace.html')
 
     @app.get('/api/agent/catalog')
     def catalog(kind: Literal['curated', 'fixture'] = 'curated'):

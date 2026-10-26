@@ -40,7 +40,7 @@ SOURCES = {
                     'intentcart/evidence_catalog.py','intentcart/workspace_preferences.py',
                     'intentcart/gateway.py','intentcart/research.py','intentcart/orchestrator.py',
                     'intentcart/orchestrator_routes.py','intentcart/workflow.py','intentcart/observability.py',
-                    'intentcart/semantic.py','intentcart/sdk_transport.py', 'intentcart/production.py', 'intentcart/accounts.py', 'intentcart/astro_auth.py', 'intentcart/installation.py', 'intentcart/__main__.py', 'intentcart/model_usage.py', 'intentcart/progress.py', 'intentcart/documents.py', 'intentcart/document_routes.py', 'intentcart/vector_search.py','intentcart/data/evidence-catalog.json'},
+                    'intentcart/semantic.py','intentcart/sdk_transport.py', 'intentcart/production.py', 'intentcart/accounts.py','intentcart/studio.py','intentcart/trained_agent.py', 'intentcart/astro_auth.py', 'intentcart/installation.py', 'intentcart/__main__.py', 'intentcart/model_usage.py', 'intentcart/progress.py', 'intentcart/documents.py', 'intentcart/document_routes.py', 'intentcart/vector_search.py','intentcart/data/evidence-catalog.json'},
 }
 
 

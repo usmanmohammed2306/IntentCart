@@ -1,0 +1,46 @@
+{
+  "schema": "intentcart-workspace-router/1",
+  "sha256": "d660434617ff1b49508be1160a9708c1df9f730c68a75e2fbd577333b69d0de3",
+  "features": 2048,
+  "actions": [
+    "add",
+    "remove",
+    "move",
+    "surface",
+    "none",
+    "budget",
+    "clarify"
+  ],
+  "kinds": [
+    "laptop",
+    "desktop",
+    "monitor",
+    "keyboard",
+    "mouse",
+    "dock",
+    "cable",
+    "power",
+    "webcam",
+    "audio",
+    "storage",
+    "other",
+    "none"
+  ],
+  "steps": 120,
+  "seed": 107,
+  "architecture": "PyTorch linear multi-head classifier on hashed word/bigram features",
+  "training_rows": 11940,
+  "dev": {
+    "n": 1492,
+    "action_correct": 1491,
+    "kind_correct": 1492,
+    "joint_correct": 1491
+  },
+  "test": {
+    "n": 1493,
+    "action_correct": 1490,
+    "kind_correct": 1493,
+    "joint_correct": 1490
+  },
+  "provenance": "Authored synthetic templates; random utterance split shares templates and is not an independent/generalization benchmark. The 50 product scenarios were not included."
+}

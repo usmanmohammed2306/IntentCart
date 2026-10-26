@@ -2,411 +2,221 @@
 
 # IntentCart
 
-### Before you buy the parts, know whether the whole thing works.
+### From “will this work?” to a purchase you can explain.
 
-Your workspace assistant—from an idea to a plan you can inspect.
+**An AI workspace planner with a reviewed cart and PayPal Sandbox checkout. Keep what works, investigate what is missing, and approve every payment yourself.**
 
-[Run locally](#run-locally) · [File research](#read-your-own-spec-sheets) · [How it works](#from-a-request-to-a-reviewed-decision)
+[Run locally](#run-locally) · [PayPal + AI](#from-ai-investigation-to-paypal-sandbox) · [The workspace](#your-space-your-way)
 
 </div>
 
-## A cart holds products. A plan makes them work together.
+## A better starting point than another shopping cart
 
-> “I have a laptop. I want two monitors, enough charging power and a setup within my budget. What do I actually need?”
+You have a laptop, a small table and a few things that already work. You might need one monitor. You might need none. Perhaps all that is missing is a cable.
 
-The dock looks right. The monitors fit the budget. The cables are in the cart. But can the laptop drive both displays? Is a driver required? Does the power supply deliver enough charging power?
+IntentCart lets you build that situation first. Place independent objects in a visual workspace, enter measurements you trust, keep an area clear and see what is known—and what still needs checking. There is no compulsory dock, screen, table or purchase.
 
-IntentCart starts with the outcome. Describe what you want, review a few details, and let the AI investigate. Watch the actual progress, answer a permission question when needed, and see the recommended parts together. Open the sources or the interactive 3D studio when you want more detail. Missing information stays visible. An impossible request gets an explanation. When availability changes, the planner looks for a repair that changes the fewest component slots.
+The product is a planning aid. Its purpose is to reduce avoidable purchases and overlooked constraints, not to promise that a drawing proves a setup will work. Customer demand and willingness to pay remain unvalidated.
 
-Payment is a separate decision. A supported plan never grants permission to spend: an exact basket, current quote and explicit approval precede PayPal **sandbox** checkout.
+## From AI investigation to PayPal Sandbox
 
-## Explore the pieces together
+Imagine you need a two-screen setup but already own one screen. Buying the cheapest dock alone can leave you without the right power supply or cable. **Shop** asks the trained local agent to investigate a complete cart, inspect missing catalog facts and check the exact budget and compatibility conditions before making a recommendation.
 
-The illustrated desk is the main surface from request through investigation and result: drag through a full horizontal orbit, select a projected component pin, switch the desk finish, or separate the parts to see how the workspace is arranged. Exact parts and explanations open on demand, keeping the main view visual. The **Parts** menu offers the same inspection with a keyboard; **View** rotates, zooms and resets the camera. The supported result uses the exact part names from your reviewed plan. Shapes and spacing are illustrative, rather than measured product dimensions.
+1. **Find a complete cart.** Sign in, open Shop and review the laptop, screen count, budget and explicit software choice. The controller chooses search, inspection, recommendation or deferral; it has no payment tool.
+2. **See what you would get.** Preview the returned items as a new 3D draft. Earlier saved projects remain separate. Unknown dimensions stay unknown; the scene does not certify physical fit.
+3. **Review the exact amount.** Request a quote bound to the agent run, catalog, source identity, revision and exact draft. Changed inputs or stale evidence require another review. A quote expires after fifteen minutes.
+4. **Approve in PayPal Sandbox.** An unchecked human approval control precedes the PayPal buyer flow. The server creates an Orders v2 order, verifies the exact quote/reference/currency/amount, captures only the approved order and retains an owned payment record.
+5. **Recover or refund.** Saved status reconciliation and full sandbox refund reuse durable operation identities. A lost response is checked before another attempt; a model cannot grant payment authority.
 
-Three.js renders the scene on demand, while Anime.js 4.5 provides short spring transitions. There is no continuous idle render loop or model call behind the visual controls. Reduced-motion preferences are respected, and a static illustration plus text controls keep the request flow usable when graphics are unavailable. These are browser graphics, not a rented GPU or WebGPU deployment. React, R3F, Rapier and Rive are not dependencies of this plain-JavaScript interface.
-
-## Your account, your customers
-
-The optional account profile adds IntentCart sign-up/sign-in/sign-out, saved workspace ownership, editable profiles, active-session controls and a private customer pipeline. Add contacts, search by name/company/notes, move them through **New → Planning → Ready → Archived**, and download your own workspace. Each account has its own records; an operator can manage account enablement and AI invitations without an application route for reading another account’s plans or customer notes. The infrastructure owner still controls storage and backups.
-
-To try accounts locally, keep the model/payment caps at zero and start with:
-
-```bash
-INTENTCART_AUTH=accounts python -m intentcart
-```
-
-Open `/login`. Use a unique username and a password of at least 15 characters, then save the displayed recovery key. Passwords use salted scrypt (N=131072,r=8,p=1); login cookies are HttpOnly, revocable and expire after seven days or one inactive day. A changed password or recovered account revokes all previous sessions and replaces the recovery key. No email address is needed and no verification/reset email is sent. Losing both password and recovery key can prevent recovery. Deactivation blocks access and retains records for operator-assisted restoration; it is not permanent erasure. `/privacy` describes storage and AI sharing.
-
-There is no automatic operator role or AI allocation for the first sign-up. On your own server, create a private, one-use, 24-hour operator invitation with `python -m intentcart.accounts invite-admin`; add `--ai` only to grant use of the already configured shared model allowance. Never publish the invitation. Public deployment requires the explicit `INTENTCART_PUBLIC_ACCOUNTS_APPROVED=true` setting, exact HTTPS origin, secure cookies and durable storage. A fixed hashed bootstrap invitation and fixed expiry can be supplied privately through the hosting configuration when an interactive shell is unavailable. These settings do not renew model usage.
-
-This single-instance release bounds registration to 1000 accounts and customer records to 100/account, with durable authentication throttles, exact-Origin/CSRF protection and revision checks on updates. These are controlled demo limits, not a scale or security-certification claim. New accounts cannot spend model/discovery credits unless the operator explicitly grants AI access. Hosted AI access is limited; account creation, customer management and the labelled deterministic example planner do not call a model. PayPal remains sandbox-only and requires server credentials plus separate exact-basket approval.
-
-## From a request to a reviewed decision
+The bundled seller catalog and laptop profiles used by Shop are **fictional sandbox fixtures**. There are no real goods, shipping, tax charges or delivery promises. The default supported cart currently totals **$229.00 in sandbox funds** after source inspection; different reviewed settings can change it. Independent manual workspaces still allow zero screens, no desk and no purchase. Arbitrary imported objects are not silently converted into seller SKUs or payable baskets.
 
 ```mermaid
 flowchart LR
-    A[Describe your outcome] --> B[Review requirements]
-    B --> C[Plan a complete setup]
-    C --> D{Enough supporting evidence?}
-    D -->|Missing facts| E[Inspect or clarify]
-    E --> C
-    D -->|Unsupported| F[Explain, revise or defer]
-    F --> B
-    D -->|Supported| G[Explore and review]
-    G --> H[Exact basket and quote]
-    H --> I[Explicit approval]
-    I --> J[PayPal sandbox]
-    J --> K[Verify, reconcile or refund]
+    G[Reviewed need and budget] --> A[Trained local AI]
+    A --> T[Search and inspect catalog facts]
+    T --> V[Verify complete cart]
+    V --> D[Human-reviewed 3D draft]
+    D --> Q[Exact expiring quote]
+    Q --> H[Human approval]
+    H --> P[PayPal Sandbox buyer approval]
+    P --> C[Verified capture]
+    C --> R[Saved status and full refund]
 ```
 
-The application keeps these boundaries explicit:
+## Your space, your way
 
-- **Requirements before recommendations.** AI proposes settings for your review; the fields you approve remain authoritative.
-- **Evidence before support.** Known, unknown and conflicting facts are distinct. Source dates, exact variants, prices and permissions matter.
-- **Preferences within constraints.** Pairwise choices update a Bayesian estimate without weakening hard requirements.
-- **Approval for one exact decision.** Changed plans invalidate old quotes. Payment retries preserve operation identities, and uncertain results require reconciliation.
+- **Start without an account.** Add laptops, desktops, screens, keyboards, mice, docks, cables, power adapters, webcams, audio, storage or a generic object. Each instance can be moved, rotated, renamed or removed independently.
+- **Make it yours.** A Three.js scene uses procedural materials, lighting, shadows and original graphics. Drag an object, orbit the view, zoom, lock placement or undo an edit. Forms and an item list provide an alternative to canvas interaction.
+- **Use real measurements.** Declare the surface, each object's overall in-use size and reserved areas. Dimension notes distinguish personal measurements, manufacturer sources and illustrative shapes. A model name alone never invents specifications or an exact replica.
+- **Keep unknowns visible.** Footprint containment and overlap checks use rotated bounding rectangles. Missing measurements produce “Unknown.” This is not CAD, structural analysis, electrical certification or an ergonomic assessment.
+- **Spend deliberately.** Separate owned equipment from proposed purchases. A zero budget is valid. Prices, currency, shipping and tax are explicit; missing charges never silently become a complete all-in price. A buy-nothing plan has no new purchase cost.
+- **Remember the whole request.** Requirements remain in a ledger with open, met, unmet or specialist-needed outcomes. Resolution records the user's reason; it is not an independent verification.
+- **Keep projects separate.** Accounts save up to twenty private named workspaces with revision conflict protection. Export/import includes the complete workspace, measurements, connections and requirement ledger. Importing never restores account permissions, payments or AI budgets.
+
+Guest drafts stay in browser-session storage, including across sign-in. They are never automatically merged over an existing saved project. Export a backup before closing the browser session, clearing its storage or switching devices.
+
+### Simple controls
+
+| Interaction | Action |
+|---|---|
+| Drag an item | Move it on the horizontal planning plane |
+| Empty-space drag / Look | Orbit the camera |
+| Scroll / + / − | Zoom |
+| W / R / O | Move / rotate / look mode |
+| Arrow keys on the focused canvas | Move selected item by 10 mm, or rotate in Rotate mode |
+| Escape during a drag | Cancel the uncommitted placement |
+| Items | Select and edit an object without aiming at the scene |
+
+Rendering runs on demand, with no idle animation loop. Reduced-motion preferences are respected. If WebGL is unavailable, ordinary item and placement forms remain available. Shapes are conceptual, not photorealistic product scans.
+
+## A trained agent with tools and boundaries
+
+Sign in to ask for a change such as **“Add two monitors,” “I want no monitors,” “Move the laptop left,” “My desk is 90 by 50 cm,”** or **“My budget is zero dollars.”**
+
+The trained router handles a single edit. For a larger request, **Plan** opens a bounded, durable agent workflow: search exact-device candidates, inspect recorded facts, compare proposed quantities and arrangements, verify declared goals, and return a proposal for your review. Explicit counts, negation, units, budget and software denial compile into visible typed conditions. Unrepresented wording remains a question, so this is not a claim of unrestricted language understanding.
+
+**Research an exact device.** Select an item and choose **Find exact model**. The bundled library contains ten reviewed variants/configurations, not a universal catalog. Confirm the year, revision and operating state before linking it. Closed-laptop dimensions never substitute for an unknown open-lid footprint. You can extend the library through reviewed manufacturer pages, a locally parsed specification PDF/text file, or a bounded inventory import. Every accepted fact retains a source quotation/date and a content fingerprint. These are user-reviewed snapshots, not independent certification.
+
+With explicit consent, a planning run can read up to two supplied official HTTPS specification pages. The allowlisted manufacturer reader checks every redirect and DNS destination, pins public connections, limits bytes/time and executes no page scripts. Only the URLs are sent; no account, workspace or private document goes to a model service. Unavailable pages and rate limits remain failures. Retrieved instructions cannot approve software, spending or accounts; extracted facts require review.
+
+**Verify the whole declared plan.** Tools cover concave usable-surface outlines, blocked/access areas, rotated footprints, resource-counted video cables/ports, dated landed costs and declared exchange rates, closed-box packing, weight, reach and clearance. Save distinct work/packed/shared states, link projects to your own client records and build per-space procurement estimates with explicit inventory counts. A prototype owned once is not multiplied into classroom stock. Unknown load, operating-system, bandwidth, electrical, medical, acoustic, comfort and delivery facts remain explicit.
+
+Runs have at most 24 reserved model steps, durable checkpoints, cancellation and explicit recovery. A model action with unmet prerequisites pauses; no deterministic policy silently replaces it. Plans are proposals: review exact variants, changes and caveats before applying. Source/day/design/project changes invalidate old results. Three-way conflict review preserves concurrent human edits. Project-only backups open as new drafts and never roll back account access, later saved work or usage counters. The public workspace shell and manual import/export can work offline after a successful cached visit; the server-based local AI needs the installation online and its model installed.
+
+The model is required for AI actions. Missing or invalid artifacts produce an error; there is no silent baseline or paid-provider fallback. Guest manual editing is intentionally available without AI or an account.
+
+```mermaid
+flowchart LR
+    U[Your request] --> R[Trained intent router]
+    W[One workspace graph] --> L[Trained generative controller]
+    R --> L
+    L --> T[Read · search · inspect · clarify]
+    T --> C[Schema and planning checks]
+    C --> P[Review the verified proposal]
+    P --> W
+    W --> V[3D scene and item forms]
+    W --> S[Private revision-bound projects]
+    W --> E[Complete workspace export]
+```
+
+### Actual training, distinct evaluations
+
+The generative adapter specializes **Qwen/Qwen3-0.6B**, pinned to revision `c1899de289a04d12100db370d81485cdf75e47ca`. Completion-only PEFT LoRA trains **1,146,880 parameters**, rank 8 on query/value projections. The initial adapter ran **360 optimizer steps** on a free Colab **v5e-1 TPU**, using native TorchTPU/PyTorch, with **915 unique authored synthetic training examples**. Development selection used 289 separate examples; its original frozen 290-example evaluation reported:
+
+| Original contract, bfloat16 evaluation | Exact matches |
+|---|---:|
+| Scene commands | 47 / 103 |
+| Requirement requests | 128 / 128 |
+| Finite-policy choices | 59 / 59 |
+
+These numbers do not qualify the new workspace contract, current CPU precision, general reasoning or human usefulness. The unadapted base's zero exact-format matches were not zero semantic understanding. Failed/inconclusive CPU trials and the first TPU trial are retained in private development evidence.
+
+The current adapter continues that checkpoint with actual **local Apple MPS float32 training**, using TRL completion-only supervised fine-tuning and PEFT. It completed **128 optimizer steps / 512 example presentations** from a **704-example training partition**—about 0.73 epoch, not a claim that every row was presented. Persona partitions were fixed before training; 52 development and 107 test examples stayed out of the optimizer. In a paired, uncached CPU Q8 exact-policy diagnostic, the continuation matched **105/107** test persona/context prompts versus **58/107** for the earlier adapter; both matched **59/59** original permission-policy targets. Two Q8 errors and the float32/quantization difference remain failures. Of the 107 test prompts, **103 share an exact observed finite state with training** (28 of the 32 distinct test states), despite different persona/context text. This is a related prompt-format/policy diagnostic, not unseen-state generalization, independent reasoning or human-quality evidence. The larger generated journey corpus was not all used as training data.
+
+Current serving uses the merged adapter in **Q8_0 GGUF through llama.cpp**, CPU-only with zero GPU layers. Public base weights are not committed; the explicit setup verifies pinned base, adapter, converter and output checksums.
+
+The additional small **PyTorch-trained multi-head intent classifier** uses hashed word/bigram features and runs through NumPy at inference. Its reproducible trainer, authored dataset partitions, weights and manifest are included. It was refined using development failures. Its random utterance partitions share templates, so their accuracy is a narrow template diagnostic—not independent generalization or a research benchmark. The fifty product scenarios were not a training dataset.
+
+No foundation-model pretraining, RL, human-feedback learning or distributed training is claimed. Both models remain bounded and imperfect; controls and review are part of the product.
+
+### Tools and their roles
+
+| Tool | What it does here |
+|---|---|
+| PayPal Orders v2 and JavaScript SDK | Sandbox buyer approval, exact-amount order creation/capture, saved status reconciliation and full refunds |
+| Qwen3-0.6B, PyTorch, Transformers, PEFT and TRL | Actual supervised training and bounded local generative tool selection; the separate trained router handles supported scene edits |
+| llama.cpp | Offline CPU serving of the merged Q8 model; no rented accelerator or provider request is required |
+| FastAPI, Pydantic and SQLite | Strict tool/API contracts, private accounts/projects, durable checkpoints, revisions and payment-operation identities |
+| Three.js and Anime.js | Interactive procedural workspace graphics and transitions; graphics do not establish physical compatibility |
+| Astropods | Earlier external-model research integration and sponsor-native hosting; the default local trained-agent flow does not spend its credits |
+
+The earlier evidence-research workspace also contains LangGraph orchestration, an OpenAI-compatible SDK transport, local document parsing/retrieval and read-only MCP tools. Those capabilities are separate from the local trained shopping controller; listing them does not mean every action invokes every framework.
 
 ## Run locally
 
-**Requires Python 3.12.** No Node.js build, API key, paid service or rented GPU is needed for the local application.
+Use **Python 3.12**, a modern browser and a machine with sufficient free RAM/disk for installation and CPU inference. Initial setup downloads roughly 1.5 GB of public base files and builds the serving artifact; merging temporarily needs more memory than inference. A working C/C++ toolchain is needed when pip builds llama.cpp. The installer tests macOS linking and, if necessary, selects a compatible already installed SDK for its own subprocess; it never changes system settings. No paid API key, rented GPU, subscription or cloud account is required.
 
 ```sh
-git clone https://github.com/usmanmohammed2306/IntentCart.git
-cd IntentCart
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-python -m intentcart
+python scripts/install_runtime.py
+python scripts/setup_trained_model.py
+EXTERNAL_CALL_LIMIT=0 INTENTCART_AUTH=accounts python -m intentcart
 ```
 
-Open **http://127.0.0.1:4000** for the guided AI assistant. Connect Astropods with an explicitly approved credit budget to use the model agent. The deterministic research baseline and `/missions` 3D planner remain runnable without keys. Local SQLite storage is created automatically in `var/`.
+Open **http://127.0.0.1:4000/agent**. Start building immediately; sign in to save or use the local AI. Create your own password and keep the recovery key private. SQLite data lives in `var/` unless `DATABASE_PATH` is configured. Run one application worker for this single-instance deployment.
 
-On Windows, create the environment with `py -3.12 -m venv .venv`, activate it with `.venv\Scripts\Activate.ps1`, then run the same install and start commands.
-
-To check a running server:
-
-```sh
-curl http://127.0.0.1:4000/healthz
-```
-
-Expected response: `{"status":"ok","environment":"sandbox"}`.
-
-## Explore the workspaces
-
-| Address | Experience |
-|---|---|
-| `/login`, `/account`, `/customers` | Optional account sign-in, security controls and a private customer pipeline. |
-| `/missions` | Describe → Explore → Review. Inspect parts, orbit the 3D setup and repair fictional-catalog plans. |
-| `/` or `/agent` | Start a checkpointed research workflow: investigate, verify, explore a fallback and download a cited brief. |
-| `/workbench` | Review manufacturer records, exact variants, owned inventory, source expiry, all-in costs and preference history; export the decision. |
-| `/research` | Explore saved finite-budget comparisons, CPU learning curves, ablations and preference diagnostics. |
-| `/reliability` | Inspect separate decision claims, evidence-budget comparisons and recorded fake-provider failure traces. |
-| `/learn` and `/lab` | Explore Bayesian pairwise learning and rehearse fictional budget, shipping or stock changes. |
-| `/study` | Open the optional consent-based local pilot instrument. No conducted human study is claimed. |
-
-The workbench preserves unsaved requirement edits in tab memory when another tab changes the task. Compare your edits with the latest saved values, restore only your changed fields, then explicitly review and apply them. Nothing is automatically resubmitted or saved to browser storage.
-
-Before accepting a source replacement, compare its current and proposed values, units, URL and review date. Changed metadata is highlighted, and confirmation is bound to the displayed proposal and task revision. Refreshing, changing the proposal or editing its form clears that confirmation; acceptance never replaces a fresh inspection. You can withdraw a mistaken pending proposal without changing accepted evidence or preference answers. The exact proposal ID and task revision prevent an older tab from withdrawing a newer proposal.
-
-The **Trade-off lens** compares two currently supported setups from the same revision: all-in price difference, exact component/quantity changes, estimated preference contributions and inspected source fields. Download a readable comparison without changing the task, selecting a basket or granting checkout approval. Refreshing or changing the choices clears the old comparison.
-
-The evidence workspace uses curated manufacturer records and declared scenario assumptions. It cannot create checkout. Missions uses a separate fictional merchant catalog. Browser WebGL renders the locally served Three.js scene, with an illustrated fallback; the planning core runs on CPU.
-
-## An agent that finishes the investigation
-
-Open `/` or `/agent`. Write a request or choose a visual example, select **Let’s plan**, review the details, then choose **Find my setup**. The request, review, investigation and result appear one at a time. **Details** holds the source records and advanced controls. Screen counts use illustrated buttons; results lead with part pictures and everyday labels. The workflow decides which missing detail to inspect next, pauses for your software permission, verifies the supported result and explores what changes if the selected dock becomes unavailable. With driver permission enabled, it also checks the alternative without that permission. A concise brief keeps the recommendation, supporting observations and unresolved questions together.
-
-```mermaid
-flowchart LR
-    R[Reviewed request] --> P[Plan investigation]
-    P --> T[Retrieve observed evidence]
-    T --> A[Propose one typed action]
-    A --> V{Local tool validator}
-    V -->|Allowed| O[Observe and checkpoint]
-    O --> T
-    V -->|Human decision| H[Pause for your answer]
-    H --> A
-    O --> C[Verify citations and arithmetic]
-    C --> F[Re-solve a hypothetical fallback]
-    F --> B[Evidence brief]
-```
-
-**AI is the primary engine.** Astropods first generates a bounded investigation plan, then proposes the next action using the reviewed task, recent observations and hybrid retrieval from visible/inspected evidence. The server validates every proposal. At completion, the model selects and orders already verified claim IDs for the brief; it cannot invent report facts. The deterministic research baseline remains explicitly separate under **Details → Advanced controls**. Local verification shares the existing finite compatibility evaluator, so it is not an independent hardware oracle or source-truth check.
-
-**Progress survives a refresh.** SQLite stores the current workflow and a hash-linked journal. Run identity, task fingerprint, revision, source identity and review date reject stale work. Each explicit request performs at most four local transitions or one model request. The primary visual-planner interpreter also uses real model inference and resets software permission before human review. Closing the page starts no background worker. Cancellation stops future steps; an already dispatched response cannot restore a cancelled or changed run. Lost or rejected model replies retain their durable call/cost reservation and trigger no automatic retry.
-
-**Inspectable output.** The brief includes supported claims with exact source IDs, structural checks, counterfactuals and limitations. Markdown and JSON exports omit the free-text request and raw journal, but still contain product/evidence details: review them before sharing. Retrieval combines BM25 with a pinned local Hugging Face MiniLM encoder when configured. PyTorch runs masked mean pooling and normalized 384-dimensional embeddings on CPU; reciprocal-rank fusion combines the ranks. Only already visible or inspected, current sources enter retrieval. Without the reviewed local encoder, the response explicitly reports lexical fallback. Neither cosine similarity nor rank is factual confidence; this does not browse the open web. An eligible fictional-catalog brief can seed the 3D planner’s requirement form for fresh review; this resets software permission and transfers no evidence, quote or approval. All budgets remain active, and neither engine grants scenario confirmation, software permission or payment approval.
-
-## Engineering behind the experience
-
-| Layer | Actual implementation |
-| --- | --- |
-| Application | Python 3.12, FastAPI, strict Pydantic schemas, HTTPX |
-| Model inference | OpenAI Python SDK pointed at the optional Astropods gateway; no OpenAI account required |
-| Orchestration | LangGraph routes one guarded transition at a time; SQLite transactions persist run checkpoints, ownership and revisions |
-| Hosted identity | Official Astropods auth SDK, signed and expiring platform claims, private access-list checks and account-bound sessions |
-| Retrieval | BM25 + CPU PyTorch/Hugging Face Transformers; Sentence Transformers and Qdrant for owned file passages |
-| File parsing | Docling, pypdf, LlamaIndex passage boundaries; bounded network-disabled parser process |
-| Storage/search | SQLite durable state, source-bound JSON, exact private Qdrant vector search and a bounded embedding cache |
-| Tools | Strict product search, evidence inspection, human questions and recommendation actions; separate read-only MCP snapshot server |
-| Observability | OpenTelemetry SDK with an in-process 128-span buffer and owned-run export; no network exporter or prompt capture |
-| Interface | Build-free browser JavaScript, responsive CSS, SVG illustrations and Three.js in the optional 3D studio |
-
-The model proposes; server-side validation checks every action, citation, permission and price calculation. The SDK has **zero automatic retries**, disallows redirects and bounds decoded success/error bodies to 64 KiB. Call and cost reservations persist before dispatch and remain consumed after an uncertain or invalid response. LangGraph does not replace the SQLite transaction boundary. Hosted tracing, distributed training, fine-tuning, GPU serving and edge inference are not activated or claimed. The release uses one implementation for each implemented job; it does not claim every alternative framework in the ecosystem. Jev’s typed API was reviewed and protocol-tested privately, but no live TypeSafe key or approved provider allocation was supplied, so no Jev inference result is claimed.
-
-### Local semantic retrieval
-
-The explicit setup step downloads public encoder weights once; starting the application never downloads a model or starts a GPU job.
+The legacy document/research tools also require the optional offline retrieval encoder:
 
 ```sh
 python scripts/setup_encoder.py --directory var/encoder
-INTENTCART_EMBEDDING_DIR=var/encoder HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m intentcart
+INTENTCART_EMBEDDING_DIR=var/encoder EXTERNAL_CALL_LIMIT=0 INTENTCART_AUTH=accounts python -m intentcart
 ```
 
-The encoder is [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2), revision `173eb854beababc71d6c2962980f98ac8f7a975d`, licensed Apache-2.0. Setup saves provenance and file hashes; runtime validates them and uses local safetensors without remote model code. Weights stay outside Git. This is pretrained encoder inference, not training or a newly developed model. Field-level retrieval evaluations are separate from end-to-end recommendation quality.
+On Windows, create the environment with `py -3.12 -m venv .venv`, activate `.venv\Scripts\Activate.ps1` and use PowerShell environment variables before `python -m intentcart`. CPU serving is the default; the new workspace proposal path is qualified on CPU. GPU acceleration is not required.
 
-### Read a brief through MCP
+Check the server with `curl http://127.0.0.1:4000/healthz`. Local operation has no inference-provider fee. Hosting, electricity, downloads and third-party services have their own conditions; there is no automatic sponsor-credit renewal or card-funded fallback.
 
-Download a completed research brief as JSON from **Details**, or **Save my plan** on the result, review its product/source content, then select that one artifact when starting the official MCP stdio server:
+### Connect the free PayPal sandbox
 
-```sh
-python -m intentcart.mcp_server --snapshot /absolute/path/intentcart-research.json
-```
+Create a **sandbox REST app** in the [PayPal developer dashboard](https://developer.paypal.com/dashboard/applications/sandbox). Keep its client secret on your server. Configure `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` as private environment variables, then restart the app. Never commit them or paste them into the browser console. The server uses the sandbox API endpoint; live payments are not supported. Use a separate sandbox personal buyer account to approve the purchase. Planning works without these credentials, but payment controls explain that checkout is unavailable rather than simulating a payment.
 
-An MCP client can call `get_setup`, `verify_snapshot`, `get_claims`, `search_sources` and `get_fallbacks`. All five tools are read-only. There is no file-selection, model-dispatch, task-mutation or payment tool. The selected artifact is untrusted data. Citation consistency is not an authenticity signature, a freshness guarantee or a physical hardware test.
+`EXTERNAL_CALL_LIMIT=0` blocks sponsor-model usage; it is **not** a PayPal sandbox request counter. PayPal calls happen only through explicit human checkout, saved-status or refund actions. Setup downloads and local CPU inference do not spend sponsor inference credit. No real card, paid model key or cloud deployment is required to run the local prototype.
 
-## Read your own spec sheets
+## Additional planning workspaces
 
-Open **Details → Read a spec sheet**. Add a PDF with selectable text, Markdown or a text file. The server reads it with Docling and pypdf, splits passages with LlamaIndex, then searches them with local Sentence Transformers embeddings and exact Qdrant search. No hosted embedding service or vector account is needed.
+The default workspace is independent of the earlier finite-catalog experiments. Existing saved accounts, evidence tasks and sandbox history are preserved.
 
-Files are limited to 1.5 MB, eight PDF pages, 40,000 readable characters and five files per browser session. Original uploads are deleted after extraction; the owned extracted text is stored in SQLite. Images and external resources are not fetched. Scanned PDFs need a text layer; no OCR is claimed.
+| Address | Purpose |
+|---|---|
+| `/agent` or `/` | Independent objects, measured space, requirements and private projects |
+| `/investigate` | Earlier checkpointed evidence workflow for its explicitly supported catalog |
+| `/workbench` | Manufacturer records, source replacements, declared inventory, costs and preferences |
+| `/research` | Authored finite-budget comparisons and ablations |
+| `/missions` | Fictional-catalog compatibility planning and separately gated PayPal sandbox checkout |
+| `/reliability` | Source-bound reports and fake-provider failure/recovery traces |
+| `/account`, `/customers` | Account security and a private customer pipeline |
 
-**Find passages** reads locally. **Ask AI** appears after you review the retrieved passages and explicitly agree to send the question and excerpts to Astropods. AI selects from those passages; the answer quotes the actual text with page references. It cannot invent a quotation or turn a file into verified compatibility evidence. Changing the question clears the reviewed context and sharing choice. Removing a file leaves the workstation plan and approvals untouched.
+Connection research does not automatically certify the measured workspace. Historical sponsor-model and PayPal sandbox outcomes remain distinct from fake-provider diagnostics. Sponsor inference is inactive at a zero call limit; separately configured PayPal sandbox actions require human approval. No real-money payment is supported by the agent's tools. Astropods has supplied historical hosted inference and application hosting; using every optional sponsor is not a requirement and unused services are not claimed as integrations.
 
-Every AI operation reserves its shared call/cost allowance before dispatch. Exact operation IDs prevent an HTTP retry from repeating the model call. A lost response can recover the recorded answer through a read-only status request. Invalid responses retain the reservation. File text is private to its owning browser session; it is not included in public logs, traces or source exports.
+## What the checks establish
 
-## Run the container
+The local October 25 workspace acceptance run executes all fifty authored product scenarios as **bounded schema, planning, persistence and authority checks**. It keeps unresolved goals and specialist handoffs separate from task success. It does **not** establish that all fifty original real-world goals were achieved. No genuine human pilot, independent reproduction, measured adoption or willingness to pay is claimed.
 
-The image includes the pinned CPU encoder. Building it downloads public packages and weights; starting it performs no model download or automatic inference.
+Current checks cover guest/member flows, item independence, zero-screen/no-desk/no-purchase cases, declared costs, rotated footprint geometry, browser/server parity, private projects, stale revisions, export and actual local-model proposals. Exact device identification, trustworthy specification acquisition, real delivery/availability, clinical/industrial suitability, structural safety and enterprise procurement are not solved by a successful JSON check.
 
-```sh
-docker compose up --build
-```
+### October 25 qualification
 
-Open **http://127.0.0.1:4000**. The default container has zero external-call and inference ceilings. Configure a deliberately approved model allocation privately to enable real inference. SQLite uses the stable named `intentcart-local-data` volume. The app runs as a non-root user, with a read-only image filesystem and a bounded temporary directory.
+| Check | Observed result | Scope |
+|---|---:|---|
+| Composed planning API journeys | 100,000 / 100,000 passed | 100 fictional accounts, 1,000 material signatures each; exact frozen planner core |
+| Persona Chrome journeys | 100 / 100 passed | Actual in-process local CPU model; separate from the API run |
+| Selected application regressions | 216 passed | Current workspace, accounts and commerce contracts |
+| Checkout browser checks | 14 full-flow + 14 focused checks passed | Actual local model; explicitly fake payment provider for automated checkout |
+| Clean local setup | Passed | Fresh Python 3.12 macOS environment and exact CPU model reconstruction |
+| Real PayPal Sandbox | $229 captured and fully refunded | Separate approved test, ten server API calls; no real money |
 
-## Sponsor-hosted frontend
+The API corpus composes 28 mechanisms and eight recovery operations; it is not 100,000 independent natural-language tasks, uncached model generations or browser sessions. Identical complete model states may reuse an audited decision while every episode reruns its tools and verifiers. The separately curated subset contains 60 complete runtime policy states (43 train, 7 development, 10 test); persona or story changes do not inflate that count. Independent functional episodes reset fixture rates/history, so this is not load testing. The current checkout addition has its own qualification; the larger run covers the byte-identical bound planner core. All 1,004 earlier failed API attempts and browser failure records are retained alongside successful reruns. The full synthetic dataset and private test evidence are stored outside this minimal runtime repository; no fictional account credentials are published. These results do not establish human utility or general model competence.
 
-`astropods.yml` packages this same application as a custom Astropods frontend, with its managed gateway and persistent `/data` storage. The dedicated `Dockerfile.astropods` serves port80 as an unprivileged user; the default `Dockerfile` keeps its original high port. The explicit file also supports CLI versions that ignore multi-stage build targets. Check the account's actual eligibility and deploy-form estimate before provisioning. Astropods documents free compute for its oldest running agent; model usage and any separately billed storage still need limits. Render credits are an alternative subject to its payment-method requirements; Azure is the fallback.
-
-The hosted profile uses the official `astropods-adapter-core` authorization SDK with signed, expiring ALB identity headers and the deployment's private access list. A bare user-ID header is insufficient. Missing deployment identity, a development identity, an anonymous outage fallback, invalid signature, access denial and authorization outage all fail closed. Browser sessions bind to the verified signed-in subject; changing accounts starts a separate owned session. Authorization decisions may remain cached for30 seconds. The native profile explicitly sets `INTENTCART_TLS_TERMINATION=astropods` for the assigned `.agents.astropods.ai` HTTPS origin: Astropods redirects external HTTP to HTTPS and forwards a private HTTP request. In the invited `astropods` policy, that upstream is accepted only with the exact configured host and cryptographically verified platform identity. The separately approved `accounts` policy replaces the platform sign-in gate with IntentCart authentication: the landing page is public, and private APIs require a current application account session and CSRF protection. It requires `INTENTCART_PUBLIC_ACCOUNTS_APPROVED=true` and an explicit managed-HTTPS termination setting for the assigned host; the platform Custom app access must be set to Public only after this policy is deployed and verified. Secure cookies remain required; standalone password-protected hosting retains its HTTPS scheme check.
-
-Set the declared production origin to the exact assigned HTTPS hostname. Deployment requires an explicit fixed allocation ID, reviewed starting usage totals and one-time installation approval. `intentcart.installation` seeds a new volume with those totals; restarts retain later usage and reject changed allocation declarations, counters below the declared migration baseline, missing markers or a missing database on previously marked storage. An older valid backup can still omit later usage; reconcile that usage before any manual restore. Remove `INTENTCART_FIRST_INSTALL_APPROVED` after the initial installation and verify a restart before inviting anyone. This is a single-instance migration mechanism, not an automatic backup restoration or budget renewal service.
-
-```sh
-ast spec validate
-ast blueprint push intentcart --visibility private
-ast blueprint deploy intentcart --vars-file /private/approved-launch.env --dry-run
-```
-
-Only deploy after reviewing the resolved configuration, access list, compute/storage estimate and persistent-volume settings. Keep credentials and operator migration files outside Git. A build, schema validation or dry-run alone does not confirm a live deployment.
-
-## Public launch profiles
-
-| Profile | Intended behavior |
-| --- | --- |
-| `local` | Private laptop development and explicitly bounded manual inference |
-| `public-preview` | Read-only, no provider keys and zero external ceilings; suitable for the included free Render preview blueprint |
-| `production` | HTTPS hosting with approved IntentCart accounts, a private access password or verified Astropods authorization; durable storage and a separately approved model allocation |
-
-The production profile refuses startup when those prerequisites are missing. `INTENTCART_AUTH=astropods` selects the signed platform identity flow and requires its injected deployment token; the default `basic` policy uses the private launch password. The explicit `accounts` policy supports public registration with separate private workspaces and invite-only AI spending access. It must not be enabled by silently removing another authentication gate. It uses one process and one instance; it is not a horizontally distributed payment service. `GET /readyz` checks configuration and storage access. Progress streams contain owned checkpoints, never advance the agent, and close automatically; they are not token-generation or idle model jobs. API and HTML responses are private/non-cacheable. Only versioned public static assets receive immutable caching headers; this is not distributed edge inference or an AI-CDN deployment.
-
-For the standalone Caddy deployment, before exposing the instance:
-
-1. Put private settings outside Git. Set `PUBLIC_URL` to the exact HTTPS origin, `COOKIE_SECURE=true`, `INTENTCART_MODE=production`, a private `INTENTCART_ACCESS_PASSWORD` of at least 32 bytes and `INTENTCART_STORAGE_ACK=durable`.
-2. Configure the Astropods endpoint, key, reviewed rates, credit-only confirmation and **separate** positive call/cost ceilings. Set `INTENTCART_PUBLIC_INFERENCE_APPROVED=true` only for the allocation approved for this public launch. Do not copy or renew another session's allowance.
-3. Mount a durable local block-backed volume, then explicitly run `python -m intentcart.release --init-storage` on that volume. This creates an installation marker without resetting receipts or counters.
-4. Use the immutable audited application image in `compose.production.yaml`, supply `APP_DOMAIN` and the private environment-file path, then start the app behind the included Caddy HTTPS proxy. The application trusts only that proxy's fixed private address. Username is `intentcart`; the password is the private value from step 1.
-
-The [official hackathon Render page](https://paypalaihackathon.devpost.com/details/render) links the [$50 organizer claim flow](https://credits-portal-mmdm.onrender.com/claim/paypal-ai-hackathon). Redeem it into the intended workspace and verify the balance. Free Render services have ephemeral storage and are represented here by the read-only preview. A durable AI launch needs a paid compute instance and persistent disk; verify credit-only eligibility and payment-method requirements before creating either. Do not add a card or create cash exposure just to consume a grant. The Azure fallback in `deploy/azure/main.bicep` provisions one CPU-only ARM Linux host with a local disk and one administrator `/32` SSH rule. The template does not provision a GPU, Kubernetes, paid inference or a registry. Compile and review it before deploying:
-
-```sh
-az bicep build --file deploy/azure/main.bicep
-az deployment group what-if --resource-group YOUR_GROUP --template-file deploy/azure/main.bicep \
-  --parameters location=westus2 sshPublicKey=YOUR_PUBLIC_KEY adminIpv4=YOUR_IP dnsLabel=YOUR_AVAILABLE_LABEL
-```
-
-Check the actual subscription's region policy, CPU quota, credit balance and spending limit first. The supported host size is configurable because account eligibility varies. Use a Linux/ARM64 application image with the default ARM host. The template prepares infrastructure; source delivery, private settings, volume initialization, TLS and a successful external smoke check are required before calling the site live. No subscription upgrade or paid plan is automatically selected.
-
-For an explicit private backup, while preserving the live allowance ledger:
-
-```sh
-python -m intentcart.backup --output /private/backups/intentcart.sqlite3
-```
-
-Backups can contain private sessions, uploaded text and sandbox records. Keep them out of Git. The command creates a new mode-600 backup and verifies integrity and the usage counters. It does not upload, schedule or automatically restore old counters. Stop the service and reconcile any later usage before a restore.
-
-## Optional configuration
-
-The application reads a private `.env` from the repository root. It is ignored by Git. The defaults run locally with external inference and discovery disabled:
-
-```dotenv
-PUBLIC_URL=http://127.0.0.1:4000
-DATABASE_PATH=var/intentcart.sqlite3
-EXTERNAL_CALL_LIMIT=0
-ASTRO_BUDGET_MICROUSD=0
-```
-
-If you change the port, set `PORT` in the shell before starting and make `PUBLIC_URL` match the exact browser origin. Keep the server bound to localhost for local use.
-
-**PayPal sandbox:** create a sandbox REST application in the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/applications/sandbox), set `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` privately, restart the server and use a separate Personal sandbox buyer. Review and approve the exact quote before opening checkout. No real funds or goods are involved. After an uncertain capture, reconcile the existing order before retrying.
-
-**Optional hosted inference:** the Astropods adapter requires `ASTRO_GATEWAY_URL`, `ASTRO_GATEWAY_API_KEY`, `MODEL_DEFAULT`, explicitly reviewed input/output rates, `ASTRO_CREDIT_ONLY_CONFIRMED=true`, and positive call and cost ceilings. Costs are configured in micro-USD; the rate variables are `ASTRO_INPUT_MICROUSD_PER_MILLION` and `ASTRO_OUTPUT_MICROUSD_PER_MILLION`. Keep ceilings at zero unless you deliberately authorize usage. The main workspace selects real inference. A missing connection or exhausted budget is shown explicitly; it is never presented as a working model. Deterministic policies remain available as named research baselines.
-
-**Optional discovery:** `CHANNEL3_API_KEY` and an explicitly positive `EXTERNAL_CALL_LIMIT` enable separate product discovery. Discovery listings do not authorize checkout or establish compatibility.
-
-## Inside the runnable source
+## Project structure
 
 ```text
 intentcart/
-  app.py, *_routes.py         HTTP routes, session ownership and persisted state
-  missions.py                Finite planning, investigation and minimal-change repair
-  agent.py, workbench.py      Bounded actions and human evidence review
-  orchestrator.py            Strict research transitions, verification and briefs
-  workflow.py                LangGraph routing over those guarded transitions
-  semantic.py                Offline PyTorch/Transformers evidence retrieval
-  documents.py               Bounded, network-disabled file parsing
-  document_routes.py         Owned file lookup, consent and idempotent AI answers
-  vector_search.py            LlamaIndex / Sentence Transformers / local Qdrant
-  model_usage.py              Shared durable model reservations
-  production.py, release.py   Fail-closed launch configuration and readiness
-  progress.py                Bounded owned server-sent checkpoints
-  backup.py                  Explicit private SQLite backup verification
-  observability.py           Bounded local OpenTelemetry spans
-  sdk_transport.py           Bounded OpenAI-compatible HTTPX transport
-  mcp_server.py              Read-only selected-brief MCP tools
-  evidence_catalog.py        Curated sources and exact product variants
-  learning.py                Bayesian preference learning
-  workspace_preferences.py   Preferences over supported configurations
-  acquisition.py             Finite evidence-acquisition reference
-  finite_budget.py            CPU budget and learning diagnostics
-  validity.py, research.py    Decision claims and source-checked saved results
-  replay.py                  Local failure reproduction with a fake provider
-  paypal.py, gateway.py      Optional bounded external transports
-  data/                      Catalogs, settings and results used by the interface
-  web/                       HTML, CSS, JavaScript, illustrations and Three.js
-scripts/                     Saved-view evaluators and explicit encoder setup
-docs/protocols/              Two machine-readable inputs for those views
-requirements.txt             Pinned runtime dependencies
+  workspace.py                 # Strict graph, footprint/cost checks, private project API
+  workspace_agent.py           # Trained controller, tools and reviewed proposals
+  workspace_intent.py          # Required hash-bound trained intent router
+  trained_agent.py             # Required pinned local LoRA serving
+  commerce.py                  # Trained shopping workflow and exact sandbox quote binding
+  paypal.py                    # PayPal Sandbox Orders v2 and refunds
+  accounts.py                  # Accounts, CSRF, ownership and customer records
+  web/workspace*               # Visual editor, conceptual 3D scene, shared browser checks
+  web/commerce-ui.js           # Human cart review, buyer approval and saved payments
+  data/workspace-router/       # Router artifact and provenance
+  data/trained-agent/          # LoRA artifact, licenses and serving manifest
+training/                      # Authored data and reproducible training/evaluation recipes
+scripts/                       # Required setup and source-bound report generators
 ```
 
-The research views check saved results against their source hashes. Their supporting scripts and JSON protocols are retained so those checks remain usable. To regenerate a report locally, for example:
+## Licenses
 
-```sh
-python scripts/evaluate_missions.py --output /tmp/intentcart-missions.json
-```
-
-## Scope and limits
-
-IntentCart is a **single-instance sandbox application** built for the 2026 PayPal AI Hackathon. Compatibility means support under the represented finite rules and available evidence; it is not physical hardware certification or a live retailer guarantee. Saved synthetic experiments, CPU learning diagnostics and fake-provider replays are distinct from human studies and live transactions. Negative learning results remain visible in the application.
-
-The local planning experience works without external services. Actual inference, discovery and sandbox payments require your own deliberate configuration. The project does not include account authentication, distributed settlement, live inventory, fulfillment or production security certification. Source fingerprints detect content changes; they are not authenticity signatures.
-
-Released under the [MIT License](LICENSE). Bundled Three.js retains its [upstream notice](intentcart/web/vendor/THREE_LICENSE.md).
-
-## Decision Studio
-
-Open **Planning workbench → Decision Studio** after the evidence agent has returned supported configurations. Explore the decision without changing it: all analyses run locally in the browser, over at most the twelve returned options in the loaded revision. They do not search the full catalog, fetch sources, predict actual prices or grant checkout authority. Refresh the task to obtain a newer revision; results are discarded when the loaded task changes.
-
-<details>
-<summary>Available planning tools</summary>
-
-- **Budget coverage staircase** — See which returned setups remain affordable at each budget step; no plan is recomputed.
-- **Tax and shipping allowance** — Find the maximum combined extra costs each supported basket can absorb within your hypothetical budget.
-- **Component spend exposure** — Identify which component categories account for the largest share of one complete basket.
-- **Single-product outage recovery** — Find the least disruptive returned fallback when one exact product is unavailable.
-- **Correlated stock-out stress** — Remove up to four products together and inspect surviving complete baskets.
-- **Dock dependency resilience matrix** — Stress every represented dock independently and see the fallback cost for your starting setup.
-- **Diversified three-setup shortlist** — Choose three returned options that maximize their minimum component-slot distance, then minimize combined price.
-- **Least-change replacement graph** — Map the closest supported alternatives by changed component slots, with exact transition cost.
-- **Least-disruption budget ladder** — For each affordable price breakpoint, find the option with the fewest changed slots relative to your current choice.
-- **Per-product price-rise tolerance** — Calculate how much each product unit price can rise before every containing returned basket exceeds your budget.
-- **Uniform hardware inflation stress** — Apply a user-declared percentage price increase to component subtotals while keeping saved tax/shipping fixed.
-- **Exact-product price shock** — Change one component unit price hypothetically, respecting the quantity in each supported basket.
-- **Tax and shipping scenario estimator** — Replace saved extras with a declared tax rate on hardware and a fixed shipping amount.
-- **Declared operating-cost horizon** — Compare purchase plus explicitly assumed electricity and maintenance costs over a chosen horizon; no device consumption is inferred.
-- **Cost per productive session** — Translate one-time planning costs into a stated number of work sessions without implying financing or resale value.
-- **Worst-case price interval screen** — Screen setups against a declared component-price uncertainty band; saved extras remain fixed.
-- **Price-scenario minimax regret** — Find the smallest worst-case excess cost across baseline, hardware-inflation and one-product-shock scenarios among returned options.
-- **Cost and model-trade-off Pareto frontier** — Identify returned setups dominated on total price, changed slots and the three estimated non-price contributions.
-- **Exact-component shortlist locks** — Filter supported alternatives while keeping up to four explicitly selected components.
-- **Preference-contribution reweighting sandbox** — Explore user-supplied multipliers over the current model contribution estimates; no learned preference is changed.
-- **Preference sensitivity sweep** — Count which options lead on a fixed 35-profile multiplier grid, retaining exact ties rather than inventing probabilities.
-- **Preference cycle audit** — Detect directed cycles in the last 48 retained explicit A/B answers, with ties and skips kept separate.
-- **Distinctive comparison pair finder** — Surface supported pairs absent from the last 48 retained comparisons with large differences in model-contribution vectors.
-- **Source review expiry forecast** — Forecast review deadlines from observed dates and the declared review interval, separating undated/fictional fields.
-- **Observed-source dependency blast radius** — Map each inspected product field to returned baskets containing that exact product.
-- **Source origin concentration audit** — Group observed fields by cited URL origin and evidence kind; do not confuse repeated fields with independent sources.
-- **Observed-value contradiction audit** — Find distinct values observed for the same exact product and field without resolving the contradiction automatically.
-- **Evidence review priority queue** — Order inspected fields by overdue/unknown age and number of exposed returned setups.
-- **Portable private-data-minimized decision snapshot** — Export supported plans, product declarations and observed fields without query text, sessions or raw event history.
-- **Earlier-versus-current decision snapshot diff** — Paste an exported studio snapshot to compare prices, available setup IDs, observed values and source identities without importing authority.
-
-</details>
-
-Each result can be downloaded as JSON. Review product and source content before sharing. Price scenarios use integer cents with explicit rounding; operating costs use your declared assumptions. Preference contributions describe a finite model, not measured hardware performance or personal satisfaction. None of these tools updates the basket, requirements, evidence, preference history or payment approval.
-
-## Contingency and reproducibility tools
-
-Decision Studio now supports deeper local investigation over the same returned options. Portfolio costs count the maximum units needed to build one alternative at a time; they exclude tax/shipping. Declared outage probabilities are hypothetical independent-product assumptions, with shared components retained. No purchases, source fetches, model requests or task mutations occur.
-
-<details>
-<summary>Additional capabilities</summary>
-
-- **Searchable tool navigator** — Find analyses by name, group or description, with an explicit no-match state.
-- **Reproducible analysis receipts** — Export whitelisted parameters and source/revision identities; pasted documents are omitted and marked non-replayable.
-- **Saved-analysis replay verifier** — Recompute a non-import analysis on the same loaded revision and identify edited or incompatible receipts.
-- **Minimum contingency portfolio** — Exhaustively find the smallest set of returned options covering every representable single-product outage, breaking ties by shared-inventory cost.
-- **Budgeted maximum outage coverage** — Search all returned-option subsets for the most single-product outages covered within a hypothetical shared-hardware budget.
-- **Minimum component cut sets** — Enumerate the smallest sets of up to three product failures that eliminate every returned supported option.
-- **Shared spare-kit bill of materials** — Combine chosen returned setups using maximum component quantities, avoiding double-counting shared parts.
-- **Declared spare inventory reuse** — Calculate additional exact-product quantities for each returned setup from a declared inventory without assuming ownership.
-- **Backup-pair shared-failure matrix** — Compare every returned pair by common failure points and shared inventory cost rather than assuming independent backups.
-- **Marginal spare-product unlocks** — Find how many returned alternatives one additional unit of each product unlocks from a starting setup.
-- **Contingency coverage cost frontier** — Compute exact shared-inventory cost breakpoints where the maximum number of covered single-product outages increases.
-- **Shared-component availability model** — Use exact inclusion-exclusion to calculate alternative-setup availability under a declared independent per-product outage probability.
-- **Component outage importance** — Compare portfolio availability conditional on each exact component working or failing, retaining shared-part dependence.
-- **Outage-assumption sensitivity curve** — Evaluate a chosen portfolio at five points between declared common product-failure probabilities.
-- **Incremental trade-off exchange rates** — Relate an exact price change between two returned options to each estimated non-price contribution change.
-- **Minimum preference transfer to tie the leader** — Find the smallest normalized weight mass moved from uniform weights that lets each rival tie the current uniform-score leader.
-- **Contribution-interval robust shortlist** — Screen uniform-score rankings under a declared independent interval around each estimated contribution.
-- **Tie-aware rank consensus** — Aggregate four single-contribution rankings with average tied ranks and expose the per-dimension ranks.
-- **Lexicographic priority ordering** — Order returned setups by an explicit sequence of priorities, avoiding arbitrary numerical trade-off weights.
-- **Price versus model-value envelope** — Find the upper concave price/value envelope and its diminishing marginal contribution gains.
-- **Repeated-comparison consistency audit** — Group the last 48 explicit pairwise answers, retaining orientation, ties, skips and opposing answers.
-- **Preference comparison coverage graph** — Identify disconnected groups and unanswered setup connections within the last 48 retained comparisons.
-- **Minimum observed-field explanation cover** — Find a smallest set of observed fields covering every represented check label in the loaded source links.
-- **Observed evidence-to-check matrix** — Expose check labels with and without product-matched inspected source links for every returned setup.
-- **Canonical citation duplicate audit** — Find citations sharing a URL after removing fragments and sorting query parameters, while retaining distinct source IDs.
-- **Time-budgeted evidence review plan** — Choose observed fields under a declared review-time budget using exact knapsack optimization of summed setup exposures.
-- **Cross-snapshot changed-source impact** — Compare observed values and cite current returned setups containing products whose prior evidence changed.
-- **Cross-snapshot migration parts list** — Calculate retained, additional and surplus exact-product units between one earlier setup and a current supported setup.
-- **Analysis receipt difference review** — Compare assumptions and changed result cells from two downloaded analyses of the same tool without executing imported instructions.
-- **Readable analysis handoff export** — Download a plain-language Markdown brief with assumptions, source identities, table and limitations; private task query and pasted documents stay excluded.
-
-</details>
-
-Exact subset searches are bounded by twelve returned setups. Probability portfolios are capped at eight setups; imported JSON is capped at 120,000 characters. These diagnostics do not establish full-catalog optimality, measured reliability, source truth, human utility or payment permission. Refresh explicitly for a newer task revision. Review exported structured product/source records before sharing.
-
-### Correlated shared-cause outage scenarios
-
-In **Decision Studio**, select **Correlated shared-cause outage scenarios**. Choose returned setup IDs (blank uses the first two), then declare up to six hypothetical causes. Each cause has a unique name, a probability in percent (0–100, at most two decimal places) and exact product IDs from the chosen setups:
-
-```json
-[{"name":"Shared shipment","failure_percent":10,"products":["exact-product-id"]}]
-```
-
-Replace the example ID with an ID in the setup legend. One cause may disable multiple products; products may appear in several causes. All cause combinations are enumerated (at most 64), with their probabilities, failed products and surviving setups. The result includes per-setup and portfolio availability under these assumptions. An empty array models no failures.
-
-Causes are assumed mutually independent. Products are correlated through declared causes; unlisted products remain available, and no other failures are modeled. No supplier relationships, live stock, measured reliability or timing are inferred. Results do not change support, task state or payment approval. JSON and readable exports include cause names/IDs and assumptions; review before sharing. Pasted document text is omitted from receipt parameters, and this analysis is not receipt-replayable.
+Project source is [MIT licensed](LICENSE). Three.js and Anime.js retain their bundled notices in `intentcart/web/vendor/`. The Qwen-derived adapter/base carry their Apache-2.0 notices under `intentcart/data/trained-agent/`; llama.cpp notices are retained there too. Product names and linked specifications identify sources and do not imply endorsement. Procedural scene graphics are original; no third-party music or product scans are bundled.

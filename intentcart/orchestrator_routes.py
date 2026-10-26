@@ -5,7 +5,7 @@ from typing import Literal
 from fastapi import HTTPException, Request
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, ConfigDict, Field
-from . import agent, config, gateway, model_usage, evidence_catalog, missions, observability, orchestrator as flow
+from . import agent, config, gateway, model_usage, evidence_catalog, missions, observability, orchestrator as flow, trained_agent
 
 
 class Strict(BaseModel):
@@ -14,7 +14,7 @@ class Strict(BaseModel):
 
 class Start(Strict):
     task_revision: int = Field(ge=1)
-    options: flow.Options = Field(default_factory=lambda: flow.Options(engine='gateway'))
+    options: flow.Options = Field(default_factory=lambda: flow.Options(engine='trained'))
 
 
 class Revision(Strict):
@@ -62,11 +62,11 @@ def register(module):
             try:
                 run, record = current(state)
                 budget = capacity(db)
-                return {'run': flow.view(run, record), 'model_enabled': budget['enabled'], 'model_budget': budget}
+                return {'run': flow.view(run, record), 'model_enabled': budget['enabled'], 'model_budget': budget, 'trained_model':trained_agent.status()}
             except (flow.ResearchError, agent.AgentError) as exc:
                 budget = capacity(db)
                 return {'run': None, 'stale': bool(state.get('research_run')), 'notice': str(exc),
-                        'model_enabled': budget['enabled'], 'model_budget': budget}
+                        'model_enabled': budget['enabled'], 'model_budget': budget, 'trained_model':trained_agent.status()}
 
     @app.post('/api/agent/research')
     def start(body: Start, request: Request):
@@ -75,6 +75,8 @@ def register(module):
             record = state.get('evidence_agent')
             if not record or record['revision'] != body.task_revision:
                 raise HTTPException(409, 'Task changed. Review the current request first.')
+            if body.options.engine == 'trained' and not trained_agent.status()['ready']:
+                raise HTTPException(503,trained_agent.status()['notice'])
             if body.options.engine == 'gateway' and not module.outcome_model_status()['enabled']:
                 raise HTTPException(409, 'Model inference is disabled. Choose the free local workflow; no request was sent.')
             try:
@@ -225,6 +227,7 @@ def register(module):
 
     @app.post('/api/agent/research/advance')
     def advance(body: Advance, request: Request):
+        local_dispatch=False
         with module.database() as db:
             sid, state = module.owner(request, db, True)
             try:
@@ -232,7 +235,13 @@ def register(module):
                 if run['inflight'] or run['status'] in ('COMPLETE','CANCELLED','PAUSED','WAITING_FOR_USER'):
                     raise flow.ResearchError('This run is stopped, paused or waiting for your answer.')
                 role = 'planner' if run['phase'] == 'plan' else 'investigator'
-                if run['options']['engine'] == 'gateway' and (run['phase'] == 'plan' or run['phase'] == 'investigate' and record['status'] == 'ACTIVE'):
+                if run['options']['engine']=='trained' and run['phase']=='investigate' and record['status']=='ACTIVE':
+                    token=uuid.uuid4().hex;run.update(inflight=token,status='RUNNING')
+                    run['model_receipts'].append({'request_id':token,'role':'investigator','reserved_microusd':0,'model_id':'intentcart-qwen3-0.6b-lora','adapter_sha256':run['trained_adapter_sha256'],'status':'reserved','external_requests':0})
+                    flow.append(run,'investigator','local_model_dispatch',{'request_id':token,'external_requests':0},record)
+                    store(db,sid,state,run,record);db.commit();run_id=run['id'];local_record=record
+                    local_dispatch=True
+                elif run['options']['engine'] == 'gateway' and (run['phase'] == 'plan' or run['phase'] == 'investigate' and record['status'] == 'ACTIVE'):
                     payload = flow.plan_body(run, record, config.ASTRO_MODEL) if role == 'planner' else flow.action_body(run, record, config.ASTRO_MODEL)
                     token = reserve(db, sid, state, run, record, payload, role)
                     run_id = run['id']
@@ -244,6 +253,24 @@ def register(module):
                     return store(db, sid, state, run, record)
             except (flow.ResearchError, agent.AgentError, ValueError) as exc:
                 raise HTTPException(409, str(exc)) from exc
+        if local_dispatch:
+            proposed,receipt,failure=None,None,None
+            try:proposed,receipt=trained_agent.policy(local_record)
+            except trained_agent.ModelError as exc:failure=str(exc)
+            with module.database() as db:
+                sid,state=module.owner(request,db,True)
+                try:
+                    run,record=current(state)
+                    if run['id']!=run_id or run['inflight']!=token:raise flow.ResearchError('Run changed; the local model response was discarded.')
+                except (flow.ResearchError,agent.AgentError) as exc:raise HTTPException(409,str(exc)) from exc
+                try:
+                    run.update(inflight=None,status='READY');entry=next(r for r in run['model_receipts'] if r['request_id']==token)
+                    if failure:raise trained_agent.ModelError(failure)
+                    entry.update(receipt or {});run,record=flow.advance(run,record,proposed);run['model_receipts'][-1]['status']='accepted'
+                except (trained_agent.ModelError,flow.ResearchError,agent.AgentError,ValueError) as exc:
+                    run.update(status='PAUSED',fault=str(exc),inflight=None);run['model_receipts'][-1]['status']='rejected'
+                    flow.append(run,'investigator','local_model_rejected',{'external_requests':0},record)
+                return store(db,sid,state,run,record)
         return dispatch(request, token, run_id, payload, role, run, record)
 
     @app.post('/api/agent/research/model-brief')

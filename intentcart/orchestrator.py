@@ -27,7 +27,7 @@ class ResearchError(ValueError):
 
 class Options(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
-    engine: Literal['local', 'gateway'] = 'local'
+    engine: Literal['local', 'gateway', 'trained'] = 'local'
     policy: Literal['targeted', 'census'] = 'targeted'
     counterfactuals: bool = True
 
@@ -53,7 +53,7 @@ def identity():
     return digest({'encoder': semantic.configured_identity(), **{name: hashlib.sha256((base / name).read_bytes()).hexdigest()
                    for name in ('orchestrator.py', 'orchestrator_routes.py', 'agent.py',
                                 'missions.py', 'workbench.py', 'evidence_catalog.py',
-                                'workspace_preferences.py', 'gateway.py', 'workflow.py', 'observability.py', 'semantic.py', 'sdk_transport.py', 'model_usage.py', 'production.py', 'astro_auth.py', 'installation.py', '__main__.py')}})
+                                'workspace_preferences.py', 'gateway.py', 'workflow.py', 'observability.py', 'semantic.py', 'sdk_transport.py', 'model_usage.py', 'production.py', 'astro_auth.py', 'installation.py', '__main__.py', 'trained_agent.py', 'studio.py')}})
 
 
 def checkpoint(run, record):
@@ -88,6 +88,12 @@ def ensure(run, record):
     agent.ensure_current(record)
     if not run or run.get('schema') != 'intentcart-research-run/1':
         raise ResearchError('Start a research run for this task.')
+    if run.get('options',{}).get('engine')=='trained':
+        from .trained_agent import identity as trained_identity
+        try:artifact=trained_identity();current_adapter=artifact['adapter_sha256']
+        except ValueError as exc:raise ResearchError('The required trained model is unavailable. No fallback was selected.') from exc
+        if run.get('trained_serving_sha256')!=artifact.get('serving_sha256'):raise ResearchError('The trained serving artifact changed. Start a fresh reviewed run.')
+        if run.get('trained_adapter_sha256')!=current_adapter:raise ResearchError('The trained model changed. Start a fresh reviewed run.')
     if run['source_sha256'] != identity() or run['review_day'] != workbench.current_day().isoformat():
         raise ResearchError('Research source or review date changed. Start a new run.')
     if run['task_sha256'] != digest(record) or run['task_revision'] != record['revision']:
@@ -99,12 +105,16 @@ def ensure(run, record):
 def create(record, options=None):
     agent.ensure_current(record)
     options = Options.model_validate(options or {})
+    if options.engine=='trained' and record['status']!='ACTIVE':raise ResearchError('Review your requirements and start a fresh task for the trained agent.')
     run = {'schema': 'intentcart-research-run/1', 'id': uuid.uuid4().hex,
            'revision': 0, 'source_sha256': identity(),
            'review_day': workbench.current_day().isoformat(), 'options': options.model_dump(),
            'phase': 'plan' if options.engine == 'gateway' else 'investigate', 'status': 'READY', 'events': [], 'audit': None,
            'counterfactuals': [], 'report': None, 'inflight': None, 'fault': None,
            'model_receipts': [], 'brief_selection': None, 'model_plan': None}
+    if options.engine=='trained':
+        from .trained_agent import identity as trained_identity
+        artifact=trained_identity();run['trained_adapter_sha256']=artifact['adapter_sha256'];run['trained_serving_sha256']=artifact.get('serving_sha256')
     append(run, 'planner', 'plan', {'phases': [key for key, _ in PHASES],
            'engine': options.engine, 'tool_limit': agent.MAX_STEPS,
            'inspection_limit': record['inspection_budget'], 'checkout_supported': False}, record)
@@ -427,7 +437,7 @@ def view(run, record):
     result['graph'] = [{'id': key, 'label': label,
                         'status': 'done' if run['phase'] == 'done' or list(k for k,_ in PHASES).index(key) < list(k for k,_ in PHASES).index(run['phase']) else 'current' if key == run['phase'] else 'pending'}
                        for key,label in PHASES]
-    result['notice'] = 'Manual, bounded requests checkpoint progress. No background work. Local roles are programs; only gateway proposals consume model credits.'
+    result['notice'] = 'Manual, bounded requests checkpoint progress. No background work. The trained engine uses local LoRA inference; the local comparison is deterministic. Only gateway proposals consume model credits.'
     return result
 
 

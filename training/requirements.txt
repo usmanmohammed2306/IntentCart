@@ -1,0 +1,5 @@
+transformers==5.20.2
+peft==0.21.2
+accelerate==1.15.0
+safetensors==0.8.0
+# The recorded Colab runtime supplies torch2.14.1+cpu and torch_tpu0.2.0.

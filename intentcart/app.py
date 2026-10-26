@@ -15,7 +15,7 @@ from typing import Literal
 from urllib.parse import urlsplit
 import httpx
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, ConfigDict
 from . import config, production, accounts
@@ -102,7 +102,7 @@ async def boundaries(request: Request, call_next):
         body = bytearray()
         async for chunk in request.stream():
             body.extend(chunk)
-            if len(body) > (1_600_000 if request.url.path=='/api/documents/import' else 65536):
+            if len(body) > (2_100_000 if request.url.path in ('/api/planning/document','/api/planning/restore-review') else 320_000 if request.url.path.startswith(('/api/planning/','/api/workspaces/')) else 1_600_000 if request.url.path=='/api/documents/import' else 65536):
                 return JSONResponse({'detail': 'Request body is too large.'}, status_code=413)
         request._body = bytes(body)
     if request.url.path.startswith('/api/'):
@@ -418,7 +418,12 @@ def valid_quote(quote, state):
 
 def spending_gate(quote,state,proposal,now):
     if quote.get('kind')=='mission':
-        return outcomes.quote_gate(quote,state,proposal,now)
+        result=outcomes.quote_gate(quote,state,proposal,now)
+        extra=commerce.quote_gate(quote,state)
+        result['checks']+=extra
+        result['failed'] += [c['id'] for c in extra if not c['passed']]
+        result['eligible']=result['eligible'] and all(c['passed'] for c in extra)
+        return result
     return check_proposal(CATALOG,quote,state,proposal,now)
 
 @app.post('/api/proposals/check')
@@ -1012,6 +1017,10 @@ def health():
 
 @app.get('/')
 def home():
+    return FileResponse(ROOT/'web/workspace.html')
+
+@app.get('/investigate')
+def investigate():
     return FileResponse(ROOT/'web/agent.html')
 
 @app.get('/learn')
@@ -1037,3 +1046,22 @@ from . import progress
 progress.register(sys.modules[__name__])
 
 accounts.register(sys.modules[__name__])
+
+from . import studio
+studio.register(sys.modules[__name__])
+
+from . import workspace
+workspace.register(sys.modules[__name__])
+
+from . import planning_routes
+planning_routes.register(sys.modules[__name__])
+
+from . import commerce
+commerce.register(sys.modules[__name__])
+
+@app.get('/workspace-worker.js')
+def workspace_worker():
+    files=('workspace.html','workspace.css','workspace.js','workspace-core.js','workspace-scene.js','planning-ui.js','commerce-ui.js','studio-render.js')
+    version=hashlib.sha256(b''.join((ROOT/'web'/p).read_bytes() for p in files)).hexdigest()[:20]
+    source=(ROOT/'web/workspace-worker.js').read_text().replace('__VERSION__',version)
+    return Response(source,media_type='application/javascript',headers={'Service-Worker-Allowed':'/','Cache-Control':'no-store'})

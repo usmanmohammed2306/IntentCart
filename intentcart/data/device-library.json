@@ -1,0 +1,363 @@
+{
+  "schema": "intentcart-device-library/1",
+  "notice": "Small extensible reviewed library, not all hardware. Alias matches are candidates until the user confirms exact identity and configuration. No current price/stock claims.",
+  "devices": [
+    {
+      "id": "apple-mba-m1-2020",
+      "name": "Apple MacBook Air (M1, 2020)",
+      "kind": "laptop",
+      "aliases": [
+        "MacBook Air M1",
+        "MacBook Air M1 2020",
+        "MacBook Air 2020"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://support.apple.com/en-us/111883",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "closed": {
+          "width_mm": 304.1,
+          "depth_mm": 212.4,
+          "height_mm": 16.1,
+          "weight_g": 1290,
+          "native_displays": 1,
+          "video_out_usb_c": true,
+          "bluetooth": true,
+          "camera_height": 720,
+          "usb_c": true
+        },
+        "in_use": {
+          "weight_g": 1290,
+          "native_displays": 1,
+          "video_out_usb_c": true,
+          "bluetooth": true,
+          "camera_height": 720,
+          "usb_c": true
+        }
+      },
+      "note": "Closed chassis dimensions are NOT the complete open-lid operating envelope. Measure open-lid dimensions for physical fit.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "apple-mba-m2-2022",
+      "name": "Apple MacBook Air (M2, 2022)",
+      "kind": "laptop",
+      "aliases": [
+        "MacBook Air M2",
+        "MacBook Air M2 2022",
+        "MacBook Air 2022"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://support.apple.com/en-us/111867",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "closed": {
+          "width_mm": 304.1,
+          "depth_mm": 215.0,
+          "height_mm": 11.3,
+          "weight_g": 1240,
+          "native_displays": 1,
+          "video_out_usb_c": true,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        },
+        "in_use": {
+          "weight_g": 1240,
+          "native_displays": 1,
+          "video_out_usb_c": true,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        }
+      },
+      "note": "Closed chassis dimensions are NOT the complete open-lid operating envelope. Measure open-lid dimensions for physical fit.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "dell-p2422h",
+      "name": "Dell P2422H",
+      "kind": "monitor",
+      "aliases": [
+        "P2422H"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://www.delltechnologies.com/asset/en-lt/products/electronics-and-accessories/technical-support/dell-24-monitor-p2422h-datasheet.pdf",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "stand_extended": {
+          "width_mm": 537.8,
+          "depth_mm": 179.57,
+          "height_mm": 496.11,
+          "weight_g": 5570,
+          "max_height": 1080,
+          "max_hz": 60,
+          "video_in_hdmi": true,
+          "video_in_dp": true,
+          "mount": "freestanding"
+        },
+        "panel_only": {
+          "width_mm": 537.8,
+          "depth_mm": 52.15,
+          "height_mm": 318.5,
+          "weight_g": 3390,
+          "max_height": 1080,
+          "max_hz": 60,
+          "video_in_hdmi": true,
+          "video_in_dp": true,
+          "mount": "unknown"
+        }
+      },
+      "note": "Stand-extended nominal overall envelope; panel-only does not establish mounting safety. Packaging is not a fit dimension.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "logitech-m650-business-medium",
+      "name": "Logitech Signature M650 for Business \u2014 medium, right-handed",
+      "kind": "mouse",
+      "aliases": [
+        "M650 for Business medium"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://www.logitech.com/content/dam/logitech/en/business/pdf/m650-signature-for-business-data-sheet.pdf",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "width_mm": 61.8,
+          "depth_mm": 107.9,
+          "height_mm": 37.8,
+          "handedness": "right",
+          "bluetooth": true,
+          "noise_claim": "Manufacturer markets reduced click noise; individual suitability unmeasured",
+          "requires_software": false
+        }
+      },
+      "note": "Consumer M650 and M650 L/Left are distinct variants; do not transfer their dimensions.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "logitech-m650-l-left",
+      "name": "Logitech Signature M650 L Left \u2014 consumer",
+      "kind": "mouse",
+      "aliases": [
+        "M650 L Left"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://support.logi.com/hc/en-us/articles/4414480412567-Specification-Signature-M650",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "weight_g": 115.4,
+          "handedness": "left",
+          "bluetooth": true,
+          "requires_software": false
+        }
+      },
+      "note": "Support table axes describe product length/width/thickness inconsistently with workspace axes. Physical dimensions remain unknown pending explicit orientation review.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "plugable-usbc-dp",
+      "name": "Plugable USBC-DP bidirectional cable",
+      "kind": "cable",
+      "aliases": [
+        "USBC-DP"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://plugable.com/products/usbc-dp",
+          "reviewed_on": "2026-10-25",
+          "basis": "Reviewed official public specification; catalog digest is not a live-page fingerprint"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "link_type": "usb_c_dp",
+          "max_height": 2160,
+          "max_hz": 60,
+          "weight_g": 51,
+          "requires_software": false
+        }
+      },
+      "note": "Vendor documents DisplayPort Alt Mode/Thunderbolt/USB4 hosts and up to 4K60. Not suitable for a DP-host portable USB-C monitor that also needs power. Current stock, tax and shipping are unknown.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "plugable-ud6950pdh-4157",
+      "name": "Plugable UD-6950PDH \u2014 revision serial 4157+",
+      "kind": "dock",
+      "aliases": [
+        "UD-6950PDH 4157",
+        "UD-6950PDH serial 4157+"
+      ],
+      "reviewed_on": "2026-10-14",
+      "sources": [
+        {
+          "url": "https://plugable.com/products/ud-6950pdh",
+          "reviewed_on": "2026-10-14",
+          "basis": "Earlier reviewed exact-revision vendor record; no fresh document verification this release"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "displays": 2,
+          "max_height": 2160,
+          "max_hz": 60,
+          "driver_required": true,
+          "video_out_hdmi": true,
+          "pd_watts": 100
+        }
+      },
+      "note": "DisplayLink vendor compatibility requires separately granted software permission. Earlier hardware revisions are not interchangeable; no dimensions or current price inferred.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "logitech-k380s-us-920011775",
+      "name": "Logitech Pebble Keys 2 K380s \u2014 US 920-011775",
+      "kind": "keyboard",
+      "aliases": [
+        "K380s US 920-011775",
+        "Pebble Keys 2 K380s 920-011775"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://www.logitech.com/en-us/shop/p/pebble-keys-2.920-011775",
+          "reviewed_on": "2026-10-25",
+          "basis": "Official exact-SKU US product page; dimensions not exposed in retrieved text"
+        },
+        {
+          "url": "https://support.logi.com/hc/en-us/articles/16170851777047-Getting-Started-Pebble-Keys-2-K380s",
+          "reviewed_on": "2026-10-25",
+          "basis": "Official Bluetooth pairing and optional-software instructions"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "bluetooth": true,
+          "switch_hosts": 3,
+          "requires_software": false,
+          "noise_claim": "Manufacturer describes quiet keys; no independent noise measurement"
+        }
+      },
+      "note": "US keyboard layout/SKU. No dimensions invented from package sizes. Basic Bluetooth pairing differs from optional Logi Options+/Bolt/Flow setup. Prices, tax and current stock require a dated offer review.",
+      "authority": "Reviewed manufacturer specification snapshot; no current offer or suitability guarantee"
+    },
+    {
+      "id": "apple-mbp16-m1pro-2021",
+      "name": "Apple MacBook Pro 16-inch M1 Pro (2021)",
+      "kind": "laptop",
+      "aliases": [
+        "MacBook Pro 16 M1 Pro 2021"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://support.apple.com/en-us/111901",
+          "reviewed_on": "2026-10-25",
+          "basis": "Exact M1 Pro/Max variant values reviewed separately"
+        }
+      ],
+      "configurations": {
+        "closed": {
+          "width_mm": 355.7,
+          "depth_mm": 248.1,
+          "height_mm": 16.8,
+          "weight_g": 2100,
+          "native_displays": 2,
+          "video_out_hdmi": true,
+          "hdmi_outputs": 1,
+          "video_out_usb_c": true,
+          "usb_c_video_outputs": 3,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        },
+        "in_use": {
+          "weight_g": 2100,
+          "native_displays": 2,
+          "video_out_hdmi": true,
+          "hdmi_outputs": 1,
+          "video_out_usb_c": true,
+          "usb_c_video_outputs": 3,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        }
+      },
+      "note": "Closed chassis dimensions do not specify the full open-lid envelope. M1 Pro and M1 Max external-display counts differ; CPU/GPU/OS workload quality is not inferred.",
+      "authority": "Reviewed exact-variant manufacturer specification snapshot"
+    },
+    {
+      "id": "apple-mbp16-m1max-2021",
+      "name": "Apple MacBook Pro 16-inch M1 Max (2021)",
+      "kind": "laptop",
+      "aliases": [
+        "MacBook Pro 16 M1 Max 2021"
+      ],
+      "reviewed_on": "2026-10-25",
+      "sources": [
+        {
+          "url": "https://support.apple.com/en-us/111901",
+          "reviewed_on": "2026-10-25",
+          "basis": "Exact M1 Pro/Max variant values reviewed separately"
+        }
+      ],
+      "configurations": {
+        "closed": {
+          "width_mm": 355.7,
+          "depth_mm": 248.1,
+          "height_mm": 16.8,
+          "weight_g": 2200,
+          "native_displays": 4,
+          "video_out_hdmi": true,
+          "hdmi_outputs": 1,
+          "video_out_usb_c": true,
+          "usb_c_video_outputs": 3,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        },
+        "in_use": {
+          "weight_g": 2200,
+          "native_displays": 4,
+          "video_out_hdmi": true,
+          "hdmi_outputs": 1,
+          "video_out_usb_c": true,
+          "usb_c_video_outputs": 3,
+          "bluetooth": true,
+          "camera_height": 1080,
+          "usb_c": true
+        }
+      },
+      "note": "Closed chassis dimensions do not specify the full open-lid envelope. M1 Pro and M1 Max external-display counts differ; CPU/GPU/OS workload quality is not inferred.",
+      "authority": "Reviewed exact-variant manufacturer specification snapshot"
+    }
+  ]
+}

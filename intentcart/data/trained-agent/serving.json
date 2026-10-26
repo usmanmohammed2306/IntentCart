@@ -1,0 +1,12 @@
+{
+  "schema": "intentcart-trained-serving/1",
+  "adapter_sha256": "7788487e3c9925e461a00c224441dd01d63c861b1fb0ef3e16746b5e5095c5b0",
+  "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "gguf_sha256": "f215aa670661823be9f49382b0dbd909feded009c7e988862a3dd9e77397a34a",
+  "bytes": 639446816,
+  "format": "Q8_0",
+  "converter_sdist_sha256": "832db0699007f1be95a7e41ef12e88926b02ba836461e36a36372db2760c1a2e",
+  "converter": "llama-cpp-python0.3.36 bundled llama.cpp",
+  "merge": "PEFT CPU float32 merge, then float16 safetensors, thenQ8_0 conversion",
+  "warning": "Actual218-example CPU precision diagnostic is recorded; bounded policy selector, not a general planning or hardware-validity model."
+}

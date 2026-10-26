@@ -34,6 +34,9 @@ def configuration(config):
         if config.CALL_LIMIT != 0 or config.ASTRO_BUDGET != 0 or any((config.CLIENT_ID,config.CLIENT_SECRET,config.ASTRO_KEY,config.CHANNEL3_KEY)):
             issues.append('Stateless public previews cannot hold provider credentials or positive spending caps.')
     if profile == 'production':
+        from . import trained_agent,workspace_intent
+        if not workspace_intent.status()['ready']:issues.append('Production requires the verified trained workspace intent router.')
+        if not trained_agent.status()['ready']:issues.append('Production requires the verified task-trained agent and its pinned public base.')
         authentication=os.getenv('INTENTCART_AUTH','basic')
         termination=os.getenv('INTENTCART_TLS_TERMINATION','')
         if termination not in ('','astropods') or (termination=='astropods' and (authentication not in ('astropods','accounts') or not (url.hostname or '').endswith('.agents.astropods.ai'))):issues.append('Managed TLS termination requires verified Astropods identity and its assigned HTTPS hostname.')
@@ -52,10 +55,10 @@ def configuration(config):
             issues.append('Production requires an operator-confirmed durable volume and installation marker.')
         if config.CALL_LIMIT > 0 and os.getenv('INTENTCART_PUBLIC_INFERENCE_APPROVED') != 'true':
             issues.append('A separate public inference allocation must be explicitly approved.')
-        if not config.ASTRO_KEY or not config.ASTRO_URL or config.CALL_LIMIT <= 0 or config.ASTRO_BUDGET <= 0:
-            issues.append('An AI production profile requires its own configured positive model allocation.')
-        if not config.ASTRO_CREDIT_ONLY or min(config.ASTRO_INPUT_RATE,config.ASTRO_OUTPUT_RATE) <= 0:
-            issues.append('Production inference requires confirmed credit-only access and reviewed rates.')
+        cloud_configured=bool(config.ASTRO_KEY or config.CALL_LIMIT or config.ASTRO_BUDGET)
+        if cloud_configured:
+            if not config.ASTRO_KEY or not config.ASTRO_URL or config.CALL_LIMIT <= 0 or config.ASTRO_BUDGET <= 0:issues.append('Sponsor inference requires a complete, separately bounded model allocation.')
+            if not config.ASTRO_CREDIT_ONLY or min(config.ASTRO_INPUT_RATE,config.ASTRO_OUTPUT_RATE) <= 0:issues.append('Sponsor inference requires confirmed credit-only access and reviewed rates.')
     return {'profile':profile,'configuration_ready':not issues,'issues':issues}
 
 

@@ -12,3 +12,7 @@ tests
 AGENTS.md
 .astropods/
 .astro/
+
+intentcart/data/trained-agent/base
+**/*.gguf
+training

@@ -1,0 +1,6 @@
+// Public application shell only. Account/API/document responses are never cached.
+const CACHE='intentcart-shell-__VERSION__';
+const ASSETS=['/agent','/static/workspace.css','/static/workspace.js','/static/workspace-core.js','/static/workspace-scene.js','/static/planning-ui.js','/static/commerce-ui.js','/static/studio-render.js','/static/vendor/three.module.js','/static/vendor/three.core.js'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('intentcart-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin||!ASSETS.includes(url.pathname)||url.search)return;event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}return response;}).catch(async()=>{const cached=await caches.match(event.request);if(cached)return cached;throw Error('Public shell asset not available offline.');}));});
