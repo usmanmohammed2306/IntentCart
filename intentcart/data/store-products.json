@@ -1,0 +1,46 @@
+{
+  "schema": "intentcart-store-pointers/1",
+  "notice": "Exact reviewed product identity pointers only. No live price, stock, order or merchant quote.",
+  "products": [
+    {
+      "device_id": "plugable-usbc-pdmon",
+      "merchant": "plugable.com",
+      "url": "https://plugable.com/products/usbc-pdmon",
+      "sku": "USBC-PDMON",
+      "variant_id": 50165293252839,
+      "reviewed_on": "2026-10-28"
+    },
+    {
+      "device_id": "plugable-usbc-240w-power",
+      "merchant": "plugable.com",
+      "url": "https://plugable.com/products/usbc-240w-1m",
+      "sku": "USBC-240W-1M",
+      "variant_id": 48839960592615,
+      "reviewed_on": "2026-10-28"
+    },
+    {
+      "device_id": "satechi-m1-gray",
+      "merchant": "satechi.com",
+      "url": "https://satechi.com/products/m1-wireless-mouse",
+      "sku": "ST-ABTCMM",
+      "variant_id": 20500376059992,
+      "reviewed_on": "2026-10-28"
+    },
+    {
+      "device_id": "satechi-x1-gray",
+      "merchant": "satechi.com",
+      "url": "https://satechi.com/products/slim-x1-bluetooth-backlit-keyboard",
+      "sku": "ST-BTSX1M",
+      "variant_id": 40194770206808,
+      "reviewed_on": "2026-10-28"
+    },
+    {
+      "device_id": "satechi-145w-pd1",
+      "merchant": "satechi.com",
+      "url": "https://satechi.com/products/145w-usb-c-4-port-gan-travel-charger",
+      "sku": "CT-W145C2",
+      "variant_id": 40748263342168,
+      "reviewed_on": "2026-10-28"
+    }
+  ]
+}

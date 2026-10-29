@@ -102,6 +102,7 @@ async function loadPaypal() {
   if(window.paypal) return window.paypal;
   if(!paypalPromise) paypalPromise=new Promise((resolve,reject)=>{
     const script=document.createElement('script');
+    const nonce=document.querySelector('meta[name="csp-nonce"]')?.content;if(!nonce)throw Error('Reload this page before opening PayPal.');script.nonce=nonce;script.setAttribute('data-csp-nonce',nonce);
     script.src='https://www.paypal.com/sdk/js?'+new URLSearchParams({'client-id':settings.paypal_client_id,currency:'USD',intent:'capture',components:'buttons','disable-funding':'card,credit,venmo'});
     script.onload=()=>resolve(window.paypal);script.onerror=()=>{paypalPromise=null;script.remove();reject(new Error('PayPal SDK could not load. Check your connection and sandbox app configuration.'));};document.head.append(script);
   });

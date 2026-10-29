@@ -96,7 +96,7 @@ with tempfile.TemporaryDirectory(prefix='intentcart-lab-') as directory:
                     {'action':'Retry capture safely','result':'Existing completed capture returned; capture call count remains one.'},
                     {'action':'Refund the verified fake capture','result':'REFUNDED for the exact original total.'}]},
             'source_sha256':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
-                for name in ('intentcart/app.py','intentcart/assurance.py','intentcart/learning.py','scripts/evaluate_lab.py')},
+                for name in ('intentcart/app.py','intentcart/assurance.py','intentcart/learning.py','intentcart/procurement.py','intentcart/data/it-catalog.json','scripts/evaluate_lab.py')},
             'limits':'Not a human study, live outage experiment, general security benchmark, or proof of prompt-injection resistance.'}
 args.output.parent.mkdir(parents=True,exist_ok=True)
 args.output.write_text(json.dumps(result,indent=2)+'\n')

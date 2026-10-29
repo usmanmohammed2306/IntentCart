@@ -33,7 +33,7 @@ SOURCES = {
     'acquisition': {'intentcart/acquisition.py','scripts/evaluate_acquisition.py',
                     'scripts/missions_oracle.py','intentcart/data/missions-catalog.json',
                     'intentcart/data/acquisition-protocol.json','intentcart/data/acquisition-cases.json'},
-    'reliability': {'intentcart/workbench.py','intentcart/workbench_routes.py','intentcart/finite_budget.py','intentcart/learned_acquisition.py','intentcart/acquisition.py','intentcart/replay.py','intentcart/app.py','intentcart/paypal.py','intentcart/paypal_limits.py',
+    'reliability': {'intentcart/procurement.py','intentcart/data/it-catalog.json','intentcart/workbench.py','intentcart/workbench_routes.py','intentcart/finite_budget.py','intentcart/learned_acquisition.py','intentcart/acquisition.py','intentcart/replay.py','intentcart/app.py','intentcart/paypal.py','intentcart/paypal_limits.py',
                     'intentcart/config.py','intentcart/missions.py','intentcart/validity.py',
                     'intentcart/assurance.py','intentcart/data/missions-catalog.json',
                     'scripts/evaluate_reliability.py','intentcart/agent.py','intentcart/agent_routes.py',

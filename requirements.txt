@@ -162,3 +162,7 @@ accelerate==1.15.0
 llama-cpp-python==0.3.36
 diskcache==5.6.3
 sentencepiece==0.2.1
+
+# ISO delivery countries and regions
+pycountry==26.2.16
+playwright==1.64.1

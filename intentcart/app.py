@@ -68,6 +68,8 @@ def initialize():
             CREATE TABLE IF NOT EXISTS studies (owner TEXT PRIMARY KEY REFERENCES sessions(id), data TEXT NOT NULL);
         ''')
         accounts.initialize(db)
+        from . import procurement
+        procurement.initialize(db)
         # Upgrade existing installations without losing receipts. An old pending
         # operation has no trustworthy first-attempt time: require review.
         columns = {r['name'] for r in db.execute('PRAGMA table_info(orders)')}
@@ -121,14 +123,27 @@ async def boundaries(request: Request, call_next):
                         del RATES[old]
     denied=accounts.bind(request,__import__(__name__,fromlist=['app']))
     if denied is not None:return denied
+    # A cached HTML body must never be paired with a different nonce header.
+    if request.url.path.endswith('.html'):
+        request.scope['headers'] = [(k,v) for k,v in request.scope['headers'] if k.lower() not in (b'if-none-match',b'if-modified-since')]
+    nonce = secrets.token_urlsafe(24)
     response = await call_next(request)
+    if response.headers.get('content-type','').startswith('text/html') and request.method != 'HEAD':
+        body = b''.join([chunk async for chunk in response.body_iterator])
+        meta = ('<meta name="csp-nonce" content="'+nonce+'">').encode()
+        body = body.replace(b'</head>',meta+b'</head>',1) if b'</head>' in body else meta+body
+        headers = {k:v for k,v in response.headers.items() if k.lower() not in ('content-length','etag','last-modified')}
+        response = Response(body,status_code=response.status_code,headers=headers,background=response.background)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'no-referrer'
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
     response.headers['Cache-Control'] = 'no-store' if request.url.path.startswith('/api/') else 'no-cache'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' https://*.paypal.com https://*.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.paypal.com https://*.paypalobjects.com; connect-src 'self' https://*.paypal.com https://*.paypalobjects.com; frame-src https://*.paypal.com https://*.paypalobjects.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.paypal.com; frame-ancestors 'none'"
-    return production.cache_policy(request,response,ROOT/'web')
+    response.headers['Content-Security-Policy'] = f"default-src 'self'; script-src 'self' 'nonce-{nonce}' https://*.paypal.com https://*.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.paypal.com https://*.paypalobjects.com; connect-src 'self' https://*.paypal.com https://*.paypalobjects.com; frame-src 'self' https://*.paypal.com https://*.paypalobjects.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.paypal.com; frame-ancestors 'none'"
+    response = production.cache_policy(request,response,ROOT/'web')
+    if response.headers.get('content-type','').startswith('text/html'):
+        response.headers['Cache-Control'] = 'private, no-store'
+    return response
 
 def fresh_state():
     return {'version': 0, 'mission': None, 'history': [], 'excluded': [], 'question': None, 'answered_ids': [],
@@ -466,7 +481,7 @@ def lab_evidence():
     if not path.is_file():
         raise HTTPException(404, 'Recovery evidence has not been generated. Run scripts/evaluate_lab.py.')
     data = json.loads(path.read_text())
-    names = ('intentcart/app.py','intentcart/assurance.py','intentcart/learning.py','scripts/evaluate_lab.py')
+    names = ('intentcart/app.py','intentcart/assurance.py','intentcart/learning.py','intentcart/procurement.py','intentcart/data/it-catalog.json','scripts/evaluate_lab.py')
     if not all((ROOT.parent/name).is_file() and hashlib.sha256((ROOT.parent/name).read_bytes()).hexdigest()
                == data.get('source_sha256',{}).get(name) for name in names):
         raise HTTPException(409, 'Saved recovery evidence is stale. Re-run scripts/evaluate_lab.py for this source version.')
@@ -1064,9 +1079,27 @@ planning_routes.register(sys.modules[__name__])
 from . import commerce
 commerce.register(sys.modules[__name__])
 
+from . import procurement
+procurement.register(sys.modules[__name__])
+
 @app.get('/workspace-worker.js')
 def workspace_worker():
-    files=('workspace.html','workspace.css','workspace.js','workspace-core.js','workspace-scene.js','planning-ui.js','commerce-ui.js','studio-render.js')
+    files=('workspace.html','workspace.css','workspace.js','workspace-core.js','workspace-scene.js','planning-ui.js','commerce-ui.js','studio-render.js','procurement.js','team-projection.js','team-studio.css','autopilot-ui.js','equipment-shelf.js','equipment-shelf.css','open-research-ui.js')
     version=hashlib.sha256(b''.join((ROOT/'web'/p).read_bytes() for p in files)).hexdigest()[:20]
     source=(ROOT/'web/workspace-worker.js').read_text().replace('__VERSION__',version)
     return Response(source,media_type='application/javascript',headers={'Service-Worker-Allowed':'/','Cache-Control':'no-store'})
+
+from . import setup_autopilot
+setup_autopilot.register(sys.modules[__name__])
+
+from . import equipment_studio
+equipment_studio.register(sys.modules[__name__])
+
+from . import open_research
+open_research.register(sys.modules[__name__])
+
+from . import sentence_setup
+sentence_setup.register(sys.modules[__name__])
+
+from . import landed_budget
+landed_budget.register(sys.modules[__name__])

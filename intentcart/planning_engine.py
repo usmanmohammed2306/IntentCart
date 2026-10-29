@@ -162,18 +162,19 @@ def costs(w,p,today=None):
  today=today or date.today();rows=[];unknown=[];total=0;has_allowance=False
  for i in w.items:
   if i.owned:rows.append({'item_id':i.id,'amount_minor':0,'basis':'owned / no new purchase'});continue
-  offers=[o for o in p.offers if o.item_id==i.id or o.device_id and any(b.item_id==i.id and b.device_id==o.device_id for b in p.devices)]
-  current=[o for o in offers if date.fromisoformat(o.observed_on)<=today<=date.fromisoformat(o.valid_until) and o.stock!='out_of_stock' and (not p.region or not o.region or p.region==o.region)]
+  offers=[o for o in p.offers if o.item_id==i.id or not o.item_id and o.device_id and any(b.item_id==i.id and b.device_id==o.device_id for b in p.devices)]
+  now=__import__('time').time()
+  current=[o for o in offers if (date.fromisoformat(o.observed_on)<=today<=date.fromisoformat(o.valid_until) if o.expires_at is None else o.observed_at<=now<=o.expires_at) and o.stock!='out_of_stock' and (not p.region or not o.region or p.region==o.region) and (o.expires_at is None or o.observed_at<=now<=o.expires_at) and (not o.quote_id or bool(p.region) and p.region==o.region)]
   values=[]
   for o in current:
-   charges=[o.shipping_minor,o.tax_minor,o.duty_minor]
-   if any(x is None for x in charges):continue
+   charges=[o.shipping_minor,o.tax_minor,o.duty_minor,o.fees_minor]
+   if o.delivered_minor is None and any(x is None for x in charges):continue
    rate=Decimal(1)
    if o.currency!=w.currency:
     fx=next((f for f in p.exchange_rates if f.currency==o.currency and date.fromisoformat(f.observed_on)<=today<=date.fromisoformat(f.valid_until)),None)
     if not fx:continue
     rate=Decimal(str(fx.rate))
-   amount=int((Decimal(o.amount_minor+sum(charges))*rate).quantize(Decimal('1'),rounding=ROUND_HALF_UP));values.append((amount,o))
+   amount=int((Decimal(o.delivered_minor if o.delivered_minor is not None else o.amount_minor-o.discount_minor+sum(charges))*rate).quantize(Decimal('1'),rounding=ROUND_HALF_UP));values.append((amount,o))
   if values:
    amount,offer=min(values,key=lambda x:(x[0],x[1].id));rows.append({'item_id':i.id,'amount_minor':amount,'offer_id':offer.id,'observed_on':offer.observed_on,'stock':offer.stock,'return_days':offer.return_days,'qualified':True,'url':offer.url});total+=amount
   elif not offers and i.price_cents is not None:
@@ -244,7 +245,7 @@ def evaluate(w,p,extra=(),today=None):
    claims=[f.get('noise_claim') for f in fs];status='qualified' if claims and all(claims) else 'unknown';reason='Manufacturer noise descriptions are subjective; audition/measurement remains your decision.'
   elif g.kind=='display_mode':
    h,hz=g.value,g.value2;values=[(f.get('max_height'),f.get('max_hz')) for f in fs]
-   routes=connections(w,p,resolved);video=[r for r in routes['routes'] if r.get('target') in {i.id for i in selected}];status='unknown' if routes['status']=='unknown' or len(video)<len(selected) or any(r.get('max_height') is None or r.get('max_hz') is None for r in video) else 'met' if video and all(r['max_height']>=h and r['max_hz']>=(hz or 60) for r in video) else 'unmet';reason='Mode requires a complete bounded route; missing host/cable/GPU/OS mode facts stay unknown.'
+   routes=connections(w,p,resolved);video=[r for r in routes['routes'] if r.get('kind')!='power' and r.get('target') in {i.id for i in selected}];status='unknown' if routes['status']=='unknown' or len(video)<len(selected) or any(r.get('max_height') is None or r.get('max_hz') is None for r in video) else 'met' if video and all(r['max_height']>=h and r['max_hz']>=(hz or 60) for r in video) else 'unmet';reason='Mode requires a complete bounded route; missing host/cable/GPU/OS mode facts stay unknown.'
   elif g.kind=='native_displays':
    hosts=[i for i in selected if i.kind in ('laptop','desktop')];values=[facts[i.id].get('native_displays') for i in hosts];status='unknown' if not values or any(v is None for v in values) else 'met' if all(v>=float(g.value) for v in values) else 'unmet';reason='Each selected host native limit checked separately; no unapproved software workaround.'
   elif g.kind=='connections':
@@ -270,6 +271,9 @@ def connections(w,p,resolved=None):
   if not isolated:questions.append('Multiple hosts need explicit switching/isolation routes. Pairing alone does not establish isolation.')
  if len(hosts)==1:
   host=hosts[0];f=facts[host.id];native=f.get('native_displays');ports={'hdmi':f.get('hdmi_outputs',int(f.get('video_out_hdmi') is True)),'dp':f.get('dp_outputs',int(f.get('video_out_dp') is True)),'usb_c_dp':f.get('usb_c_video_outputs',int(f.get('video_out_usb_c') is True))};cables={i.id:facts[i.id] for i in w.items if i.kind=='cable'};used=set();native_used=0
+  for screen in screens:
+   sf=facts[screen.id]
+   if sf.get('included_video_cables')==1 and sf.get('included_link_type')=='usb_c_usb_c':cables['included:'+screen.id]={'link_type':'usb_c_usb_c','max_height':sf.get('max_height'),'max_hz':sf.get('max_hz'),'included_for':screen.id}
   docks=[i for i in w.items if i.kind=='dock' and facts[i.id].get('driver_required') is True];dock_slots=sum(facts[i.id].get('displays',0) for i in docks) if f.get('usb_c') is True or f.get('usb_a') is True else 0
   confirmed_screens={e.target for e in confirmed if e.source==host.id and any(i.id==e.target for i in screens)}
   if confirmed_screens and len(confirmed_screens)<len(screens):questions.append('Some screen routes are user-confirmed without resource allocation; check all shared port/native limits explicitly before adding routes.')
@@ -278,8 +282,8 @@ def connections(w,p,resolved=None):
   for screen in screens:
    if any(e.target==screen.id and e.source==host.id for e in confirmed):continue
    sf=facts[screen.id];chosen=None
-   for port,link,accept in [('hdmi','hdmi_hdmi','video_in_hdmi'),('dp','dp_dp','video_in_dp'),('usb_c_dp','usb_c_dp','video_in_dp')]:
-    cable=next((k for k,v in cables.items() if k not in used and v.get('link_type')==link),None)
+   for port,link,accept in [('hdmi','hdmi_hdmi','video_in_hdmi'),('dp','dp_dp','video_in_dp'),('usb_c_dp','usb_c_dp','video_in_dp'),('usb_c_dp','usb_c_usb_c','video_in_usb_c')]:
+    cable=next((k for k,v in cables.items() if k not in used and v.get('link_type')==link and v.get('included_for',screen.id)==screen.id),None)
     if cable and ports[port]>0 and native is not None and native_used<native and sf.get(accept) is True:
      chosen=(cable,port,'Source-based direct '+port.replace('_',' ')+' route');native_used+=1;ports[port]-=1;break
    if chosen is None and dock_slots>0 and p.allow_driver is True and sf.get('video_in_hdmi') is True:
@@ -287,12 +291,15 @@ def connections(w,p,resolved=None):
     if cable:chosen=(cable,'displaylink','Exact-revision vendor DisplayLink route, conditional on permitted software and OS support');dock_slots-=1
    if chosen:
     cable,port,basis=chosen;used.add(cable);cf=cables[cable];caps=[sf,cf] if port=='displaylink' else [sf,cf,f];height=min(v['max_height'] for v in caps) if all(isinstance(v.get('max_height'),(int,float)) for v in caps) else None;hz=min(v['max_hz'] for v in caps) if all(isinstance(v.get('max_hz'),(int,float)) for v in caps) else None
-    routes.append({'source':host.id,'target':screen.id,'cable_id':cable,'basis':basis,'status':'qualified','max_height':height,'max_hz':hz})
+    routes.append({'source':host.id,'target':screen.id,'cable_id':cable,'basis':basis+(' using the monitor’s included cable' if cable.startswith('included:') else ''),'status':'qualified','max_height':height,'max_hz':hz})
    else:questions.append('No unconsumed compatible port/cable route to '+screen.name+'. Display count, software permission or exact facts may be missing.')
   for peripheral in [i for i in w.items if i.kind in ('mouse','keyboard')]:
    pf=facts[peripheral.id]
    if f.get('bluetooth') is True and pf.get('bluetooth') is True:routes.append({'source':host.id,'target':peripheral.id,'basis':'Recorded Bluetooth support; pairing/OS remain conditional','status':'qualified'})
    elif not any(e.target==peripheral.id for e in confirmed):questions.append('Peripheral connection is unknown for '+peripheral.name+'.')
+ from .setup_power import check as power_check
+ power=power_check(w,facts)
+ questions.extend(power['questions']);routes.extend(power['routes'])
  if not screens and not any(i.kind in ('keyboard','mouse') for i in w.items):return {'status':'met','routes':routes,'summary':'No external display/peripheral connection requested.'}
  return {'status':'unknown' if questions else 'qualified','routes':routes,'questions':questions,'summary':'; '.join(questions) if questions else 'Resource-counted declared/source-based routes; no installation, purchasing or security authority inferred.'}
 

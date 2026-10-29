@@ -38,3 +38,20 @@ intentcart/data/trained-agent/base/
 training/checkpoints/
 
 **/*.gguf
+
+# Local browser state, recordings and generated model artifacts
+.ast/
+playwright-report/
+test-results/
+.playwright/
+browser-binaries/
+*.har
+*.webm
+*.mp4
+*.m4a
+*.wav
+*.sqlite
+*.sqlite-*
+*.safetensors.index.json
+.ruff_cache/
+.mypy_cache/

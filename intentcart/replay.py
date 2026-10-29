@@ -28,6 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = 'intentcart-replay-v1'
 SOURCE_FILES = (
+    'intentcart/procurement.py', 'intentcart/data/it-catalog.json',
     'intentcart/workbench.py','intentcart/workbench_routes.py','intentcart/finite_budget.py','intentcart/learned_acquisition.py','intentcart/acquisition.py',
     'intentcart/replay.py', 'intentcart/app.py', 'intentcart/paypal.py', 'intentcart/paypal_limits.py',
     'intentcart/config.py', 'intentcart/missions.py', 'intentcart/validity.py', 'intentcart/assurance.py',

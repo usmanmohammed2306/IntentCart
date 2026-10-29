@@ -358,6 +358,332 @@
       },
       "note": "Closed chassis dimensions do not specify the full open-lid envelope. M1 Pro and M1 Max external-display counts differ; CPU/GPU/OS workload quality is not inferred.",
       "authority": "Reviewed exact-variant manufacturer specification snapshot"
+    },
+    {
+      "id": "dell-u2723qe",
+      "name": "Dell UltraSharp U2723QE \u00b7 27-inch",
+      "kind": "monitor",
+      "aliases": [
+        "U2723QE",
+        "Dell U2723QE"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://www.dell.com/en-gb/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723qe/apd/210-bcxk/",
+          "reviewed_on": "2026-10-27",
+          "basis": "Official specification read for this preview; not a live price or physical validation"
+        }
+      ],
+      "configurations": {
+        "stand_low": {
+          "width_mm": 611.4,
+          "depth_mm": 185,
+          "height_mm": 385.18,
+          "weight_g": 6640,
+          "video_in_dp": true,
+          "video_in_hdmi": true,
+          "max_height": 2160,
+          "max_hz": 60,
+          "mount": "freestanding"
+        }
+      },
+      "note": "Lowest stand position. USB-C hub is integrated, not a separate included dock. Complete host/cable/mode qualification remains necessary.",
+      "authority": "Reviewed manufacturer specification snapshot"
+    },
+    {
+      "id": "lg-32un880-b",
+      "name": "LG UltraFine 32UN880-B \u00b7 31.5-inch",
+      "kind": "monitor",
+      "aliases": [
+        "LG 32UN880",
+        "32UN880-B"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://www.lg.com/sg/consumer-monitors/ergo-monitors/32un880-b/",
+          "reviewed_on": "2026-10-27",
+          "basis": "Official specification read for this preview; not a live price or physical validation"
+        }
+      ],
+      "configurations": {
+        "ergo_stand": {
+          "width_mm": 714.3,
+          "depth_mm": 406.8,
+          "height_mm": 641.1,
+          "weight_g": 10300,
+          "video_in_dp": true,
+          "video_in_hdmi": true,
+          "max_height": 2160,
+          "max_hz": 60,
+          "mount": "clamp"
+        }
+      },
+      "note": "Ergo arm needs mounting review. Published envelope is one stand configuration, not its complete sweep or a load/clearance certificate.",
+      "authority": "Reviewed manufacturer specification snapshot"
+    },
+    {
+      "id": "lenovo-t14-g4-intel",
+      "name": "Lenovo ThinkPad T14 Gen 4 (Intel)",
+      "kind": "laptop",
+      "aliases": [
+        "ThinkPad T14 Gen 4 Intel"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf",
+          "reviewed_on": "2026-10-27",
+          "basis": "Official specification read for this preview; not a live price or physical validation"
+        }
+      ],
+      "configurations": {
+        "closed": {
+          "width_mm": 317.7,
+          "depth_mm": 226.9,
+          "height_mm": 17.9
+        },
+        "in_use": {}
+      },
+      "note": "Closed chassis only. Open-lid footprint and exact graphics/port capabilities need configuration-specific review.",
+      "authority": "Reviewed manufacturer specification snapshot"
+    },
+    {
+      "id": "logitech-mx-master-3s",
+      "name": "Logitech MX Master 3S",
+      "kind": "mouse",
+      "aliases": [
+        "MX Master 3S"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://support.logi.com/hc/pt-br/articles/5218070669847-Specification-MX-Master-3S",
+          "reviewed_on": "2026-10-27",
+          "basis": "Official specification read for this preview; not a live price or physical validation"
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "width_mm": 84.3,
+          "depth_mm": 124.9,
+          "height_mm": 51,
+          "weight_g": 141,
+          "bluetooth": true,
+          "handedness": "right"
+        }
+      },
+      "note": "Length 124.9 mm maps to desk depth; width 84.3 mm; height 51 mm. Bluetooth pairing/OS support must still be checked.",
+      "authority": "Reviewed manufacturer specification snapshot"
+    },
+    {
+      "id": "logitech-mx-master-3s-bluetooth-black",
+      "name": "Logitech MX Master 3S Bluetooth Edition \u2014 Black",
+      "kind": "mouse",
+      "aliases": [
+        "MX Master 3S Bluetooth Edition Black",
+        "910-007500"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://www.logitech.com/en-us/shop/p/mx-master-3s",
+          "document_sha256": "30d37c73bcd0864d87794e5fb58503f03c942e5506c750723e2bd98b3b7122d8",
+          "retrieved_on": "2026-10-27",
+          "basis": "Observed official product and exact ProductModel SKU910-007500; no operating dimensions inferred."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "bluetooth": true
+        }
+      },
+      "field_evidence": {
+        "bluetooth": "MX Master 3S Bluetooth Edition"
+      },
+      "authority": "Observed manufacturer snapshot; user must review exact variant before binding",
+      "note": "Black Bluetooth Edition SKU910-007500 is distinct from the older receiver-bundled MX Master3S. Price/stock are researched separately; operating size remains unmeasured."
+    },
+    {
+      "id": "dell-p2426h",
+      "name": "Dell P2426H \u2014 with stand",
+      "kind": "monitor",
+      "aliases": [
+        "Dell Pro P24 Monitor P2426H",
+        "Dell P2426H",
+        "210-BVST",
+        "R3H3M"
+      ],
+      "reviewed_on": "2026-10-27",
+      "sources": [
+        {
+          "url": "https://www.dell.com/en-us/shop/dell-pro-p-24-monitor-p2426h/apd/210-bvst",
+          "document_sha256": "74d60482e72c0af6842773e824fc9a6246c26d84addd00739851ea6b7b842801",
+          "retrieved_on": "2026-10-27",
+          "basis": "Observed Dell USA exact with-stand product technical specifications; not without-stand variant."
+        }
+      ],
+      "configurations": {
+        "with_stand": {
+          "video_in_dp": true,
+          "video_in_hdmi": true,
+          "max_height": 1080,
+          "max_hz": 120,
+          "mount": "freestanding"
+        }
+      },
+      "field_evidence": {
+        "video_in_dp": "1 DisplayPort 1.4 (HDCP 1.4) port/s",
+        "video_in_hdmi": "1 HDMI port/s (HDCP 1.4)",
+        "mount": "Stand Included Yes"
+      },
+      "authority": "Observed manufacturer snapshot; exact variant review required",
+      "note": "DisplayPort and HDMI inputs from literal Dell source. Operating footprint remains unmeasured: dimensions from another document were intentionally not copied. Included DP-to-DP cable does not connect directly to a USB-C-only MacBook; add a separately counted USB-C/DP cable.120Hz panel specification is not a route-wide120Hz guarantee."
+    },
+    {
+      "id": "plugable-usbc-pdmon",
+      "name": "Plugable USBC-PDMON 15.6-inch portable monitor",
+      "kind": "monitor",
+      "aliases": [
+        "USBC-PDMON",
+        "Plugable USBC-PDMON 15.6-inch portable monitor"
+      ],
+      "reviewed_on": "2026-10-28",
+      "sources": [
+        {
+          "url": "https://plugable.com/products/usbc-pdmon",
+          "reviewed_on": "2026-10-28",
+          "basis": "Official public product specification reviewed; price and stock must be refreshed separately."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "video_in_usb_c": true,
+          "max_height": 1080,
+          "max_hz": 60,
+          "usb_c": true,
+          "weight_g": 840,
+          "included_video_cables": 1,
+          "included_link_type": "usb_c_usb_c",
+          "pd_input_watts": 100,
+          "pd_passthrough_watts": 85
+        }
+      },
+      "note": "Includes one 1m video/power USB-C cable and folding cover. Chassis 361\u00d7215\u00d710.6mm is not the open-stand footprint: measure operating space. External-power configuration requires 100W PD; up to 85W host passthrough. Bus-powered use is a separate unverified configuration.",
+      "authority": "Reviewed manufacturer snapshot; conditional compatibility, not physical certification"
+    },
+    {
+      "id": "plugable-usbc-240w-power",
+      "name": "Plugable USBC-240W-1M power cable",
+      "kind": "cable",
+      "aliases": [
+        "USBC-240W-1M",
+        "Plugable USBC-240W-1M power cable"
+      ],
+      "reviewed_on": "2026-10-28",
+      "sources": [
+        {
+          "url": "https://plugable.com/products/usbc-240w-1m",
+          "reviewed_on": "2026-10-28",
+          "basis": "Official public product specification reviewed; price and stock must be refreshed separately."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "link_type": "usb_c_power",
+          "pd_watts": 240
+        }
+      },
+      "note": "Selected as dedicated charger-to-monitor power cable, not counted again as a video route. USB-C e-marked, 1m, up to 5A/240W; power delivery is limited by charger and device.",
+      "authority": "Reviewed manufacturer snapshot; conditional compatibility, not physical certification"
+    },
+    {
+      "id": "satechi-m1-gray",
+      "name": "Satechi M1 Bluetooth Mouse \u2014 Space Gray",
+      "kind": "mouse",
+      "aliases": [
+        "ST-ABTCMM",
+        "Satechi M1 Bluetooth Mouse \u2014 Space Gray"
+      ],
+      "reviewed_on": "2026-10-28",
+      "sources": [
+        {
+          "url": "https://satechi.com/products/m1-wireless-mouse",
+          "reviewed_on": "2026-10-28",
+          "basis": "Official public product specification reviewed; price and stock must be refreshed separately."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "width_mm": 57.2,
+          "depth_mm": 111,
+          "height_mm": 31.8,
+          "weight_g": 175.77,
+          "bluetooth": true,
+          "usb_c": true
+        }
+      },
+      "note": "Bluetooth connection; USB-C charging cable included. USB-C is charging, not a wired pointer link. Review OS compatibility and pairing.",
+      "authority": "Reviewed manufacturer snapshot; conditional compatibility, not physical certification"
+    },
+    {
+      "id": "satechi-x1-gray",
+      "name": "Satechi Slim X1 Bluetooth Keyboard \u2014 Space Gray",
+      "kind": "keyboard",
+      "aliases": [
+        "ST-BTSX1M",
+        "Satechi Slim X1 Bluetooth Keyboard \u2014 Space Gray"
+      ],
+      "reviewed_on": "2026-10-28",
+      "sources": [
+        {
+          "url": "https://satechi.com/products/slim-x1-bluetooth-backlit-keyboard",
+          "reviewed_on": "2026-10-28",
+          "basis": "Official public product specification reviewed; price and stock must be refreshed separately."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "width_mm": 283,
+          "depth_mm": 115,
+          "height_mm": 12,
+          "weight_g": 294,
+          "bluetooth": true,
+          "usb_c": true
+        }
+      },
+      "note": "US-English layout; Mac-oriented function keys. USB-C charging cable and risers included. Bluetooth pairing and current OS support remain conditional.",
+      "authority": "Reviewed manufacturer snapshot; conditional compatibility, not physical certification"
+    },
+    {
+      "id": "satechi-145w-pd1",
+      "name": "Satechi 145W travel charger \u2014 PD1 only",
+      "kind": "power",
+      "aliases": [
+        "CT-W145C2",
+        "Satechi 145W travel charger \u2014 PD1 only"
+      ],
+      "reviewed_on": "2026-10-28",
+      "sources": [
+        {
+          "url": "https://satechi.com/products/145w-usb-c-4-port-gan-travel-charger",
+          "reviewed_on": "2026-10-28",
+          "basis": "Official public product specification reviewed; price and stock must be refreshed separately."
+        }
+      ],
+      "configurations": {
+        "in_use": {
+          "width_mm": 77,
+          "depth_mm": 97,
+          "height_mm": 31,
+          "weight_g": 346.5,
+          "power_watts": 100,
+          "usb_c": true
+        }
+      },
+      "note": "PD1 with only one device connected: conservative 100W limit for this setup. Other ports must remain unused; multi-device power splits differ. Includes US/UK/EU/AU plug adapters; e-marked charging cable sold separately. Plug clearance and AC nameplate suitability need verification.",
+      "authority": "Reviewed manufacturer snapshot; conditional compatibility, not physical certification"
     }
   ]
 }

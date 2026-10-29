@@ -12,6 +12,7 @@ def compile_request(w,p,text):
  def record(match,kind,value=None,category='',value2=None):
   g=Goal(id=uuid.uuid4().hex,kind=kind,text=match.group(0),value=value,category=category,value2=value2);meta.goals=[x for x in meta.goals if not (x.kind==g.kind and x.category==g.category and x.item_id==g.item_id)]+[g];spans.append(match.span());covered.append({'text':match.group(0),'goal_id':g.id,'kind':kind});return g
  for m in re.finditer(r'\b(no|zero|one|two|three|four|five|six|seven|eight|\d+)\s+(?:external\s+)?(monitors?|screens?|displays?|mice|mouse|keyboards?|laptops?|desktops?|docks?|webcams?)\b',text,re.I):
+  if re.search(r'[$€£]\s*$',text[:m.start()]):continue
   raw,word=m.groups();count=int(raw) if raw.isdigit() else NUM[raw.lower()];word=word.lower();category='mouse' if word in ('mouse','mice') else KINDS.get(word.rstrip('s'))
   if category:record(m,'count',count,category)
  for phrase,kind in [(r'\b(?:no|without)\s+(?:new\s+)?(?:purchases?|buying)\b|\bbuy\s+nothing\b|\breuse[ -]only\b','no_purchase'),(r'\b(?:no|without)\s+(?:drilling|drill)\b','no_drill'),(r'\b(?:no|without)\s+(?:clamps?|clamping)\b','no_clamp')]:

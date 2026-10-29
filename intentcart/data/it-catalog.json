@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-10-27",
+  "review_by": "2027-01-25",
+  "scope": "Document-backed checks for the declared Windows 11, Intel integrated-graphics Latitude 5440 configuration, one WD22TB4 with its 180 W adapter and up to two direct DisplayPort P2422H displays at 1920\u00d71080/60 Hz. Not physical testing, live stock, prices, or general model-name compatibility.",
+  "sources": [
+    {
+      "id": "host-ports",
+      "title": "Dell Latitude 5440 \u2014 external ports",
+      "url": "https://www.dell.com/support/manuals/en-us/latitude-14-5440-laptop/latitude-5440-owners-manual/external-ports?guid=guid-1fc91ef3-b5a3-4c62-9229-cbe8084bfd5f&lang=en-us",
+      "facts": "Two Thunderbolt 4 / DisplayPort Alt Mode / power-delivery ports."
+    },
+    {
+      "id": "host-displays",
+      "title": "Dell Latitude 5440 \u2014 external display support",
+      "url": "https://www.dell.com/support/manuals/en-us/latitude-14-5440-laptop/latitude-5440-owners-manual/external-display-support?guid=guid-22d70207-6e37-4c35-8ccf-f0bf30f2a348&lang=en-us",
+      "facts": "Intel UHD and Iris Xe configurations list three external displays with the internal panel enabled. This app reviews only up to two."
+    },
+    {
+      "id": "host-power",
+      "title": "Dell Latitude 5440 \u2014 power adapter",
+      "url": "https://www.dell.com/support/manuals/en-us/latitude-14-5440-laptop/latitude-5440-owners-manual/power-adapter?guid=guid-6e7fe3da-c295-461e-805a-f3636f2373e9&lang=en-us",
+      "facts": "USB-C adapter options: 60, 65 and 100 W."
+    },
+    {
+      "id": "dock-display",
+      "title": "Dell WD22TB4 \u2014 display resolution table",
+      "url": "https://www.dell.com/support/manuals/en-us/wd22tb4-dock/dell_wd22tb4_userguide/display-resolution-table?guid=guid-fafc77a4-c95f-44df-92ad-608231d11cd9&lang=en-us",
+      "facts": "Dual direct DisplayPort supports FHD/60 even at non-Thunderbolt HBR2. Thunderbolt HBR2 supports dual QHD/60. HDMI and MFDP cannot be used together. Drivers, EDID and OS affect results."
+    },
+    {
+      "id": "dock-power",
+      "title": "Dell WD22TB4 \u2014 product specifications",
+      "url": "https://www.dell.com/support/manuals/en-ph/wd22tb4-dock/dell_wd22tb4_userguide/product-specifications?guid=guid-bb63fcdf-357e-408c-82f1-c7c56e8d5b4e&lang=en-us",
+      "facts": "130 W delivery to Dell systems with the 180 W AC adapter; attached 0.8 m host cable."
+    },
+    {
+      "id": "display",
+      "title": "Dell P2422H \u2014 product specifications",
+      "url": "https://www.dell.com/en-gb/shop/dell-24-monitor-p2422h/apd/210-azyx/",
+      "facts": "23.8-inch viewable display; 1920\u00d71080/60 Hz; DisplayPort 1.2 and HDMI inputs; listed package has one 1.8 m DisplayPort cable. Listing currently says unavailable; supplier availability is not inferred."
+    }
+  ],
+  "products": [
+    {
+      "id": "dell-latitude-5440",
+      "name": "Dell Latitude 5440",
+      "kind": "laptop",
+      "subtitle": "Exact configuration must be checked",
+      "source_ids": [
+        "host-ports",
+        "host-power",
+        "host-displays"
+      ],
+      "max_power_w": 100
+    },
+    {
+      "id": "dell-wd22tb4-180w",
+      "name": "Dell WD22TB4 + 180 W adapter",
+      "kind": "dock",
+      "subtitle": "Attached Thunderbolt host cable",
+      "source_ids": [
+        "dock-display",
+        "dock-power"
+      ],
+      "power_w": 130,
+      "outputs": [
+        "DP1",
+        "DP2"
+      ]
+    },
+    {
+      "id": "dell-p2422h-dp",
+      "name": "Dell P2422H + DisplayPort cable",
+      "kind": "monitor",
+      "subtitle": "23.8-inch \u00b7 1080p \u00b7 60 Hz",
+      "source_ids": [
+        "display"
+      ],
+      "width_px": 1920,
+      "height_px": 1080,
+      "hz": 60
+    }
+  ]
+}

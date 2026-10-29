@@ -30,14 +30,17 @@ def source_identity():
 def projection(run):
  goal=catalog.Goal(**run['mission']['goal']);plan=run['mission']['result']['plan']
  if not plan:return None
- items=[Item(id='owned-laptop',kind='laptop',name=catalog.LAPTOPS[goal.laptop_id]['name'],model=goal.laptop_id,owned=True,price_cents=None,pose=Pose(x=-400,z=-200))]
- if goal.reuse_monitor:items.append(Item(id='owned-monitor',kind='monitor',name='Existing monitor · sandbox fixture',owned=True,pose=Pose(x=-220,z=0)))
- placements={'dock':(-250.,220.),'power':(250.,220.),'cable':(0.,220.),'monitor':(220.,0.)};monitor=0
+ # Spacing separates the illustrative 540 mm display shapes; it is not measured fit.
+ monitor_count=int(goal.reuse_monitor)+sum(row['quantity'] for row in plan['items'] if catalog.PRODUCTS[row['product_id']]['kind']=='monitor')
+ def display_x(index):return (index-(monitor_count-1)/2)*620.
+ items=[Item(id='owned-laptop',kind='laptop',name=catalog.LAPTOPS[goal.laptop_id]['name'],model=goal.laptop_id,owned=True,price_cents=None,pose=Pose(x=-(monitor_count*620/2+60),z=220))]
+ if goal.reuse_monitor:items.append(Item(id='owned-monitor',kind='monitor',name='Existing monitor · sandbox fixture',owned=True,pose=Pose(x=display_x(0),z=-70)))
+ placements={'dock':(-240.,220.),'power':(320.,240.),'cable':(50.,240.),'monitor':(0.,-70.)};monitor=int(goal.reuse_monitor)
  for row in plan['items']:
   p=catalog.PRODUCTS[row['product_id']]
   for n in range(row['quantity']):
    x,z=placements[p['kind']]
-   if p['kind']=='monitor':x=(-220. if not goal.reuse_monitor and monitor==0 else 220.);monitor+=1
+   if p['kind']=='monitor':x=display_x(monitor);monitor+=1
    items.append(Item(id='buy-'+p['id']+'-'+str(n),kind=p['kind'],name=p['name'],model=p['id'],owned=False,price_cents=p['price_cents'],pose=Pose(x=x,z=z),color='#9de5d2'))
  w=Workspace(name='Sandbox purchase plan',currency='USD',budget_cents=goal.budget_cents,shipping_cents=0,tax_cents=0,surface=Surface.model_validate(run['space']),items=items)
  return {'workspace':w.model_dump(),'planning':Planning().model_dump(),'notice':'Illustrative cart preview. Dimensions are unknown; this does not certify physical fit. Fictional products, sandbox funds, no goods or delivery.'}

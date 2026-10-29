@@ -8,7 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit,urljoin
 ROOT=Path(__file__).parent
-ROOTS=('apple.com','dell.com','delltechnologies.com','logitech.com','logi.com','plugable.com','lenovo.com','hp.com','microsoft.com','samsung.com','lg.com','asus.com','acer.com','benq.com','caldigit.com')
+ROOTS=('apple.com','dell.com','delltechnologies.com','logitech.com','logi.com','plugable.com','lenovo.com','hp.com','microsoft.com','samsung.com','lg.com','asus.com','acer.com','benq.com','caldigit.com','ikea.com','upliftdesk.com','flexispot.com','frame.work','razer.com','corsair.com','steelseries.com','keychron.com','msi.com','gigabyte.com','aoc.com','viewsonic.com','philips.com','autonomous.ai','secretlab.co','system76.com','tuxedocomputers.com','huawei.com','honor.com','elgato.com','jabra.com','satechi.net','satechi.com','anker.com','logitechg.com')
 MAX_BYTES=1_500_000
 class ResearchError(ValueError):pass
 
@@ -85,7 +85,7 @@ def fetch(url,*,consent=False):
   raw=bytes(raw)
   if content=='application/pdf' or raw.startswith(b'%PDF-'):
    from .documents import extract
-   text='\n'.join(p['text'] for p in extract(raw,'.pdf')['pages']);method='Bounded network-disabled PDF parser'
+   text='\n'.join(p['text'] for p in extract(raw,'.pdf',specification=True)['pages']);method='Bounded public PDF excerpt: first40 pages scanned, up to8 relevant pages/40000 characters retained; network-disabled parser'
   elif content in ('text/html','application/xhtml+xml','text/plain'):
    decoded=raw.decode('utf-8',errors='replace')
    if content=='text/plain':text=decoded
@@ -128,7 +128,9 @@ def review(source,body):
     if re.search(r'\bcm\b',quote,re.I):factors.append(10)
     if re.search(r'\binches?\b|\bin\b',quote,re.I):factors.append(25.4)
    if key=='weight_g' and re.search(r'\bkg\b',quote,re.I):factors.append(1000)
-   if not any(abs(n*f-value)<.051 for n in nums for f in factors):raise ResearchError('Numeric fact is not supported by its quotation and units.')
+   word_count=re.search(r'\b(one|two|three|four)\s+external\s+(?:displays?|monitors?)\b',quote,re.I) if key=='native_displays' else None
+   literal_count={'one':1,'two':2,'three':3,'four':4}.get(word_count.group(1).lower()) if word_count else None
+   if not any(abs(n*f-value)<.051 for n in nums for f in factors) and literal_count!=value:raise ResearchError('Numeric fact is not supported by its quotation and units.')
   fields[key]=value;evidence[key]=quote
  if not fields:raise ResearchError('Choose at least one fact.')
  result={'id':body.device_id,'name':body.name,'kind':body.kind,'aliases':[],'reviewed_on':source['retrieved_on'],'sources':[{'url':source['url'],'document_sha256':source['id'],'retrieved_on':source['retrieved_on']}],'configurations':{body.configuration:fields},'field_evidence':evidence,'authority':'User-reviewed source extraction, not independently certified'};result['digest']=digest(result);return result

@@ -16,6 +16,9 @@ agent:
     timeout: 5s
     retries: 3
   inputs:
+  - name: INTENTCART_UCP_PROFILE_URL
+    datatype: string
+    default: ''
   - name: INTENTCART_MODE
     datatype: string
     default: production

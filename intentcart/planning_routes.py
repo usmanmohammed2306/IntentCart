@@ -31,7 +31,8 @@ class Cancel(Strict):
 def permission_binding(w,p):
  return research.digest({'devices':[b.model_dump() for b in p.devices],'hosts':[{'id':i.id,'model':i.model} for i in w.items if i.kind in ('laptop','desktop','dock')],'screens':sum(i.kind=='monitor' for i in w.items)})
 def validated_permission(w,p,state):
- context=p.model_copy(deep=True)
+ from .landed_budget import verified_offers
+ context=verified_offers(w,p,state)
  if context.allow_driver is True:
   permit=state.get('planning_permissions',{}).get(context.driver_permission_token)
   if not permit or permit['binding']!=permission_binding(w,p) or permit['date']!=date.today().isoformat():context.allow_driver=None;context.driver_permission_token=None

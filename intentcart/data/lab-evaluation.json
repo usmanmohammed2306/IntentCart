@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-26T16:36:54.784055+00:00",
+  "created_utc": "2026-10-28T00:11:27.584401+00:00",
   "app_version": "4.3.0",
   "kind": "One deterministic scripted local run; actual API endpoints, explicitly fake provider",
   "live_provider_calls": 0,
@@ -159,10 +159,12 @@
     ]
   },
   "source_sha256": {
-    "intentcart/app.py": "e79906e431ff7c6f96d8b5ef444134cf5c2bfbfb54948374b8cdafd9064618ae",
+    "intentcart/app.py": "0cc05a73153f279df3ff198dcbd6957dcdccb7a3e2d0bf91cc8d5428c257c3a7",
     "intentcart/assurance.py": "f9836b0904ca67e7446e9f8cdaf3060a46fd57ee3f086b36eb2809edaf46099c",
     "intentcart/learning.py": "49d7c3c7b699cf4ce15af6f46173285766eb231a5cbde27948e5ed878870cbdf",
-    "scripts/evaluate_lab.py": "dc55efd86d645f7e1e2b1b6778094b94eac4874177ad0c1c63410d2af387525b"
+    "intentcart/procurement.py": "2735bd8e310393598ba60cef6e648c7ed8a31dcae2d7b17468edbbc0c3cfcb61",
+    "intentcart/data/it-catalog.json": "418e4a708fe9df60986c7a34e4d6b984938a4128b2388df474f1b208b0e2489a",
+    "scripts/evaluate_lab.py": "ea17f2b05d5414e02a0de5908ad5ebd1b56997778d11cc6e1654fa6ad83aa416"
   },
   "limits": "Not a human study, live outage experiment, general security benchmark, or proof of prompt-injection resistance."
 }

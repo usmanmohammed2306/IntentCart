@@ -4,9 +4,9 @@ from datetime import date
 from typing import Literal
 from pydantic import Field,model_validator
 from .workspace import Strict,Workspace,Pose
-NUMERIC={'width_mm','depth_mm','height_mm','weight_g','native_displays','max_height','max_hz','displays','pd_watts','voltage_min','voltage_max','camera_height','noise_db','hdmi_outputs','dp_outputs','usb_c_video_outputs','switch_hosts'}
-BOOLEAN={'video_out_hdmi','video_out_dp','video_out_usb_c','video_in_hdmi','video_in_dp','bluetooth','usb_a','usb_c','driver_required','requires_software','isolation_verified'}
-TEXTUAL={'mount','handedness','noise_claim','link_type','os','switch_mode','identity','custom'}
+NUMERIC={'width_mm','depth_mm','height_mm','weight_g','native_displays','max_height','max_hz','displays','pd_watts','voltage_min','voltage_max','camera_height','noise_db','hdmi_outputs','dp_outputs','usb_c_video_outputs','switch_hosts','included_video_cables','pd_input_watts','pd_passthrough_watts','power_watts'}
+BOOLEAN={'video_out_hdmi','video_out_dp','video_out_usb_c','video_in_hdmi','video_in_dp','video_in_usb_c','bluetooth','usb_a','usb_c','driver_required','requires_software','isolation_verified'}
+TEXTUAL={'mount','handedness','noise_claim','link_type','os','switch_mode','identity','custom','included_link_type'}
 def fact_valid(key,value):
  import math
  if key in NUMERIC:
@@ -61,14 +61,20 @@ class Goal(Strict):
   if self.kind=='count' and (int(self.value)!=self.value or self.value>48 or self.category not in ('laptop','desktop','monitor','keyboard','mouse','dock','cable','power','webcam','audio','storage','other')):raise ValueError('Invalid item count goal.')
   return self
 class Offer(Strict):
+ quote_id:str|None=Field(default=None,pattern=r'^[a-f0-9]{32}$')
+ observed_at:int|None=Field(default=None,ge=0)
+ expires_at:int|None=Field(default=None,ge=0)
  id:str=Field(pattern=r'^[\w-]{1,64}$')
  item_id:str=Field(default='',max_length=64)
  device_id:str=Field(default='',max_length=100)
  currency:str=Field(pattern=r'^[A-Z]{3}$')
  amount_minor:int=Field(ge=0,le=100000000)
+ discount_minor:int=Field(default=0,ge=0,le=100000000)
  shipping_minor:int|None=Field(default=None,ge=0,le=10000000)
  tax_minor:int|None=Field(default=None,ge=0,le=10000000)
  duty_minor:int|None=Field(default=None,ge=0,le=10000000)
+ fees_minor:int|None=Field(default=0,ge=0,le=10000000)
+ delivered_minor:int|None=Field(default=None,ge=0,le=100000000)
  stock:Literal['unknown','in_stock','out_of_stock']='unknown'
  region:str=Field(default='',max_length=60)
  url:str=Field(default='',max_length=800)
@@ -78,6 +84,10 @@ class Offer(Strict):
  return_note:str=Field(default='',max_length=500)
  @model_validator(mode='after')
  def dates(self):
+  if (self.observed_at is None)!=(self.expires_at is None) or self.observed_at is not None and self.expires_at<self.observed_at:raise ValueError('Use a valid complete offer timestamp window.')
+  if self.discount_minor>self.amount_minor or self.discount_minor and not self.quote_id:raise ValueError('Discounts require an observed quote and cannot exceed the item price.')
+  if self.delivered_minor is not None and (not self.quote_id or self.delivered_minor<self.amount_minor-self.discount_minor):raise ValueError('Complete merchant totals require a bound quote and must cover the net item price.')
+  if self.quote_id and (self.observed_at is None or not self.region):raise ValueError('Observed delivered offers require timestamps and a destination binding.')
   if date.fromisoformat(self.valid_until)<date.fromisoformat(self.observed_on):raise ValueError('Offer expiry precedes observation.')
   if self.url and not self.url.startswith('https://'):raise ValueError('Offer links must use HTTPS.')
   return self
